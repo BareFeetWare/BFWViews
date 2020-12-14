@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var miniSheetManager: MiniSheet.Manager
+    @EnvironmentObject var miniSheet: MiniSheet
     
     var body: some View {
         NavigationView {
@@ -18,7 +18,7 @@ struct ContentView: View {
             }
             .navigationTitle("BFWViews")
         }
-        .overlay(miniSheetManager.overlay)
+        .overlay(miniSheet.overlay)
     }
 }
 

@@ -9,36 +9,34 @@ import SwiftUI
 
 struct MiniSheetScene: View {
     
-    @EnvironmentObject var miniSheetManager: MiniSheet.Manager
+    @EnvironmentObject var miniSheet: MiniSheet
     
     var body: some View {
-        NavigationView {
-            List {
-                Button("Info") {
-                    miniSheetManager.content = AnyView(infoView)
-                }
-                Button("Amazing") {
-                    miniSheetManager.content = AnyView(amazingView)
-                }
+        List {
+            Button("Info") {
+                miniSheet.content = AnyView(infoView)
             }
-            .listStyle(PlainListStyle())
+            Button("Amazing") {
+                miniSheet.content = AnyView(amazingView)
+            }
         }
+        .listStyle(PlainListStyle())
     }
     
     var infoView: some View {
         VStack {
             Text("Info")
-            Button("OK") { miniSheetManager.content = nil }
+            Button("OK") { miniSheet.content = nil }
         }
     }
     
     var amazingView: some View {
         VStack {
             Text("Amazing!")
-            Button("OK") { miniSheetManager.content = nil }
+            Button("OK") { miniSheet.content = nil }
         }
     }
-
+    
 }
 
 struct MiniSheetScene_Previews: PreviewProvider {
