@@ -12,6 +12,7 @@ struct BFWViewsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(MiniSheet.Manager())
         }
     }
 }

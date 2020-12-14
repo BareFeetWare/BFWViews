@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var miniSheetManager: MiniSheet.Manager
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            List {
+                NavigationLink("MiniSheet", destination: MiniSheetScene())
+            }
+            .navigationTitle("BFWViews")
+        }
+        .overlay(miniSheetManager.overlay)
     }
 }
 
