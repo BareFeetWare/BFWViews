@@ -52,10 +52,7 @@
 		E213111A2586F380001496C7 /* BFWViews */ = {
 			isa = PBXGroup;
 			children = (
-				E213111B2586F380001496C7 /* BFWViewsApp.swift */,
-				E213111D2586F380001496C7 /* ContentView.swift */,
-				E213111F2586F385001496C7 /* Assets.xcassets */,
-				E21311242586F385001496C7 /* Info.plist */,
+				E213112B2586F399001496C7 /* Launch */,
 				E21311212586F385001496C7 /* Preview Content */,
 			);
 			path = BFWViews;
@@ -67,6 +64,17 @@
 				E21311222586F385001496C7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E213112B2586F399001496C7 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				E213111B2586F380001496C7 /* BFWViewsApp.swift */,
+				E213111D2586F380001496C7 /* ContentView.swift */,
+				E213111F2586F385001496C7 /* Assets.xcassets */,
+				E21311242586F385001496C7 /* Info.plist */,
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,7 +279,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BFWViews/Preview Content\"";
 				DEVELOPMENT_TEAM = 2X3652T48P;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = BFWViews/Info.plist;
+				INFOPLIST_FILE = BFWViews/Launch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -293,7 +301,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BFWViews/Preview Content\"";
 				DEVELOPMENT_TEAM = 2X3652T48P;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = BFWViews/Info.plist;
+				INFOPLIST_FILE = BFWViews/Launch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
