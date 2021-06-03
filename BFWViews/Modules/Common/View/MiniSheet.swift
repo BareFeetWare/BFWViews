@@ -3,19 +3,22 @@
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 14/12/20.
+//  Copyright © 2020 BareFeetWare. All rights reserved.
 //
 
 import SwiftUI
 
-class MiniSheet: ObservableObject {
+public class MiniSheet: ObservableObject {
     
-    var content: AnyView? {
+    public init() {}
+    
+    public var content: AnyView? {
         didSet {
             updateOverlay(content: content)
         }
     }
     
-    @Published var overlay: AnyView?
+    @Published public var overlay: AnyView?
     
     private func updateOverlay(content: AnyView?) {
         overlay = content.map { content in
