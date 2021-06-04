@@ -16,6 +16,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
+                NavigationLink("Alert+Error", destination: AlertScene())
                 NavigationLink("Card", destination: CardScene())
                 NavigationLink("CompressibleSpacer", destination: CompressibleSpacerScene())
                 NavigationLink("Distributed", destination: DistributedScene())

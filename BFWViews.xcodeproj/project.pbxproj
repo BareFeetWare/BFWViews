@@ -31,6 +31,8 @@
 		E2FD40B5266890AC004E4905 /* CompressibleSpacerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40B4266890AC004E4905 /* CompressibleSpacerScene.swift */; };
 		E2FD40B72668915F004E4905 /* DistributedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40B62668915F004E4905 /* DistributedScene.swift */; };
 		E2FD40B926689384004E4905 /* TrailingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40B826689384004E4905 /* TrailingScene.swift */; };
+		E2FD40CD2669C9F5004E4905 /* Alert+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40CC2669C9F5004E4905 /* Alert+Error.swift */; };
+		E2FD40CF2669CA26004E4905 /* AlertScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40CE2669CA26004E4905 /* AlertScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,8 @@
 		E2FD40B4266890AC004E4905 /* CompressibleSpacerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressibleSpacerScene.swift; sourceTree = "<group>"; };
 		E2FD40B62668915F004E4905 /* DistributedScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedScene.swift; sourceTree = "<group>"; };
 		E2FD40B826689384004E4905 /* TrailingScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingScene.swift; sourceTree = "<group>"; };
+		E2FD40CC2669C9F5004E4905 /* Alert+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alert+Error.swift"; sourceTree = "<group>"; };
+		E2FD40CE2669CA26004E4905 /* AlertScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,7 @@
 		E213112E2586F3D7001496C7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				E2FD40CE2669CA26004E4905 /* AlertScene.swift */,
 				E2FD40B226688DF5004E4905 /* CardScene.swift */,
 				E2FD40B4266890AC004E4905 /* CompressibleSpacerScene.swift */,
 				E2FD40B62668915F004E4905 /* DistributedScene.swift */,
@@ -196,6 +201,7 @@
 		E2C16B642664809B00BAC051 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E2FD40CC2669C9F5004E4905 /* Alert+Error.swift */,
 				E2C16B6B266480F900BAC051 /* Card.swift */,
 				E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
@@ -369,6 +375,7 @@
 				E21311372586F5BF001496C7 /* MiniSheetScene.swift in Sources */,
 				E2FD40B5266890AC004E4905 /* CompressibleSpacerScene.swift in Sources */,
 				E2FD40B926689384004E4905 /* TrailingScene.swift in Sources */,
+				E2FD40CF2669CA26004E4905 /* AlertScene.swift in Sources */,
 				E2FD40B326688DF5004E4905 /* CardScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2FD40AC26683A83004E4905 /* ImageSymbol.swift in Sources */,
+				E2FD40CD2669C9F5004E4905 /* Alert+Error.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
 				E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */,
 				E2C16B68266480C400BAC051 /* View+Distributed.swift in Sources */,
