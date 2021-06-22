@@ -24,6 +24,7 @@ struct ContentView: View {
                 NavigationLink("ImageSymbol", destination: ImageSymbolScene())
                 NavigationLink("MiniSheet", destination: MiniSheetScene())
                 NavigationLink("ReadFrame", destination: ReadFrameScene())
+                NavigationLink("TappableCell", destination: TappableCellScene())
                 NavigationLink("Trailing", destination: TrailingScene())
             }
             .navigationTitle("BFWViews")
