@@ -81,6 +81,7 @@ public enum ImageSymbol: String {
     case moonFill = "moon.fill"
     case pauseCircleFill = "pause.circle.fill"
     case pauseFill = "pause.fill"
+    case pencil = "pencil"
     case pencilCircleFill = "pencil.circle.fill"
     case person
     case personCropRectangleFill = "person.crop.rectangle.fill"
