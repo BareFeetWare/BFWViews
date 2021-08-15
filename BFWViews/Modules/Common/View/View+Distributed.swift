@@ -9,7 +9,7 @@ import SwiftUI
 
 public extension View {
     
-    func distributed(_ alignment: VerticalAlignment) -> some View {
+    func distributed(_ alignment: VerticalAlignment?) -> some View {
         VStack(spacing: 0) {
             if [.bottom, .center].contains(alignment) {
                 CompressibleSpacer()
@@ -21,7 +21,7 @@ public extension View {
         }
     }
     
-    func distributed(_ alignment: HorizontalAlignment) -> some View {
+    func distributed(_ alignment: HorizontalAlignment?) -> some View {
         HStack(spacing: 0) {
             if [.trailing, .center].contains(alignment) {
                 CompressibleSpacer()
