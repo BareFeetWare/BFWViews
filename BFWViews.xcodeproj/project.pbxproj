@@ -12,6 +12,8 @@
 		E21311202586F385001496C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E213111F2586F385001496C7 /* Assets.xcassets */; };
 		E21311232586F385001496C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E21311222586F385001496C7 /* Preview Assets.xcassets */; };
 		E21311372586F5BF001496C7 /* MiniSheetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21311362586F5BF001496C7 /* MiniSheetScene.swift */; };
+		E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A126E8661100AC5CD2 /* Color+Hex.swift */; };
+		E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */; };
 		E23AB43B268157720018DD04 /* FramePreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43A268157720018DD04 /* FramePreferenceKey.swift */; };
 		E23AB43D268157A90018DD04 /* ReadFrameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43C268157A90018DD04 /* ReadFrameScene.swift */; };
 		E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43E26817EC50018DD04 /* View+TappableCell.swift */; };
@@ -74,6 +76,8 @@
 		E21311242586F385001496C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E21311312586F418001496C7 /* MiniSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSheet.swift; sourceTree = "<group>"; };
 		E21311362586F5BF001496C7 /* MiniSheetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSheetScene.swift; sourceTree = "<group>"; };
+		E224C9A126E8661100AC5CD2 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHexScene.swift; sourceTree = "<group>"; };
 		E23AB43A268157720018DD04 /* FramePreferenceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FramePreferenceKey.swift; sourceTree = "<group>"; };
 		E23AB43C268157A90018DD04 /* ReadFrameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFrameScene.swift; sourceTree = "<group>"; };
 		E23AB43E26817EC50018DD04 /* View+TappableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+TappableCell.swift"; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				E2FD40CE2669CA26004E4905 /* AlertScene.swift */,
 				E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */,
 				E2FD40B226688DF5004E4905 /* CardScene.swift */,
+				E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */,
 				E2FD40B4266890AC004E4905 /* CompressibleSpacerScene.swift */,
 				E2FD40B62668915F004E4905 /* DistributedScene.swift */,
 				E2FD40B02668600A004E4905 /* ImageSymbolScene.swift */,
@@ -219,6 +224,7 @@
 				E2FD40CC2669C9F5004E4905 /* Alert+Error.swift */,
 				E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */,
 				E2C16B6B266480F900BAC051 /* Card.swift */,
+				E224C9A126E8661100AC5CD2 /* Color+Hex.swift */,
 				E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */,
 				E23AB43A268157720018DD04 /* FramePreferenceKey.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
@@ -391,6 +397,7 @@
 				E23AB43D268157A90018DD04 /* ReadFrameScene.swift in Sources */,
 				E2FD40B72668915F004E4905 /* DistributedScene.swift in Sources */,
 				E213111C2586F380001496C7 /* BFWViewsDemoApp.swift in Sources */,
+				E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */,
 				E23AB44126817FEE0018DD04 /* TappableCellScene.swift in Sources */,
 				E21311372586F5BF001496C7 /* MiniSheetScene.swift in Sources */,
 				E2FD40B5266890AC004E4905 /* CompressibleSpacerScene.swift in Sources */,
@@ -414,6 +421,7 @@
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E23AB43B268157720018DD04 /* FramePreferenceKey.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
+				E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */,
 				E2C16B69266480C400BAC051 /* CompressibleSpacer.swift in Sources */,
 				E2C16B7A2664816F00BAC051 /* ColorScheme+Identifiable.swift in Sources */,
 				E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */,

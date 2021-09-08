@@ -9,28 +9,46 @@
 import SwiftUI
 import BFWViews
 
-struct ContentView: View {
-    
+struct ContentView {
     @EnvironmentObject var miniSheet: MiniSheet
-    
+}
+
+extension ContentView: View {
     var body: some View {
         NavigationView {
-            List {
-                NavigationLink("Alert+Error", destination: AlertScene())
-                NavigationLink("AsyncNavigationLink", destination: AsyncNavigationLinkScene())
-                NavigationLink("Card", destination: CardScene())
-                NavigationLink("CompressibleSpacer", destination: CompressibleSpacerScene())
-                NavigationLink("Distributed", destination: DistributedScene())
-                NavigationLink("ImageSymbol", destination: ImageSymbolScene())
-                NavigationLink("MiniSheet", destination: MiniSheetScene())
-                NavigationLink("ReadFrame", destination: ReadFrameScene())
-                NavigationLink("TappableCell", destination: TappableCellScene())
-                NavigationLink("Trailing", destination: TrailingScene())
+            List(cells) { cell in
+                NavigationLink(cell.name, destination: cell.destination)
             }
             .navigationTitle("BFWViews")
         }
         .overlay(miniSheet.overlay)
     }
+}
+
+private extension ContentView {
+    
+    struct Cell: Identifiable {
+        let id = UUID()
+        let name: String
+        let destination: AnyView
+    }
+    
+    var cells: [Cell] {
+        [
+            .init(name: "Alert+Error", destination: AnyView(AlertScene())),
+            .init(name: "AsyncNavigationLink", destination: AnyView(AsyncNavigationLinkScene())),
+            .init(name: "Card", destination: AnyView(CardScene())),
+            .init(name: "Color+Hex", destination: AnyView(ColorHexScene())),
+            .init(name: "CompressibleSpacer", destination: AnyView(CompressibleSpacerScene())),
+            .init(name: "Distributed", destination: AnyView(DistributedScene())),
+            .init(name: "ImageSymbol", destination: AnyView(ImageSymbolScene())),
+            .init(name: "MiniSheet", destination: AnyView(MiniSheetScene())),
+            .init(name: "ReadFrame", destination: AnyView(ReadFrameScene())),
+            .init(name: "TappableCell", destination: AnyView(TappableCellScene())),
+            .init(name: "Trailing", destination: AnyView(TrailingScene())),
+        ]
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
