@@ -41,6 +41,7 @@ private extension ContentView {
             .init(name: "Color+Hex", destination: AnyView(ColorHexScene())),
             .init(name: "CompressibleSpacer", destination: AnyView(CompressibleSpacerScene())),
             .init(name: "Distributed", destination: AnyView(DistributedScene())),
+            .init(name: "ImageLoader", destination: AnyView(ImageLoaderScene())),
             .init(name: "ImageSymbol", destination: AnyView(ImageSymbolScene())),
             .init(name: "MiniSheet", destination: AnyView(MiniSheetScene())),
             .init(name: "ReadFrame", destination: AnyView(ReadFrameScene())),

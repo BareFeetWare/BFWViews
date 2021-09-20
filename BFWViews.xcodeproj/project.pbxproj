@@ -18,7 +18,9 @@
 		E23AB43D268157A90018DD04 /* ReadFrameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43C268157A90018DD04 /* ReadFrameScene.swift */; };
 		E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43E26817EC50018DD04 /* View+TappableCell.swift */; };
 		E23AB44126817FEE0018DD04 /* TappableCellScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB44026817FEE0018DD04 /* TappableCellScene.swift */; };
+		E2733EB526F8AE79007B31C0 /* ImageLoaderScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2733EB426F8AE79007B31C0 /* ImageLoaderScene.swift */; };
 		E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */; };
+		E278F52E26F85E9300BD0161 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278F52D26F85E9300BD0161 /* ImageLoaderView.swift */; };
 		E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */; };
 		E2C16B5826647C4400BAC051 /* BFWViews.h in Headers */ = {isa = PBXBuildFile; fileRef = E2C16B5626647C4400BAC051 /* BFWViews.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2C16B5B26647C4400BAC051 /* BFWViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C16B5426647C4400BAC051 /* BFWViews.framework */; };
@@ -82,7 +84,9 @@
 		E23AB43C268157A90018DD04 /* ReadFrameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFrameScene.swift; sourceTree = "<group>"; };
 		E23AB43E26817EC50018DD04 /* View+TappableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+TappableCell.swift"; sourceTree = "<group>"; };
 		E23AB44026817FEE0018DD04 /* TappableCellScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableCellScene.swift; sourceTree = "<group>"; };
+		E2733EB426F8AE79007B31C0 /* ImageLoaderScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderScene.swift; sourceTree = "<group>"; };
 		E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLink.swift; sourceTree = "<group>"; };
+		E278F52D26F85E9300BD0161 /* ImageLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
 		E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLinkScene.swift; sourceTree = "<group>"; };
 		E2C16B5426647C4400BAC051 /* BFWViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BFWViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C16B5626647C4400BAC051 /* BFWViews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFWViews.h; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 				E23AB43C268157A90018DD04 /* ReadFrameScene.swift */,
 				E23AB44026817FEE0018DD04 /* TappableCellScene.swift */,
 				E2FD40B826689384004E4905 /* TrailingScene.swift */,
+				E2733EB426F8AE79007B31C0 /* ImageLoaderScene.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -227,6 +232,7 @@
 				E224C9A126E8661100AC5CD2 /* Color+Hex.swift */,
 				E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */,
 				E23AB43A268157720018DD04 /* FramePreferenceKey.swift */,
+				E278F52D26F85E9300BD0161 /* ImageLoaderView.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
 				E2C16B65266480C400BAC051 /* View+Distributed.swift */,
 				E23AB43E26817EC50018DD04 /* View+TappableCell.swift */,
@@ -401,6 +407,7 @@
 				E23AB44126817FEE0018DD04 /* TappableCellScene.swift in Sources */,
 				E21311372586F5BF001496C7 /* MiniSheetScene.swift in Sources */,
 				E2FD40B5266890AC004E4905 /* CompressibleSpacerScene.swift in Sources */,
+				E2733EB526F8AE79007B31C0 /* ImageLoaderScene.swift in Sources */,
 				E2FD40B926689384004E4905 /* TrailingScene.swift in Sources */,
 				E2FD40CF2669CA26004E4905 /* AlertScene.swift in Sources */,
 				E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */,
@@ -427,6 +434,7 @@
 				E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */,
 				E2C16B6C266480F900BAC051 /* Card.swift in Sources */,
 				E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */,
+				E278F52E26F85E9300BD0161 /* ImageLoaderView.swift in Sources */,
 				E2FD40AD26683A83004E4905 /* Image+Symbol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
