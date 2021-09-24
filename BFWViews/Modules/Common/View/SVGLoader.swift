@@ -36,11 +36,13 @@ extension SVGLoader {
             return Fail(error: Error.parse)
                 .eraseToAnyPublisher()
         }
-        let size = try! size(svg: source)
-        let frame = CGRect(origin: .zero, size: size)
-        return Just(1)
+        return Just(source)
+            .tryMap { source in
+                try (source, size(svg: source))
+            }
             .receive(on: DispatchQueue.main)
-            .map { _ -> WebNavigationDelegate in
+            .map { source, size -> WebNavigationDelegate in
+                let frame = CGRect(origin: .zero, size: size)
                 // WKWebView must be created on the main thread
                 let webView = WKWebView(frame: frame)
                 webView.isOpaque = false
