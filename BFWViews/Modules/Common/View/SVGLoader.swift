@@ -12,31 +12,20 @@ import WebKit
 
 public enum SVGLoader {}
 
-extension SVGLoader {
+public extension SVGLoader {
     
     enum Error: LocalizedError {
         case parse
         case snapshot
     }
     
-    public static func publisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
+    static func publisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
         Fetcher.dataPublisher(url: url)
-            .flatMap { data in
-                publisher(data: data)
+            .tryMap { data in
+                guard let source = String(data: data, encoding: .utf8)
+                else { throw Error.parse }
+                return source
             }
-            .eraseToAnyPublisher()
-    }
-    
-    static var webView: WKWebView?
-    static var navigationDelegate: WebNavigationDelegate?
-    
-    public static func publisher(data: Data) -> AnyPublisher<UIImage, Swift.Error> {
-        guard let source = String(data: data, encoding: .utf8)
-        else {
-            return Fail(error: Error.parse)
-                .eraseToAnyPublisher()
-        }
-        return Just(source)
             .tryMap { source in
                 try (source, size(svg: source))
             }
@@ -48,9 +37,8 @@ extension SVGLoader {
                 webView.isOpaque = false
                 let scale = 2.5
                 webView.pageZoom = scale
-                self.webView = webView
                 let navigationDelegate = WebNavigationDelegate()
-                self.navigationDelegate = navigationDelegate
+                self.webCacheForURL[url] = WebCache(webView: webView, navigationDelegate: navigationDelegate)
                 webView.navigationDelegate = navigationDelegate
                 webView.loadHTMLString(source, baseURL: nil)
                 return navigationDelegate
@@ -59,12 +47,23 @@ extension SVGLoader {
             .flatMap { navigationDelegate in
                 navigationDelegate.imagePublisher
             }
+            .map {
+                webCacheForURL.removeValue(forKey: url)
+                return $0
+            }
             .eraseToAnyPublisher()
     }
     
 }
 
 private extension SVGLoader {
+    
+    struct WebCache: Hashable {
+        let webView: WKWebView
+        let navigationDelegate: WebNavigationDelegate
+    }
+    
+    static var webCacheForURL = [URL: WebCache]()
     
     static func size(svg: String) throws -> CGSize {
         // TODO: Replace scanning of all groups with just first match.
