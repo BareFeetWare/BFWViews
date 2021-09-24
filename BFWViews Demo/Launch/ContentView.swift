@@ -45,6 +45,7 @@ private extension ContentView {
             .init(name: "ImageSymbol", destination: AnyView(ImageSymbolScene())),
             .init(name: "MiniSheet", destination: AnyView(MiniSheetScene())),
             .init(name: "ReadFrame", destination: AnyView(ReadFrameScene())),
+            .init(name: "SVGLoader", destination: AnyView(SVGLoaderScene())),
             .init(name: "TappableCell", destination: AnyView(TappableCellScene())),
             .init(name: "Trailing", destination: AnyView(TrailingScene())),
         ]

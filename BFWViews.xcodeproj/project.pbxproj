@@ -22,6 +22,10 @@
 		E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */; };
 		E278F52E26F85E9300BD0161 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278F52D26F85E9300BD0161 /* ImageLoaderView.swift */; };
 		E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */; };
+		E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC0426FD4EC900CFDE50 /* WebView.swift */; };
+		E2BAAC0926FD6D4D00CFDE50 /* SVGLoaderScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC0826FD6D4D00CFDE50 /* SVGLoaderScene.swift */; };
+		E2BAAC0C26FD6DC400CFDE50 /* city.svg in Resources */ = {isa = PBXBuildFile; fileRef = E2BAAC0B26FD6DC400CFDE50 /* city.svg */; };
+		E2BAAC0E26FD6F5D00CFDE50 /* SVGLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC0D26FD6F5D00CFDE50 /* SVGLoader.swift */; };
 		E2BAAC1126FD88F700CFDE50 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1026FD88F700CFDE50 /* Fetcher.swift */; };
 		E2BAAC1326FD899B00CFDE50 /* Image+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1226FD899B00CFDE50 /* Image+Data.swift */; };
 		E2BAAC1526FD8A8000CFDE50 /* Fetcher+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1426FD8A8000CFDE50 /* Fetcher+Image.swift */; };
@@ -91,6 +95,10 @@
 		E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLink.swift; sourceTree = "<group>"; };
 		E278F52D26F85E9300BD0161 /* ImageLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
 		E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLinkScene.swift; sourceTree = "<group>"; };
+		E2BAAC0426FD4EC900CFDE50 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		E2BAAC0826FD6D4D00CFDE50 /* SVGLoaderScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGLoaderScene.swift; sourceTree = "<group>"; };
+		E2BAAC0B26FD6DC400CFDE50 /* city.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = city.svg; sourceTree = "<group>"; };
+		E2BAAC0D26FD6F5D00CFDE50 /* SVGLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGLoader.swift; sourceTree = "<group>"; };
 		E2BAAC1026FD88F700CFDE50 /* Fetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
 		E2BAAC1226FD899B00CFDE50 /* Image+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Data.swift"; sourceTree = "<group>"; };
 		E2BAAC1426FD8A8000CFDE50 /* Fetcher+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fetcher+Image.swift"; sourceTree = "<group>"; };
@@ -159,6 +167,7 @@
 				E213112B2586F399001496C7 /* Launch */,
 				E213112E2586F3D7001496C7 /* Modules */,
 				E21311212586F385001496C7 /* Preview Content */,
+				E2BAAC0A26FD6DAD00CFDE50 /* Resources */,
 			);
 			path = "BFWViews Demo";
 			sourceTree = "<group>";
@@ -194,11 +203,20 @@
 				E2FD40B02668600A004E4905 /* ImageSymbolScene.swift */,
 				E21311362586F5BF001496C7 /* MiniSheetScene.swift */,
 				E23AB43C268157A90018DD04 /* ReadFrameScene.swift */,
+				E2BAAC0826FD6D4D00CFDE50 /* SVGLoaderScene.swift */,
 				E23AB44026817FEE0018DD04 /* TappableCellScene.swift */,
 				E2FD40B826689384004E4905 /* TrailingScene.swift */,
 				E2733EB426F8AE79007B31C0 /* ImageLoaderScene.swift */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		E2BAAC0A26FD6DAD00CFDE50 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E2BAAC0B26FD6DC400CFDE50 /* city.svg */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		E2BAAC0F26FD888F00CFDE50 /* Model */ = {
@@ -251,9 +269,11 @@
 				E23AB43A268157720018DD04 /* FramePreferenceKey.swift */,
 				E278F52D26F85E9300BD0161 /* ImageLoaderView.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
+				E2BAAC0D26FD6F5D00CFDE50 /* SVGLoader.swift */,
 				E2C16B65266480C400BAC051 /* View+Distributed.swift */,
 				E23AB43E26817EC50018DD04 /* View+TappableCell.swift */,
 				E2C16B67266480C400BAC051 /* View+Trailing.swift */,
+				E2BAAC0426FD4EC900CFDE50 /* WebView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -397,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E21311232586F385001496C7 /* Preview Assets.xcassets in Resources */,
+				E2BAAC0C26FD6DC400CFDE50 /* city.svg in Resources */,
 				E21311202586F385001496C7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +438,7 @@
 			files = (
 				E2FD40B12668600A004E4905 /* ImageSymbolScene.swift in Sources */,
 				E213111E2586F380001496C7 /* ContentView.swift in Sources */,
+				E2BAAC0926FD6D4D00CFDE50 /* SVGLoaderScene.swift in Sources */,
 				E23AB43D268157A90018DD04 /* ReadFrameScene.swift in Sources */,
 				E2FD40B72668915F004E4905 /* DistributedScene.swift in Sources */,
 				E213111C2586F380001496C7 /* BFWViewsDemoApp.swift in Sources */,
@@ -446,6 +468,7 @@
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E23AB43B268157720018DD04 /* FramePreferenceKey.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
+				E2BAAC0E26FD6F5D00CFDE50 /* SVGLoader.swift in Sources */,
 				E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */,
 				E2C16B69266480C400BAC051 /* CompressibleSpacer.swift in Sources */,
 				E2BAAC1326FD899B00CFDE50 /* Image+Data.swift in Sources */,
@@ -454,6 +477,7 @@
 				E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */,
 				E2C16B6C266480F900BAC051 /* Card.swift in Sources */,
 				E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */,
+				E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */,
 				E278F52E26F85E9300BD0161 /* ImageLoaderView.swift in Sources */,
 				E2FD40AD26683A83004E4905 /* Image+Symbol.swift in Sources */,
 			);
