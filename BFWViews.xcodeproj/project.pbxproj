@@ -22,6 +22,9 @@
 		E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */; };
 		E278F52E26F85E9300BD0161 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278F52D26F85E9300BD0161 /* ImageLoaderView.swift */; };
 		E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */; };
+		E2BAAC1126FD88F700CFDE50 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1026FD88F700CFDE50 /* Fetcher.swift */; };
+		E2BAAC1326FD899B00CFDE50 /* Image+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1226FD899B00CFDE50 /* Image+Data.swift */; };
+		E2BAAC1526FD8A8000CFDE50 /* Fetcher+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1426FD8A8000CFDE50 /* Fetcher+Image.swift */; };
 		E2C16B5826647C4400BAC051 /* BFWViews.h in Headers */ = {isa = PBXBuildFile; fileRef = E2C16B5626647C4400BAC051 /* BFWViews.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2C16B5B26647C4400BAC051 /* BFWViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C16B5426647C4400BAC051 /* BFWViews.framework */; };
 		E2C16B5C26647C4400BAC051 /* BFWViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2C16B5426647C4400BAC051 /* BFWViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -88,6 +91,9 @@
 		E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLink.swift; sourceTree = "<group>"; };
 		E278F52D26F85E9300BD0161 /* ImageLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
 		E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLinkScene.swift; sourceTree = "<group>"; };
+		E2BAAC1026FD88F700CFDE50 /* Fetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
+		E2BAAC1226FD899B00CFDE50 /* Image+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Data.swift"; sourceTree = "<group>"; };
+		E2BAAC1426FD8A8000CFDE50 /* Fetcher+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fetcher+Image.swift"; sourceTree = "<group>"; };
 		E2C16B5426647C4400BAC051 /* BFWViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BFWViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C16B5626647C4400BAC051 /* BFWViews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFWViews.h; sourceTree = "<group>"; };
 		E2C16B5726647C4400BAC051 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -195,6 +201,15 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
+		E2BAAC0F26FD888F00CFDE50 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E2BAAC1026FD88F700CFDE50 /* Fetcher.swift */,
+				E2BAAC1426FD8A8000CFDE50 /* Fetcher+Image.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E2C16B5526647C4400BAC051 /* BFWViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +233,7 @@
 		E2C16B632664808E00BAC051 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E2BAAC0F26FD888F00CFDE50 /* Model */,
 				E2C16B642664809B00BAC051 /* View */,
 			);
 			path = Common;
@@ -231,6 +247,7 @@
 				E2C16B6B266480F900BAC051 /* Card.swift */,
 				E224C9A126E8661100AC5CD2 /* Color+Hex.swift */,
 				E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */,
+				E2BAAC1226FD899B00CFDE50 /* Image+Data.swift */,
 				E23AB43A268157720018DD04 /* FramePreferenceKey.swift */,
 				E278F52D26F85E9300BD0161 /* ImageLoaderView.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
@@ -420,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2FD40AC26683A83004E4905 /* ImageSymbol.swift in Sources */,
+				E2BAAC1526FD8A8000CFDE50 /* Fetcher+Image.swift in Sources */,
 				E2FD40CD2669C9F5004E4905 /* Alert+Error.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
 				E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */,
@@ -430,7 +448,9 @@
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
 				E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */,
 				E2C16B69266480C400BAC051 /* CompressibleSpacer.swift in Sources */,
+				E2BAAC1326FD899B00CFDE50 /* Image+Data.swift in Sources */,
 				E2C16B7A2664816F00BAC051 /* ColorScheme+Identifiable.swift in Sources */,
+				E2BAAC1126FD88F700CFDE50 /* Fetcher.swift in Sources */,
 				E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */,
 				E2C16B6C266480F900BAC051 /* Card.swift in Sources */,
 				E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */,

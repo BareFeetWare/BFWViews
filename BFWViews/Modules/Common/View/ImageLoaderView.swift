@@ -31,6 +31,8 @@ extension ImageLoaderView: View {
     }
 }
 
+import Combine
+
 extension ImageLoaderView {
     class ViewModel: ObservableObject {
         
@@ -96,61 +98,5 @@ struct ImageLoaderView_Previews: PreviewProvider {
             }
         }
         .previewLayout(.sizeThatFits)
-    }
-}
-
-// TODO: Move to separate file:
-
-import Combine
-
-struct Fetcher {
-    
-    enum Error: LocalizedError {
-        case notHTTPURLResponse
-        case httpResponse(HTTPURLResponse, data: Data)
-        case notAnImage
-    }
-    
-    static var imageForURL: [URL: Image] = [:]
-    
-    static func imagePublisher(url: URL) -> AnyPublisher<Image, Swift.Error> {
-        if let image = imageForURL[url] {
-            return Just<Image>(image)
-                .mapError { _ -> Swift.Error in }
-                .eraseToAnyPublisher()
-        } else {
-            return dataPublisher(url: url)
-                .tryMap { data in
-                    guard let image = Image(data: data)
-                    else { throw Error.notAnImage }
-                    return image
-                }
-                .eraseToAnyPublisher()
-        }
-    }
-    
-    static func dataPublisher(url: URL) -> AnyPublisher<Data, Swift.Error> {
-        URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { (data: Data, response: URLResponse) in
-                guard let httpResponse = response as? HTTPURLResponse
-                else { throw Error.notHTTPURLResponse }
-                guard httpResponse.statusCode < 400
-                else {
-                    throw Error.httpResponse(
-                        httpResponse,
-                        data: data
-                    )
-                }
-                return data
-            }
-            .eraseToAnyPublisher()
-    }
-}
-
-private extension Image {
-    init?(data: Data) {
-        guard let uiImage = UIImage(data: data)
-        else { return nil }
-        self = Image(uiImage: uiImage)
     }
 }
