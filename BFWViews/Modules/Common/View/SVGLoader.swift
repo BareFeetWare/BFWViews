@@ -27,6 +27,9 @@ extension SVGLoader {
             .eraseToAnyPublisher()
     }
     
+    static var webView: WKWebView?
+    static var navigationDelegate: WebNavigationDelegate?
+    
     public static func publisher(data: Data) -> AnyPublisher<UIImage, Swift.Error> {
         guard let source = String(data: data, encoding: .utf8)
         else {
@@ -35,18 +38,24 @@ extension SVGLoader {
         }
         let size = try! size(svg: source)
         let frame = CGRect(origin: .zero, size: size)
-        // FIXME: Create WKWebView on main thread
-        return Just(WKWebView(frame: frame))
-            .map { webView -> WebNavigationDelegate in
+        return Just(1)
+            .receive(on: DispatchQueue.main)
+            .map { _ -> WebNavigationDelegate in
+                // WKWebView must be created on the main thread
+                let webView = WKWebView(frame: frame)
+                webView.isOpaque = false
                 let scale = 2.5
-                customizeWebView(webView, scale: scale)
+                webView.pageZoom = scale
+                self.webView = webView
                 let navigationDelegate = WebNavigationDelegate()
+                self.navigationDelegate = navigationDelegate
                 webView.navigationDelegate = navigationDelegate
                 webView.loadHTMLString(source, baseURL: nil)
                 return navigationDelegate
             }
+            .receive(on: DispatchQueue.global(qos: .background))
             .flatMap { navigationDelegate in
-                navigationDelegate.publisher
+                navigationDelegate.imagePublisher
             }
             .eraseToAnyPublisher()
     }
@@ -54,11 +63,6 @@ extension SVGLoader {
 }
 
 private extension SVGLoader {
-    
-    static func customizeWebView(_ webView: WKWebView, scale: CGFloat) {
-        webView.isOpaque = false
-        webView.pageZoom = scale
-    }
     
     static func size(svg: String) throws -> CGSize {
         // TODO: Replace scanning of all groups with just first match.
@@ -76,7 +80,7 @@ private extension SVGLoader {
 }
 
 class WebNavigationDelegate: NSObject {
-    let publisher = PassthroughSubject<UIImage, Swift.Error>()
+    let imagePublisher = PassthroughSubject<UIImage, Swift.Error>()
 }
 
 extension WebNavigationDelegate {
@@ -93,10 +97,10 @@ extension WebNavigationDelegate: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.takeSnapshot(with: snapshotConfiguration) { image, error in
             if let image = image {
-                self.publisher.send(image)
-                self.publisher.send(completion: .finished)
+                self.imagePublisher.send(image)
+                self.imagePublisher.send(completion: .finished)
             } else {
-                self.publisher.send(completion: .failure(error ?? SVGLoader.Error.snapshot))
+                self.imagePublisher.send(completion: .failure(error ?? SVGLoader.Error.snapshot))
             }
         }
     }
