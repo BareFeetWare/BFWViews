@@ -10,58 +10,13 @@ import SwiftUI
 import BFWViews
 
 struct SVGLoaderScene {
-    @StateObject var viewModel = ViewModel()
+    let url = Bundle.main.url(forResource: "city", withExtension: "svg")!
 }
 
 extension SVGLoaderScene: View {
     var body: some View {
-        if let image = viewModel.image {
-            Image(uiImage: image)
-        } else {
-            ProgressView()
-                .onAppear { viewModel.loadImage() }
-        }
+        SVGImage(url: url, loadingView: ProgressView())
     }
-}
-
-import Combine
-
-extension SVGLoaderScene {
-    class ViewModel: ObservableObject {
-        
-        @Published var image: UIImage?
-        
-        private var subscribers = Set<AnyCancellable>()
-    }
-}
-
-extension SVGLoaderScene.ViewModel {
-    
-    func loadImage() {
-        loadImage(url: Bundle.main.url(forResource: "city", withExtension: "svg")!)
-    }
-    
-}
-
-extension SVGLoaderScene.ViewModel {
-    
-    func loadImage(url: URL) {
-        SVGLoader
-            .publisher(url: url)
-            .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                    case .failure(let error):
-                        debugPrint("error = \(error)")
-                    case.finished:
-                        break
-                    }
-                },
-                receiveValue: { self.image = $0}
-            )
-            .store(in: &subscribers)
-    }
-    
 }
 
 struct SVGImageScene_Preview: PreviewProvider {
