@@ -26,12 +26,6 @@ public extension SVGLoader {
                 else { throw Error.parse }
                 return source
             }
-            .map { source in
-                """
-                <meta name="viewport" content="initial-scale=1"/>
-                \(source)
-                """
-            }
             .tryMap { source in
                 try (source, size(svg: source))
             }
@@ -99,6 +93,17 @@ extension WebNavigationDelegate {
 }
 
 extension WebNavigationDelegate: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        let javaScript = """
+            var meta = document.createElement('meta');
+                        meta.setAttribute('name', 'viewport');
+                        meta.setAttribute('content', 'width=device-width');
+                        document.getElementsByTagName('head')[0].appendChild(meta);
+            """
+        webView.evaluateJavaScript(javaScript)
+    }
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.takeSnapshot(with: snapshotConfiguration) { image, error in
             if let image = image {
@@ -109,6 +114,7 @@ extension WebNavigationDelegate: WKNavigationDelegate {
             }
         }
     }
+    
 }
 
 // Inspired by https://stackoverflow.com/questions/42789953/swift-3-how-do-i-extract-captured-groups-in-regular-expressions
