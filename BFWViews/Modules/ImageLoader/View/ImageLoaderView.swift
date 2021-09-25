@@ -31,53 +31,6 @@ extension ImageLoaderView: View {
     }
 }
 
-import Combine
-
-extension ImageLoaderView {
-    class ViewModel: ObservableObject {
-        
-        init(url: URL) {
-            self.url = url
-        }
-        
-        let url: URL
-        @Published var imageData: Data?
-        
-        private var subscribers = Set<AnyCancellable>()
-    }
-}
-
-extension ImageLoaderView.ViewModel {
-    
-    func onAppear() {
-        if subscribers.isEmpty {
-            subscribe()
-        }
-    }
-
-}
-
-private extension ImageLoaderView.ViewModel {
-
-    func subscribe() {
-        Fetcher.dataPublisher(url: url)
-            .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                    case .failure(let error): debugPrint("error = \(error)")
-                    case .finished: break
-                    }
-                },
-                receiveValue: {
-                    self.imageData = $0
-                }
-            )
-            .store(in: &subscribers)
-    }
-    
-}
-
 struct ImageLoaderView_Previews: PreviewProvider {
     
     static let url = URL(string: "https://www.barefeetware.com/logo.png")!
