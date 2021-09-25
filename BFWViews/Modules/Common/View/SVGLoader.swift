@@ -21,10 +21,16 @@ public extension SVGLoader {
     
     static func publisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
         Fetcher.dataPublisher(url: url)
-            .tryMap { data in
+            .tryMap { data -> String in
                 guard let source = String(data: data, encoding: .utf8)
                 else { throw Error.parse }
                 return source
+            }
+            .map { source in
+                """
+                <meta name="viewport" content="initial-scale=1"/>
+                \(source)
+                """
             }
             .tryMap { source in
                 try (source, size(svg: source))
@@ -35,8 +41,6 @@ public extension SVGLoader {
                 // WKWebView must be created on the main thread
                 let webView = WKWebView(frame: frame)
                 webView.isOpaque = false
-                let scale = 2.5
-                webView.pageZoom = scale
                 let navigationDelegate = WebNavigationDelegate()
                 self.webCacheForURL[url] = WebCache(webView: webView, navigationDelegate: navigationDelegate)
                 webView.navigationDelegate = navigationDelegate
