@@ -11,9 +11,10 @@ import SwiftUI
 public struct ImageLoaderView {
     
     public init(
-        url: URL
+        url: URL,
+        isResizable: Bool = false
     ) {
-        self.viewModel = .init(url: url)
+        self.viewModel = .init(url: url, isResizable: isResizable)
     }
     
     @ObservedObject var viewModel: ViewModel
@@ -23,8 +24,15 @@ public struct ImageLoaderView {
 extension ImageLoaderView: View {
     public var body: some View {
         ZStack {
-            viewModel.imageData.map {
-                Image(data: $0)
+            viewModel.imageData.map { data in
+                Group {
+                    if viewModel.isResizable {
+                        Image(data: data)?
+                            .resizable()
+                    } else {
+                        Image(data: data)
+                    }
+                }
             }
         }
         .onAppear { viewModel.onAppear() }

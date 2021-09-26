@@ -12,11 +12,16 @@ import Combine
 extension ImageLoaderView {
     class ViewModel: ObservableObject {
         
-        init(url: URL) {
+        init(
+            url: URL,
+            isResizable: Bool
+        ) {
             self.url = url
+            self.isResizable = isResizable
         }
         
         let url: URL
+        let isResizable: Bool
         @Published var imageData: Data?
         
         private var subscribers = Set<AnyCancellable>()
