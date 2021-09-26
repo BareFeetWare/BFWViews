@@ -17,7 +17,11 @@ extension ContentView: View {
     var body: some View {
         NavigationView {
             List(cells) { cell in
-                NavigationLink(cell.name, destination: cell.destination)
+                NavigationLink(
+                    cell.name,
+                    destination: cell.destination
+                        .navigationTitle(cell.name)
+                )
             }
             .navigationTitle("BFWViews")
         }
