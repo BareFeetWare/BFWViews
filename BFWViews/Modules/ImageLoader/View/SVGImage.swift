@@ -12,12 +12,15 @@ public struct SVGImage<Loading: View> {
     
     public init(
         url: URL,
+        isResizable: Bool = false,
         loadingView: Loading
     ) {
+        self.isResizable = isResizable
         self.loadingView = loadingView
         self.viewModel = ViewModel(url: url)
     }
     
+    let isResizable: Bool
     let loadingView: Loading
     @ObservedObject var viewModel: ViewModel
     
@@ -26,7 +29,12 @@ public struct SVGImage<Loading: View> {
 extension SVGImage: View {
     public var body: some View {
         if let image = viewModel.image {
-            Image(uiImage: image)
+            if isResizable {
+                Image(uiImage: image)
+                    .resizable()
+            } else {
+                Image(uiImage: image)
+            }
         } else {
             loadingView
                 .onAppear { viewModel.onAppear() }
