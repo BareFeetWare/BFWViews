@@ -95,13 +95,8 @@ extension WebNavigationDelegate {
 extension WebNavigationDelegate: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        let javaScript = """
-            var meta = document.createElement('meta');
-                        meta.setAttribute('name', 'viewport');
-                        meta.setAttribute('content', 'width=device-width');
-                        document.getElementsByTagName('head')[0].appendChild(meta);
-            """
-        webView.evaluateJavaScript(javaScript)
+        webView.correctMargin()
+        webView.correctScale()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -113,6 +108,32 @@ extension WebNavigationDelegate: WKNavigationDelegate {
                 self.imagePublisher.send(completion: .failure(error ?? SVGLoader.Error.snapshot))
             }
         }
+    }
+    
+}
+
+private extension WKWebView {
+    
+    func correctScale() {
+        evaluateJavaScript(
+            """
+            var meta = document.createElement('meta');
+            meta.setAttribute('name', 'viewport');
+            meta.setAttribute('content', 'width=device-width');
+            document.getElementsByTagName('head')[0].appendChild(meta);
+            """
+        )
+    }
+    
+    // Inspired by: https://stackoverflow.com/questions/33027124/strange-padding-while-using-uiwebview-wkwebview/34276426
+    func correctMargin() {
+        evaluateJavaScript(
+            """
+            var style = document.createElement('style');
+            style.innerHTML = 'body { margin:0; }';
+            document.body.appendChild(style);
+            """
+        )
     }
     
 }
