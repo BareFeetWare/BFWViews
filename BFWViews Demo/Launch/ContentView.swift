@@ -17,7 +17,11 @@ extension ContentView: View {
     var body: some View {
         NavigationView {
             List(cells) { cell in
-                NavigationLink(cell.name, destination: cell.destination)
+                NavigationLink(
+                    cell.name,
+                    destination: cell.destination
+                        .navigationTitle(cell.name)
+                )
             }
             .navigationTitle("BFWViews")
         }
@@ -45,6 +49,7 @@ private extension ContentView {
             .init(name: "ImageSymbol", destination: AnyView(ImageSymbolScene())),
             .init(name: "MiniSheet", destination: AnyView(MiniSheetScene())),
             .init(name: "ReadFrame", destination: AnyView(ReadFrameScene())),
+            .init(name: "SVGLoader", destination: AnyView(SVGLoaderScene())),
             .init(name: "TappableCell", destination: AnyView(TappableCellScene())),
             .init(name: "Trailing", destination: AnyView(TrailingScene())),
         ]
