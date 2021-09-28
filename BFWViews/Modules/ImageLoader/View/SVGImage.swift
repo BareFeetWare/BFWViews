@@ -37,7 +37,6 @@ extension SVGImage: View {
             }
         } else {
             loadingView
-                .onAppear { viewModel.onAppear() }
         }
     }
 }

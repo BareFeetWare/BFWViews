@@ -14,30 +14,20 @@ extension SVGImage {
     class ViewModel: ObservableObject {
         
         init(url: URL) {
-            self.url = url
+            self.fetchImage(url: url)
         }
         
         @Published var image: UIImage?
-        
-        let url: URL
         private var subscribers = Set<AnyCancellable>()
         
     }
 }
 
-extension SVGImage.ViewModel {
-    
-    func onAppear() {
-        if subscribers.isEmpty {
-            subscribe()
-        }
-    }
-    
-}
-
 private extension SVGImage.ViewModel {
     
-    func subscribe() {
+    // Don't call fetchImage from onAppear, since that is only called when the SVGImage first appears and not when reinstiated by an update of the superview, such as with a new URL.
+    
+    func fetchImage(url: URL) {
         SVGLoader
             .publisher(url: url)
             .sink(
