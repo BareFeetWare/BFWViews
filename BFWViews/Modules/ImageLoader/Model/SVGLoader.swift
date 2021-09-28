@@ -110,6 +110,14 @@ extension WebNavigationDelegate: WKNavigationDelegate {
         }
     }
     
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        self.imagePublisher.send(completion: .failure(error))
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        self.imagePublisher.send(completion: .failure(error))
+    }
+    
 }
 
 private extension WKWebView {
