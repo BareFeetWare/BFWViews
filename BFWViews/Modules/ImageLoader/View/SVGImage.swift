@@ -17,12 +17,13 @@ public struct SVGImage<Loading: View> {
     ) {
         self.isResizable = isResizable
         self.loadingView = loadingView
-        self.viewModel = ViewModel(url: url)
+        // Inspired by: https://stackoverflow.com/a/62636048/1532648
+        _viewModel = StateObject(wrappedValue: ViewModel(url: url))
     }
     
     let isResizable: Bool
     let loadingView: Loading
-    @ObservedObject var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
     
 }
 
