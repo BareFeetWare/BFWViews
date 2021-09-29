@@ -25,7 +25,7 @@ extension SVGImage {
 
 private extension SVGImage.ViewModel {
     
-    // Don't call fetchImage from onAppear, since that is only called when the SVGImage first appears and not when reinstiated by an update of the superview, such as with a new URL.
+    // Don't call fetchImage from onAppear, since that is only called when the SVGImage first appears and not when reinstantiated by an update of the superview, such as with a new URL.
     
     func fetchImage(url: URL) {
         SVGLoader
