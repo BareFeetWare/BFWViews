@@ -20,6 +20,32 @@ public extension SVGLoader {
     }
     
     static func publisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
+        // TODO: Refactor with switch.
+        if let cache = cacheForURL[url],
+           case .image(let image) = cache
+        {
+            debugPrint("cached image     url.last = \(url.lastPathComponent)")
+            return Just(image)
+                .mapError { _ -> Error in }
+                .eraseToAnyPublisher()
+        } else if let publisher = publisherForURL[url] {
+            debugPrint("cached publisher url.last = \(url.lastPathComponent)")
+            return publisher
+        } else {
+            debugPrint("new publisher    url.last = \(url.lastPathComponent)")
+            let publisher = imagePublisher(url: url)
+                .share()
+                .eraseToAnyPublisher()
+            publisherForURL[url] = publisher
+            return publisher
+        }
+    }
+    
+}
+
+private extension SVGLoader {
+
+    static func imagePublisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
         Fetcher.dataPublisher(url: url)
             .tryMap { data -> String in
                 guard let source = String(data: data, encoding: .utf8)
@@ -33,10 +59,13 @@ public extension SVGLoader {
             .map { source, size -> WebNavigationDelegate in
                 let frame = CGRect(origin: .zero, size: size)
                 // WKWebView must be created on the main thread
+                // TODO: Use existing webView if cached
                 let webView = WKWebView(frame: frame)
                 webView.isOpaque = false
                 let navigationDelegate = WebNavigationDelegate()
-                self.webCacheForURL[url] = WebCache(webView: webView, navigationDelegate: navigationDelegate)
+                if self.cacheForURL[url] == nil {
+                    self.cacheForURL[url] = .web(.init(webView: webView, navigationDelegate: navigationDelegate))
+                }
                 webView.navigationDelegate = navigationDelegate
                 webView.loadHTMLString(source, baseURL: nil)
                 return navigationDelegate
@@ -45,23 +74,35 @@ public extension SVGLoader {
             .flatMap { navigationDelegate in
                 navigationDelegate.imagePublisher
             }
-            .map {
-                webCacheForURL.removeValue(forKey: url)
-                return $0
+            .map { image in
+                if case .image = cacheForURL[url] {
+                    // ignore
+                } else {
+                    cacheForURL[url] = .image(image)
+                }
+                return image
+            }
+            .mapError { error in
+                debugPrint("error = \(error.localizedDescription)")
+                return error
             }
             .eraseToAnyPublisher()
     }
     
-}
-
-private extension SVGLoader {
+    // TODO: Use NSCache
     
-    struct WebCache: Hashable {
-        let webView: WKWebView
-        let navigationDelegate: WebNavigationDelegate
+    enum Cache {
+        case web(Web)
+        case image(UIImage)
+        
+        struct Web: Hashable {
+            let webView: WKWebView
+            let navigationDelegate: WebNavigationDelegate
+        }
     }
     
-    static var webCacheForURL = [URL: WebCache]()
+    static var publisherForURL = [URL: AnyPublisher<UIImage, Swift.Error>]()
+    static var cacheForURL = [URL: Cache]()
     
     static func size(svg: String) throws -> CGSize {
         // TODO: Replace scanning of all groups with just first match.
