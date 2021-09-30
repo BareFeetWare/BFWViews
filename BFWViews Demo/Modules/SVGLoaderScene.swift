@@ -57,7 +57,7 @@ private extension SVGLoaderScene {
         SVGImage(
             url: url,
             isResizable: true,
-            loadingView: ProgressView()
+            placeholder: ProgressView()
         )
             .aspectRatio(1, contentMode: .fit)
     }

@@ -8,21 +8,21 @@
 
 import SwiftUI
 
-public struct SVGImage<Loading: View> {
+public struct SVGImage<Placeholder: View> {
     
     public init(
         url: URL,
         isResizable: Bool = false,
-        loadingView: Loading
+        placeholder: Placeholder
     ) {
         self.isResizable = isResizable
-        self.loadingView = loadingView
+        self.placeholder = placeholder
         // Inspired by: https://stackoverflow.com/a/62636048/1532648
         _viewModel = StateObject(wrappedValue: ViewModel(url: url))
     }
     
     let isResizable: Bool
-    let loadingView: Loading
+    let placeholder: Placeholder
     @StateObject var viewModel: ViewModel
     
 }
@@ -37,7 +37,7 @@ extension SVGImage: View {
                 Image(uiImage: image)
             }
         } else {
-            loadingView
+            placeholder
         }
     }
 }
@@ -46,7 +46,7 @@ struct SVGImage_Previews: PreviewProvider {
     static var previews: some View {
         SVGImage(
             url: Bundle.main.url(forResource: "city", withExtension: "svg")!,
-            loadingView: ProgressView()
+            placeholder: ProgressView()
         )
     }
 }
