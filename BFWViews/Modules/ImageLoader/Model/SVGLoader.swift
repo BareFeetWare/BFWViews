@@ -17,6 +17,8 @@ public extension SVGLoader {
     enum Error: LocalizedError {
         case parse
         case snapshot
+        case renderTimeout
+        case terminated
     }
     
     static func publisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
@@ -56,10 +58,9 @@ private extension SVGLoader {
                 try (source, size(svg: source))
             }
             .receive(on: DispatchQueue.main)
-            .map { source, size -> WebNavigationDelegate in
+            .flatMap { source, size -> AnyPublisher<UIImage, Swift.Error> in
                 let frame = CGRect(origin: .zero, size: size)
                 // WKWebView must be created on the main thread
-                // TODO: Use existing webView if cached
                 let webView = WKWebView(frame: frame)
                 webView.isOpaque = false
                 let navigationDelegate = WebNavigationDelegate()
@@ -67,17 +68,26 @@ private extension SVGLoader {
                     self.cacheForURL[url] = .web(.init(webView: webView, navigationDelegate: navigationDelegate))
                 }
                 webView.navigationDelegate = navigationDelegate
-                webView.loadHTMLString(source, baseURL: nil)
-                return navigationDelegate
-            }
-            .receive(on: DispatchQueue.global(qos: .background))
-            .flatMap { navigationDelegate in
-                navigationDelegate.imagePublisher
+                let imagePublisher = navigationDelegate.imagePublisher
+                // DispatchQueue.main might not be needed.
+                DispatchQueue.main.async {
+                    webView.loadHTMLString(source, baseURL: nil)
+                }
+                return imagePublisher
+                    .timeout(2, scheduler: DispatchQueue.main, options: nil) {
+                        debugPrint("render timeout. url = \(url)")
+                        return Error.renderTimeout
+                    }
+                    .eraseToAnyPublisher()
             }
             .map { image in
                 if case .image = cacheForURL[url] {
                     // ignore
                 } else {
+                    /* This deallocates the webView from memory, since it is no longer needed. But deallocation seems to trigger two innocuous side effects in the log:
+                     1. [ProcessSuspension] 0x13e0fe300 - ProcessAssertion: Failed to acquire RBS assertion 'ConnectionTerminationWatchdog' for process with PID=XXXXX, error: Error Domain=RBSAssertionErrorDomain Code=2 "Specified target process does not exist" UserInfo={NSLocalizedFailureReason=Specified target process does not exist}
+                     2. Could not signal service com.apple.WebKit.WebContent: 113: Could not find specified service
+                     */
                     cacheForURL[url] = .image(image)
                 }
                 return image
@@ -138,6 +148,10 @@ extension WebNavigationDelegate: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         webView.correctMargin()
         webView.correctScale()
+    }
+    
+    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        self.imagePublisher.send(completion: .failure(SVGLoader.Error.terminated))
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
