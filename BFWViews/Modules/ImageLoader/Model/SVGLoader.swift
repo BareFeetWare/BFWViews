@@ -69,13 +69,9 @@ private extension SVGLoader {
                 }
                 webView.navigationDelegate = navigationDelegate
                 let imagePublisher = navigationDelegate.imagePublisher
-                // DispatchQueue.main might not be needed.
-                DispatchQueue.main.async {
-                    webView.loadHTMLString(source, baseURL: nil)
-                }
+                webView.loadHTMLString(source, baseURL: nil)
                 return imagePublisher
                     .timeout(2, scheduler: DispatchQueue.main, options: nil) {
-                        debugPrint("render timeout. url = \(url)")
                         return Error.renderTimeout
                     }
                     .eraseToAnyPublisher()
@@ -94,6 +90,7 @@ private extension SVGLoader {
             }
             .mapError { error in
                 debugPrint("error = \(error.localizedDescription)")
+                self.cacheForURL.removeValue(forKey: url)
                 return error
             }
             .eraseToAnyPublisher()
