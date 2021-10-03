@@ -1,5 +1,5 @@
 //
-//  SVGLoader.swift
+//  Fetch+Image.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 24/9/21.
@@ -10,18 +10,9 @@ import Foundation
 import Combine
 import WebKit
 
-public enum SVGLoader {}
-
-public extension SVGLoader {
+public extension Fetch {
     
-    enum Error: LocalizedError {
-        case parse
-        case snapshot
-        case renderTimeout
-        case terminated
-    }
-    
-    static func publisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
+    static func publisher(url: URL) -> AnyPublisher<UIImage, Error> {
         // TODO: Refactor with switch.
         if let cache = cacheForURL[url],
            case .image(let image) = cache
@@ -45,32 +36,32 @@ public extension SVGLoader {
     
 }
 
-private extension SVGLoader {
+private extension Fetch {
     
     // TODO: Consolidate/merge with ImageLoader
     
-    static func imagePublisher(url: URL, data: Data) -> AnyPublisher<UIImage, Swift.Error> {
+    static func imagePublisher(url: URL, data: Data) -> AnyPublisher<UIImage, Error> {
         guard let image = UIImage(data: data)
         else {
             return svgImagePublisher(url: url, data: data)
         }
         return Just(image)
-            .mapError { _ -> Swift.Error in }
+            .mapError { _ -> Error in }
             .eraseToAnyPublisher()
     }
     
-    static func svgImagePublisher(url: URL, data: Data) -> AnyPublisher<UIImage, Swift.Error> {
+    static func svgImagePublisher(url: URL, data: Data) -> AnyPublisher<UIImage, Error> {
         Just(data)
             .tryMap { data -> String in
                 guard let source = String(data: data, encoding: .utf8)
-                else { throw Error.parse }
+                else { throw FetchError.parse }
                 return source
             }
             .tryMap { source in
                 try (source, size(svg: source))
             }
             .receive(on: DispatchQueue.main)
-            .flatMap { source, size -> AnyPublisher<UIImage, Swift.Error> in
+            .flatMap { source, size -> AnyPublisher<UIImage, Error> in
                 let frame = CGRect(origin: .zero, size: size)
                 // WKWebView must be created on the main thread
                 let webView = WKWebView(frame: frame)
@@ -84,15 +75,15 @@ private extension SVGLoader {
                 webView.loadHTMLString(source, baseURL: nil)
                 return imagePublisher
                     .timeout(2, scheduler: DispatchQueue.main, options: nil) {
-                        return Error.renderTimeout
+                        return FetchError.renderTimeout
                     }
                     .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }
     
-    static func imagePublisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
-        Fetcher.dataPublisher(url: url)
+    static func imagePublisher(url: URL) -> AnyPublisher<UIImage, Error> {
+        dataPublisher(url: url)
             .flatMap { data in
                 imagePublisher(url: url, data: data)
             }
@@ -128,7 +119,7 @@ private extension SVGLoader {
         }
     }
     
-    static var publisherForURL = [URL: AnyPublisher<UIImage, Swift.Error>]()
+    static var publisherForURL = [URL: AnyPublisher<UIImage, Error>]()
     static var cacheForURL = [URL: Cache]()
     
     static func size(svg: String) throws -> CGSize {
@@ -137,7 +128,7 @@ private extension SVGLoader {
               let heightString = try svg.groups(regexPattern: "<svg.*?height=\"(.*?)\"").last?.last,
               let width = Double(widthString),
               let height = Double(heightString)
-        else { throw Error.parse }
+        else { throw FetchError.parse }
         return CGSize(
             width: width,
             height: height
@@ -147,7 +138,7 @@ private extension SVGLoader {
 }
 
 class WebNavigationDelegate: NSObject {
-    let imagePublisher = PassthroughSubject<UIImage, Swift.Error>()
+    let imagePublisher = PassthroughSubject<UIImage, Error>()
 }
 
 extension WebNavigationDelegate {
@@ -168,7 +159,7 @@ extension WebNavigationDelegate: WKNavigationDelegate {
     }
     
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
-        self.imagePublisher.send(completion: .failure(SVGLoader.Error.terminated))
+        self.imagePublisher.send(completion: .failure(FetchError.terminated))
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -177,7 +168,7 @@ extension WebNavigationDelegate: WKNavigationDelegate {
                 self.imagePublisher.send(image)
                 self.imagePublisher.send(completion: .finished)
             } else {
-                self.imagePublisher.send(completion: .failure(error ?? SVGLoader.Error.snapshot))
+                self.imagePublisher.send(completion: .failure(error ?? FetchError.snapshot))
             }
         }
     }

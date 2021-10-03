@@ -1,5 +1,5 @@
 //
-//  Fetcher.swift
+//  Fetch.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 24/9/21.
@@ -9,20 +9,23 @@
 import Foundation
 import Combine
 
-enum Fetcher {
+public enum FetchError: LocalizedError {
+    case httpResponse(HTTPURLResponse, data: Data)
+    case parse
+    case snapshot
+    case renderTimeout
+    case terminated
+}
+
+public enum Fetch {
     
-    enum Error: LocalizedError {
-        case httpResponse(HTTPURLResponse, data: Data)
-        case notAnImage
-    }
-    
-    static func dataPublisher(url: URL) -> AnyPublisher<Data, Swift.Error> {
+    static func dataPublisher(url: URL) -> AnyPublisher<Data, Error> {
         URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { (data: Data, response: URLResponse) in
                 if let httpResponse = response as? HTTPURLResponse,
                    httpResponse.statusCode >= 400
                 {
-                    throw Error.httpResponse(
+                    throw FetchError.httpResponse(
                         httpResponse,
                         data: data
                     )

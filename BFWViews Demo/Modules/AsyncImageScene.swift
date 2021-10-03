@@ -1,5 +1,5 @@
 //
-//  SVGLoaderScene.swift
+//  AsyncImageScene.swift
 //  BFWViews Demo
 //
 //  Created by Tom Brodhurst-Hill on 24/9/21.
@@ -9,24 +9,17 @@
 import SwiftUI
 import BFWViews
 
-struct SVGLoaderScene {
-    
-    let fileNames = [
-        "city.svg",
-        "emptySquare100.svg",
-        "filledSquare100.svg",
+struct AsyncImageScene {
+    let urls = [
+        URL(string: "https://www.barefeetware.com/logo.png"),
+        URL(string: "https://upload.wikimedia.org/wikipedia/commons/0/02/SVG_logo.svg"),
+        Bundle.main.url(forResource: "emptySquare100.svg", withExtension: nil),
+        Bundle.main.url(forResource: "filledSquare100.svg", withExtension: nil),
     ]
-    
-    var urls: [URL] {
-        fileNames.map {
-            Bundle.main.url(forResource: $0, withExtension: nil)!
-        }
-    }
-    
-    let url = Bundle.main.url(forResource: "city", withExtension: "svg")!
+        .compactMap { $0 }
 }
 
-extension SVGLoaderScene: View {
+extension AsyncImageScene: View {
     var body: some View {
         List(urls, id: \.self) { url in
             NavigationLink(
@@ -47,14 +40,14 @@ extension SVGLoaderScene: View {
     }
 }
 
-private extension SVGLoaderScene {
+private extension AsyncImageScene {
     
     func title(url: URL) -> String {
         url.pathComponents.last ?? "?"
     }
     
     func svgImage(url: URL) -> some View {
-        SVGImage(url: url) {
+        AsyncImage(url: url) {
             $0
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -65,10 +58,10 @@ private extension SVGLoaderScene {
     
 }
 
-struct SVGImageScene_Preview: PreviewProvider {
+struct AsyncImageScene_Preview: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SVGLoaderScene()
+            AsyncImageScene()
         }
     }
 }

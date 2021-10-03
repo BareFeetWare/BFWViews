@@ -1,5 +1,5 @@
 //
-//  SVGImage.swift
+//  AsyncImage.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 25/9/21.
@@ -8,10 +8,10 @@
 
 import SwiftUI
 
-public struct SVGImage<Content: View, Placeholder: View> {
+public struct AsyncImage<Content: View, Placeholder: View> {
     
     public init(
-        // TODO: Allow for URL? to match AsyncImage
+        // TODO: Allow for URL? to match SwiftUI.AsyncImage
         url: URL,
         @ViewBuilder content: @escaping (Image) -> Content,
         @ViewBuilder placeholder: @escaping () -> Placeholder
@@ -28,7 +28,7 @@ public struct SVGImage<Content: View, Placeholder: View> {
     
 }
 
-extension SVGImage: View {
+extension AsyncImage: View {
     public var body: some View {
         if let image = viewModel.image {
             content(Image(uiImage: image))
@@ -38,12 +38,14 @@ extension SVGImage: View {
     }
 }
 
-struct SVGImage_Previews: PreviewProvider {
+struct AsyncImage_Previews: PreviewProvider {
     static var previews: some View {
-        SVGImage(
-            url: Bundle.main.url(forResource: "city", withExtension: "svg")!
+        AsyncImage(
+            url: Bundle.main.url(forResource: "SVG_logo.svg", withExtension: nil)!
         ) {
-            $0.resizable()
+            $0
+                .resizable()
+                .aspectRatio(contentMode: .fit)
         } placeholder: {
             ProgressView()
         }
