@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-public struct SVGImage<Placeholder: View> {
+public struct SVGImage<Content: View, Placeholder: View> {
     
     public init(
         // TODO: Allow for URL? to match AsyncImage
         url: URL,
-        @ViewBuilder content: @escaping (Image) -> Image = { $0 },
+        @ViewBuilder content: @escaping (Image) -> Content,
         @ViewBuilder placeholder: @escaping () -> Placeholder
     ) {
         self.content = content
@@ -22,7 +22,7 @@ public struct SVGImage<Placeholder: View> {
         _viewModel = StateObject(wrappedValue: ViewModel(url: url))
     }
     
-    let content: (Image) -> Image
+    let content: (Image) -> Content
     let placeholder: Placeholder
     @StateObject var viewModel: ViewModel
     
@@ -42,8 +42,8 @@ struct SVGImage_Previews: PreviewProvider {
     static var previews: some View {
         SVGImage(
             url: Bundle.main.url(forResource: "city", withExtension: "svg")!
-        ) { image in
-            image.resizable()
+        ) {
+            $0.resizable()
         } placeholder: {
             ProgressView()
         }

@@ -55,12 +55,14 @@ private extension SVGLoaderScene {
     
     func svgImage(url: URL) -> some View {
         SVGImage(url: url) {
-            $0.resizable()
+            $0
+                .resizable()
+                .aspectRatio(contentMode: .fit)
         } placeholder: {
             ProgressView()
         }
-        .aspectRatio(1, contentMode: .fit)
     }
+    
 }
 
 struct SVGImageScene_Preview: PreviewProvider {
