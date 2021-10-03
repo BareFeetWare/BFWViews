@@ -46,9 +46,21 @@ public extension SVGLoader {
 }
 
 private extension SVGLoader {
-
-    static func imagePublisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
-        Fetcher.dataPublisher(url: url)
+    
+    // TODO: Consolidate/merge with ImageLoader
+    
+    static func imagePublisher(url: URL, data: Data) -> AnyPublisher<UIImage, Swift.Error> {
+        guard let image = UIImage(data: data)
+        else {
+            return svgImagePublisher(url: url, data: data)
+        }
+        return Just(image)
+            .mapError { _ -> Swift.Error in }
+            .eraseToAnyPublisher()
+    }
+    
+    static func svgImagePublisher(url: URL, data: Data) -> AnyPublisher<UIImage, Swift.Error> {
+        Just(data)
             .tryMap { data -> String in
                 guard let source = String(data: data, encoding: .utf8)
                 else { throw Error.parse }
@@ -75,6 +87,14 @@ private extension SVGLoader {
                         return Error.renderTimeout
                     }
                     .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    static func imagePublisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
+        Fetcher.dataPublisher(url: url)
+            .flatMap { data in
+                imagePublisher(url: url, data: data)
             }
             .map { image in
                 if case .image = cacheForURL[url] {
