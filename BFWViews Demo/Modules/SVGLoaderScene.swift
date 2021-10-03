@@ -54,12 +54,12 @@ private extension SVGLoaderScene {
     }
     
     func svgImage(url: URL) -> some View {
-        SVGImage(
-            url: url,
-            isResizable: true,
-            placeholder: ProgressView()
-        )
-            .aspectRatio(1, contentMode: .fit)
+        SVGImage(url: url) {
+            $0.resizable()
+        } placeholder: {
+            ProgressView()
+        }
+        .aspectRatio(1, contentMode: .fit)
     }
 }
 

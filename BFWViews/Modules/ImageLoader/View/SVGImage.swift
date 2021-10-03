@@ -11,17 +11,18 @@ import SwiftUI
 public struct SVGImage<Placeholder: View> {
     
     public init(
+        // TODO: Allow for URL? to match AsyncImage
         url: URL,
-        isResizable: Bool = false,
-        placeholder: Placeholder
+        @ViewBuilder content: @escaping (Image) -> Image = { $0 },
+        @ViewBuilder placeholder: @escaping () -> Placeholder
     ) {
-        self.isResizable = isResizable
-        self.placeholder = placeholder
+        self.content = content
+        self.placeholder = placeholder()
         // Inspired by: https://stackoverflow.com/a/62636048/1532648
         _viewModel = StateObject(wrappedValue: ViewModel(url: url))
     }
     
-    let isResizable: Bool
+    let content: (Image) -> Image
     let placeholder: Placeholder
     @StateObject var viewModel: ViewModel
     
@@ -30,12 +31,7 @@ public struct SVGImage<Placeholder: View> {
 extension SVGImage: View {
     public var body: some View {
         if let image = viewModel.image {
-            if isResizable {
-                Image(uiImage: image)
-                    .resizable()
-            } else {
-                Image(uiImage: image)
-            }
+            content(Image(uiImage: image))
         } else {
             placeholder
         }
@@ -45,8 +41,11 @@ extension SVGImage: View {
 struct SVGImage_Previews: PreviewProvider {
     static var previews: some View {
         SVGImage(
-            url: Bundle.main.url(forResource: "city", withExtension: "svg")!,
-            placeholder: ProgressView()
-        )
+            url: Bundle.main.url(forResource: "city", withExtension: "svg")!
+        ) { image in
+            image.resizable()
+        } placeholder: {
+            ProgressView()
+        }
     }
 }
