@@ -74,7 +74,7 @@ private extension Fetch {
                 let imagePublisher = navigationDelegate.imagePublisher
                 webView.loadHTMLString(source, baseURL: nil)
                 return imagePublisher
-                    .timeout(2, scheduler: DispatchQueue.main, options: nil) {
+                    .timeout(4, scheduler: DispatchQueue.main, options: nil) {
                         return FetchError.renderTimeout
                     }
                     .eraseToAnyPublisher()
