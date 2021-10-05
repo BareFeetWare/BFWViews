@@ -1,5 +1,5 @@
 //
-//  SVGLoader.swift
+//  Fetch+Image.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 24/9/21.
@@ -10,16 +10,9 @@ import Foundation
 import Combine
 import WebKit
 
-public enum SVGLoader {}
-
-public extension SVGLoader {
+public extension Fetch {
     
-    enum Error: LocalizedError {
-        case parse
-        case snapshot
-    }
-    
-    static func publisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
+    static func publisher(url: URL) -> AnyPublisher<UIImage, Error> {
         // TODO: Refactor with switch.
         if let cache = cacheForURL[url],
            case .image(let image) = cache
@@ -43,23 +36,32 @@ public extension SVGLoader {
     
 }
 
-private extension SVGLoader {
-
-    static func imagePublisher(url: URL) -> AnyPublisher<UIImage, Swift.Error> {
-        Fetcher.dataPublisher(url: url)
+private extension Fetch {
+    
+    static func imagePublisher(url: URL, data: Data) -> AnyPublisher<UIImage, Error> {
+        guard let image = UIImage(data: data)
+        else {
+            return svgImagePublisher(url: url, data: data)
+        }
+        return Just(image)
+            .mapError { _ -> Error in }
+            .eraseToAnyPublisher()
+    }
+    
+    static func svgImagePublisher(url: URL, data: Data) -> AnyPublisher<UIImage, Error> {
+        Just(data)
             .tryMap { data -> String in
                 guard let source = String(data: data, encoding: .utf8)
-                else { throw Error.parse }
+                else { throw FetchError.parse }
                 return source
             }
             .tryMap { source in
                 try (source, size(svg: source))
             }
             .receive(on: DispatchQueue.main)
-            .map { source, size -> WebNavigationDelegate in
+            .flatMap { source, size -> AnyPublisher<UIImage, Error> in
                 let frame = CGRect(origin: .zero, size: size)
                 // WKWebView must be created on the main thread
-                // TODO: Use existing webView if cached
                 let webView = WKWebView(frame: frame)
                 webView.isOpaque = false
                 let navigationDelegate = WebNavigationDelegate()
@@ -67,23 +69,37 @@ private extension SVGLoader {
                     self.cacheForURL[url] = .web(.init(webView: webView, navigationDelegate: navigationDelegate))
                 }
                 webView.navigationDelegate = navigationDelegate
+                let imagePublisher = navigationDelegate.imagePublisher
                 webView.loadHTMLString(source, baseURL: nil)
-                return navigationDelegate
+                return imagePublisher
+                    .timeout(4, scheduler: DispatchQueue.main, options: nil) {
+                        return FetchError.renderTimeout
+                    }
+                    .eraseToAnyPublisher()
             }
-            .receive(on: DispatchQueue.global(qos: .background))
-            .flatMap { navigationDelegate in
-                navigationDelegate.imagePublisher
+            .eraseToAnyPublisher()
+    }
+    
+    static func imagePublisher(url: URL) -> AnyPublisher<UIImage, Error> {
+        dataPublisher(url: url)
+            .flatMap { data in
+                imagePublisher(url: url, data: data)
             }
             .map { image in
                 if case .image = cacheForURL[url] {
                     // ignore
                 } else {
+                    /* This deallocates the webView from memory, since it is no longer needed. But deallocation seems to trigger two innocuous side effects in the log:
+                     1. [ProcessSuspension] 0x13e0fe300 - ProcessAssertion: Failed to acquire RBS assertion 'ConnectionTerminationWatchdog' for process with PID=XXXXX, error: Error Domain=RBSAssertionErrorDomain Code=2 "Specified target process does not exist" UserInfo={NSLocalizedFailureReason=Specified target process does not exist}
+                     2. Could not signal service com.apple.WebKit.WebContent: 113: Could not find specified service
+                     */
                     cacheForURL[url] = .image(image)
                 }
                 return image
             }
             .mapError { error in
                 debugPrint("error = \(error.localizedDescription)")
+                self.cacheForURL.removeValue(forKey: url)
                 return error
             }
             .eraseToAnyPublisher()
@@ -101,7 +117,7 @@ private extension SVGLoader {
         }
     }
     
-    static var publisherForURL = [URL: AnyPublisher<UIImage, Swift.Error>]()
+    static var publisherForURL = [URL: AnyPublisher<UIImage, Error>]()
     static var cacheForURL = [URL: Cache]()
     
     static func size(svg: String) throws -> CGSize {
@@ -110,7 +126,7 @@ private extension SVGLoader {
               let heightString = try svg.groups(regexPattern: "<svg.*?height=\"(.*?)\"").last?.last,
               let width = Double(widthString),
               let height = Double(heightString)
-        else { throw Error.parse }
+        else { throw FetchError.parse }
         return CGSize(
             width: width,
             height: height
@@ -120,7 +136,7 @@ private extension SVGLoader {
 }
 
 class WebNavigationDelegate: NSObject {
-    let imagePublisher = PassthroughSubject<UIImage, Swift.Error>()
+    let imagePublisher = PassthroughSubject<UIImage, Error>()
 }
 
 extension WebNavigationDelegate {
@@ -140,13 +156,17 @@ extension WebNavigationDelegate: WKNavigationDelegate {
         webView.correctScale()
     }
     
+    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        self.imagePublisher.send(completion: .failure(FetchError.terminated))
+    }
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.takeSnapshot(with: snapshotConfiguration) { image, error in
             if let image = image {
                 self.imagePublisher.send(image)
                 self.imagePublisher.send(completion: .finished)
             } else {
-                self.imagePublisher.send(completion: .failure(error ?? SVGLoader.Error.snapshot))
+                self.imagePublisher.send(completion: .failure(error ?? FetchError.snapshot))
             }
         }
     }
