@@ -38,8 +38,6 @@ public extension Fetch {
 
 private extension Fetch {
     
-    // TODO: Consolidate/merge with ImageLoader
-    
     static func imagePublisher(url: URL, data: Data) -> AnyPublisher<UIImage, Error> {
         guard let image = UIImage(data: data)
         else {
