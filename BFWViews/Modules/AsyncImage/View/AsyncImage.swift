@@ -33,9 +33,11 @@ extension AsyncImage where Placeholder == EmptyView {
         url: URL,
         @ViewBuilder content: @escaping (Image) -> Content
     ) {
-        self.content = content
-        self.placeholder = EmptyView()
-        _viewModel = StateObject(wrappedValue: ViewModel(url: url))
+        self.init(
+            url: url,
+            content: content,
+            placeholder: { EmptyView() }
+        )
     }
 }
 
