@@ -28,6 +28,19 @@ public struct AsyncImage<Content: View, Placeholder: View> {
     
 }
 
+extension AsyncImage where Placeholder == EmptyView {
+    public init(
+        url: URL,
+        @ViewBuilder content: @escaping (Image) -> Content
+    ) {
+        self.init(
+            url: url,
+            content: content,
+            placeholder: { EmptyView() }
+        )
+    }
+}
+
 extension AsyncImage: View {
     public var body: some View {
         if let image = viewModel.image {
