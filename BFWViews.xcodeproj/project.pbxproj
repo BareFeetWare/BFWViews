@@ -41,6 +41,8 @@
 		E2C16B7B2664816F00BAC051 /* DateFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B722664816F00BAC051 /* DateFormatter+Style.swift */; };
 		E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */; };
 		E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */; };
+		E2F9B1B5274CB7A300C8EC18 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9B1B4274CB7A300C8EC18 /* ViewController.swift */; };
+		E2F9B1B7274CB8F800C8EC18 /* ViewControllerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9B1B6274CB8F800C8EC18 /* ViewControllerScene.swift */; };
 		E2FD40AC26683A83004E4905 /* ImageSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40A926683A83004E4905 /* ImageSymbol.swift */; };
 		E2FD40AD26683A83004E4905 /* Image+Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40AB26683A83004E4905 /* Image+Symbol.swift */; };
 		E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21311312586F418001496C7 /* MiniSheet.swift */; };
@@ -115,6 +117,8 @@
 		E2C16B722664816F00BAC051 /* DateFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Style.swift"; sourceTree = "<group>"; };
+		E2F9B1B4274CB7A300C8EC18 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E2F9B1B6274CB8F800C8EC18 /* ViewControllerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScene.swift; sourceTree = "<group>"; };
 		E2FD40A926683A83004E4905 /* ImageSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSymbol.swift; sourceTree = "<group>"; };
 		E2FD40AB26683A83004E4905 /* Image+Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+Symbol.swift"; sourceTree = "<group>"; };
 		E2FD40B02668600A004E4905 /* ImageSymbolScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSymbolScene.swift; sourceTree = "<group>"; };
@@ -208,6 +212,7 @@
 				E23AB43C268157A90018DD04 /* ReadFrameScene.swift */,
 				E23AB44026817FEE0018DD04 /* TappableCellScene.swift */,
 				E2FD40B826689384004E4905 /* TrailingScene.swift */,
+				E2F9B1B6274CB8F800C8EC18 /* ViewControllerScene.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				E2C16B65266480C400BAC051 /* View+Distributed.swift */,
 				E23AB43E26817EC50018DD04 /* View+TappableCell.swift */,
 				E2C16B67266480C400BAC051 /* View+Trailing.swift */,
+				E2F9B1B4274CB7A300C8EC18 /* ViewController.swift */,
 				E2BAAC0426FD4EC900CFDE50 /* WebView.swift */,
 			);
 			path = View;
@@ -476,6 +482,7 @@
 				E21311372586F5BF001496C7 /* MiniSheetScene.swift in Sources */,
 				E2FD40B5266890AC004E4905 /* CompressibleSpacerScene.swift in Sources */,
 				E2FD40B926689384004E4905 /* TrailingScene.swift in Sources */,
+				E2F9B1B7274CB8F800C8EC18 /* ViewControllerScene.swift in Sources */,
 				E2FD40CF2669CA26004E4905 /* AlertScene.swift in Sources */,
 				E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */,
 				E2FD40B326688DF5004E4905 /* CardScene.swift in Sources */,
@@ -493,6 +500,7 @@
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
 				E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */,
 				E2C16B68266480C400BAC051 /* View+Distributed.swift in Sources */,
+				E2F9B1B5274CB7A300C8EC18 /* ViewController.swift in Sources */,
 				E2C16B7B2664816F00BAC051 /* DateFormatter+Style.swift in Sources */,
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E23AB43B268157720018DD04 /* FramePreferenceKey.swift in Sources */,
