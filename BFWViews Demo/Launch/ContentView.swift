@@ -51,6 +51,7 @@ private extension ContentView {
             .init(name: "ReadFrame", destination: AnyView(ReadFrameScene())),
             .init(name: "TappableCell", destination: AnyView(TappableCellScene())),
             .init(name: "Trailing", destination: AnyView(TrailingScene())),
+            .init(name: "UIViewController", destination: AnyView(ViewControllerScene())),
         ]
     }
     
