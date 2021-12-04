@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  UIKitViewController.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 23/11/21.
@@ -9,12 +9,12 @@
 import SwiftUI
 
 public extension View {
-    func viewController(_ customize: @escaping (UIViewController?) -> Void) -> some View {
-        background(ViewController(customize: customize))
+    func uiViewController(_ customize: @escaping (UIViewController?) -> Void) -> some View {
+        background(UIKitViewController(customize: customize))
     }
 }
 
-private struct ViewController: UIViewControllerRepresentable {
+private struct UIKitViewController: UIViewControllerRepresentable {
     
     let customize: (UIViewController?) -> Void
     
@@ -37,7 +37,7 @@ struct ViewController_Previews: PreviewProvider {
                 NavigationLink("Child") { Text("Destination") }
             }
             .navigationTitle("View Controller")
-            .viewController { $0?.navigationItem.backButtonTitle = "Customized Back" }
+            .uiViewController { $0?.navigationItem.backButtonTitle = "Customized Back" }
         }
     }
 }
