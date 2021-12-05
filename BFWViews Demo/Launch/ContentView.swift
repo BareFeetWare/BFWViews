@@ -49,6 +49,7 @@ private extension ContentView {
             .init(name: "ImageSymbol", destination: AnyView(ImageSymbolScene())),
             .init(name: "MiniSheet", destination: AnyView(MiniSheetScene())),
             .init(name: "ReadFrame", destination: AnyView(ReadFrameScene())),
+            .init(name: "RoundedBorder", destination: AnyView(RoundedBorderScene())),
             .init(name: "TappableCell", destination: AnyView(TappableCellScene())),
             .init(name: "Trailing", destination: AnyView(TrailingScene())),
             .init(name: "UIView", destination: AnyView(UIViewScene())),
