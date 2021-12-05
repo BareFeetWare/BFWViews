@@ -22,6 +22,8 @@
 		E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */; };
 		E281557B2701219200D56072 /* emptySquare100.svg in Resources */ = {isa = PBXBuildFile; fileRef = E28155792701219100D56072 /* emptySquare100.svg */; };
 		E281557C2701219200D56072 /* filledSquare100.svg in Resources */ = {isa = PBXBuildFile; fileRef = E281557A2701219200D56072 /* filledSquare100.svg */; };
+		E28B7ABB275AC73F00ED5730 /* UIViewScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B7ABA275AC73F00ED5730 /* UIViewScene.swift */; };
+		E28B7ABD275AC77700ED5730 /* UIKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B7ABC275AC77700ED5730 /* UIKitView.swift */; };
 		E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */; };
 		E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC0426FD4EC900CFDE50 /* WebView.swift */; };
 		E2BAAC0926FD6D4D00CFDE50 /* AsyncImageScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC0826FD6D4D00CFDE50 /* AsyncImageScene.swift */; };
@@ -98,6 +100,8 @@
 		E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLink.swift; sourceTree = "<group>"; };
 		E28155792701219100D56072 /* emptySquare100.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = emptySquare100.svg; sourceTree = "<group>"; };
 		E281557A2701219200D56072 /* filledSquare100.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = filledSquare100.svg; sourceTree = "<group>"; };
+		E28B7ABA275AC73F00ED5730 /* UIViewScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewScene.swift; sourceTree = "<group>"; };
+		E28B7ABC275AC77700ED5730 /* UIKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitView.swift; sourceTree = "<group>"; };
 		E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLinkScene.swift; sourceTree = "<group>"; };
 		E2BAAC0426FD4EC900CFDE50 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		E2BAAC0826FD6D4D00CFDE50 /* AsyncImageScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageScene.swift; sourceTree = "<group>"; };
@@ -213,6 +217,7 @@
 				E23AB44026817FEE0018DD04 /* TappableCellScene.swift */,
 				E2FD40B826689384004E4905 /* TrailingScene.swift */,
 				E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */,
+				E28B7ABA275AC73F00ED5730 /* UIViewScene.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 				E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */,
 				E23AB43A268157720018DD04 /* FramePreferenceKey.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
+				E28B7ABC275AC77700ED5730 /* UIKitView.swift */,
 				E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */,
 				E2C16B65266480C400BAC051 /* View+Distributed.swift */,
 				E23AB43E26817EC50018DD04 /* View+TappableCell.swift */,
@@ -474,6 +480,7 @@
 				E2FD40B12668600A004E4905 /* ImageSymbolScene.swift in Sources */,
 				E213111E2586F380001496C7 /* ContentView.swift in Sources */,
 				E2BAAC0926FD6D4D00CFDE50 /* AsyncImageScene.swift in Sources */,
+				E28B7ABB275AC73F00ED5730 /* UIViewScene.swift in Sources */,
 				E23AB43D268157A90018DD04 /* ReadFrameScene.swift in Sources */,
 				E2FD40B72668915F004E4905 /* DistributedScene.swift in Sources */,
 				E213111C2586F380001496C7 /* BFWViewsDemoApp.swift in Sources */,
@@ -496,6 +503,7 @@
 				E2BAAC1C26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift in Sources */,
 				E2FD40AC26683A83004E4905 /* ImageSymbol.swift in Sources */,
 				E2BAAC1526FD8A8000CFDE50 /* Fetch+Image.swift in Sources */,
+				E28B7ABD275AC77700ED5730 /* UIKitView.swift in Sources */,
 				E2FD40CD2669C9F5004E4905 /* Alert+Error.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
 				E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */,

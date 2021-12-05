@@ -10,7 +10,19 @@ import SwiftUI
 
 struct UIViewScene: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            Section {
+                Text("Alone")
+            }
+            Section {
+                Text("Top")
+                    .uiView(ofType: UITableViewCell.self) { cell in
+                        cell.accessoryType = .detailDisclosureButton
+                    }
+                Text("Middle")
+                Text("Bottom")
+            }
+        }
     }
 }
 
