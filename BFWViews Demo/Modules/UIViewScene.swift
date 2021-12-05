@@ -8,20 +8,15 @@
 
 import SwiftUI
 
+// TODO: Add better use cases.
+
 struct UIViewScene: View {
     var body: some View {
         List {
-            Section {
-                Text("Alone")
-            }
-            Section {
-                Text("Top")
-                    .uiTableViewCell { cell in
-                        cell.accessoryType = .detailDisclosureButton
-                    }
-                Text("Middle")
-                Text("Bottom")
-            }
+            Text("Cell")
+                .uiTableViewCell { cell in
+                    cell.accessoryType = .checkmark
+                }
         }
     }
 }
