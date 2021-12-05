@@ -16,7 +16,7 @@ struct UIViewScene: View {
             }
             Section {
                 Text("Top")
-                    .uiView(ofType: UITableViewCell.self) { cell in
+                    .uiTableViewCell { cell in
                         cell.accessoryType = .detailDisclosureButton
                     }
                 Text("Middle")

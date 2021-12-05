@@ -24,6 +24,12 @@ public extension View {
         )
     }
     
+    func uiTableViewCell(customize: @escaping (UITableViewCell) -> Void) -> some View {
+        uiView(ofType: UITableViewCell.self) { cell in
+            customize(cell)
+        }
+    }
+    
 }
 
 private extension UIView {
@@ -77,9 +83,7 @@ struct UIKitView_Previews: PreviewProvider {
             }
             Section {
                 Text("Top")
-                    .uiView(ofType: UITableViewCell.self) { cell in
-                        cell.accessoryType = .checkmark
-                    }
+                    .uiTableViewCell { $0.accessoryType = .checkmark }
                 Text("Middle")
                 Text("Bottom")
             }
