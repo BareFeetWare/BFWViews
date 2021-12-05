@@ -38,6 +38,7 @@ private class BorderView: UIView {
         self.lineWidth = lineWidth
         self.color = color
         super.init(frame: frame)
+        self.isUserInteractionEnabled = false
     }
     
     required init?(coder: NSCoder) {
