@@ -1,5 +1,5 @@
 //
-//  RoundedBorder.swift
+//  CellBorder.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 5/12/21.
@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension View {
-    func roundedBorder(color: Color, lineWidth: CGFloat = 1) -> some View {
+    func cellBorder(color: Color, lineWidth: CGFloat = 1) -> some View {
         uiTableViewCell { cell in
             cell.addBorder(color: UIColor(color), lineWidth: lineWidth)
         }
@@ -95,19 +95,19 @@ private extension CACornerMask {
 }
 
 
-struct Border_Previews: PreviewProvider {
+struct CellBorder_Previews: PreviewProvider {
     static var previews: some View {
         List {
             Section {
                 Text("Alone")
             }
-            .roundedBorder(color: .orange, lineWidth: 4)
+            .cellBorder(color: .orange, lineWidth: 4)
             Section {
                 Text("Top")
                 Text("Middle")
                 Text("Bottom")
             }
-            .roundedBorder(color: .purple, lineWidth: 2)
+            .cellBorder(color: .purple, lineWidth: 2)
         }
     }
 }

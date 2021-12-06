@@ -1,5 +1,5 @@
 //
-//  RoundedBorderScene.swift
+//  CellBorderScene.swift
 //  BFWViews Demo
 //
 //  Created by Tom Brodhurst-Hill on 5/12/21.
@@ -8,25 +8,25 @@
 
 import SwiftUI
 
-struct RoundedBorderScene: View {
+struct CellBorderScene: View {
     var body: some View {
         List {
             Section {
                 Text("Alone")
             }
-            .roundedBorder(color: .orange, lineWidth: 4)
+            .cellBorder(color: .orange, lineWidth: 4)
             Section {
                 Text("Top")
                 Text("Middle")
                 Text("Bottom")
             }
-            .roundedBorder(color: .secondary)
+            .cellBorder(color: .secondary)
         }
     }
 }
 
-struct RoundedBorderScene_Previews: PreviewProvider {
+struct CellBorderScene_Previews: PreviewProvider {
     static var previews: some View {
-        RoundedBorderScene()
+        CellBorderScene()
     }
 }
