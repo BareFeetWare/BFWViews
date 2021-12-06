@@ -19,12 +19,32 @@ private struct UIKitViewController: UIViewControllerRepresentable {
     let customize: (UIViewController?) -> Void
     
     func makeUIViewController(context: Context) -> some UIViewController {
-        UIViewController()
+        EmbeddedViewController(customize: customize)
     }
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        DispatchQueue.main.async {
-            customize(uiViewController.parent)
+        // Ignore
+    }
+    
+}
+
+private class EmbeddedViewController: UIViewController {
+    
+    init(customize: @escaping (UIViewController?) -> Void) {
+        self.customize = customize
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    let customize: (UIViewController?) -> Void
+    
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if let parent = parent {
+            customize(parent)
         }
     }
     
