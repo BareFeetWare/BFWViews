@@ -43,6 +43,7 @@ private extension ContentView {
             .init(name: "AsyncImage", destination: AnyView(AsyncImageScene())),
             .init(name: "AsyncNavigationLink", destination: AnyView(AsyncNavigationLinkScene())),
             .init(name: "Card", destination: AnyView(CardScene())),
+            .init(name: "CellBorderScene", destination: AnyView(CellBorderScene())),
             .init(name: "Color+Hex", destination: AnyView(ColorHexScene())),
             .init(name: "CompressibleSpacer", destination: AnyView(CompressibleSpacerScene())),
             .init(name: "Distributed", destination: AnyView(DistributedScene())),
