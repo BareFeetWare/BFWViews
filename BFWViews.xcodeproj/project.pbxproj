@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E2050A792709792600B726EE /* SVG_logo.svg in Resources */ = {isa = PBXBuildFile; fileRef = E2050A782709792600B726EE /* SVG_logo.svg */; };
+		E205F0A82762F98E005E0E6E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205F0A72762F98E005E0E6E /* Badge.swift */; };
 		E213111C2586F380001496C7 /* BFWViewsDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213111B2586F380001496C7 /* BFWViewsDemoApp.swift */; };
 		E213111E2586F380001496C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213111D2586F380001496C7 /* ContentView.swift */; };
 		E21311202586F385001496C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E213111F2586F385001496C7 /* Assets.xcassets */; };
@@ -85,6 +86,7 @@
 
 /* Begin PBXFileReference section */
 		E2050A782709792600B726EE /* SVG_logo.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SVG_logo.svg; sourceTree = "<group>"; };
+		E205F0A72762F98E005E0E6E /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		E21311182586F380001496C7 /* BFWViews Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BFWViews Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E213111B2586F380001496C7 /* BFWViewsDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFWViewsDemoApp.swift; sourceTree = "<group>"; };
 		E213111D2586F380001496C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 			children = (
 				E2FD40CC2669C9F5004E4905 /* Alert+Error.swift */,
 				E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */,
+				E205F0A72762F98E005E0E6E /* Badge.swift */,
 				E2C16B6B266480F900BAC051 /* Card.swift */,
 				E28B7ABE275C5E2F00ED5730 /* CellBorder.swift */,
 				E224C9A126E8661100AC5CD2 /* Color+Hex.swift */,
@@ -518,6 +521,7 @@
 				E2C16B68266480C400BAC051 /* View+Distributed.swift in Sources */,
 				E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */,
 				E2C16B7B2664816F00BAC051 /* DateFormatter+Style.swift in Sources */,
+				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E23AB43B268157720018DD04 /* FramePreferenceKey.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
