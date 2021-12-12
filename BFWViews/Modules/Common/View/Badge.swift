@@ -68,17 +68,25 @@ private extension View {
 
 struct Badge_Previews: PreviewProvider {
     static var previews: some View {
-        HStack {
-            Image(symbol: .bell)
-                .imageScale(.large)
-                .foregroundColor(.secondary)
-                .badge(
-                    foreground: Text("12345")
-                        .colorScheme(.dark),
-                    background: Color.red
-                )
+        Group {
+            HStack {
+                Image(symbol: .bell)
+                    .imageScale(.large)
+                    .foregroundColor(.secondary)
+                    .badge(
+                        foreground: Text("12345")
+                            .colorScheme(.dark),
+                        background: Color.red
+                    )
+                Image(symbol: .heart)
+                    .imageScale(.large)
+                    .foregroundColor(.secondary)
+                    .badge(
+                        background: Color.green
+                    )
+            }
             Image(symbol: .heart)
-                .imageScale(.large)
+                .font(.largeTitle.bold())
                 .foregroundColor(.secondary)
                 .badge(
                     background: Color.green
