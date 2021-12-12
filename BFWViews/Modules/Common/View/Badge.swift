@@ -9,6 +9,26 @@
 import SwiftUI
 
 public extension View {
+    
+    func badge<Background: View>(
+        background: Background
+    ) -> some View {
+        HStack(alignment: .top, spacing: -12) {
+            self
+            Text(" ")
+                .foregroundStyle()
+                .background(background)
+                .clipShape(Circle())
+                .overlay(
+                    Circle()
+                        .strokeBorder(Color.white, lineWidth: 3)
+                )
+                .backgroundStyle()
+        }
+    }
+    
+    // TODO: Consolidate the two functions
+    
     func badge<Foreground: View, Background: View>(
         foreground: Foreground,
         background: Background
@@ -16,18 +36,34 @@ public extension View {
         HStack(alignment: .top, spacing: -12) {
             self
             foreground
-                .font(.caption2)
-                .padding(.vertical, 3)
-                .padding(.horizontal, 8)
+                .foregroundStyle()
                 .background(background)
                 .clipShape(Capsule())
                 .overlay(
                     Capsule()
                         .strokeBorder(Color.white, lineWidth: 3)
                 )
-                .offset(CGSize(width: 0, height: -6))
+                .backgroundStyle()
         }
     }
+    
+}
+
+private extension View {
+    
+    func foregroundStyle() -> some View {
+        self
+            .font(.caption2.bold())
+            .fixedSize(horizontal: true, vertical: false)
+            .padding(.vertical, 3)
+            .padding(.horizontal, 8)
+    }
+    
+    func backgroundStyle() -> some View {
+        self
+            .offset(CGSize(width: 0, height: -6))
+    }
+    
 }
 
 struct Badge_Previews: PreviewProvider {
@@ -38,17 +74,13 @@ struct Badge_Previews: PreviewProvider {
                 .foregroundColor(.secondary)
                 .badge(
                     foreground: Text("12345")
-                        .colorScheme(.dark)
-                        .fixedSize(horizontal: true, vertical: false),
+                        .colorScheme(.dark),
                     background: Color.red
                 )
             Image(symbol: .heart)
                 .imageScale(.large)
                 .foregroundColor(.secondary)
                 .badge(
-                    foreground: Text(" ")
-                        .colorScheme(.dark)
-                        .fixedSize(horizontal: true, vertical: false),
                     background: Color.green
                 )
         }
