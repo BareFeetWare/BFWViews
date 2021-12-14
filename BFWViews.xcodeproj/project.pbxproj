@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E2050A792709792600B726EE /* SVG_logo.svg in Resources */ = {isa = PBXBuildFile; fileRef = E2050A782709792600B726EE /* SVG_logo.svg */; };
+		E205F0A82762F98E005E0E6E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205F0A72762F98E005E0E6E /* Badge.swift */; };
 		E213111C2586F380001496C7 /* BFWViewsDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213111B2586F380001496C7 /* BFWViewsDemoApp.swift */; };
 		E213111E2586F380001496C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213111D2586F380001496C7 /* ContentView.swift */; };
 		E21311202586F385001496C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E213111F2586F385001496C7 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 		E23AB43D268157A90018DD04 /* ReadFrameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43C268157A90018DD04 /* ReadFrameScene.swift */; };
 		E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43E26817EC50018DD04 /* View+TappableCell.swift */; };
 		E23AB44126817FEE0018DD04 /* TappableCellScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB44026817FEE0018DD04 /* TappableCellScene.swift */; };
+		E26A7AD42765A561007E3A6C /* BadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A7AD32765A561007E3A6C /* BadgeScene.swift */; };
 		E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */; };
 		E281557B2701219200D56072 /* emptySquare100.svg in Resources */ = {isa = PBXBuildFile; fileRef = E28155792701219100D56072 /* emptySquare100.svg */; };
 		E281557C2701219200D56072 /* filledSquare100.svg in Resources */ = {isa = PBXBuildFile; fileRef = E281557A2701219200D56072 /* filledSquare100.svg */; };
@@ -85,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		E2050A782709792600B726EE /* SVG_logo.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SVG_logo.svg; sourceTree = "<group>"; };
+		E205F0A72762F98E005E0E6E /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		E21311182586F380001496C7 /* BFWViews Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BFWViews Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E213111B2586F380001496C7 /* BFWViewsDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFWViewsDemoApp.swift; sourceTree = "<group>"; };
 		E213111D2586F380001496C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -99,6 +102,7 @@
 		E23AB43C268157A90018DD04 /* ReadFrameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFrameScene.swift; sourceTree = "<group>"; };
 		E23AB43E26817EC50018DD04 /* View+TappableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+TappableCell.swift"; sourceTree = "<group>"; };
 		E23AB44026817FEE0018DD04 /* TappableCellScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableCellScene.swift; sourceTree = "<group>"; };
+		E26A7AD32765A561007E3A6C /* BadgeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeScene.swift; sourceTree = "<group>"; };
 		E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLink.swift; sourceTree = "<group>"; };
 		E28155792701219100D56072 /* emptySquare100.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = emptySquare100.svg; sourceTree = "<group>"; };
 		E281557A2701219200D56072 /* filledSquare100.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = filledSquare100.svg; sourceTree = "<group>"; };
@@ -211,6 +215,7 @@
 				E2FD40CE2669CA26004E4905 /* AlertScene.swift */,
 				E2BAAC0826FD6D4D00CFDE50 /* AsyncImageScene.swift */,
 				E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */,
+				E26A7AD32765A561007E3A6C /* BadgeScene.swift */,
 				E2FD40B226688DF5004E4905 /* CardScene.swift */,
 				E28B7AC0275C9B5700ED5730 /* CellBorderScene.swift */,
 				E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */,
@@ -307,6 +312,7 @@
 			children = (
 				E2FD40CC2669C9F5004E4905 /* Alert+Error.swift */,
 				E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */,
+				E205F0A72762F98E005E0E6E /* Badge.swift */,
 				E2C16B6B266480F900BAC051 /* Card.swift */,
 				E28B7ABE275C5E2F00ED5730 /* CellBorder.swift */,
 				E224C9A126E8661100AC5CD2 /* Color+Hex.swift */,
@@ -489,6 +495,7 @@
 				E28B7AC1275C9B5700ED5730 /* CellBorderScene.swift in Sources */,
 				E28B7ABB275AC73F00ED5730 /* UIViewScene.swift in Sources */,
 				E23AB43D268157A90018DD04 /* ReadFrameScene.swift in Sources */,
+				E26A7AD42765A561007E3A6C /* BadgeScene.swift in Sources */,
 				E2FD40B72668915F004E4905 /* DistributedScene.swift in Sources */,
 				E213111C2586F380001496C7 /* BFWViewsDemoApp.swift in Sources */,
 				E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */,
@@ -518,6 +525,7 @@
 				E2C16B68266480C400BAC051 /* View+Distributed.swift in Sources */,
 				E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */,
 				E2C16B7B2664816F00BAC051 /* DateFormatter+Style.swift in Sources */,
+				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E23AB43B268157720018DD04 /* FramePreferenceKey.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
