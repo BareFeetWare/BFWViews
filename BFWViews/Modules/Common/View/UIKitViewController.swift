@@ -9,9 +9,19 @@
 import SwiftUI
 
 public extension View {
+    
     func uiViewController(_ customize: @escaping (UIViewController?) -> Void) -> some View {
-        background(UIKitViewController(customize: customize))
+        background(
+            UIKitViewController(customize: customize)
+        )
     }
+    
+    func uiNavigationController(_ customize: @escaping (UINavigationController?) -> Void) -> some View {
+        background(
+            UIKitViewController(customize: { customize($0?.navigationController) })
+        )
+    }
+    
 }
 
 private struct UIKitViewController: UIViewControllerRepresentable {
