@@ -54,7 +54,7 @@ private struct UIKitView: UIViewRepresentable {
     
 }
 
-private class EmbeddedView: UIView {
+internal class EmbeddedView: UIView {
     
     init(frame: CGRect, customize: @escaping (UIView) -> Void) {
         self.customize = customize
