@@ -17,7 +17,7 @@ public extension View {
     func uiView<T: UIView>(ofType type: T.Type, customize: @escaping (T) -> Void) -> some View {
         background(
             UIKitView { view in
-                guard let matchingView = (view as? T) ?? view.superview(ofType: type)
+                guard let matchingView = (view as? T) ?? view.ancestorView(ofType: type)
                 else { return }
                 customize(matchingView)
             }
@@ -33,8 +33,8 @@ public extension View {
 }
 
 private extension UIView {
-    func superview<T>(ofType type: T.Type) -> T? {
-        return (superview as? T) ?? superview?.superview(ofType: type)
+    func ancestorView<T>(ofType type: T.Type) -> T? {
+        return (superview as? T) ?? superview?.ancestorView(ofType: type)
     }
 }
 
@@ -54,7 +54,7 @@ private struct UIKitView: UIViewRepresentable {
     
 }
 
-private class EmbeddedView: UIView {
+internal class EmbeddedView: UIView {
     
     init(frame: CGRect, customize: @escaping (UIView) -> Void) {
         self.customize = customize

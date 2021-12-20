@@ -9,9 +9,19 @@
 import SwiftUI
 
 public extension View {
+    
     func uiViewController(_ customize: @escaping (UIViewController?) -> Void) -> some View {
-        background(UIKitViewController(customize: customize))
+        background(
+            UIKitViewController(customize: customize)
+        )
     }
+    
+    func uiNavigationController(_ customize: @escaping (UINavigationController?) -> Void) -> some View {
+        background(
+            UIKitViewController(customize: { customize($0?.navigationController) })
+        )
+    }
+    
 }
 
 private struct UIKitViewController: UIViewControllerRepresentable {
@@ -23,7 +33,8 @@ private struct UIKitViewController: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        // Ignore
+        // TODO: Perhaps avoid calling this on instantiation, if already called in make.
+        customize(uiViewController.parent)
     }
     
 }
@@ -31,21 +42,16 @@ private struct UIKitViewController: UIViewControllerRepresentable {
 private class EmbeddedViewController: UIViewController {
     
     init(customize: @escaping (UIViewController?) -> Void) {
-        self.customize = customize
         super.init(nibName: nil, bundle: nil)
+        self.view = EmbeddedView(frame: .zero) { [weak self] _ in
+            guard let parent = self?.parent
+            else { return }
+            customize(parent)
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    let customize: (UIViewController?) -> Void
-    
-    override func willMove(toParent parent: UIViewController?) {
-        super.willMove(toParent: parent)
-        if let parent = parent {
-            customize(parent)
-        }
     }
     
 }
