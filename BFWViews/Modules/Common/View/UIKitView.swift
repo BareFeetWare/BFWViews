@@ -24,18 +24,44 @@ public extension View {
         )
     }
     
+    /// Apply to a subview in a List or Form to customize the underlying UITableViewCell.
     func uiTableViewCell(customize: @escaping (UITableViewCell) -> Void) -> some View {
         uiView(ofType: UITableViewCell.self) { cell in
             customize(cell)
         }
     }
     
+    /// Apply to List or Form to customize the underlying UITableView.
+    func uiTableView(customize: @escaping (UITableView) -> Void) -> some View {
+        uiViewHostedSibling(ofType: UITableView.self, customize: customize)
+    }
+    
+    func uiViewHostedSibling<T: UIView>(ofType type: T.Type, customize: @escaping (T) -> Void) -> some View {
+        uiView { view in
+            view.hostedSiblingView(ofType: type)
+                .map { customize($0) }
+        }
+    }
+    
 }
 
 private extension UIView {
+    
     func ancestorView<T>(ofType type: T.Type) -> T? {
-        return (superview as? T) ?? superview?.ancestorView(ofType: type)
+        (superview as? T) ?? superview?.ancestorView(ofType: type)
     }
+    
+    func subview<T>(ofType: T.Type) -> T? {
+        subviews.first { $0 is T } as? T
+    }
+    
+    func hostedSiblingView<T>(ofType: T.Type) -> T? {
+        superview?.subviews
+            .filter { $0 != self && NSStringFromClass(type(of: $0)).contains("ViewHost") }
+            .compactMap { $0.subview(ofType: T.self) }
+            .first
+    }
+    
 }
 
 private struct UIKitView: UIViewRepresentable {
