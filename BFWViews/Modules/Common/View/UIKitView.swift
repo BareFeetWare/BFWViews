@@ -11,17 +11,18 @@ import SwiftUI
 public extension View {
     
     func uiView(customize: @escaping (UIView) -> Void) -> some View {
-        background(UIKitView(customize: customize))
+        overlay(
+            UIKitView(customize: customize)
+                .frame(width: 0, height: 0, alignment: .topLeading)
+        )
     }
     
     func uiView<T: UIView>(ofType type: T.Type, customize: @escaping (T) -> Void) -> some View {
-        background(
-            UIKitView { view in
-                guard let matchingView = (view as? T) ?? view.ancestorView(ofType: type)
-                else { return }
-                customize(matchingView)
-            }
-        )
+        uiView { view in
+            guard let matchingView = (view as? T) ?? view.ancestorView(ofType: type)
+            else { return }
+            customize(matchingView)
+        }
     }
     
     /// Apply to a subview in a List or Form to customize the underlying UITableViewCell.
@@ -69,9 +70,7 @@ private struct UIKitView: UIViewRepresentable {
     let customize: (UIView) -> Void
     
     func makeUIView(context: Context) -> some UIView {
-        let embeddedView = EmbeddedView(frame: .zero, customize: customize)
-        embeddedView.backgroundColor = .clear
-        return embeddedView
+        EmbeddedView(frame: .zero, customize: customize)
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
