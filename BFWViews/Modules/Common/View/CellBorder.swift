@@ -9,11 +9,27 @@
 import SwiftUI
 
 public extension View {
-    func cellBorder(color: Color, lineWidth: CGFloat = 1) -> some View {
-        uiTableViewCell { cell in
-            cell.addBorder(color: UIColor(color), lineWidth: lineWidth)
+    
+    @ViewBuilder
+    func cellBorder(color: Color, lineWidth: CGFloat = 1, isFake: Bool = false) -> some View {
+        if isFake {
+            self
+                .padding()
+                .background(Color(.systemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .strokeBorder(Color.secondary)
+                )
+        } else {
+            /// Same visual as cellBorder, but for use when not in a UITableView and if single row in a section.
+            self
+                .uiTableViewCell { cell in
+                    cell.addBorder(color: UIColor(color), lineWidth: lineWidth)
+                }
         }
     }
+    
 }
 
 private extension UIView {
