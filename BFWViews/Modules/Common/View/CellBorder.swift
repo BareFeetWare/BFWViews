@@ -21,12 +21,13 @@ public extension View {
     // Same visual as cellBorder, but for use when not in a UITableView and if single row in a section.
     func fakeCellBorder(color: Color, lineWidth: CGFloat = 1) -> some View {
         self
-            .padding(8)
-            .background(Color(.systemBackground))
+            .padding(round(8 + lineWidth / 2))
+            .padding(.horizontal, 4)
+            .background(Color(.secondarySystemGroupedBackground))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(Color.secondary)
+                    .strokeBorder(color, lineWidth: lineWidth / 2)
             )
     }
     
@@ -113,17 +114,42 @@ private extension CACornerMask {
 
 struct CellBorder_Previews: PreviewProvider {
     static var previews: some View {
-        List {
-            Section {
-                Text("Alone")
+        ForEach(ColorScheme.allCases) { colorSceheme in
+            Group {
+                List {
+                    Section(
+                        header: Text("cellBorder")
+                            .textCase(.none)
+                    ) {
+                        Text("Alone")
+                    }
+                    .cellBorder(color: .orange, lineWidth: 8)
+                    Section {
+                        Text("Top")
+                        Text("Middle")
+                        Text("Bottom")
+                    }
+                    .cellBorder(color: .purple, lineWidth: 2)
+                }
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        Section(
+                            header: Text("fakeCellBorder")
+                                .textCase(.none)
+                        ) {
+                            Text("Alone")
+                                .distributed(.leading)
+                                .fakeCellBorder(color: .orange, lineWidth: 8)
+                        }
+                    }
+                    .padding()
+                }
+                .background(
+                    Color(colorSceheme == .light ? .tertiarySystemGroupedBackground : .systemBackground)
+                        .ignoresSafeArea()
+                )
             }
-            .cellBorder(color: .orange, lineWidth: 4)
-            Section {
-                Text("Top")
-                Text("Middle")
-                Text("Bottom")
-            }
-            .cellBorder(color: .purple, lineWidth: 2)
+            .colorScheme(colorSceheme)
         }
     }
 }
