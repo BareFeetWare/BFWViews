@@ -74,7 +74,7 @@ private struct UIKitView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        // Ignored
+        customize(uiView)
     }
     
 }
