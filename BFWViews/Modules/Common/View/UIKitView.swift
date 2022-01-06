@@ -44,19 +44,18 @@ public extension View {
         }
     }
     
-    func sectionHeaderHeight(
-        tableViewProxy: TableViewProxy,
-        heightForSection: @escaping (Int, Int) -> CGFloat?
+    func tableViewProxy(
+        _ tableViewProxy: TableViewProxy,
+        heightForHeaderInSection: @escaping (Int) -> CGFloat?
     ) -> some View {
-        self
-            .uiTableView { tableView in
-                if tableView.delegate as? TableViewProxy != tableViewProxy {
-                    tableViewProxy.delegate = tableView.delegate
-                    tableView.delegate = tableViewProxy
-                    tableViewProxy.heightForSection = heightForSection
-                    tableView.reloadData() // Needed?
-                }
+        uiTableView { tableView in
+            if tableView.delegate as? TableViewProxy != tableViewProxy {
+                tableViewProxy.delegate = tableView.delegate
+                tableView.delegate = tableViewProxy
+                tableViewProxy.heightForHeaderInSection = heightForHeaderInSection
+                tableView.reloadData() // Needed?
             }
+        }
     }
 
 }

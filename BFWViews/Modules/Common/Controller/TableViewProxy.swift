@@ -10,13 +10,13 @@ import UIKit
 
 public class TableViewProxy: NSObject {
     weak var delegate: UITableViewDelegate?
-    var heightForSection: ((Int, Int) -> CGFloat?)?
+    var heightForHeaderInSection: ((Int) -> CGFloat?)?
 }
 
 extension TableViewProxy: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        heightForSection?(section, tableView.numberOfSections)
+        heightForHeaderInSection?(section)
         ?? delegate?.tableView?(tableView, heightForHeaderInSection: section)
         ?? tableView.sectionHeaderHeight
     }
