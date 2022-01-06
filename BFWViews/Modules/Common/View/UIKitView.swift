@@ -11,31 +11,58 @@ import SwiftUI
 public extension View {
     
     func uiView(customize: @escaping (UIView) -> Void) -> some View {
-        background(UIKitView(customize: customize))
-    }
-    
-    func uiView<T: UIView>(ofType type: T.Type, customize: @escaping (T) -> Void) -> some View {
-        background(
-            UIKitView { view in
-                guard let matchingView = (view as? T) ?? view.ancestorView(ofType: type)
-                else { return }
-                customize(matchingView)
-            }
+        overlay(
+            UIKitView(customize: customize)
+                .frame(width: 0, height: 0, alignment: .topLeading)
         )
     }
     
+    func uiView<T: UIView>(ofType type: T.Type, customize: @escaping (T) -> Void) -> some View {
+        uiView { view in
+            guard let matchingView = (view as? T) ?? view.ancestorView(ofType: type)
+            else { return }
+            customize(matchingView)
+        }
+    }
+    
+    /// Apply to a subview in a List or Form to customize the underlying UITableViewCell.
     func uiTableViewCell(customize: @escaping (UITableViewCell) -> Void) -> some View {
         uiView(ofType: UITableViewCell.self) { cell in
             customize(cell)
         }
     }
     
+    /// Apply to List or Form to customize the underlying UITableView.
+    func uiTableView(customize: @escaping (UITableView) -> Void) -> some View {
+        uiViewHostedSibling(ofType: UITableView.self, customize: customize)
+    }
+    
+    func uiViewHostedSibling<T: UIView>(ofType type: T.Type, customize: @escaping (T) -> Void) -> some View {
+        uiView { view in
+            view.hostedSiblingView(ofType: type)
+                .map { customize($0) }
+        }
+    }
+    
 }
 
 private extension UIView {
+    
     func ancestorView<T>(ofType type: T.Type) -> T? {
-        return (superview as? T) ?? superview?.ancestorView(ofType: type)
+        (superview as? T) ?? superview?.ancestorView(ofType: type)
     }
+    
+    func subview<T>(ofType: T.Type) -> T? {
+        subviews.first { $0 is T } as? T
+    }
+    
+    func hostedSiblingView<T>(ofType: T.Type) -> T? {
+        superview?.subviews
+            .filter { $0 != self && NSStringFromClass(type(of: $0)).contains("ViewHost") }
+            .compactMap { $0.subview(ofType: T.self) }
+            .first
+    }
+    
 }
 
 private struct UIKitView: UIViewRepresentable {
@@ -43,13 +70,11 @@ private struct UIKitView: UIViewRepresentable {
     let customize: (UIView) -> Void
     
     func makeUIView(context: Context) -> some UIView {
-        let embeddedView = EmbeddedView(frame: .zero, customize: customize)
-        embeddedView.backgroundColor = .clear
-        return embeddedView
+        EmbeddedView(frame: .zero, customize: customize)
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        // Ignored
+        customize(uiView)
     }
     
 }
