@@ -25,10 +25,10 @@ public extension View {
         }
     }
     
-    /// Apply to a subview in a List or Form to customize the underlying UITableViewCell.
-    func uiTableViewCell(customize: @escaping (UITableViewCell) -> Void) -> some View {
-        uiView(ofType: UITableViewCell.self) { cell in
-            customize(cell)
+    func uiViewHostedSibling<T: UIView>(ofType type: T.Type, customize: @escaping (T) -> Void) -> some View {
+        uiView { view in
+            view.hostedSiblingView(ofType: type)
+                .map { customize($0) }
         }
     }
     
@@ -37,13 +37,29 @@ public extension View {
         uiViewHostedSibling(ofType: UITableView.self, customize: customize)
     }
     
-    func uiViewHostedSibling<T: UIView>(ofType type: T.Type, customize: @escaping (T) -> Void) -> some View {
-        uiView { view in
-            view.hostedSiblingView(ofType: type)
-                .map { customize($0) }
+    /// Apply to a subview in a List or Form to customize the underlying UITableViewCell.
+    func uiTableViewCell(customize: @escaping (UITableViewCell) -> Void) -> some View {
+        uiView(ofType: UITableViewCell.self) { cell in
+            customize(cell)
         }
     }
     
+    func tableViewProxy(
+        _ tableViewProxy: TableViewProxy,
+        heightForHeaderInSection: ((Int) -> CGFloat?)? = nil,
+        heightForFooterInSection: ((Int) -> CGFloat?)? = nil
+    ) -> some View {
+        uiTableView { tableView in
+            if tableView.delegate as? TableViewProxy != tableViewProxy {
+                tableViewProxy.delegate = tableView.delegate
+                tableView.delegate = tableViewProxy
+                tableViewProxy.heightForHeaderInSection = heightForHeaderInSection
+                tableViewProxy.heightForFooterInSection = heightForFooterInSection
+                tableView.reloadData() // Needed?
+            }
+        }
+    }
+
 }
 
 private extension UIView {
