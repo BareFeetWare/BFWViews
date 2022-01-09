@@ -11,6 +11,7 @@ import UIKit
 public class TableViewProxy: NSObject {
     weak var delegate: UITableViewDelegate?
     var heightForHeaderInSection: ((Int) -> CGFloat?)?
+    var heightForFooterInSection: ((Int) -> CGFloat?)?
 }
 
 /// Intercepts calls to the UITableView's delegate.
@@ -23,7 +24,9 @@ extension TableViewProxy: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        delegate?.tableView?(tableView, heightForFooterInSection: section) ?? tableView.sectionFooterHeight
+        heightForFooterInSection?(section)
+        ?? delegate?.tableView?(tableView, heightForFooterInSection: section)
+        ?? tableView.sectionFooterHeight
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
