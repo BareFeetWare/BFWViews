@@ -6,12 +6,33 @@
 //  Copyright © 2022 BareFeetWare. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
+
+public extension View {
+    func tableViewProxy(
+        _ tableViewProxy: TableViewProxy,
+        heightForHeaderInSection: ((Int) -> CGFloat?)? = nil,
+        heightForFooterInSection: ((Int) -> CGFloat?)? = nil,
+        willDisplayCell: ((UITableViewCell, IndexPath) -> Void)? = nil
+    ) -> some View {
+        uiTableView { tableView in
+            if tableView.delegate as? TableViewProxy != tableViewProxy {
+                tableViewProxy.delegate = tableView.delegate
+                tableView.delegate = tableViewProxy
+                tableViewProxy.heightForHeaderInSection = heightForHeaderInSection
+                tableViewProxy.heightForFooterInSection = heightForFooterInSection
+                tableViewProxy.willDisplayCell = willDisplayCell
+                tableView.reloadData() // Needed?
+            }
+        }
+    }
+}
 
 public class TableViewProxy: NSObject {
     weak var delegate: UITableViewDelegate?
     var heightForHeaderInSection: ((Int) -> CGFloat?)?
     var heightForFooterInSection: ((Int) -> CGFloat?)?
+    var willDisplayCell: ((UITableViewCell, IndexPath) -> Void)?
 }
 
 /// Intercepts calls to the UITableView's delegate.
@@ -38,7 +59,12 @@ extension TableViewProxy: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        delegate?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
+        willDisplayCell?(cell, indexPath)
+        ?? delegate?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        delegate?.tableView?(tableView, didEndDisplaying: cell, forRowAt: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, shouldSpringLoadRowAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {

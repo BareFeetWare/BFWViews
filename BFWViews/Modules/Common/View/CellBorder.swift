@@ -34,15 +34,18 @@ public extension View {
 }
 
 private extension UIView {
-    func addBorder(color: UIColor, lineWidth: CGFloat) {
+    func addBorder(color: UIColor, lineWidth: CGFloat = 1) {
         let borderView: BorderView
         if let subview = subviews.first(where: { $0 is BorderView }) as? BorderView {
             borderView = subview
         } else {
             borderView = BorderView(frame: bounds, color: color, lineWidth: lineWidth)
+            // TODO: Maybe add BorderLayer directly, without BorderView.
             addSubview(borderView)
             borderView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
+        borderView.borderLayer().setNeedsDisplay()
+        borderView.borderLayer().displayIfNeeded()
     }
 }
 
@@ -62,20 +65,52 @@ private class BorderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addBorderLayer() {
-        guard let superview = superview else { return }
-        let maskedCorners = superview.layer.maskedCorners
-        let cornerRadius = superview.layer.cornerRadius
-        let borderLayerName = "border"
-        let borderLayer: CAShapeLayer
-        if let layer = layer.sublayers?.first(where: { $0.name == borderLayerName }) as? CAShapeLayer {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        borderLayer().frame = bounds
+        borderLayer().setNeedsDisplay()
+    }
+    
+    func borderLayer() -> BorderLayer {
+        let borderLayer: BorderLayer
+        if let layer = layer.sublayers?.first(where: { $0 is BorderLayer }) as? BorderLayer {
             borderLayer = layer
         } else {
-            borderLayer = CAShapeLayer()
-            borderLayer.name = borderLayerName
+            borderLayer = BorderLayer()
+            borderLayer.strokeColor = color.cgColor
+            borderLayer.lineWidth = lineWidth
             layer.addSublayer(borderLayer)
         }
-        borderLayer.path = UIBezierPath(
+        return borderLayer
+    }
+    
+}
+
+class BorderLayer: CAShapeLayer {
+    
+    override init(layer: Any) {
+        super.init(layer: layer)
+    }
+    
+    override init() {
+        super.init()
+        masksToBounds = true
+        fillColor = UIColor.clear.cgColor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(in ctx: CGContext) {
+        updateBorder()
+    }
+    
+    func updateBorder() {
+        guard let cellLayer = superlayer?.superlayer else { return }
+        let maskedCorners = cellLayer.maskedCorners
+        let cornerRadius = cellLayer.cornerRadius
+        path = UIBezierPath(
             roundedRect: bounds.inset(
                 by: UIEdgeInsets(
                     top: maskedCorners.contains(.layerMinXMinYCorner) ? 0 : -lineWidth,
@@ -87,17 +122,8 @@ private class BorderView: UIView {
             byRoundingCorners: maskedCorners.rectCorner,
             cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
         ).cgPath
-        borderLayer.strokeColor = color.cgColor
-        borderLayer.fillColor = UIColor.clear.cgColor
-        borderLayer.lineWidth = lineWidth
-        clipsToBounds = true
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        addBorderLayer()
-    }
-    
+
 }
 
 private extension CACornerMask {
@@ -114,7 +140,7 @@ private extension CACornerMask {
 
 struct CellBorder_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(ColorScheme.allCases) { colorSceheme in
+        ForEach(ColorScheme.allCases) { colorScheme in
             Group {
                 List {
                     Section(
@@ -126,11 +152,17 @@ struct CellBorder_Previews: PreviewProvider {
                     .cellBorder(color: .orange, lineWidth: 8)
                     Section {
                         Text("Top")
+                        Text("Bottom")
+                    }
+                    .cellBorder(color: .purple, lineWidth: 2)
+                    Section {
+                        Text("Top")
                         Text("Middle")
                         Text("Bottom")
                     }
                     .cellBorder(color: .purple, lineWidth: 2)
                 }
+                .previewDisplayName("cellBorder")
                 ScrollView {
                     VStack(alignment: .leading) {
                         Section(
@@ -145,11 +177,12 @@ struct CellBorder_Previews: PreviewProvider {
                     .padding()
                 }
                 .background(
-                    Color(colorSceheme == .light ? .tertiarySystemGroupedBackground : .systemBackground)
+                    Color(colorScheme == .light ? .tertiarySystemGroupedBackground : .systemBackground)
                         .ignoresSafeArea()
                 )
+                .previewDisplayName("fakeCellBorder")
             }
-            .colorScheme(colorSceheme)
+            .colorScheme(colorScheme)
         }
     }
 }

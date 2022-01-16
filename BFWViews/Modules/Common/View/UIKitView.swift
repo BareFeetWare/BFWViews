@@ -44,22 +44,6 @@ public extension View {
         }
     }
     
-    func tableViewProxy(
-        _ tableViewProxy: TableViewProxy,
-        heightForHeaderInSection: ((Int) -> CGFloat?)? = nil,
-        heightForFooterInSection: ((Int) -> CGFloat?)? = nil
-    ) -> some View {
-        uiTableView { tableView in
-            if tableView.delegate as? TableViewProxy != tableViewProxy {
-                tableViewProxy.delegate = tableView.delegate
-                tableView.delegate = tableViewProxy
-                tableViewProxy.heightForHeaderInSection = heightForHeaderInSection
-                tableViewProxy.heightForFooterInSection = heightForFooterInSection
-                tableView.reloadData() // Needed?
-            }
-        }
-    }
-
 }
 
 private extension UIView {
