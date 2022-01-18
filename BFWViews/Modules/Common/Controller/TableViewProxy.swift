@@ -23,7 +23,6 @@ public extension View {
                 tableViewProxy.heightForHeaderInSection = heightForHeaderInSection
                 tableViewProxy.heightForFooterInSection = heightForFooterInSection
                 tableViewProxy.willDisplayCell = willDisplayCell
-                tableView.reloadData() // Needed?
             }
         }
     }
