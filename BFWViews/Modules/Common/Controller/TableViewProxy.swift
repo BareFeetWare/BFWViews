@@ -10,19 +10,19 @@ import SwiftUI
 
 public extension View {
     func tableViewProxy(
-        _ tableViewProxy: TableViewProxy,
         heightForHeaderInSection: ((Int) -> CGFloat?)? = nil,
         heightForFooterInSection: ((Int) -> CGFloat?)? = nil,
         willDisplayCell: ((UITableViewCell, IndexPath) -> Void)? = nil
     ) -> some View {
         uiTableView { tableView in
-            if tableView.delegate as? TableViewProxy != tableViewProxy {
+            if !(tableView.delegate is TableViewProxy) {
+                let tableViewProxy = TableViewProxy()
+                TableViewProxy.mapTable.setObject(tableViewProxy, forKey: tableView)
                 tableViewProxy.delegate = tableView.delegate
                 tableView.delegate = tableViewProxy
                 tableViewProxy.heightForHeaderInSection = heightForHeaderInSection
                 tableViewProxy.heightForFooterInSection = heightForFooterInSection
                 tableViewProxy.willDisplayCell = willDisplayCell
-                tableView.reloadData() // Needed?
             }
         }
     }
@@ -33,6 +33,10 @@ public class TableViewProxy: NSObject {
     var heightForHeaderInSection: ((Int) -> CGFloat?)?
     var heightForFooterInSection: ((Int) -> CGFloat?)?
     var willDisplayCell: ((UITableViewCell, IndexPath) -> Void)?
+}
+
+private extension TableViewProxy {
+    static var mapTable: NSMapTable<UITableView, TableViewProxy> = .weakToStrongObjects()
 }
 
 /// Intercepts calls to the UITableView's delegate.
