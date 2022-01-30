@@ -10,52 +10,46 @@ import SwiftUI
 import BFWViews
 
 struct AsyncImageScene {
-    let urls = [
+    
+    let samples = [
         URL(string: "https://www.barefeetware.com/logo.png"),
-        URL(string: "https://upload.wikimedia.org/wikipedia/commons/0/02/SVG_logo.svg"),
         Bundle.main.url(forResource: "emptySquare100.svg", withExtension: nil),
         Bundle.main.url(forResource: "filledSquare100.svg", withExtension: nil),
     ]
         .compactMap { $0 }
+    
+    init() {
+        self.urls = samples
+        self._url = State(wrappedValue: self.urls.first!)
+    }
+    
+    let urls: [URL]
+    
+    @State var url: URL
 }
 
 extension AsyncImageScene: View {
     var body: some View {
-        List(urls, id: \.self) { url in
-            NavigationLink(
-                destination:
-                    svgImage(url: url)
-                    .navigationTitle(title(url: url)),
-                label: {
-                    HStack {
-                        Text(title(url: url))
-                        Spacer()
-                        svgImage(url: url)
-                            .background(Color.red.opacity(0.2))
+        VStack {
+            HStack {
+                Text("URL: ")
+                Picker("URL", selection: $url) {
+                    ForEach(urls, id: \.self) { url in
+                        Text(url.lastPathComponent)
                     }
-                    .frame(height: 88)
                 }
-            )
+            }
+            AsyncImage(
+                url: url
+            ) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                ProgressView()
+            }
         }
     }
-}
-
-private extension AsyncImageScene {
-    
-    func title(url: URL) -> String {
-        url.pathComponents.last ?? "?"
-    }
-    
-    func svgImage(url: URL) -> some View {
-        AsyncImage(url: url) {
-            $0
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-        } placeholder: {
-            ProgressView()
-        }
-    }
-    
 }
 
 struct AsyncImageScene_Preview: PreviewProvider {
