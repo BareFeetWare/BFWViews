@@ -18,13 +18,12 @@ public struct AsyncImage<Content: View, Placeholder: View> {
     ) {
         self.content = content
         self.placeholder = placeholder()
-        // Inspired by: https://stackoverflow.com/a/62636048/1532648
-        _viewModel = StateObject(wrappedValue: ViewModel(url: url))
+        self.viewModel = ViewModel(url: url)
     }
     
     let content: (Image) -> Content
     let placeholder: Placeholder
-    @StateObject var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     
 }
 

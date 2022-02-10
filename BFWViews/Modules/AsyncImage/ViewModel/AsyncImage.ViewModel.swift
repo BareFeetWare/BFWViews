@@ -35,12 +35,14 @@ private extension AsyncImage.ViewModel {
                 receiveCompletion: { completion in
                     switch completion {
                     case .failure(let error):
-                        debugPrint("error = \(error)")
+                        print("error = \(error)")
                     case.finished:
                         break
                     }
                 },
-                receiveValue: { self.image = $0}
+                receiveValue: {
+                    self.image = $0
+                }
             )
             .store(in: &subscribers)
     }
