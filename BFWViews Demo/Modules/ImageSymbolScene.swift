@@ -21,7 +21,7 @@ struct ImageSymbolScene {
 extension ImageSymbolScene: View {
     var body: some View {
         List {
-            ForEach(0 ..< symbols.count) { index in
+            ForEach(0 ..< symbols.count, id: \.self) { index in
                 HStack {
                     Image(symbol: symbols[index])
                         .frame(width: 44)
