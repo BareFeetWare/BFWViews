@@ -12,7 +12,6 @@ import BFWViews
 struct AsyncNavigationLinkScene {
     
     @State private var isActiveNext = false
-    @State private var isInProgressTask = false
     
     func performTask() {
         // Example async task. This would typically be a network fetch, or anything that takes some time.
@@ -21,7 +20,6 @@ struct AsyncNavigationLinkScene {
             execute: .init(
                 block: {
                     isActiveNext = true
-                    isInProgressTask = false
                 }
             )
         )
@@ -32,13 +30,13 @@ extension AsyncNavigationLinkScene: View {
     var body: some View {
         List {
             AsyncNavigationLink(
-                destination: Text("Next Scene"),
                 isActive: $isActiveNext,
-                isInProgress: $isInProgressTask,
+                destination: { Text("Next Scene") },
+                label: {
+                    Text("Do something asynchronous")
+                },
                 action: performTask
-            ) {
-                Text("Do something asynchronous")
-            }
+            )
         }
         .navigationTitle("AsyncNavigationLink")
     }
@@ -46,6 +44,8 @@ extension AsyncNavigationLinkScene: View {
 
 struct AsyncNavigationLinkScene_Previews: PreviewProvider {
     static var previews: some View {
-        AsyncNavigationLinkScene()
+        NavigationView {
+            AsyncNavigationLinkScene()
+        }
     }
 }

@@ -18,137 +18,87 @@ import SwiftUI
  7. If isActive does not change to false (eg if the action failed), it does not move forward. No error shown yet.
  */
 public struct AsyncNavigationLink<Destination: View, Label: View> {
-    let destination: Destination
-    var hasDisclosureIndicator: Bool
     @Binding var isActive: Bool
-    @Binding var isInProgress: Bool
-    let action: () -> Void
+    let destination: () -> Destination
     let label: () -> Label
+    let action: (() -> Void)?
+    @State private var isInProgress = false
     
     public init(
-        destination: Destination,
-        hasDisclosureIndicator: Bool = true,
         isActive: Binding<Bool>,
-        isInProgress: Binding<Bool>,
-        action: @escaping () -> Void,
-        label: @escaping () -> Label
+        destination: @escaping () -> Destination,
+        label: @escaping () -> Label,
+        action: (() -> Void)?
     ) {
-        self.destination = destination
-        self.hasDisclosureIndicator = hasDisclosureIndicator
         self._isActive = isActive
-        self._isInProgress = isInProgress
-        self.action = action
+        self.destination = destination
         self.label = label
-    }
-    
-    // TODO: Add an init for Button, incorporating the action.
-}
-
-private extension AsyncNavigationLink {
-    
-    var isOverlayedProgress: Bool {
-        !hasDisclosureIndicator && isInProgress
+        self.action = action
     }
     
 }
 
 extension AsyncNavigationLink: View {
     public var body: some View {
-        HStack {
-            label()
-                .brightness(isOverlayedProgress ? 0.3 : 0)
-                .disabled(isOverlayedProgress)
-                .overlay(isOverlayedProgress ? ProgressView() : nil)
-            if hasDisclosureIndicator {
-                CompressibleSpacer()
-                if isInProgress {
-                    ProgressView()
-                } else {
-                    Image(systemName: "chevron.right")
-                        .imageScale(.small)
-                        .foregroundColor(.secondary)
+        Group {
+            if let action = action {
+                Button {
+                    isInProgress = true
+                    action()
+                } label: {
+                    if isInProgress {
+                        HStack {
+                            label()
+                            Spacer()
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                        }
+                    } else {
+                        NavigationLink(
+                            isActive: $isActive,
+                            destination: destination,
+                            label: label
+                        )
+                    }
                 }
+            } else {
+                label()
             }
         }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            isInProgress = true
-            action()
+        .foregroundColor(.primary)
+        .onChange(of: isActive) { isActive in
+            if isActive {
+                isInProgress = false
+            }
         }
-        .background(
-            NavigationLink(
-                destination: destination,
-                isActive: $isActive,
-                label: { Text("Hidden") }
-            )
-            .hidden()
-            .disabled(true)
-        )
     }
 }
 
 struct AsyncNavigationLink_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            List {
-                Section(header: Text("Not yet started")
-                ) {
+    
+    struct PreviewScene: View {
+        
+        @State private var isActive = false
+        
+        var body: some View {
+            NavigationView {
+                List {
                     AsyncNavigationLink(
-                        destination: Text("Destination"),
-                        hasDisclosureIndicator: true,
-                        isActive: .constant(false),
-                        isInProgress: .constant(false),
-                        action: {},
-                        label: { Text("Disclosure") }
-                    )
-                    AsyncNavigationLink(
-                        destination: Text("Destination"),
-                        hasDisclosureIndicator: false,
-                        isActive: .constant(false),
-                        isInProgress: .constant(false),
-                        action: {},
-                        label: {
-                            Text("Action")
-                                .foregroundColor(.accentColor)
-                        }
-                    )
-                }
-                Section(header: Text("In Progress")
-                ) {
-                    AsyncNavigationLink(
-                        destination: Text("Destination"),
-                        hasDisclosureIndicator: true,
-                        isActive: .constant(false),
-                        isInProgress: .constant(true),
-                        action: {},
-                        label: { Text("Disclosure") }
-                    )
-                    AsyncNavigationLink(
-                        destination: Text("Destination"),
-                        hasDisclosureIndicator: false,
-                        isActive: .constant(false),
-                        isInProgress: .constant(true),
-                        action: {},
-                        label: {
-                            Text("Action")
-                                .foregroundColor(.accentColor)
+                        isActive: $isActive,
+                        destination: { Text("Destination") },
+                        label: { Text("Async") },
+                        action: {
+                            DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .seconds(1))) {
+                                isActive = true
+                            }
                         }
                     )
                 }
             }
-            .navigationBarItems(
-                trailing: AsyncNavigationLink(
-                    destination: Text("Next"),
-                    hasDisclosureIndicator: false,
-                    isActive: .constant(false),
-                    isInProgress: .constant(false),
-                    action: {},
-                    label: {
-                        Text("Next")
-                            .foregroundColor(.accentColor)
-                    }
-                )
-            )
         }
+    }
+    
+    static var previews: some View {
+        PreviewScene()
     }
 }
