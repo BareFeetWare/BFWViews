@@ -49,6 +49,7 @@ private extension ContentView {
             .init(name: "CompressibleSpacer", destination: AnyView(CompressibleSpacerScene())),
             .init(name: "Distributed", destination: AnyView(DistributedScene())),
             .init(name: "ImageSymbol", destination: AnyView(ImageSymbolScene())),
+            .init(name: "ListScene", destination: AnyView(ListSceneFlow())),
             .init(name: "MiniSheet", destination: AnyView(MiniSheetScene())),
             .init(name: "ReadFrame", destination: AnyView(ReadFrameScene())),
             .init(name: "TappableCell", destination: AnyView(TappableCellScene())),
