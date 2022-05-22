@@ -46,19 +46,20 @@ extension AsyncNavigationLink: View {
                     isInProgress = true
                     action()
                 } label: {
-                    if isInProgress {
+                    ZStack {
                         HStack {
                             label()
                             Spacer()
                             ProgressView()
                                 .progressViewStyle(.circular)
                         }
-                    } else {
+                        .opacity(isInProgress ? 1 : 0)
                         NavigationLink(
                             isActive: $isActive,
                             destination: destination,
                             label: label
                         )
+                        .opacity(isInProgress ? 0 : 1)
                     }
                 }
             } else {
