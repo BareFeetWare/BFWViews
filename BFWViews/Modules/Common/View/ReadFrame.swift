@@ -1,5 +1,5 @@
 //
-//  FramePreferenceKey.swift
+//  ReadFrame.swift
 //
 //  Created by Tom Brodhurst-Hill on 3/2/21.
 //  Copyright © 2021 BareFeetWare. All rights reserved.
@@ -7,17 +7,9 @@
 
 import SwiftUI
 
-public struct FramePreferenceKey: PreferenceKey {
-    public static let defaultValue: CGRect = .zero
-
-    public static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
-        value = nextValue()
-    }
-}
-
 public extension View {
     func readFrame(
-        in coordinateSpace: CoordinateSpace,
+        in coordinateSpace: CoordinateSpace = .global,
         writer: @escaping (CGRect) -> Void
     ) -> some View {
         background(
@@ -32,4 +24,14 @@ public extension View {
             }
         )
     }
+}
+
+public struct FramePreferenceKey: PreferenceKey {
+    
+    public static let defaultValue: CGRect = .zero
+    
+    public static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
+        value = nextValue()
+    }
+    
 }
