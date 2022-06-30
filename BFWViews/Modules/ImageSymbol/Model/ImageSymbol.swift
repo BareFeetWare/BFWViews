@@ -64,6 +64,7 @@ public enum ImageSymbol: String {
     case handThumbsup = "hand.thumbsup"
     case handThumbsupFill = "hand.thumbsup.fill"
     case heart
+    case heartFill = "heart.fill"
     case home
     case house
     case houseFill = "house.fill"
