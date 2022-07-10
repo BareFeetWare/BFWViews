@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8798E0D52877E9BE00FB1344 /* WebScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798E0D42877E9BE00FB1344 /* WebScene.swift */; };
 		E2050A792709792600B726EE /* SVG_logo.svg in Resources */ = {isa = PBXBuildFile; fileRef = E2050A782709792600B726EE /* SVG_logo.svg */; };
 		E205F0A82762F98E005E0E6E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205F0A72762F98E005E0E6E /* Badge.swift */; };
 		E213111C2586F380001496C7 /* BFWViewsDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213111B2586F380001496C7 /* BFWViewsDemoApp.swift */; };
@@ -87,6 +88,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8798E0D42877E9BE00FB1344 /* WebScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebScene.swift; sourceTree = "<group>"; };
 		E2050A782709792600B726EE /* SVG_logo.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SVG_logo.svg; sourceTree = "<group>"; };
 		E205F0A72762F98E005E0E6E /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		E21311182586F380001496C7 /* BFWViews Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BFWViews Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +232,7 @@
 				E2FD40B826689384004E4905 /* TrailingScene.swift */,
 				E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */,
 				E28B7ABA275AC73F00ED5730 /* UIViewScene.swift */,
+				8798E0D42877E9BE00FB1344 /* WebScene.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				E2FD40B72668915F004E4905 /* DistributedScene.swift in Sources */,
 				E213111C2586F380001496C7 /* BFWViewsDemoApp.swift in Sources */,
 				E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */,
+				8798E0D52877E9BE00FB1344 /* WebScene.swift in Sources */,
 				E23AB44126817FEE0018DD04 /* TappableCellScene.swift in Sources */,
 				E21311372586F5BF001496C7 /* MiniSheetScene.swift in Sources */,
 				E2FD40B5266890AC004E4905 /* CompressibleSpacerScene.swift in Sources */,
