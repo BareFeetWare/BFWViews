@@ -1,5 +1,5 @@
 //
-//  DemoListScene.swift
+//  ListSceneFlow.Coordinator.swift
 //  BFWViews Demo
 //
 //  Created by Tom Brodhurst-Hill on 17/5/2022.
@@ -19,28 +19,29 @@ private extension ListSceneFlow.Coordinator {
     
     func rootListSceneViewModel() -> ListScene.ViewModel {
         let viewModel = ListScene.ViewModel(
-            title: "Bluetooth",
+            title: "ListScene",
             sections: []
         )
         viewModel.sections = [
             .init(
-                title: "Bluetooth Central Manager",
+                title: "Static detail",
                 cells: [
                     .button(
-                        .init(title: "Start", action: {})
+                        .init(title: "Button", action: {})
                     ),
                     .detail(
-                        .init("Status", trailing: "Off line")
+                        .init("title", id: "2", trailing: "trailing")
                     ),
-                    .button(
-                        .init(title: "Scan", action: {})),
+                    .detail(
+                        .init("title", id: "3", subtitle: "subtitle", trailing: "trailing")
+                    ),
                 ]
             ),
             .init(
-                title: "Devices",
+                title: "Async",
                 cells: [
                     .detail(
-                        .init("Peripherals", trailing: "3") { [weak self] in
+                        .init("Title", trailing: "3") { [weak self] in
                             guard let self = self else { return }
                             self.fetchPeripherals(sourceViewModel: viewModel)
                         }
