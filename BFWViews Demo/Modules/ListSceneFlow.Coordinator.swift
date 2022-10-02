@@ -41,10 +41,11 @@ private extension ListSceneFlow.Coordinator {
                 title: "Async",
                 cells: [
                     .detail(
-                        .init("Title", trailing: "3") { [weak self] in
-                            guard let self = self else { return }
-                            self.fetchPeripherals(sourceViewModel: viewModel)
-                        }
+                        .init(
+                            "Title",
+                            trailing: "3",
+                            destinationSceneViewModel: peripheralsSceneViewModel
+                        )
                     ),
                 ]
             ),
@@ -52,16 +53,16 @@ private extension ListSceneFlow.Coordinator {
         return viewModel
     }
     
-    func fetchPeripherals(sourceViewModel: ListScene.ViewModel) {
-        // Pretend async request
-        DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .seconds(2))) {
-            let peripherals = ["Peripheral 1", "Peripheral 2", "Peripheral 3"]
-            sourceViewModel.destinationViewModel = .init(
-                title: "Peripherals",
-                cells: peripherals.map { peripheral in
-                        .detail(.init(peripheral))
-                }
-            )
-        }
+    func peripheralsSceneViewModel() async -> ListScene.ViewModel {
+        // Arbitrary delay, pretending to be an async request.
+        try? await Task.sleep(nanoseconds: 2000000000)
+        let peripherals = ["Peripheral 1", "Peripheral 2", "Peripheral 3"]
+        return .init(
+            title: "Peripherals",
+            cells: peripherals.map { peripheral in
+                    .detail(.init(peripheral))
+            }
+        )
     }
+    
 }

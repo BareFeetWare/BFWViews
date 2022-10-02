@@ -22,7 +22,11 @@ public extension ListScene {
         @Published public var sections: [Section]
         @Published public var destinationViewModel: ListScene.ViewModel? {
             didSet {
-                isActiveDestination = destinationViewModel != nil
+                // TODO: Perhaps instead use subscriber.
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    self.isActiveDestination = self.destinationViewModel != nil
+                }
             }
         }
         @Published var isActiveDestination = false
@@ -54,18 +58,18 @@ public extension ListScene.ViewModel {
         public struct Detail {
             public let id: String
             public let detailCellViewModel: DetailCell.ViewModel
-            public var onTap: (() -> Void)?
+            public var destinationSceneViewModel: (() async -> ListScene.ViewModel)?
             
             public init(
                 _ title: String?,
                 id: String? = nil,
                 subtitle: String? = nil,
                 trailing: String? = nil,
-                onTap: (() -> Void)? = nil
+                destinationSceneViewModel: (() async -> ListScene.ViewModel)? = nil
             ) {
                 self.id = id ?? title ?? "nil"
                 self.detailCellViewModel = .init(title: title, subtitle: subtitle, trailing: trailing)
-                self.onTap = onTap
+                self.destinationSceneViewModel = destinationSceneViewModel
             }
         }
         
@@ -137,6 +141,15 @@ public extension ListScene.ViewModel {
         }
     }
     
+    func action(detail: Cell.Detail) -> (() -> Void)? {
+        guard let destinationSceneViewModel = detail.destinationSceneViewModel else { return nil }
+        return { [self] in
+            Task {
+                // FIXME: Run on main thread
+                destinationViewModel = await destinationSceneViewModel()
+            }
+        }
+    }
 }
 
 // MARK: - Previews

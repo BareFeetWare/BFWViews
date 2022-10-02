@@ -29,7 +29,7 @@ extension ListScene: View {
                                 isActive: $viewModel.isActiveDestination,
                                 destination: { viewModel.destinationViewModel.map { ListScene(viewModel: $0) }},
                                 label: { DetailCell(viewModel: detail.detailCellViewModel) },
-                                action: detail.onTap
+                                action: viewModel.action(detail: detail)
                             )
                         }
                     }
