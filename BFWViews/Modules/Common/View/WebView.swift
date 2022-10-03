@@ -13,10 +13,20 @@ import WebKit
 
 public struct WebView: UIViewRepresentable {
     
-    @Binding var title: String
+    public init(
+        title: Binding<String>,
+        url: URL,
+        loadStatusChanged: ((Bool, Error?) -> Void)? = nil
+    ) {
+        self.title = title
+        self.url = url
+        self.loadStatusChanged = loadStatusChanged
+    }
+    
+    var title: Binding<String>
     var url: URL
-    var loadStatusChanged: ((Bool, Error?) -> Void)? = nil
-
+    var loadStatusChanged: ((Bool, Error?) -> Void)?
+    
     public func makeCoordinator() -> WebView.Coordinator {
         Coordinator(self)
     }
@@ -51,7 +61,7 @@ public struct WebView: UIViewRepresentable {
         }
 
         public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            parent.title = webView.title ?? ""
+            parent.title.wrappedValue = webView.title ?? ""
             parent.loadStatusChanged?(false, nil)
         }
 
@@ -65,7 +75,8 @@ struct WebView_Previews: PreviewProvider {
     static var previews: some View {
         WebView(
             title: .constant("Title"),
-            url: URL(string: "https://www.barefeetware.com")!
+            url: URL(string: "https://www.barefeetware.com")!,
+            loadStatusChanged: nil
         )
     }
 }
