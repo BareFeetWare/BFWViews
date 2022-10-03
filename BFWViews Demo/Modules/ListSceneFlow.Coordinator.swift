@@ -30,22 +30,22 @@ private extension ListSceneFlow.Coordinator {
                         .init(title: "Button", action: {})
                     ),
                     .detail(
-                        .init("title", id: "2", trailing: "trailing")
+                        .init(title: "Detail 1", trailing: "trailing")
                     ),
                     .detail(
-                        .init("title", id: "3", subtitle: "subtitle", trailing: "trailing")
+                        .init(title: "Detail 2", subtitle: "subtitle", trailing: "trailing")
                     ),
                 ]
             ),
             .init(
-                title: "Async",
+                title: "Push",
                 cells: [
-                    .detail(
+                    .push(
                         .init(
-                            "Title",
-                            trailing: "3",
-                            destinationSceneViewModel: peripheralsSceneViewModel
-                        )
+                            title: "Push 1",
+                            trailing: "3"
+                        ),
+                        childrenSceneViewModel
                     ),
                 ]
             ),
@@ -53,14 +53,14 @@ private extension ListSceneFlow.Coordinator {
         return viewModel
     }
     
-    func peripheralsSceneViewModel() async -> ListScene.ViewModel {
+    func childrenSceneViewModel() async -> ListScene.ViewModel {
         // Arbitrary delay, pretending to be an async request.
         try? await Task.sleep(nanoseconds: 2000000000)
-        let peripherals = ["Peripheral 1", "Peripheral 2", "Peripheral 3"]
+        let children = ["Child 1", "Child 2", "Child 3"]
         return .init(
-            title: "Peripherals",
-            cells: peripherals.map { peripheral in
-                    .detail(.init(peripheral))
+            title: "Children",
+            cells: children.map { child in
+                    .detail(.init(title: child))
             }
         )
     }

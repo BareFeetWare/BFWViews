@@ -46,33 +46,18 @@ public extension ListScene.ViewModel {
     
     enum Cell: Identifiable {
         case button(Button)
-        case detail(Detail)
+        case detail(DetailCell.ViewModel)
+        case push(DetailCell.ViewModel, () async -> ListScene.ViewModel)
         
         public var id: String {
             switch self {
-            case .button(let button): return "button(title: \(button.title))"
-            case .detail(let detail): return "detail(id: \(detail.id))"
+            case .detail(let detailCellViewModel), .push(let detailCellViewModel, _):
+                // TODO: Better nil handling.
+                return detailCellViewModel.id
+            case .button(let button):
+                return button.title
             }
         }
-        
-        public struct Detail {
-            public let id: String
-            public let detailCellViewModel: DetailCell.ViewModel
-            public var destinationSceneViewModel: (() async -> ListScene.ViewModel)?
-            
-            public init(
-                _ title: String?,
-                id: String? = nil,
-                subtitle: String? = nil,
-                trailing: String? = nil,
-                destinationSceneViewModel: (() async -> ListScene.ViewModel)? = nil
-            ) {
-                self.id = id ?? title ?? "nil"
-                self.detailCellViewModel = .init(title: title, subtitle: subtitle, trailing: trailing)
-                self.destinationSceneViewModel = destinationSceneViewModel
-            }
-        }
-        
     }
     
     struct Button {
@@ -141,12 +126,14 @@ public extension ListScene.ViewModel {
         }
     }
     
-    func action(detail: Cell.Detail) -> (() -> Void)? {
-        guard let destinationSceneViewModel = detail.destinationSceneViewModel else { return nil }
-        return { [self] in
-            Task {
-                // FIXME: Run on main thread
-                destinationViewModel = await destinationSceneViewModel()
+    func action(
+        destinationSceneViewModel: @escaping () async -> ListScene.ViewModel
+    ) -> (() -> Void)? {
+        {
+            DispatchQueue.main.async {
+                Task {
+                    self.destinationViewModel = await destinationSceneViewModel()
+                }
             }
         }
     }
@@ -156,29 +143,43 @@ public extension ListScene.ViewModel {
 
 extension ListScene.ViewModel {
     static let preview: ListScene.ViewModel = .init(
-        title: "Bluetooth",
+        title: "List Scene Root",
         sections: [
             Section(
-                title: "Bluetooth Central Manager",
+                title: "Buttons and detail",
                 cells: [
                     .button(
                         .init(title: "Start", action: {})
                     ),
                     .detail(
-                        .init("Status", trailing: "Off line")
+                        .init(title: "Status", trailing: "Off line")
                     ),
                     .button(
                         .init(title: "Scan", action: {})),
                 ]
             ),
             Section(
-                title: "Devices",
+                title: "Async children",
                 cells: [
-                    .detail(
-                        .init("Peripherals", trailing: "23")
+                    .push(
+                        .init(title: "Children", trailing: "23"),
+                        childrenSceneViewModel
                     ),
                 ]
             ),
         ]
     )
+    
+    static func childrenSceneViewModel() async -> ListScene.ViewModel {
+        // Arbitrary delay, pretending to be an async request.
+        try? await Task.sleep(nanoseconds: 2000000000)
+        let children = ["Child 1", "Child 2", "Child 3"]
+        return .init(
+            title: "Children",
+            cells: children.map { child in
+                    .detail(.init(title: child))
+            }
+        )
+    }
+    
 }

@@ -24,12 +24,14 @@ extension ListScene: View {
                         switch cell {
                         case .button(let button):
                             Button(button.title, action: button.action)
-                        case .detail(let detail):
+                        case .detail(let detailCellViewModel):
+                            DetailCell(viewModel: detailCellViewModel)
+                        case .push(let detailCellViewModel, let destinationSceneViewModel):
                             AsyncNavigationLink(
                                 isActive: $viewModel.isActiveDestination,
                                 destination: { viewModel.destinationViewModel.map { ListScene(viewModel: $0) }},
-                                label: { DetailCell(viewModel: detail.detailCellViewModel) },
-                                action: viewModel.action(detail: detail)
+                                label: { DetailCell(viewModel: detailCellViewModel) },
+                                action: viewModel.action(destinationSceneViewModel: destinationSceneViewModel)
                             )
                         }
                     }
