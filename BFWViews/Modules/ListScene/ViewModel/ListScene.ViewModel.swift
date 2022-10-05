@@ -38,10 +38,9 @@ public extension ListScene {
 public extension ListScene.ViewModel {
     
     struct Section: Identifiable {
+        public let id: String
         let title: String?
         var cells: [Cell]
-        
-        public var id: String { title ?? "nil" }
     }
     
     enum Cell: Identifiable {
@@ -75,7 +74,11 @@ public extension ListScene.ViewModel {
 // MARK: - Public Inits
 
 extension ListScene.ViewModel.Section {
-    public init(title: String, cells: [ListScene.ViewModel.Cell]) {
+    public init(
+        title: String? = nil,
+        cells: [ListScene.ViewModel.Cell]
+    ) {
+        self.id = UUID().uuidString
         self.title = title
         self.cells = cells
     }
@@ -92,10 +95,7 @@ public extension ListScene.ViewModel {
         self.init(
             title: title,
             sections: [
-                .init(
-                    title: nil,
-                    cells: cells
-                )
+                .init(cells: cells)
             ]
         )
     }
@@ -108,6 +108,7 @@ public extension ListScene.ViewModel.Section {
         _ title: String?,
         cells: [ListScene.ViewModel.Cell]
     ) {
+        self.id = UUID().uuidString
         self.title = title
         self.cells = cells
     }
