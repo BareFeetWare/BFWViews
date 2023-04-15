@@ -45,12 +45,11 @@ public extension ListScene.ViewModel {
     
     enum Cell: Identifiable {
         case button(Button)
-        case detail(DetailCell.ViewModel)
-        case push(DetailCell.ViewModel, () async -> ListScene.ViewModel)
+        case detail(DetailCell.ViewModel, (() async -> ListScene.ViewModel)? = nil)
         
         public var id: String {
             switch self {
-            case .detail(let detailCellViewModel), .push(let detailCellViewModel, _):
+            case .detail(let detailCellViewModel, _):
                 // TODO: Better nil handling.
                 return detailCellViewModel.id
             case .button(let button):
@@ -162,10 +161,9 @@ extension ListScene.ViewModel {
             Section(
                 title: "Async children",
                 cells: [
-                    .push(
-                        .init(title: "Children", trailing: "23"),
-                        childrenSceneViewModel
-                    ),
+                    .detail(.init(title: "Children", trailing: "3")) {
+                        .init(title: "Children", cells: childrenCells)
+                    },
                 ]
             ),
         ]
@@ -174,13 +172,16 @@ extension ListScene.ViewModel {
     static func childrenSceneViewModel() async -> ListScene.ViewModel {
         // Arbitrary delay, pretending to be an async request.
         try? await Task.sleep(nanoseconds: 2000000000)
-        let children = ["Child 1", "Child 2", "Child 3"]
         return .init(
             title: "Children",
-            cells: children.map { child in
-                    .detail(.init(title: child))
-            }
+            cells: childrenCells
         )
     }
     
+    static var childrenCells: [Cell] {
+        ["Child 1", "Child 2", "Child 3"]
+            .map { child in
+                    .detail(.init(title: child))
+            }
+    }
 }
