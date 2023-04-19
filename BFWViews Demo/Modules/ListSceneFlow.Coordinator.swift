@@ -38,15 +38,35 @@ private extension ListSceneFlow.Coordinator {
                 ]
             ),
             .init(
-                title: "Push",
+                title: "Push Immediate",
                 cells: [
-                    .push(
+                    .detail(
                         .init(
                             title: "Push 1",
                             trailing: "3"
-                        ),
-                        childrenSceneViewModel
-                    ),
+                        )
+                    ) {
+                        .init(
+                            title: "Pushed",
+                            cells: [
+                                .detail(.init(title: "Child 1")),
+                                .detail(.init(title: "Child 2")),
+                            ]
+                        )
+                    },
+                ]
+            ),
+            .init(
+                title: "Push Async",
+                cells: [
+                    .detail(
+                        .init(
+                            title: "Push 2",
+                            trailing: "3"
+                        )
+                    ) {
+                        await self.childrenSceneViewModel()
+                    },
                 ]
             ),
         ]
