@@ -54,6 +54,8 @@
 		E2C16B7B2664816F00BAC051 /* DateFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B722664816F00BAC051 /* DateFormatter+Style.swift */; };
 		E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */; };
 		E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */; };
+		E2DDC1F129EE0C5B00DE6C84 /* ViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F029EE0C5B00DE6C84 /* ViewModelable.swift */; };
+		E2DDC1F329F0D7C700DE6C84 /* ViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F229F0D7C700DE6C84 /* ViewModelable.swift */; };
 		E2EA561E2838D3240053BDAC /* ListSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */; };
 		E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */; };
 		E2F9B1B7274CB8F800C8EC18 /* UIViewControllerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */; };
@@ -144,6 +146,8 @@
 		E2C16B722664816F00BAC051 /* DateFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Style.swift"; sourceTree = "<group>"; };
+		E2DDC1F029EE0C5B00DE6C84 /* ViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelable.swift; sourceTree = "<group>"; };
+		E2DDC1F229F0D7C700DE6C84 /* ViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelable.swift; sourceTree = "<group>"; };
 		E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSceneFlow.swift; sourceTree = "<group>"; };
 		E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitViewController.swift; sourceTree = "<group>"; };
 		E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerScene.swift; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 				E2FD40B826689384004E4905 /* TrailingScene.swift */,
 				E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */,
 				E28B7ABA275AC73F00ED5730 /* UIViewScene.swift */,
+				E2DDC1F229F0D7C700DE6C84 /* ViewModelable.swift */,
 				8798E0D42877E9BE00FB1344 /* WebScene.swift */,
 			);
 			path = Modules;
@@ -282,6 +287,7 @@
 			children = (
 				E28D1BD1283350C400064CCD /* DetailCell.swift */,
 				E28D1BD3283350C400064CCD /* ListScene.swift */,
+				E2DDC1F029EE0C5B00DE6C84 /* ViewModelable.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -563,6 +569,7 @@
 				E2FD40B926689384004E4905 /* TrailingScene.swift in Sources */,
 				E2F9B1B7274CB8F800C8EC18 /* UIViewControllerScene.swift in Sources */,
 				E2FD40CF2669CA26004E4905 /* AlertScene.swift in Sources */,
+				E2DDC1F329F0D7C700DE6C84 /* ViewModelable.swift in Sources */,
 				E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */,
 				E2FD40B326688DF5004E4905 /* CardScene.swift in Sources */,
 				E28D1BDC2833582A00064CCD /* ListSceneFlow.Coordinator.swift in Sources */,
@@ -587,6 +594,7 @@
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */,
+				E2DDC1F129EE0C5B00DE6C84 /* ViewModelable.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
 				E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */,
 				E28D1BD5283350C400064CCD /* ListScene.ViewModel.swift in Sources */,
