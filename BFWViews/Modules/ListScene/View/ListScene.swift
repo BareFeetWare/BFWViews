@@ -49,6 +49,8 @@ extension ListScene: View {
 
 struct ListScene_Previews: PreviewProvider {
     static var previews: some View {
-        ListScene(viewModel: .preview)
+        NavigationView {
+            ListScene(viewModel: .preview)
+        }
     }
 }
