@@ -24,9 +24,9 @@ extension ListScene: View {
                         switch cell {
                         case .image(let url):
                             AsyncImage(url: url) { image in
-                                ScrollView {
-                                    image
-                                }
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
                             } placeholder: {
                                 ProgressView()
                             }
