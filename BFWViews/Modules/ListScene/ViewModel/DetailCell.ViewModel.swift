@@ -18,13 +18,14 @@ public extension DetailCell {
 
 public extension DetailCell.ViewModel {
     
-    /// Use the title as the id. Only use this init if the titles are guaranteed to be unique.
+    /// Only omit the id if the title is guaranteed to be unique.
     init(
+        id: String? = nil,
         title: String,
         subtitle: String? = nil,
         trailing: String? = nil
     ) {
-        self.id = title
+        self.id = id ?? title
         self.title = title
         self.subtitle = subtitle
         self.trailing = trailing
