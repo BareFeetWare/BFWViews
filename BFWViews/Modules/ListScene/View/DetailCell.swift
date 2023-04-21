@@ -21,7 +21,10 @@ public struct DetailCell: View {
             }
             .multilineTextAlignment(.leading)
             Spacer()
-            viewModel.trailing.map { Text("\($0)") }
+            viewModel.trailing.map {
+                Text("\($0)")
+                    .multilineTextAlignment(.trailing)
+            }
         }
     }
 }
