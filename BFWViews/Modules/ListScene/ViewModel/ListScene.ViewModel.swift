@@ -50,11 +50,12 @@ public extension ListScene.ViewModel {
         
         public static func detail(
             _ title: String,
+            id: String? = nil,
             subtitle: String? = nil,
             trailing: String? = nil,
             action: (() async -> ListScene.ViewModel)? = nil
         ) -> Self {
-            .detail(.init(title: title, subtitle: subtitle, trailing: trailing), action)
+            .detail(.init(id: id, title: title, subtitle: subtitle, trailing: trailing), action)
         }
         
         public var id: String {

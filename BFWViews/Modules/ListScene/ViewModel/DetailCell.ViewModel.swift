@@ -17,15 +17,13 @@ public extension DetailCell {
 }
 
 public extension DetailCell.ViewModel {
-    
-    /// Only omit the id if the title is guaranteed to be unique.
     init(
         id: String? = nil,
         title: String,
         subtitle: String? = nil,
         trailing: String? = nil
     ) {
-        self.id = id ?? title
+        self.id = id ?? UUID().uuidString
         self.title = title
         self.subtitle = subtitle
         self.trailing = trailing
