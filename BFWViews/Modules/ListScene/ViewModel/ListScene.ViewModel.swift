@@ -48,6 +48,15 @@ public extension ListScene.ViewModel {
         case button(Button)
         case detail(DetailCell.ViewModel, (() async -> ListScene.ViewModel)? = nil)
         
+        public static func detail(
+            _ title: String,
+            subtitle: String? = nil,
+            trailing: String? = nil,
+            action: (() async -> ListScene.ViewModel)? = nil
+        ) -> Self {
+            .detail(.init(title: title, subtitle: subtitle, trailing: trailing), action)
+        }
+        
         public var id: String {
             switch self {
             case .image(let url):
