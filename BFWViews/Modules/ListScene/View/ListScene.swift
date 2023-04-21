@@ -22,6 +22,14 @@ extension ListScene: View {
                 Section {
                     ForEach(section.cells) { cell in
                         switch cell {
+                        case .image(let url):
+                            AsyncImage(url: url) { image in
+                                ScrollView {
+                                    image
+                                }
+                            } placeholder: {
+                                ProgressView()
+                            }
                         case .button(let button):
                             Button(button.title, action: button.action)
                         case .detail(let detailCellViewModel, let destinationSceneViewModel):

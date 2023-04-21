@@ -44,11 +44,14 @@ public extension ListScene.ViewModel {
     }
     
     enum Cell: Identifiable {
+        case image(url: URL)
         case button(Button)
         case detail(DetailCell.ViewModel, (() async -> ListScene.ViewModel)? = nil)
         
         public var id: String {
             switch self {
+            case .image(let url):
+                return url.absoluteString
             case .detail(let detailCellViewModel, _):
                 // TODO: Better nil handling.
                 return detailCellViewModel.id
