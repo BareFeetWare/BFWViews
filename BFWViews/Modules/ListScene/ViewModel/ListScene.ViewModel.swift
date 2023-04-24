@@ -53,9 +53,9 @@ public extension ListScene.ViewModel {
             id: String? = nil,
             subtitle: String? = nil,
             trailing: String? = nil,
-            action: (() async -> ListScene.ViewModel)? = nil
+            listSceneViewModel: (() async -> ListScene.ViewModel)? = nil
         ) -> Self {
-            .detail(.init(id: id, title: title, subtitle: subtitle, trailing: trailing), action)
+            .detail(.init(id: id, title: title, subtitle: subtitle, trailing: trailing), listSceneViewModel)
         }
         
         public var id: String {
