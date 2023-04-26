@@ -39,8 +39,8 @@ public extension ListScene.ViewModel {
     
     struct Section: Identifiable {
         public let id: String
-        let title: String?
-        var cells: [Cell]
+        public let title: String?
+        public var cells: [Cell]
     }
     
     enum Cell: Identifiable {
