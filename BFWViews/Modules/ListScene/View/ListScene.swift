@@ -46,11 +46,13 @@ extension ListScene: View {
                         }
                     }
                 } header: {
-                    section.title.map { Text($0) }
+                    section.title.map {
+                        Text($0)
+                            .textCase(nil)
+                    }
                 }
             }
         }
-        .textCase(.none)
         .navigationTitle(viewModel.title)
     }
 }
