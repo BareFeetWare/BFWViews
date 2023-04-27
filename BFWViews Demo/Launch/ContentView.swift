@@ -56,7 +56,7 @@ private extension ContentView {
             .init(name: "Trailing", destination: AnyView(TrailingScene())),
             .init(name: "UIView", destination: AnyView(UIViewScene())),
             .init(name: "UIViewController", destination: AnyView(UIViewControllerScene())),
-            .init(name: "ViewModelable", destination: AnyView(ViewModelableView())),
+            .init(name: "ViewShowableScene", destination: AnyView(ViewShowableScene())),
             .init(name: "WebView", destination: AnyView(WebScene())),
         ]
     }

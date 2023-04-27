@@ -1,5 +1,5 @@
 //
-//  VioewModelable.swift
+//  ViewShowable.swift
 //  BFWViews Demo
 //
 //  Created by Tom Brodhurst-Hill on 20/4/2023.
@@ -8,6 +8,18 @@
 
 import SwiftUI
 import BFWViews
+
+extension FirstView.ViewModel: ViewShowable {
+    func view() -> AnyView {
+        AnyView(FirstView(viewModel: self))
+    }
+}
+
+extension SecondView.ViewModel: ViewShowable {
+    func view() -> AnyView {
+        AnyView(SecondView(viewModel: self))
+    }
+}
 
 struct FirstView: View {
     let viewModel: ViewModel
@@ -28,45 +40,45 @@ struct SecondView: View {
 }
 
 extension FirstView {
-    struct ViewModel: AnyViewModel {
-        let id = UUID().uuidString
+    struct ViewModel: Identifiable {
+        let id = UUID() //.uuidString
         // Add other properties specific to FirstView.ViewModel
-        
-        func createView() -> some View {
+
+        func view() -> some View {
             FirstView(viewModel: self)
         }
     }
 }
 
 extension SecondView {
-    struct ViewModel: AnyViewModel {
-        let id = UUID().uuidString
+    struct ViewModel: Identifiable {
+        let id = UUID() //.uuidString
         // Add other properties specific to SecondView.ViewModel
-        
-        func createView() -> some View {
+
+        func view() -> some View {
             SecondView(viewModel: self)
         }
     }
 }
 
-struct ViewModelableView: View {
-    let viewFactories: [AnyViewFactory] = [
-        AnyViewFactory(FirstView.ViewModel()),
-        AnyViewFactory(SecondView.ViewModel()),
-        AnyViewFactory(FirstView.ViewModel())
-    ]
-
+struct ViewShowableScene: View {
+    
+    let viewModel = ViewModel()
+    
     var body: some View {
         List {
-            ForEach(viewFactories) { viewFactory in
-                viewFactory.createView()
+            ForEach(viewModel.cellViewModels) { cellViewModel in
+                cellViewModel.view()
             }
         }
     }
 }
 
-struct ViewModelableView_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewModelableView()
+extension ViewShowableScene {
+    struct ViewModel {
+        let cellViewModels: [CellViewModel] = [
+            CellViewModel(FirstView.ViewModel()),
+            CellViewModel(SecondView.ViewModel()),
+        ]
     }
 }
