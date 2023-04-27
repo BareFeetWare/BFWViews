@@ -9,10 +9,10 @@ import Foundation
 
 public extension DetailCell {
     struct ViewModel {
-        let id: String
-        let title: String?
-        let subtitle: String?
-        let trailing: String?
+        public let id: String
+        public let title: String?
+        public let subtitle: String?
+        public let trailing: String?
     }
 }
 
