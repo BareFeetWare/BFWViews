@@ -14,10 +14,24 @@ extension DetailCell.ViewModel: ViewShowable {
     }
 }
 
-// TODO: Move Button out of ListScene. Move this to its own file.
+// TODO: Move below out of ListScene. Move this to its own file.
 
 extension ListScene.ViewModel.Button: ViewShowable {
     public func view() -> AnyView {
         AnyView(Button(title, action: action))
+    }
+}
+
+extension ListScene.ViewModel.Image: ViewShowable {
+    public func view() -> AnyView {
+        AnyView(
+            AsyncImage(url: url) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                ProgressView()
+            }
+        )
     }
 }

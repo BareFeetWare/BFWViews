@@ -59,6 +59,11 @@ public extension ListScene.ViewModel {
         }
     }
     
+    struct Image: Identifiable {
+        public var id: String = UUID().uuidString
+        public let url: URL
+    }
+    
 }
 
 // MARK: - Public Inits
@@ -125,6 +130,12 @@ public extension ListScene.ViewModel.Cell {
     
     static func button(_ title: String, action: @escaping () -> Void) -> Self {
         .init(ListScene.ViewModel.Button(title: title, action: action))
+    }
+    
+    static func image(url: URL) -> Self {
+        .init(
+            ListScene.ViewModel.Image(url: url)
+        )
     }
     
 }
