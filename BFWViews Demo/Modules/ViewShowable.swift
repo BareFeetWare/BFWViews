@@ -10,14 +10,14 @@ import SwiftUI
 import BFWViews
 
 extension FirstView.ViewModel: ViewShowable {
-    func view() -> AnyView {
-        AnyView(FirstView(viewModel: self))
+    func view() -> any View {
+        FirstView(viewModel: self)
     }
 }
 
 extension SecondView.ViewModel: ViewShowable {
-    func view() -> AnyView {
-        AnyView(SecondView(viewModel: self))
+    func view() -> any View {
+        SecondView(viewModel: self)
     }
 }
 
@@ -41,7 +41,7 @@ struct SecondView: View {
 
 extension FirstView {
     struct ViewModel: Identifiable {
-        let id = UUID() //.uuidString
+        let id = UUID().uuidString
         // Add other properties specific to FirstView.ViewModel
 
         func view() -> some View {
@@ -52,7 +52,7 @@ extension FirstView {
 
 extension SecondView {
     struct ViewModel: Identifiable {
-        let id = UUID() //.uuidString
+        let id = UUID().uuidString
         // Add other properties specific to SecondView.ViewModel
 
         func view() -> some View {
@@ -68,17 +68,22 @@ struct ViewShowableScene: View {
     var body: some View {
         List {
             ForEach(viewModel.cellViewModels) { cellViewModel in
-                cellViewModel.view()
+                // FIXME: Compilation error.
+                AnyView(cellViewModel.view())
             }
         }
+    }
+    
+    func testView() -> some View {
+        Text("test")
     }
 }
 
 extension ViewShowableScene {
     struct ViewModel {
-        let cellViewModels: [CellViewModel] = [
-            CellViewModel(FirstView.ViewModel()),
-            CellViewModel(SecondView.ViewModel()),
+        let cellViewModels: [ListScene.ViewModel.Cell] = [
+            .init(FirstView.ViewModel()),
+            .init(SecondView.ViewModel()),
         ]
     }
 }

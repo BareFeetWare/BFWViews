@@ -21,29 +21,7 @@ extension ListScene: View {
             ForEach(viewModel.sections) { section in
                 Section {
                     ForEach(section.cells) { cell in
-                        switch cell {
-                        case .image(let url):
-                            AsyncImage(url: url) { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                            } placeholder: {
-                                ProgressView()
-                            }
-                        case .button(let button):
-                            Button(button.title, action: button.action)
-                        case .detail(let detailCellViewModel, let destinationSceneViewModel):
-                            if let destinationSceneViewModel {
-                                AsyncNavigationLink(
-                                    isActive: $viewModel.isActiveDestination,
-                                    destination: { viewModel.destinationViewModel.map { ListScene(viewModel: $0) }},
-                                    label: { DetailCell(viewModel: detailCellViewModel) },
-                                    action: viewModel.action(destinationSceneViewModel: destinationSceneViewModel)
-                                )
-                            } else {
-                                DetailCell(viewModel: detailCellViewModel)
-                            }
-                        }
+                        cell.view()
                     }
                 } header: {
                     section.title.map {

@@ -54,8 +54,9 @@
 		E2C16B7B2664816F00BAC051 /* DateFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B722664816F00BAC051 /* DateFormatter+Style.swift */; };
 		E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */; };
 		E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */; };
-		E2DDC1F129EE0C5B00DE6C84 /* ViewShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F029EE0C5B00DE6C84 /* ViewShowable.swift */; };
+		E2DDC1F129EE0C5B00DE6C84 /* ListScene.ViewModel.Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F029EE0C5B00DE6C84 /* ListScene.ViewModel.Cell.swift */; };
 		E2DDC1F329F0D7C700DE6C84 /* ViewShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F229F0D7C700DE6C84 /* ViewShowable.swift */; };
+		E2DDC20529FA54CB00DE6C84 /* DetailCell+ViewShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC20429FA54CB00DE6C84 /* DetailCell+ViewShowable.swift */; };
 		E2EA561E2838D3240053BDAC /* ListSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */; };
 		E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */; };
 		E2F9B1B7274CB8F800C8EC18 /* UIViewControllerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */; };
@@ -146,8 +147,9 @@
 		E2C16B722664816F00BAC051 /* DateFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Style.swift"; sourceTree = "<group>"; };
-		E2DDC1F029EE0C5B00DE6C84 /* ViewShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewShowable.swift; sourceTree = "<group>"; };
+		E2DDC1F029EE0C5B00DE6C84 /* ListScene.ViewModel.Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScene.ViewModel.Cell.swift; sourceTree = "<group>"; };
 		E2DDC1F229F0D7C700DE6C84 /* ViewShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewShowable.swift; sourceTree = "<group>"; };
+		E2DDC20429FA54CB00DE6C84 /* DetailCell+ViewShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailCell+ViewShowable.swift"; sourceTree = "<group>"; };
 		E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSceneFlow.swift; sourceTree = "<group>"; };
 		E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitViewController.swift; sourceTree = "<group>"; };
 		E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerScene.swift; sourceTree = "<group>"; };
@@ -286,8 +288,9 @@
 			isa = PBXGroup;
 			children = (
 				E28D1BD1283350C400064CCD /* DetailCell.swift */,
+				E2DDC20429FA54CB00DE6C84 /* DetailCell+ViewShowable.swift */,
 				E28D1BD3283350C400064CCD /* ListScene.swift */,
-				E2DDC1F029EE0C5B00DE6C84 /* ViewShowable.swift */,
+				E2DDC1F029EE0C5B00DE6C84 /* ListScene.ViewModel.Cell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -594,13 +597,14 @@
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */,
-				E2DDC1F129EE0C5B00DE6C84 /* ViewShowable.swift in Sources */,
+				E2DDC1F129EE0C5B00DE6C84 /* ListScene.ViewModel.Cell.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
 				E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */,
 				E28D1BD5283350C400064CCD /* ListScene.ViewModel.swift in Sources */,
 				E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */,
 				E2C16B69266480C400BAC051 /* CompressibleSpacer.swift in Sources */,
 				E2BAAC1326FD899B00CFDE50 /* Image+Data.swift in Sources */,
+				E2DDC20529FA54CB00DE6C84 /* DetailCell+ViewShowable.swift in Sources */,
 				E28D1BDA283350C400064CCD /* ListScene.swift in Sources */,
 				E2C16B7A2664816F00BAC051 /* ColorScheme+Identifiable.swift in Sources */,
 				E2BAAC1126FD88F700CFDE50 /* Fetch.swift in Sources */,

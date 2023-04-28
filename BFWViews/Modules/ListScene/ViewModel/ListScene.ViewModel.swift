@@ -43,39 +43,17 @@ public extension ListScene.ViewModel {
         public var cells: [Cell]
     }
     
-    enum Cell: Identifiable {
-        case image(url: URL)
-        case button(Button)
-        case detail(DetailCell.ViewModel, (() async -> ListScene.ViewModel)? = nil)
+    struct Button: Identifiable {
+        public let id: String
+        public let title: String
+        public let action: () -> Void
         
-        public static func detail(
-            _ title: String,
+        public init(
             id: String? = nil,
-            subtitle: String? = nil,
-            trailing: String? = nil,
-            listSceneViewModel: (() async -> ListScene.ViewModel)? = nil
-        ) -> Self {
-            .detail(.init(id: id, title: title, subtitle: subtitle, trailing: trailing), listSceneViewModel)
-        }
-        
-        public var id: String {
-            switch self {
-            case .image(let url):
-                return url.absoluteString
-            case .detail(let detailCellViewModel, _):
-                // TODO: Better nil handling.
-                return detailCellViewModel.id
-            case .button(let button):
-                return button.title
-            }
-        }
-    }
-    
-    struct Button {
-        let title: String
-        let action: () -> Void
-        
-        public init(title: String, action: @escaping () -> Void) {
+            title: String,
+            action: @escaping () -> Void
+        ) {
+            self.id = id ?? UUID().uuidString
             self.title = title
             self.action = action
         }
@@ -127,6 +105,30 @@ public extension ListScene.ViewModel.Section {
     
 }
 
+public extension ListScene.ViewModel.Cell {
+    
+    static func detail(
+        _ title: String,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        listSceneViewModel: (() async -> ListScene.ViewModel)? = nil
+    ) -> Self {
+        .init(
+            DetailCell.ViewModel(
+                title: title,
+                subtitle: subtitle,
+                trailing: trailing
+            ),
+            listSceneViewModel: listSceneViewModel
+        )
+    }
+    
+    static func button(_ title: String, action: @escaping () -> Void) -> Self {
+        .init(ListScene.ViewModel.Button(title: title, action: action))
+    }
+    
+}
+
 // MARK: - Public Functions
 
 public extension ListScene.ViewModel {
@@ -161,20 +163,15 @@ extension ListScene.ViewModel {
             Section(
                 title: "Buttons and detail",
                 cells: [
-                    .button(
-                        .init(title: "Start", action: {})
-                    ),
-                    .detail(
-                        .init(title: "Status", trailing: "Off line")
-                    ),
-                    .button(
-                        .init(title: "Scan", action: {})),
+                    .button("Start") {},
+                    .detail("Status", trailing: "Off line"),
+                    .button("Scan") {},
                 ]
             ),
             Section(
                 title: "Async children",
                 cells: [
-                    .detail(.init(title: "Children", trailing: "3")) {
+                    .detail("Children", trailing: "3") {
                         .init(title: "Children", cells: childrenCells)
                     },
                 ]
@@ -194,7 +191,7 @@ extension ListScene.ViewModel {
     static var childrenCells: [Cell] {
         ["Child 1", "Child 2", "Child 3"]
             .map { child in
-                    .detail(.init(title: child))
+                    .detail(child)
             }
     }
 }

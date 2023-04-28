@@ -26,9 +26,7 @@ private extension ListSceneFlow.Coordinator {
             .init(
                 title: "Static detail",
                 cells: [
-                    .button(
-                        .init(title: "Button", action: {})
-                    ),
+                    .button("Button") {},
                     .detail("Detail 1", trailing: "trailing"),
                     .detail("Detail 2", subtitle: "subtitle", trailing: "trailing"),
                 ]
@@ -66,7 +64,7 @@ private extension ListSceneFlow.Coordinator {
         return .init(
             title: "Children",
             cells: children.map { child in
-                    .detail(.init(title: child))
+                    .detail(child)
             }
         )
     }

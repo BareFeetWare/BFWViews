@@ -8,7 +8,7 @@
 import Foundation
 
 public extension DetailCell {
-    struct ViewModel {
+    struct ViewModel: Identifiable {
         public let id: String
         public let title: String?
         public let subtitle: String?
