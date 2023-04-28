@@ -13,6 +13,7 @@ public extension DetailCell {
         public let title: String?
         public let subtitle: String?
         public let trailing: String?
+        public let listSceneViewModel: (() async -> ListScene.ViewModel)?
     }
 }
 
@@ -21,11 +22,13 @@ public extension DetailCell.ViewModel {
         id: String? = nil,
         title: String,
         subtitle: String? = nil,
-        trailing: String? = nil
+        trailing: String? = nil,
+        listSceneViewModel: (() async -> ListScene.ViewModel)? = nil
     ) {
         self.id = id ?? UUID().uuidString
         self.title = title
         self.subtitle = subtitle
         self.trailing = trailing
+        self.listSceneViewModel = listSceneViewModel
     }
 }

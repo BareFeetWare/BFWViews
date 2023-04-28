@@ -21,7 +21,16 @@ extension ListScene: View {
             ForEach(viewModel.sections) { section in
                 Section {
                     ForEach(section.cells) { cell in
-                        cell.view()
+                        if let destinationSceneViewModel = cell.listSceneViewModel {
+                            AsyncNavigationLink(
+                                isActive: $viewModel.isActiveDestination,
+                                destination: { viewModel.destinationViewModel.map { ListScene(viewModel: $0) }},
+                                label: { cell.view() },
+                                action: viewModel.action(destinationSceneViewModel: destinationSceneViewModel)
+                            )
+                        } else {
+                            cell.view()
+                        }
                     }
                 } header: {
                     section.title.map {

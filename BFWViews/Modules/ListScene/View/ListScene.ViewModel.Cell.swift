@@ -15,10 +15,10 @@ public protocol ViewShowable {
 
 extension ListScene.ViewModel {
     public struct Cell: Identifiable, ViewShowable {
-        private let base: Any
-        private let _id: String
-        private let _view: () -> AnyView
-        private let listSceneViewModel: (() async -> ListScene.ViewModel)?
+        public let base: Any
+        public let _id: String
+        public let _view: () -> AnyView
+        public let listSceneViewModel: (() async -> ListScene.ViewModel)?
         
         public init<V: Identifiable & ViewShowable>(
             _ base: V,
