@@ -10,14 +10,14 @@ import Foundation
 import SwiftUI
 
 public protocol ViewShowable {
-    func view() -> any View
+    func view() -> AnyView
 }
 
 extension ListScene.ViewModel {
     public struct Cell: Identifiable, ViewShowable {
         private let base: Any
         private let _id: String
-        private let _view: () -> any View
+        private let _view: () -> AnyView
         private let listSceneViewModel: (() async -> ListScene.ViewModel)?
         
         public init<V: Identifiable & ViewShowable>(
@@ -34,7 +34,7 @@ extension ListScene.ViewModel {
             return _id
         }
         
-        public func view() -> any View {
+        public func view() -> AnyView {
             return _view()
         }
     }

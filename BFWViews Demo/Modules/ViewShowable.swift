@@ -10,14 +10,14 @@ import SwiftUI
 import BFWViews
 
 extension FirstView.ViewModel: ViewShowable {
-    func view() -> any View {
-        FirstView(viewModel: self)
+    func view() -> AnyView {
+        AnyView(FirstView(viewModel: self))
     }
 }
 
 extension SecondView.ViewModel: ViewShowable {
-    func view() -> any View {
-        SecondView(viewModel: self)
+    func view() -> AnyView {
+        AnyView(SecondView(viewModel: self))
     }
 }
 
@@ -68,8 +68,7 @@ struct ViewShowableScene: View {
     var body: some View {
         List {
             ForEach(viewModel.cellViewModels) { cellViewModel in
-                // FIXME: Compilation error.
-                AnyView(cellViewModel.view())
+                cellViewModel.view()
             }
         }
     }
