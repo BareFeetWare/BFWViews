@@ -12,14 +12,19 @@ public extension ListScene {
         
         public init(
             title: String,
-            sections: [Section]
+            sections: [Section],
+            listStyle: ListStyle = .automatic
         ) {
             self.title = title
             self.sections = sections
+            self.listStyle = listStyle
         }
         
         public let title: String
+        public let listStyle: ListStyle
         @Published public var sections: [Section]
+        @Published var isActiveDestination = false
+        
         @Published public var destinationViewModel: ListScene.ViewModel? {
             didSet {
                 // TODO: Perhaps instead use subscriber.
@@ -29,13 +34,21 @@ public extension ListScene {
                 }
             }
         }
-        @Published var isActiveDestination = false
     }
 }
 
 // MARK: - Types
 
 public extension ListScene.ViewModel {
+    
+    enum ListStyle {
+        case automatic
+        case insetGrouped
+        case inset
+        case grouped
+        case plain
+        case sidebar
+    }
     
     struct Section: Identifiable {
         public let id: String

@@ -43,6 +43,7 @@
 		E2BAAC1526FD8A8000CFDE50 /* Fetch+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1426FD8A8000CFDE50 /* Fetch+Image.swift */; };
 		E2BAAC1926FEFF0400CFDE50 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1826FEFF0400CFDE50 /* AsyncImage.swift */; };
 		E2BAAC1C26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1B26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift */; };
+		E2BF0B712A00F05F0035DE5E /* ListStyle+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF0B702A00F05F0035DE5E /* ListStyle+ViewModel.swift */; };
 		E2C16B5826647C4400BAC051 /* BFWViews.h in Headers */ = {isa = PBXBuildFile; fileRef = E2C16B5626647C4400BAC051 /* BFWViews.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2C16B5B26647C4400BAC051 /* BFWViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C16B5426647C4400BAC051 /* BFWViews.framework */; };
 		E2C16B5C26647C4400BAC051 /* BFWViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2C16B5426647C4400BAC051 /* BFWViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -136,6 +137,7 @@
 		E2BAAC1426FD8A8000CFDE50 /* Fetch+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fetch+Image.swift"; sourceTree = "<group>"; };
 		E2BAAC1826FEFF0400CFDE50 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		E2BAAC1B26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.ViewModel.swift; sourceTree = "<group>"; };
+		E2BF0B702A00F05F0035DE5E /* ListStyle+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListStyle+ViewModel.swift"; sourceTree = "<group>"; };
 		E2C16B5426647C4400BAC051 /* BFWViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BFWViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C16B5626647C4400BAC051 /* BFWViews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFWViews.h; sourceTree = "<group>"; };
 		E2C16B5726647C4400BAC051 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				E2DDC20429FA54CB00DE6C84 /* DetailCell+ViewShowable.swift */,
 				E28D1BD3283350C400064CCD /* ListScene.swift */,
 				E2DDC1F029EE0C5B00DE6C84 /* ListScene.ViewModel.Cell.swift */,
+				E2BF0B702A00F05F0035DE5E /* ListStyle+ViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */,
+				E2BF0B712A00F05F0035DE5E /* ListStyle+ViewModel.swift in Sources */,
 				E2DDC1F129EE0C5B00DE6C84 /* ListScene.ViewModel.Cell.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
 				E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */,

@@ -40,6 +40,7 @@ extension ListScene: View {
                 }
             }
         }
+        .listStyle(viewModel.listStyle)
         .navigationTitle(viewModel.title)
     }
 }
