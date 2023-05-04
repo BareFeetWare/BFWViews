@@ -19,7 +19,7 @@ extension ListScene.ViewModel {
 public extension ListScene.ViewModel.Section {
     
     init(
-        _ title: String?,
+        title: String? = nil,
         cells: [ListScene.ViewModel.Cell]
     ) {
         self.id = UUID().uuidString

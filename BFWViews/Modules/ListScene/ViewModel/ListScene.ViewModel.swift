@@ -75,19 +75,6 @@ public extension ListScene.ViewModel {
     
 }
 
-// MARK: - Public Inits
-
-extension ListScene.ViewModel.Section {
-    public init(
-        title: String? = nil,
-        cells: [ListScene.ViewModel.Cell]
-    ) {
-        self.id = UUID().uuidString
-        self.title = title
-        self.cells = cells
-    }
-}
-
 // MARK: - Convenience Inits
 
 public extension ListScene.ViewModel {
