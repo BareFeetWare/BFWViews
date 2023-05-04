@@ -35,3 +35,35 @@ extension ListScene.ViewModel {
         }
     }
 }
+
+// MARK: - Static instances of Cell. Add your own custom instances in your project.
+
+public extension ListScene.ViewModel.Cell {
+    
+    static func detail(
+        _ title: String,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        listSceneViewModel: (() async -> ListScene.ViewModel)? = nil
+    ) -> Self {
+        .init(
+            DetailCell.ViewModel(
+                title: title,
+                subtitle: subtitle,
+                trailing: trailing
+            ),
+            listSceneViewModel: listSceneViewModel
+        )
+    }
+    
+    static func button(_ title: String, action: @escaping () -> Void) -> Self {
+        .init(ListScene.ViewModel.Button(title: title, action: action))
+    }
+    
+    static func image(url: URL) -> Self {
+        .init(
+            ListScene.ViewModel.Image(url: url)
+        )
+    }
+    
+}
