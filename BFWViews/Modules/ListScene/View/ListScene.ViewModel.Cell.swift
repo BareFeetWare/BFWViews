@@ -9,10 +9,6 @@
 import Foundation
 import SwiftUI
 
-public protocol ViewShowable {
-    func view() -> AnyView
-}
-
 extension ListScene.ViewModel {
     public struct Cell: Identifiable, ViewShowable {
         public let base: Any
