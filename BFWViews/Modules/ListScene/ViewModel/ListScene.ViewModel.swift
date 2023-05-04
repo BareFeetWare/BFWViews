@@ -110,14 +110,6 @@ public extension ListScene.ViewModel {
 
 public extension ListScene.ViewModel {
     
-    func update(cell: Cell) {
-        for (sectionIndex, section) in sections.enumerated() {
-            guard let cellIndex = section.cells.firstIndex(where: { $0.id == cell.id })
-            else { continue }
-            sections[sectionIndex].cells[cellIndex] = cell
-        }
-    }
-    
     func action(
         destinationSceneViewModel: @escaping () async -> ListScene.ViewModel
     ) -> (() -> Void)? {
