@@ -1,5 +1,5 @@
 //
-//  ListStyle+ViewModel.swift
+//  View+Boss.ListStyle.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 2/5/2023.
@@ -9,13 +9,13 @@
 import SwiftUI
 
 extension View {
-    func listStyle(_ listStyle: ListScene.ViewModel.ListStyle) -> some View {
+    func listStyle(_ listStyle: Boss.ListStyle) -> some View {
         modifier(ListStyleModifier(listStyle: listStyle))
     }
 }
 
 fileprivate struct ListStyleModifier: ViewModifier {
-    let listStyle: ListScene.ViewModel.ListStyle
+    let listStyle: Boss.ListStyle
 
     @ViewBuilder
     func body(content: Content) -> some View {

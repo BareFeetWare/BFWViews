@@ -1,5 +1,5 @@
 //
-//  ListScene.ViewModel.Section.swift
+//  Boss.Section.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 4/5/2023.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension ListScene.ViewModel {
+extension Boss {
     public struct Section: Identifiable {
         public let id: String
         public let title: String?
@@ -16,11 +16,11 @@ extension ListScene.ViewModel {
     }
 }
 
-public extension ListScene.ViewModel.Section {
+public extension Boss.Section {
     
     init(
         title: String? = nil,
-        cells: [ListScene.ViewModel.Cell]
+        cells: [Boss.Cell]
     ) {
         self.id = UUID().uuidString
         self.title = title

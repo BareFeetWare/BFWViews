@@ -80,7 +80,7 @@ struct ViewShowableScene: View {
 
 extension ViewShowableScene {
     struct ViewModel {
-        let cellViewModels: [ListScene.ViewModel.Cell] = [
+        let cellViewModels: [Boss.Cell] = [
             .init(FirstView.ViewModel()),
             .init(SecondView.ViewModel()),
         ]

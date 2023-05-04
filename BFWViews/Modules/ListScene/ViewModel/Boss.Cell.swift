@@ -1,15 +1,14 @@
 //
-//  ListScene.ViewModel.Cell.swift
+//  Boss.Cell.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 18/4/2023.
 //  Copyright © 2023 BareFeetWare. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
 
-extension ListScene.ViewModel {
+extension Boss {
     public struct Cell: Identifiable, ViewShowable {
         public let base: Any
         public let _id: String
@@ -38,7 +37,7 @@ extension ListScene.ViewModel {
 
 // MARK: - Static instances of Cell. Add your own custom instances in your project.
 
-public extension ListScene.ViewModel.Cell {
+public extension Boss.Cell {
     
     static func detail(
         _ title: String,
@@ -57,13 +56,11 @@ public extension ListScene.ViewModel.Cell {
     }
     
     static func button(_ title: String, action: @escaping () -> Void) -> Self {
-        .init(ListScene.ViewModel.Button(title: title, action: action))
+        .init(Boss.Button(title: title, action: action))
     }
     
     static func image(url: URL) -> Self {
-        .init(
-            ListScene.ViewModel.Image(url: url)
-        )
+        .init(Boss.Image(url: url))
     }
     
 }

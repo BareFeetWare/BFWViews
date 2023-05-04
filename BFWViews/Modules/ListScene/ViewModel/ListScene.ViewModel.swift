@@ -12,8 +12,8 @@ public extension ListScene {
         
         public init(
             title: String,
-            sections: [Section],
-            listStyle: ListStyle = .automatic
+            sections: [Boss.Section],
+            listStyle: Boss.ListStyle = .automatic
         ) {
             self.title = title
             self.sections = sections
@@ -21,8 +21,8 @@ public extension ListScene {
         }
         
         public let title: String
-        public let listStyle: ListStyle
-        @Published public var sections: [Section]
+        public let listStyle: Boss.ListStyle
+        @Published public var sections: [Boss.Section]
         @Published var isActiveDestination = false
         
         @Published public var destinationViewModel: ListScene.ViewModel? {
@@ -37,51 +37,13 @@ public extension ListScene {
     }
 }
 
-// MARK: - Types
-
-public extension ListScene.ViewModel {
-    
-    enum ListStyle {
-        case automatic
-        case insetGrouped
-        case inset
-        case grouped
-        case plain
-        case sidebar
-    }
-    
-    // TODO: Move Button to its own file.
-    
-    struct Button: Identifiable {
-        public let id: String
-        public let title: String
-        public let action: () -> Void
-        
-        public init(
-            id: String? = nil,
-            title: String,
-            action: @escaping () -> Void
-        ) {
-            self.id = id ?? UUID().uuidString
-            self.title = title
-            self.action = action
-        }
-    }
-    
-    struct Image: Identifiable {
-        public var id: String = UUID().uuidString
-        public let url: URL
-    }
-    
-}
-
 // MARK: - Convenience Inits
 
 public extension ListScene.ViewModel {
     
     convenience init(
         title: String,
-        cells: [Cell]
+        cells: [Boss.Cell]
     ) {
         self.init(
             title: title,
@@ -116,7 +78,7 @@ extension ListScene.ViewModel {
     static let preview: ListScene.ViewModel = .init(
         title: "List Scene Root",
         sections: [
-            Section(
+            .init(
                 title: "Buttons and detail",
                 cells: [
                     .button("Start") {},
@@ -124,7 +86,7 @@ extension ListScene.ViewModel {
                     .button("Scan") {},
                 ]
             ),
-            Section(
+            .init(
                 title: "Async children",
                 cells: [
                     .detail("Children", trailing: "3") {
@@ -135,16 +97,16 @@ extension ListScene.ViewModel {
         ]
     )
     
-    static func childrenSceneViewModel() async -> ListScene.ViewModel {
-        // Arbitrary delay, pretending to be an async request.
-        try? await Task.sleep(nanoseconds: 2000000000)
-        return .init(
-            title: "Children",
-            cells: childrenCells
-        )
-    }
+//    static func childrenSceneViewModel() async -> ListScene.ViewModel {
+//        // Arbitrary delay, pretending to be an async request.
+//        try? await Task.sleep(nanoseconds: 2000000000)
+//        return .init(
+//            title: "Children",
+//            cells: childrenCells
+//        )
+//    }
     
-    static var childrenCells: [Cell] {
+    static var childrenCells: [Boss.Cell] {
         ["Child 1", "Child 2", "Child 3"]
             .map { child in
                     .detail(child)
