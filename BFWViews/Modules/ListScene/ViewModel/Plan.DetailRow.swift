@@ -1,5 +1,5 @@
 //
-//  DetailCell.ViewModel.swift
+//  Plan.DetailRow.swift
 //
 //  Created by Tom Brodhurst-Hill on 10/4/2022.
 //  Copyright © 2022 BareFeetWare. All rights reserved.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-public extension DetailCell {
-    struct ViewModel: Identifiable {
+public extension Plan {
+    struct DetailRow: Identifiable {
         public let id: String
         public let title: String?
         public let subtitle: String?
@@ -17,7 +17,7 @@ public extension DetailCell {
     }
 }
 
-public extension DetailCell.ViewModel {
+public extension Plan.DetailRow {
     init(
         id: String? = nil,
         title: String,
@@ -30,5 +30,19 @@ public extension DetailCell.ViewModel {
         self.subtitle = subtitle
         self.trailing = trailing
         self.listSceneViewModel = listSceneViewModel
+    }
+}
+
+extension Plan.DetailRow {
+    static let preview: Self = .init(
+        title: "Title",
+        subtitle: "Subtitle",
+        trailing: "trailing"
+    )
+}
+
+extension Plan.DetailRow {
+    struct Display {
+        let viewModel: Plan.DetailRow
     }
 }

@@ -1,5 +1,5 @@
 //
-//  DetailCell+ViewShowable.swift
+//  Plan.DetailRow+ViewShowable.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 27/4/2023.
@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-extension DetailCell.ViewModel: ViewShowable {
+extension Plan.DetailRow: ViewShowable {
     public func view() -> AnyView {
-        AnyView(DetailCell(viewModel: self))
+        AnyView(Display(viewModel: self))
     }
 }

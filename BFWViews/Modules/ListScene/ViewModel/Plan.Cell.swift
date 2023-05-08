@@ -46,7 +46,7 @@ public extension Plan.Cell {
         listSceneViewModel: (() async -> ListScene.ViewModel)? = nil
     ) -> Self {
         .init(
-            DetailCell.ViewModel(
+            Plan.DetailRow(
                 title: title,
                 subtitle: subtitle,
                 trailing: trailing
