@@ -25,7 +25,7 @@ public extension Plan {
         @Published public var sections: [Section]
         @Published var isActiveDestination = false
         
-        @Published public var destination: (any ViewShowable)? {
+        @Published public var destination: (any Displayable)? {
             didSet {
                 // TODO: Perhaps instead use subscriber.
                 DispatchQueue.main.async { [weak self] in
@@ -60,7 +60,7 @@ public extension Plan.List {
 public extension Plan.List {
     
     func action(
-        destination: @escaping () async -> any ViewShowable
+        destination: @escaping () async -> any Displayable
     ) -> (() -> Void)? {
         {
             DispatchQueue.main.async {

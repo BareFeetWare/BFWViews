@@ -38,7 +38,7 @@ extension Plan.List.Display: View {
     }
 }
 
-extension Plan.List: ViewShowable {
+extension Plan.List: Displayable {
     public func view() -> some View {
         Display(viewModel: self)
     }

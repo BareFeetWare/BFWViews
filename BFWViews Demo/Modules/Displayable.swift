@@ -1,5 +1,5 @@
 //
-//  ViewShowable.swift
+//  Displayable.swift
 //  BFWViews Demo
 //
 //  Created by Tom Brodhurst-Hill on 20/4/2023.
@@ -57,13 +57,13 @@ extension Plan.SecondRow.Display: View {
     }
 }
 
-extension Plan.FirstRow: ViewShowable {
+extension Plan.FirstRow: Displayable {
     func view() -> some View {
         Display(viewModel: self)
     }
 }
 
-extension Plan.SecondRow: ViewShowable {
+extension Plan.SecondRow: Displayable {
     func view() -> some View {
         Display(viewModel: self)
     }

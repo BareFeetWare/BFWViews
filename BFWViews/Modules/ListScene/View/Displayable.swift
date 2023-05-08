@@ -1,5 +1,5 @@
 //
-//  ViewShowable.swift
+//  Displayable.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 4/5/2023.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public protocol ViewShowable {
+public protocol Displayable {
     associatedtype Displayed: View
     func view() -> Displayed
 }

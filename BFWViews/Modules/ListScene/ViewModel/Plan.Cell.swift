@@ -11,13 +11,13 @@ import SwiftUI
 extension Plan {
     public struct Cell: Identifiable {
         public let id: String
-        public let viewModel: any ViewShowable
-        public let destination: (() async -> any ViewShowable)?
+        public let viewModel: any Displayable
+        public let destination: (() async -> any Displayable)?
         
         public init(
             id: String = UUID().uuidString,
-            viewModel: any ViewShowable,
-            destination: (() async -> any ViewShowable)? = nil
+            viewModel: any Displayable,
+            destination: (() async -> any Displayable)? = nil
         ) {
             self.id = id
             self.viewModel = viewModel
@@ -35,7 +35,7 @@ public extension Plan.Cell {
         _ title: String,
         subtitle: String? = nil,
         trailing: String? = nil,
-        destination: (() async -> any ViewShowable)? = nil
+        destination: (() async -> any Displayable)? = nil
     ) -> Self {
         .init(
             viewModel: Plan.DetailRow(
