@@ -13,7 +13,6 @@ public extension Plan {
         public let title: String?
         public let subtitle: String?
         public let trailing: String?
-        public let listSceneViewModel: (() async -> ListScene.ViewModel)?
     }
 }
 
@@ -22,14 +21,12 @@ public extension Plan.DetailRow {
         id: String? = nil,
         title: String,
         subtitle: String? = nil,
-        trailing: String? = nil,
-        listSceneViewModel: (() async -> ListScene.ViewModel)? = nil
+        trailing: String? = nil
     ) {
         self.id = id ?? UUID().uuidString
         self.title = title
         self.subtitle = subtitle
         self.trailing = trailing
-        self.listSceneViewModel = listSceneViewModel
     }
 }
 
