@@ -11,14 +11,14 @@ import BFWViews
 
 extension ListSceneFlow {
     class Coordinator {
-        lazy var firstSceneViewModel: ListScene.ViewModel = rootListSceneViewModel()
+        lazy var firstList: Plan.List = rootList()
     }
 }
 
 private extension ListSceneFlow.Coordinator {
     
-    func rootListSceneViewModel() -> ListScene.ViewModel {
-        let viewModel = ListScene.ViewModel(
+    func rootList() -> Plan.List {
+        let viewModel = Plan.List(
             title: "ListScene",
             sections: []
         )
@@ -35,7 +35,7 @@ private extension ListSceneFlow.Coordinator {
                 title: "Push Immediate",
                 cells: [
                     .detail("Push 1", trailing: "3") {
-                        ListScene.ViewModel(
+                        Plan.List(
                             title: "Pushed",
                             cells: [
                                 .detail("Child 1"),
@@ -49,7 +49,7 @@ private extension ListSceneFlow.Coordinator {
                 title: "Push Async",
                 cells: [
                     .detail("Push 2", trailing: "3") {
-                        await self.childrenSceneViewModel()
+                        await self.childrenList()
                     },
                 ]
             ),
@@ -57,7 +57,7 @@ private extension ListSceneFlow.Coordinator {
         return viewModel
     }
     
-    func childrenSceneViewModel() async -> ListScene.ViewModel {
+    func childrenList() async -> Plan.List {
         // Arbitrary delay, pretending to be an async request.
         try? await Task.sleep(nanoseconds: 2000000000)
         let children = ["Child 1", "Child 2", "Child 3"]

@@ -1,21 +1,14 @@
 //
-//  ListScene.swift
+//  Plan.List.Display+View.swift
+//  BFWViews
 //
-//  Created by Tom Brodhurst-Hill on 10/4/2022.
-//  Copyright © 2022 BareFeetWare. All rights reserved.
+//  Created by Tom Brodhurst-Hill on 8/5/2023.
+//  Copyright © 2023 BareFeetWare. All rights reserved.
 //
 
 import SwiftUI
 
-public struct ListScene {
-    @ObservedObject var viewModel: ViewModel
-    
-    public init(viewModel: ViewModel) {
-        self.viewModel = viewModel
-    }
-}
-
-extension ListScene: View {
+extension Plan.List.Display: View {
     public var body: some View {
         List {
             ForEach(viewModel.sections) { section in
@@ -45,16 +38,16 @@ extension ListScene: View {
     }
 }
 
-extension ListScene.ViewModel: ViewShowable {
+extension Plan.List: ViewShowable {
     public func view() -> some View {
-        ListScene(viewModel: self)
+        Display(viewModel: self)
     }
 }
 
-struct ListScene_Previews: PreviewProvider {
+struct PlanListDisplay_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ListScene(viewModel: .preview)
+            Plan.List.Display(viewModel: .preview)
         }
     }
 }

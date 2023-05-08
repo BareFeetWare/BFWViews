@@ -1,5 +1,5 @@
 //
-//  Plan.ListStyle.swift
+//  Plan.List.Style.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 4/5/2023.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension Plan {
-    public enum ListStyle {
+extension Plan.List {
+    public enum Style {
         case automatic
         case insetGrouped
         case inset

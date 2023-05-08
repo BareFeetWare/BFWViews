@@ -1,5 +1,5 @@
 //
-//  View+Plan.ListStyle.swift
+//  View+Plan.List.Style.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 2/5/2023.
@@ -9,13 +9,13 @@
 import SwiftUI
 
 extension View {
-    func listStyle(_ listStyle: Plan.ListStyle) -> some View {
+    func listStyle(_ listStyle: Plan.List.Style) -> some View {
         modifier(ListStyleModifier(listStyle: listStyle))
     }
 }
 
 fileprivate struct ListStyleModifier: ViewModifier {
-    let listStyle: Plan.ListStyle
+    let listStyle: Plan.List.Style
 
     @ViewBuilder
     func body(content: Content) -> some View {

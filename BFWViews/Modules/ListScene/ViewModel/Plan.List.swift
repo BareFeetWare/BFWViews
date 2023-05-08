@@ -1,5 +1,5 @@
 //
-//  ListScene.ViewModel.swift
+//  Plan.List.swift
 //
 //  Created by Tom Brodhurst-Hill on 19/4/2022.
 //  Copyright © 2022 BareFeetWare. All rights reserved.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-public extension ListScene {
-    class ViewModel: ObservableObject {
+public extension Plan {
+    class List: ObservableObject {
         
         public init(
             title: String,
-            sections: [Plan.Section],
-            listStyle: Plan.ListStyle = .automatic
+            sections: [Section],
+            listStyle: Style = .automatic
         ) {
             self.title = title
             self.sections = sections
@@ -21,8 +21,8 @@ public extension ListScene {
         }
         
         public let title: String
-        public let listStyle: Plan.ListStyle
-        @Published public var sections: [Plan.Section]
+        public let listStyle: Style
+        @Published public var sections: [Section]
         @Published var isActiveDestination = false
         
         @Published public var destination: (any ViewShowable)? {
@@ -39,7 +39,7 @@ public extension ListScene {
 
 // MARK: - Convenience Inits
 
-public extension ListScene.ViewModel {
+public extension Plan.List {
     
     convenience init(
         title: String,
@@ -57,7 +57,7 @@ public extension ListScene.ViewModel {
 
 // MARK: - Public Functions
 
-public extension ListScene.ViewModel {
+public extension Plan.List {
     
     func action(
         destination: @escaping () async -> any ViewShowable
@@ -74,8 +74,8 @@ public extension ListScene.ViewModel {
 
 // MARK: - Previews
 
-extension ListScene.ViewModel {
-    static let preview: ListScene.ViewModel = .init(
+extension Plan.List {
+    static let preview = Plan.List(
         title: "List Scene Root",
         sections: [
             .init(
@@ -90,14 +90,14 @@ extension ListScene.ViewModel {
                 title: "Async children",
                 cells: [
                     .detail("Children", trailing: "3") {
-                        ListScene.ViewModel(title: "Children", cells: childrenCells)
+                        Plan.List(title: "Children", cells: childrenCells)
                     },
                 ]
             ),
         ]
     )
     
-//    static func childrenSceneViewModel() async -> ListScene.ViewModel {
+//    static func childrenSceneViewModel() async -> Plan.List {
 //        // Arbitrary delay, pretending to be an async request.
 //        try? await Task.sleep(nanoseconds: 2000000000)
 //        return .init(
