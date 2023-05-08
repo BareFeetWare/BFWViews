@@ -1,5 +1,5 @@
 //
-//  Boss.swift
+//  Plan.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 4/5/2023.
@@ -9,4 +9,4 @@
 import Foundation
 
 /// Name scope for view models.
-public enum Boss {}
+public enum Plan {}

@@ -12,8 +12,8 @@ public extension ListScene {
         
         public init(
             title: String,
-            sections: [Boss.Section],
-            listStyle: Boss.ListStyle = .automatic
+            sections: [Plan.Section],
+            listStyle: Plan.ListStyle = .automatic
         ) {
             self.title = title
             self.sections = sections
@@ -21,8 +21,8 @@ public extension ListScene {
         }
         
         public let title: String
-        public let listStyle: Boss.ListStyle
-        @Published public var sections: [Boss.Section]
+        public let listStyle: Plan.ListStyle
+        @Published public var sections: [Plan.Section]
         @Published var isActiveDestination = false
         
         @Published public var destinationViewModel: ListScene.ViewModel? {
@@ -43,7 +43,7 @@ public extension ListScene.ViewModel {
     
     convenience init(
         title: String,
-        cells: [Boss.Cell]
+        cells: [Plan.Cell]
     ) {
         self.init(
             title: title,
@@ -106,7 +106,7 @@ extension ListScene.ViewModel {
 //        )
 //    }
     
-    static var childrenCells: [Boss.Cell] {
+    static var childrenCells: [Plan.Cell] {
         ["Child 1", "Child 2", "Child 3"]
             .map { child in
                     .detail(child)

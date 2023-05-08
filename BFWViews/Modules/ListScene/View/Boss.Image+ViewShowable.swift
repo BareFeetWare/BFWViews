@@ -1,5 +1,5 @@
 //
-//  Boss.Image+ViewShowable.swift
+//  Plan.Image+ViewShowable.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 8/5/2023.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-extension Boss.Image: ViewShowable {
+extension Plan.Image: ViewShowable {
     public func view() -> AnyView {
         AnyView(
             AsyncImage(

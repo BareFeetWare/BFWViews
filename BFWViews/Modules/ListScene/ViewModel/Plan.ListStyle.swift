@@ -1,5 +1,5 @@
 //
-//  Boss.ListStyle.swift
+//  Plan.ListStyle.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 4/5/2023.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Boss {
+extension Plan {
     public enum ListStyle {
         case automatic
         case insetGrouped

@@ -1,5 +1,5 @@
 //
-//  Boss.Section.swift
+//  Plan.Section.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 4/5/2023.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Boss {
+extension Plan {
     public struct Section: Identifiable {
         public let id: String
         public let title: String?
@@ -16,11 +16,11 @@ extension Boss {
     }
 }
 
-public extension Boss.Section {
+public extension Plan.Section {
     
     init(
         title: String? = nil,
-        cells: [Boss.Cell]
+        cells: [Plan.Cell]
     ) {
         self.id = UUID().uuidString
         self.title = title

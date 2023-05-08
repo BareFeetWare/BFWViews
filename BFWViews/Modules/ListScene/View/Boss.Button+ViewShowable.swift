@@ -1,5 +1,5 @@
 //
-//  Boss.Button+ViewShowable.swift
+//  Plan.Button+ViewShowable.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 4/5/2023.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-extension Boss.Button: ViewShowable {
+extension Plan.Button: ViewShowable {
     public func view() -> AnyView {
         AnyView(Button(title, action: action))
     }

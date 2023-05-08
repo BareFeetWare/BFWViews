@@ -1,5 +1,5 @@
 //
-//  Boss.Cell.swift
+//  Plan.Cell.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 18/4/2023.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-extension Boss {
+extension Plan {
     public struct Cell: Identifiable, ViewShowable {
         public let base: Any
         public let _id: String
@@ -37,7 +37,7 @@ extension Boss {
 
 // MARK: - Static instances of Cell. Add your own custom instances in your project.
 
-public extension Boss.Cell {
+public extension Plan.Cell {
     
     static func detail(
         _ title: String,
@@ -56,11 +56,11 @@ public extension Boss.Cell {
     }
     
     static func button(_ title: String, action: @escaping () -> Void) -> Self {
-        .init(Boss.Button(title: title, action: action))
+        .init(Plan.Button(title: title, action: action))
     }
     
     static func image(url: URL) -> Self {
-        .init(Boss.Image(url: url))
+        .init(Plan.Image(url: url))
     }
     
 }
