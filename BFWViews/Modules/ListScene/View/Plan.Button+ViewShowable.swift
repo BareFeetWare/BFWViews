@@ -9,7 +9,7 @@
 import SwiftUI
 
 extension Plan.Button: ViewShowable {
-    public func view() -> AnyView {
-        AnyView(Button(title, action: action))
+    public func view() -> some View {
+        Button(title, action: action)
     }
 }

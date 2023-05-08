@@ -9,29 +9,21 @@
 import SwiftUI
 
 extension Plan {
-    public struct Cell: Identifiable, ViewShowable {
-        public let base: Any
-        public let _id: String
-        public let _view: () -> AnyView
-        public let listSceneViewModel: (() async -> ListScene.ViewModel)?
+    public struct Cell: Identifiable {
+        public let id: String
+        public let viewModel: any ViewShowable
+        public let destination: (() async -> any ViewShowable)?
         
-        public init<V: Identifiable & ViewShowable>(
-            _ base: V,
-            listSceneViewModel: (() async -> ListScene.ViewModel)? = nil
-        ) where V.ID == String {
-            self.base = base
-            self._id = base.id
-            self._view = base.view
-            self.listSceneViewModel = listSceneViewModel
+        public init(
+            id: String = UUID().uuidString,
+            viewModel: any ViewShowable,
+            destination: (() async -> any ViewShowable)? = nil
+        ) {
+            self.id = id
+            self.viewModel = viewModel
+            self.destination = destination
         }
         
-        public var id: String {
-            return _id
-        }
-        
-        public func view() -> AnyView {
-            return _view()
-        }
     }
 }
 
@@ -43,24 +35,24 @@ public extension Plan.Cell {
         _ title: String,
         subtitle: String? = nil,
         trailing: String? = nil,
-        listSceneViewModel: (() async -> ListScene.ViewModel)? = nil
+        destination: (() async -> any ViewShowable)? = nil
     ) -> Self {
         .init(
-            Plan.DetailRow(
+            viewModel: Plan.DetailRow(
                 title: title,
                 subtitle: subtitle,
                 trailing: trailing
             ),
-            listSceneViewModel: listSceneViewModel
+            destination: destination
         )
     }
     
     static func button(_ title: String, action: @escaping () -> Void) -> Self {
-        .init(Plan.Button(title: title, action: action))
+        .init(viewModel: Plan.Button(title: title, action: action))
     }
     
     static func image(url: URL) -> Self {
-        .init(Plan.Image(url: url))
+        .init(viewModel: Plan.Image(url: url))
     }
     
 }

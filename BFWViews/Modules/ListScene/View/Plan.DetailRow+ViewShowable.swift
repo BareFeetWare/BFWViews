@@ -9,7 +9,7 @@
 import SwiftUI
 
 extension Plan.DetailRow: ViewShowable {
-    public func view() -> AnyView {
-        AnyView(Display(viewModel: self))
+    public func view() -> some View {
+        Display(viewModel: self)
     }
 }

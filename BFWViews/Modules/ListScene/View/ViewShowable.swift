@@ -9,5 +9,6 @@
 import SwiftUI
 
 public protocol ViewShowable {
-    func view() -> AnyView
+    associatedtype Displayed: View
+    func view() -> Displayed
 }

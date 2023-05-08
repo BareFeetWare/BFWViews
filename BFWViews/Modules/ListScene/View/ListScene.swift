@@ -21,15 +21,15 @@ extension ListScene: View {
             ForEach(viewModel.sections) { section in
                 Section {
                     ForEach(section.cells) { cell in
-                        if let destinationSceneViewModel = cell.listSceneViewModel {
+                        if let destination = cell.destination {
                             AsyncNavigationLink(
                                 isActive: $viewModel.isActiveDestination,
-                                destination: { viewModel.destinationViewModel.map { ListScene(viewModel: $0) }},
-                                label: { cell.view() },
-                                action: viewModel.action(destinationSceneViewModel: destinationSceneViewModel)
+                                destination: { viewModel.destination.map { AnyView($0.view()) }},
+                                label: { AnyView(cell.viewModel.view()) },
+                                action: viewModel.action(destination: destination)
                             )
                         } else {
-                            cell.view()
+                            AnyView(cell.viewModel.view())
                         }
                     }
                 } header: {
@@ -42,6 +42,12 @@ extension ListScene: View {
         }
         .listStyle(viewModel.listStyle)
         .navigationTitle(viewModel.title)
+    }
+}
+
+extension ListScene.ViewModel: ViewShowable {
+    public func view() -> some View {
+        ListScene(viewModel: self)
     }
 }
 

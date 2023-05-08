@@ -25,12 +25,12 @@ public extension ListScene {
         @Published public var sections: [Plan.Section]
         @Published var isActiveDestination = false
         
-        @Published public var destinationViewModel: ListScene.ViewModel? {
+        @Published public var destination: (any ViewShowable)? {
             didSet {
                 // TODO: Perhaps instead use subscriber.
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
-                    self.isActiveDestination = self.destinationViewModel != nil
+                    self.isActiveDestination = self.destination != nil
                 }
             }
         }
@@ -60,12 +60,12 @@ public extension ListScene.ViewModel {
 public extension ListScene.ViewModel {
     
     func action(
-        destinationSceneViewModel: @escaping () async -> ListScene.ViewModel
+        destination: @escaping () async -> any ViewShowable
     ) -> (() -> Void)? {
         {
             DispatchQueue.main.async {
                 Task {
-                    self.destinationViewModel = await destinationSceneViewModel()
+                    self.destination = await destination()
                 }
             }
         }
@@ -90,7 +90,7 @@ extension ListScene.ViewModel {
                 title: "Async children",
                 cells: [
                     .detail("Children", trailing: "3") {
-                        .init(title: "Children", cells: childrenCells)
+                        ListScene.ViewModel(title: "Children", cells: childrenCells)
                     },
                 ]
             ),

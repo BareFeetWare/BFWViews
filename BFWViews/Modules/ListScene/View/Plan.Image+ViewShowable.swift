@@ -9,17 +9,15 @@
 import SwiftUI
 
 extension Plan.Image: ViewShowable {
-    public func view() -> AnyView {
-        AnyView(
-            AsyncImage(
-                url: url
-            ) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            } placeholder: {
-                ProgressView()
-            }
-        )
+    public func view() -> some View {
+        AsyncImage(
+            url: url
+        ) { image in
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+        } placeholder: {
+            ProgressView()
+        }
     }
 }

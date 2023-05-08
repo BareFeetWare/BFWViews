@@ -35,7 +35,7 @@ private extension ListSceneFlow.Coordinator {
                 title: "Push Immediate",
                 cells: [
                     .detail("Push 1", trailing: "3") {
-                        .init(
+                        ListScene.ViewModel(
                             title: "Pushed",
                             cells: [
                                 .detail("Child 1"),

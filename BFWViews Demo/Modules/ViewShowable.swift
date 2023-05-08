@@ -9,80 +9,79 @@
 import SwiftUI
 import BFWViews
 
-extension FirstView.ViewModel: ViewShowable {
-    func view() -> AnyView {
-        AnyView(FirstView(viewModel: self))
+// MARK: - View models
+
+extension Plan {
+    
+    struct FirstRow {
+        // Implement view model content here.
+        
+        struct Display {
+            let viewModel: FirstRow
+        }
     }
-}
-
-extension SecondView.ViewModel: ViewShowable {
-    func view() -> AnyView {
-        AnyView(SecondView(viewModel: self))
+    
+    struct SecondRow {
+        // Implement view model content here.
+        
+        struct Display {
+            let viewModel: SecondRow
+        }
     }
-}
-
-struct FirstView: View {
-    let viewModel: ViewModel
-
-    var body: some View {
-        Text("View1")
-        // Implement the view content here, using the view model.
-    }
-}
-
-struct SecondView: View {
-    let viewModel: ViewModel
-
-    var body: some View {
-        Text("View2")
-        // Implement the view content here, using the view model.
-    }
-}
-
-extension FirstView {
-    struct ViewModel: Identifiable {
-        let id = UUID().uuidString
-        // Add other properties specific to FirstView.ViewModel
-
-        func view() -> some View {
-            FirstView(viewModel: self)
+    
+    struct RootScene {
+        let cells: [Cell] = [
+            .init(viewModel: Plan.FirstRow()),
+            .init(viewModel: Plan.SecondRow()),
+        ]
+        
+        struct Display {
+            let viewModel: RootScene
         }
     }
 }
 
-extension SecondView {
-    struct ViewModel: Identifiable {
-        let id = UUID().uuidString
-        // Add other properties specific to SecondView.ViewModel
+// MARK: - Views
 
-        func view() -> some View {
-            SecondView(viewModel: self)
+extension Plan.FirstRow.Display: View {
+    var body: some View {
+        Text("FirstRow View")
+        // Implement the view content here, using the view model.
+    }
+}
+
+extension Plan.SecondRow.Display: View {
+    var body: some View {
+        Text("SecondScene View")
+        // Implement the view content here, using the view model.
+    }
+}
+
+extension Plan.FirstRow: ViewShowable {
+    func view() -> some View {
+        Display(viewModel: self)
+    }
+}
+
+extension Plan.SecondRow: ViewShowable {
+    func view() -> some View {
+        Display(viewModel: self)
+    }
+}
+
+
+extension Plan.RootScene.Display: View {
+    var body: some View {
+        List {
+            ForEach(viewModel.cells) { cell in
+                AnyView(cell.viewModel.view())
+            }
         }
     }
 }
 
 struct ViewShowableScene: View {
-    
-    let viewModel = ViewModel()
-    
     var body: some View {
-        List {
-            ForEach(viewModel.cellViewModels) { cellViewModel in
-                cellViewModel.view()
-            }
-        }
-    }
-    
-    func testView() -> some View {
-        Text("test")
-    }
-}
-
-extension ViewShowableScene {
-    struct ViewModel {
-        let cellViewModels: [Plan.Cell] = [
-            .init(FirstView.ViewModel()),
-            .init(SecondView.ViewModel()),
-        ]
+        Plan.RootScene.Display(viewModel: .init())
     }
 }
