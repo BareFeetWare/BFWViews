@@ -15,7 +15,7 @@ struct ListSceneFlow {
 
 extension ListSceneFlow: View {
     var body: some View {
-        Plan.List.Display(viewModel: coordinator.firstList)
+        coordinator.firstList
     }
 }
 

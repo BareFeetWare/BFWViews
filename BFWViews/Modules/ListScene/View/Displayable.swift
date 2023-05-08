@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public protocol Displayable {
-    associatedtype Displayed: View
-    func view() -> Displayed
-}
+//public protocol Displayable {
+//    associatedtype Displayed: View
+//    func view() -> Displayed
+//}

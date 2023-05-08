@@ -17,8 +17,9 @@
 		E21311372586F5BF001496C7 /* MiniSheetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21311362586F5BF001496C7 /* MiniSheetScene.swift */; };
 		E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A126E8661100AC5CD2 /* Color+Hex.swift */; };
 		E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */; };
-		E2386BE92A087314009FEA16 /* Plan.Image+Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BE82A087314009FEA16 /* Plan.Image+Displayable.swift */; };
-		E2386BEB2A08D54A009FEA16 /* Plan.List.Display+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BEA2A08D54A009FEA16 /* Plan.List.Display+View.swift */; };
+		E2386BE92A087314009FEA16 /* Plan.Image+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BE82A087314009FEA16 /* Plan.Image+View.swift */; };
+		E2386BEB2A08D54A009FEA16 /* Plan.List+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */; };
+		E2386BF32A08E52E009FEA16 /* Plan.Button+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BF22A08E52E009FEA16 /* Plan.Button+View.swift */; };
 		E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43A268157720018DD04 /* ReadFrame.swift */; };
 		E23AB43D268157A90018DD04 /* ReadFrameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43C268157A90018DD04 /* ReadFrameScene.swift */; };
 		E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43E26817EC50018DD04 /* View+TappableCell.swift */; };
@@ -29,7 +30,6 @@
 		E2459F872A0351E60068DCBB /* Plan.Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F862A0351E60068DCBB /* Plan.Button.swift */; };
 		E2459F892A0352090068DCBB /* Plan.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F882A0352090068DCBB /* Plan.Image.swift */; };
 		E2459F8B2A0352750068DCBB /* Plan.List.Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F8A2A0352750068DCBB /* Plan.List.Style.swift */; };
-		E2459F8D2A0354CE0068DCBB /* Plan.Button+Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F8C2A0354CD0068DCBB /* Plan.Button+Displayable.swift */; };
 		E26A7AD42765A561007E3A6C /* BadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A7AD32765A561007E3A6C /* BadgeScene.swift */; };
 		E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */; };
 		E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27BCFF927870D320004F48C /* TableViewProxy.swift */; };
@@ -41,8 +41,6 @@
 		E28B7AC1275C9B5700ED5730 /* CellBorderScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B7AC0275C9B5700ED5730 /* CellBorderScene.swift */; };
 		E28D1BD5283350C400064CCD /* Plan.List.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D1BCD283350C400064CCD /* Plan.List.swift */; };
 		E28D1BD6283350C400064CCD /* Plan.DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */; };
-		E28D1BD8283350C400064CCD /* Plan.DetailRow.Display+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D1BD1283350C400064CCD /* Plan.DetailRow.Display+View.swift */; };
-		E28D1BDA283350C400064CCD /* Plan.List.Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D1BD3283350C400064CCD /* Plan.List.Display.swift */; };
 		E28D1BDC2833582A00064CCD /* ListSceneFlow.Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D1BDB2833582A00064CCD /* ListSceneFlow.Coordinator.swift */; };
 		E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */; };
 		E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC0426FD4EC900CFDE50 /* WebView.swift */; };
@@ -65,8 +63,7 @@
 		E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */; };
 		E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */; };
 		E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */; };
-		E2DDC1F329F0D7C700DE6C84 /* Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F229F0D7C700DE6C84 /* Displayable.swift */; };
-		E2DDC20529FA54CB00DE6C84 /* Plan.DetailRow+Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+Displayable.swift */; };
+		E2DDC20529FA54CB00DE6C84 /* Plan.DetailRow+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+View.swift */; };
 		E2EA561E2838D3240053BDAC /* ListSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */; };
 		E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */; };
 		E2F9B1B7274CB8F800C8EC18 /* UIViewControllerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */; };
@@ -120,8 +117,9 @@
 		E21311362586F5BF001496C7 /* MiniSheetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSheetScene.swift; sourceTree = "<group>"; };
 		E224C9A126E8661100AC5CD2 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHexScene.swift; sourceTree = "<group>"; };
-		E2386BE82A087314009FEA16 /* Plan.Image+Displayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Image+Displayable.swift"; sourceTree = "<group>"; };
-		E2386BEA2A08D54A009FEA16 /* Plan.List.Display+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.List.Display+View.swift"; sourceTree = "<group>"; };
+		E2386BE82A087314009FEA16 /* Plan.Image+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Image+View.swift"; sourceTree = "<group>"; };
+		E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.List+View.swift"; sourceTree = "<group>"; };
+		E2386BF22A08E52E009FEA16 /* Plan.Button+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Button+View.swift"; sourceTree = "<group>"; };
 		E23AB43A268157720018DD04 /* ReadFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadFrame.swift; sourceTree = "<group>"; };
 		E23AB43C268157A90018DD04 /* ReadFrameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFrameScene.swift; sourceTree = "<group>"; };
 		E23AB43E26817EC50018DD04 /* View+TappableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+TappableCell.swift"; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 		E2459F862A0351E60068DCBB /* Plan.Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Button.swift; sourceTree = "<group>"; };
 		E2459F882A0352090068DCBB /* Plan.Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Image.swift; sourceTree = "<group>"; };
 		E2459F8A2A0352750068DCBB /* Plan.List.Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.List.Style.swift; sourceTree = "<group>"; };
-		E2459F8C2A0354CD0068DCBB /* Plan.Button+Displayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Button+Displayable.swift"; sourceTree = "<group>"; };
 		E26A7AD32765A561007E3A6C /* BadgeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeScene.swift; sourceTree = "<group>"; };
 		E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLink.swift; sourceTree = "<group>"; };
 		E27BCFF927870D320004F48C /* TableViewProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProxy.swift; sourceTree = "<group>"; };
@@ -144,8 +141,6 @@
 		E28B7AC0275C9B5700ED5730 /* CellBorderScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBorderScene.swift; sourceTree = "<group>"; };
 		E28D1BCD283350C400064CCD /* Plan.List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.List.swift; sourceTree = "<group>"; };
 		E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.DetailRow.swift; sourceTree = "<group>"; };
-		E28D1BD1283350C400064CCD /* Plan.DetailRow.Display+View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plan.DetailRow.Display+View.swift"; sourceTree = "<group>"; };
-		E28D1BD3283350C400064CCD /* Plan.List.Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.List.Display.swift; sourceTree = "<group>"; };
 		E28D1BDB2833582A00064CCD /* ListSceneFlow.Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSceneFlow.Coordinator.swift; sourceTree = "<group>"; };
 		E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLinkScene.swift; sourceTree = "<group>"; };
 		E2BAAC0426FD4EC900CFDE50 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -168,8 +163,7 @@
 		E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Cell.swift; sourceTree = "<group>"; };
-		E2DDC1F229F0D7C700DE6C84 /* Displayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Displayable.swift; sourceTree = "<group>"; };
-		E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+Displayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.DetailRow+Displayable.swift"; sourceTree = "<group>"; };
+		E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.DetailRow+View.swift"; sourceTree = "<group>"; };
 		E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSceneFlow.swift; sourceTree = "<group>"; };
 		E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitViewController.swift; sourceTree = "<group>"; };
 		E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerScene.swift; sourceTree = "<group>"; };
@@ -272,7 +266,6 @@
 				E2FD40B826689384004E4905 /* TrailingScene.swift */,
 				E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */,
 				E28B7ABA275AC73F00ED5730 /* UIViewScene.swift */,
-				E2DDC1F229F0D7C700DE6C84 /* Displayable.swift */,
 				8798E0D42877E9BE00FB1344 /* WebScene.swift */,
 			);
 			path = Modules;
@@ -313,14 +306,12 @@
 		E28D1BD0283350C400064CCD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E2459F8C2A0354CD0068DCBB /* Plan.Button+Displayable.swift */,
-				E28D1BD1283350C400064CCD /* Plan.DetailRow.Display+View.swift */,
-				E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+Displayable.swift */,
-				E2386BE82A087314009FEA16 /* Plan.Image+Displayable.swift */,
-				E28D1BD3283350C400064CCD /* Plan.List.Display.swift */,
-				E2386BEA2A08D54A009FEA16 /* Plan.List.Display+View.swift */,
-				E2BF0B702A00F05F0035DE5E /* View+Plan.List.Style.swift */,
 				E2459F7C2A032CFC0068DCBB /* Displayable.swift */,
+				E2386BF22A08E52E009FEA16 /* Plan.Button+View.swift */,
+				E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+View.swift */,
+				E2386BE82A087314009FEA16 /* Plan.Image+View.swift */,
+				E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */,
+				E2BF0B702A00F05F0035DE5E /* View+Plan.List.Style.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -602,7 +593,6 @@
 				E2FD40B926689384004E4905 /* TrailingScene.swift in Sources */,
 				E2F9B1B7274CB8F800C8EC18 /* UIViewControllerScene.swift in Sources */,
 				E2FD40CF2669CA26004E4905 /* AlertScene.swift in Sources */,
-				E2DDC1F329F0D7C700DE6C84 /* Displayable.swift in Sources */,
 				E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */,
 				E2FD40B326688DF5004E4905 /* CardScene.swift in Sources */,
 				E28D1BDC2833582A00064CCD /* ListSceneFlow.Coordinator.swift in Sources */,
@@ -621,6 +611,7 @@
 				E2FD40CD2669C9F5004E4905 /* Alert+Error.swift in Sources */,
 				E28B7ABF275C5E2F00ED5730 /* CellBorder.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
+				E2386BF32A08E52E009FEA16 /* Plan.Button+View.swift in Sources */,
 				E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */,
 				E2459F8B2A0352750068DCBB /* Plan.List.Style.swift in Sources */,
 				E2459F7D2A032CFC0068DCBB /* Displayable.swift in Sources */,
@@ -640,21 +631,18 @@
 				E2C16B69266480C400BAC051 /* CompressibleSpacer.swift in Sources */,
 				E2459F852A0351450068DCBB /* Plan.swift in Sources */,
 				E2BAAC1326FD899B00CFDE50 /* Image+Data.swift in Sources */,
-				E2386BE92A087314009FEA16 /* Plan.Image+Displayable.swift in Sources */,
-				E2DDC20529FA54CB00DE6C84 /* Plan.DetailRow+Displayable.swift in Sources */,
-				E28D1BDA283350C400064CCD /* Plan.List.Display.swift in Sources */,
+				E2386BE92A087314009FEA16 /* Plan.Image+View.swift in Sources */,
+				E2DDC20529FA54CB00DE6C84 /* Plan.DetailRow+View.swift in Sources */,
 				E2C16B7A2664816F00BAC051 /* ColorScheme+Identifiable.swift in Sources */,
 				E2BAAC1126FD88F700CFDE50 /* Fetch.swift in Sources */,
-				E2386BEB2A08D54A009FEA16 /* Plan.List.Display+View.swift in Sources */,
+				E2386BEB2A08D54A009FEA16 /* Plan.List+View.swift in Sources */,
 				E2BAAC1926FEFF0400CFDE50 /* AsyncImage.swift in Sources */,
-				E2459F8D2A0354CE0068DCBB /* Plan.Button+Displayable.swift in Sources */,
 				E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */,
 				E2C16B6C266480F900BAC051 /* Card.swift in Sources */,
 				E28D1BD6283350C400064CCD /* Plan.DetailRow.swift in Sources */,
 				E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */,
 				E2459F892A0352090068DCBB /* Plan.Image.swift in Sources */,
 				E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */,
-				E28D1BD8283350C400064CCD /* Plan.DetailRow.Display+View.swift in Sources */,
 				E2FD40AD26683A83004E4905 /* Image+Symbol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

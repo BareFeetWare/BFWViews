@@ -37,9 +37,3 @@ extension Plan.DetailRow {
         trailing: "trailing"
     )
 }
-
-extension Plan.DetailRow {
-    struct Display {
-        let viewModel: Plan.DetailRow
-    }
-}

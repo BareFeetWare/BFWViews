@@ -1,24 +1,25 @@
 //
-//  DetailRow.swift
+//  Plan.DetailRow+View.swift
+//  BFWViews
 //
-//  Created by Tom Brodhurst-Hill on 10/4/2022.
-//  Copyright © 2022 BareFeetWare. All rights reserved.
+//  Created by Tom Brodhurst-Hill on 27/4/2023.
+//  Copyright © 2023 BareFeetWare. All rights reserved.
 //
 
 import SwiftUI
 
-extension Plan.DetailRow.Display: View {
+extension Plan.DetailRow: View {
     public var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                viewModel.title.map { Text($0) }
-                viewModel.subtitle.map { Text($0) }
+                title.map { Text($0) }
+                subtitle.map { Text($0) }
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
             .multilineTextAlignment(.leading)
             Spacer()
-            viewModel.trailing.map {
+            trailing.map {
                 Text("\($0)")
                     .multilineTextAlignment(.trailing)
             }
@@ -26,8 +27,8 @@ extension Plan.DetailRow.Display: View {
     }
 }
 
-struct PlanDetailRowDisplay_Previews: PreviewProvider {
+struct PlanDetailRow_Previews: PreviewProvider {
     static var previews: some View {
-        Plan.DetailRow.Display(viewModel: .preview)
+        Plan.DetailRow.preview
     }
 }

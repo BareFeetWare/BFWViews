@@ -6,9 +6,11 @@
 //
 
 import Foundation
+// TODO: Remove:
+import SwiftUI
 
 public extension Plan {
-    class List: ObservableObject {
+    struct List {
         
         public init(
             title: String,
@@ -16,16 +18,32 @@ public extension Plan {
             listStyle: Style = .automatic
         ) {
             self.title = title
-            self.sections = sections
+            self.state = .init(sections: sections)
             self.listStyle = listStyle
         }
         
         public let title: String
         public let listStyle: Style
-        @Published public var sections: [Section]
+        @ObservedObject public var state: State
+        
+        public var sections: [Section] {
+            get { state.sections }
+            set { state.sections = newValue }
+        }
+    }
+}
+
+public extension Plan.List {
+    class State: ObservableObject {
+        
+        init(sections: [Plan.Section]) {
+            self.sections = sections
+        }
+        
+        @Published var sections: [Plan.Section]
         @Published var isActiveDestination = false
         
-        @Published public var destination: (any Displayable)? {
+        @Published public var destination: (any View)? {
             didSet {
                 // TODO: Perhaps instead use subscriber.
                 DispatchQueue.main.async { [weak self] in
@@ -41,7 +59,7 @@ public extension Plan {
 
 public extension Plan.List {
     
-    convenience init(
+    init(
         title: String,
         cells: [Plan.Cell]
     ) {
@@ -60,12 +78,12 @@ public extension Plan.List {
 public extension Plan.List {
     
     func action(
-        destination: @escaping () async -> any Displayable
+        destination: @escaping () async -> any View
     ) -> (() -> Void)? {
         {
             DispatchQueue.main.async {
                 Task {
-                    self.destination = await destination()
+                    self.state.destination = await destination()
                 }
             }
         }

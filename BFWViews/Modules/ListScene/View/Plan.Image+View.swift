@@ -1,5 +1,5 @@
 //
-//  Plan.Image+Displayable.swift
+//  Plan.Image+View.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 8/5/2023.
@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-extension Plan.Image: Displayable {
-    public func view() -> some View {
+extension Plan.Image: View {
+    public var body: some View {
         AsyncImage(
             url: url
         ) { image in

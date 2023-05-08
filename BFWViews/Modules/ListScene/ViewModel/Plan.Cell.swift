@@ -11,16 +11,16 @@ import SwiftUI
 extension Plan {
     public struct Cell: Identifiable {
         public let id: String
-        public let viewModel: any Displayable
-        public let destination: (() async -> any Displayable)?
+        public let content: any View
+        public let destination: (() async -> any View)?
         
         public init(
             id: String = UUID().uuidString,
-            viewModel: any Displayable,
-            destination: (() async -> any Displayable)? = nil
+            content: any View,
+            destination: (() async -> any View)? = nil
         ) {
             self.id = id
-            self.viewModel = viewModel
+            self.content = content
             self.destination = destination
         }
         
@@ -35,10 +35,10 @@ public extension Plan.Cell {
         _ title: String,
         subtitle: String? = nil,
         trailing: String? = nil,
-        destination: (() async -> any Displayable)? = nil
+        destination: (() async -> any View)? = nil
     ) -> Self {
         .init(
-            viewModel: Plan.DetailRow(
+            content: Plan.DetailRow(
                 title: title,
                 subtitle: subtitle,
                 trailing: trailing
@@ -48,11 +48,11 @@ public extension Plan.Cell {
     }
     
     static func button(_ title: String, action: @escaping () -> Void) -> Self {
-        .init(viewModel: Plan.Button(title: title, action: action))
+        .init(content: Plan.Button(title: title, action: action))
     }
     
     static func image(url: URL) -> Self {
-        .init(viewModel: Plan.Image(url: url))
+        .init(content: Plan.Image(url: url))
     }
     
 }

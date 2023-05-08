@@ -8,21 +8,21 @@
 
 import SwiftUI
 
-extension Plan.List.Display: View {
+extension Plan.List: View {
     public var body: some View {
         List {
-            ForEach(viewModel.sections) { section in
+            ForEach(sections) { section in
                 Section {
                     ForEach(section.cells) { cell in
                         if let destination = cell.destination {
                             AsyncNavigationLink(
-                                isActive: $viewModel.isActiveDestination,
-                                destination: { viewModel.destination.map { AnyView($0.view()) }},
-                                label: { AnyView(cell.viewModel.view()) },
-                                action: viewModel.action(destination: destination)
+                                isActive: $state.isActiveDestination,
+                                destination: { state.destination.map { AnyView($0) }},
+                                label: { AnyView(cell.content) },
+                                action: action(destination: destination)
                             )
                         } else {
-                            AnyView(cell.viewModel.view())
+                            AnyView(cell.content)
                         }
                     }
                 } header: {
@@ -33,21 +33,15 @@ extension Plan.List.Display: View {
                 }
             }
         }
-        .listStyle(viewModel.listStyle)
-        .navigationTitle(viewModel.title)
-    }
-}
-
-extension Plan.List: Displayable {
-    public func view() -> some View {
-        Display(viewModel: self)
+        .listStyle(listStyle)
+        .navigationTitle(title)
     }
 }
 
 struct PlanListDisplay_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Plan.List.Display(viewModel: .preview)
+            Plan.List.preview
         }
     }
 }
