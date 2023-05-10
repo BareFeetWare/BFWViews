@@ -1,5 +1,5 @@
 //
-//  Plan.List.Display+View.swift
+//  Plan.List+View.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 8/5/2023.
@@ -34,7 +34,6 @@ extension Plan.List: View {
             }
         }
         .listStyle(listStyle)
-        .navigationTitle(title)
     }
 }
 

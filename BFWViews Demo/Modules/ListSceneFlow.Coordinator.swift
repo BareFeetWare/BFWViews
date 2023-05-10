@@ -8,16 +8,18 @@
 
 import Foundation
 import BFWViews
+// TODO: Remove:
+import SwiftUI
 
 extension ListSceneFlow {
     class Coordinator {
-        lazy var firstList: Plan.List = rootList()
+        lazy var firstList: some View = rootView()
     }
 }
 
 private extension ListSceneFlow.Coordinator {
     
-    func rootList() -> Plan.List {
+    func rootView() -> Plan.ListScene {
         .init(
             title: "ListScene",
             sections: [
@@ -33,12 +35,14 @@ private extension ListSceneFlow.Coordinator {
                     title: "Push Immediate",
                     cells: [
                         .detail("Push 1", trailing: "3") {
-                            Plan.List(
+                            Plan.NavigationItem(
                                 title: "Pushed",
-                                cells: [
-                                    .detail("Child 1"),
-                                    .detail("Child 2"),
-                                ]
+                                content: Plan.List(
+                                    cells: [
+                                        .detail("Child 1"),
+                                        .detail("Child 2"),
+                                    ]
+                                )
                             )
                         },
                     ]
@@ -47,7 +51,7 @@ private extension ListSceneFlow.Coordinator {
                     title: "Push Async",
                     cells: [
                         .detail("Push 2", trailing: "3") {
-                            await self.childrenList()
+                            await self.childrenScene()
                         },
                     ]
                 ),
@@ -55,11 +59,11 @@ private extension ListSceneFlow.Coordinator {
         )
     }
     
-    func childrenList() async -> Plan.List {
+    func childrenScene() async -> some View {
         // Arbitrary delay, pretending to be an async request.
         try? await Task.sleep(nanoseconds: 2000000000)
         let children = ["Child 1", "Child 2", "Child 3"]
-        return await .init(
+        return Plan.ListScene(
             title: "Children",
             cells: children.map { child in
                     .detail(child)

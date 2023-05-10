@@ -13,16 +13,13 @@ public extension Plan {
     struct List {
         
         public init(
-            title: String,
             sections: [Section],
             listStyle: Style = .automatic
         ) {
-            self.title = title
             self.state = .init(sections: sections)
             self.listStyle = listStyle
         }
         
-        public let title: String
         public let listStyle: Style
         @ObservedObject public var state: State
         
@@ -60,11 +57,9 @@ public extension Plan.List {
 public extension Plan.List {
     
     init(
-        title: String,
         cells: [Plan.Cell]
     ) {
         self.init(
-            title: title,
             sections: [
                 .init(cells: cells)
             ]
@@ -94,7 +89,6 @@ public extension Plan.List {
 
 extension Plan.List {
     static let preview = Plan.List(
-        title: "List Scene Root",
         sections: [
             .init(
                 title: "Buttons and detail",
@@ -108,7 +102,10 @@ extension Plan.List {
                 title: "Async children",
                 cells: [
                     .detail("Children", trailing: "3") {
-                        Plan.List(title: "Children", cells: childrenCells)
+                        Plan.ListScene(
+                            title: "Children",
+                            cells: childrenCells
+                        )
                     },
                 ]
             ),
