@@ -13,6 +13,7 @@ extension Plan.NavigationItem: View {
         if let title = title {
             AnyView(content)
                 .navigationTitle(title)
+                .navigationBarTitleDisplayMode(titleDisplayMode)
         } else {
             AnyView(content)
         }
