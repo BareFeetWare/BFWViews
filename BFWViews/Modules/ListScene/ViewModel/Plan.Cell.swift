@@ -35,13 +35,15 @@ public extension Plan.Cell {
         _ title: String,
         subtitle: String? = nil,
         trailing: String? = nil,
+        image: Plan.Image? = nil,
         destination: (() async -> any View)? = nil
     ) -> Self {
         .init(
             content: Plan.DetailRow(
                 title: title,
                 subtitle: subtitle,
-                trailing: trailing
+                trailing: trailing,
+                image: image
             ),
             destination: destination
         )

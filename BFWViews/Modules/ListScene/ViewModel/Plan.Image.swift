@@ -9,8 +9,30 @@
 import Foundation
 
 extension Plan {
-    struct Image: Identifiable {
-        public var id: String = UUID().uuidString
-        public let url: URL
+    public struct Image {
+        public let source: Source
+        
+        public enum Source {
+            case space
+            case url(URL)
+            case system(String)
+        }
     }
+}
+
+extension Plan.Image {
+    
+    public static let space: Self = .init(source: .space)
+    
+    public init(url: URL) {
+        self.init(source: .url(url))
+    }
+    
+    public init(systemImageName: String) {
+        self.init(source: .system(systemImageName))
+    }
+}
+
+extension Plan.Image {
+    static let preview = Plan.Image(source: .url(URL(string: "https://www.barefeetware.com/logo.png")!))
 }

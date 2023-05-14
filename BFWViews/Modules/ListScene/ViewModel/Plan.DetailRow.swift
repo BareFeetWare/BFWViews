@@ -13,6 +13,7 @@ public extension Plan {
         public let title: String?
         public let subtitle: String?
         public let trailing: String?
+        public let image: Plan.Image?
     }
 }
 
@@ -21,12 +22,14 @@ public extension Plan.DetailRow {
         id: String? = nil,
         title: String,
         subtitle: String? = nil,
-        trailing: String? = nil
+        trailing: String? = nil,
+        image: Plan.Image? = nil
     ) {
         self.id = id ?? UUID().uuidString
         self.title = title
         self.subtitle = subtitle
         self.trailing = trailing
+        self.image = image
     }
 }
 
@@ -34,6 +37,7 @@ extension Plan.DetailRow {
     static let preview: Self = .init(
         title: "Title",
         subtitle: "Subtitle",
-        trailing: "trailing"
+        trailing: "trailing",
+        image: .init(source: .url(URL(string: "https://barefeetware.com/logo.png")!))
     )
 }

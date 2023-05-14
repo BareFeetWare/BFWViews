@@ -11,6 +11,8 @@ import SwiftUI
 extension Plan.DetailRow: View {
     public var body: some View {
         HStack {
+            image
+                .frame(width: 60)
             VStack(alignment: .leading) {
                 title.map { Text($0) }
                 subtitle.map { Text($0) }

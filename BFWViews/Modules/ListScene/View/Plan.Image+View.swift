@@ -10,14 +10,27 @@ import SwiftUI
 
 extension Plan.Image: View {
     public var body: some View {
-        AsyncImage(
-            url: url
-        ) { image in
-            image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-        } placeholder: {
-            ProgressView()
+        switch source {
+        case .space:
+            Color.clear
+        case .url(let url):
+            AsyncImage(
+                url: url
+            ) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                ProgressView()
+            }
+        case .system(let name):
+            Image(systemName: name)
         }
+    }
+}
+
+extension Plan.Image: PreviewProvider {
+    public static var previews: some View {
+        Plan.Image.preview
     }
 }
