@@ -25,6 +25,10 @@ extension Plan.DetailRow: View {
                 Text("\($0)")
                     .multilineTextAlignment(.trailing)
             }
+            trailingContent.map {
+                AnyView($0)
+                    .multilineTextAlignment(.trailing)
+            }
         }
     }
 }

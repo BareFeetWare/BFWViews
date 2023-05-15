@@ -36,6 +36,7 @@ public extension Plan.Cell {
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil,
+        trailingContent: (any View)? = nil,
         destination: (() async -> any View)? = nil
     ) -> Self {
         .init(
@@ -43,7 +44,8 @@ public extension Plan.Cell {
                 title: title,
                 subtitle: subtitle,
                 trailing: trailing,
-                image: image
+                image: image,
+                trailingContent: trailingContent
             ),
             destination: destination
         )

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 public extension Plan {
     struct DetailRow: Identifiable {
@@ -14,6 +15,7 @@ public extension Plan {
         public let subtitle: String?
         public let trailing: String?
         public let image: Plan.Image?
+        public let trailingContent: (any View)?
     }
 }
 
@@ -23,13 +25,15 @@ public extension Plan.DetailRow {
         title: String,
         subtitle: String? = nil,
         trailing: String? = nil,
-        image: Plan.Image? = nil
+        image: Plan.Image? = nil,
+        trailingContent: (any View)? = nil
     ) {
         self.id = id ?? UUID().uuidString
         self.title = title
         self.subtitle = subtitle
         self.trailing = trailing
         self.image = image
+        self.trailingContent = trailingContent
     }
 }
 
