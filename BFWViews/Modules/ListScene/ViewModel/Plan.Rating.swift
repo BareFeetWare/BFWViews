@@ -11,16 +11,22 @@ import SwiftUI
 
 extension Plan {
     public struct Rating {
-        public init(maximum: Int, selection: Int = 0) {
+        public init(
+            title: String? = nil,
+            maximum: Int,
+            selection: Int = 0
+        ) {
+            self.title = title
             self.maximum = maximum
             self.selection = selection
         }
         
+        public let title: String?
         public let maximum: Int
         @State public var selection: Int
     }
 }
 
 extension Plan.Rating {
-    static let preview: Self = .init(maximum: 5)
+    static let preview: Self = .init(title: "Rating", maximum: 5)
 }

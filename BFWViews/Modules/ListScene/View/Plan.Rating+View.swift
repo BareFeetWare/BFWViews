@@ -11,6 +11,10 @@ import SwiftUI
 extension Plan.Rating: View {
     public var body: some View {
         HStack {
+            title.map {
+                Text($0)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
             ForEach(1...maximum, id: \.self) { index in
                 Button {
                     selection = index
