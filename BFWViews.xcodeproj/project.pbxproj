@@ -74,6 +74,8 @@
 		E2EA561E2838D3240053BDAC /* ListSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */; };
 		E2F47B0E2A1226A7009BD9EC /* Plan+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F47B0D2A1226A7009BD9EC /* Plan+SwiftUI.swift */; };
 		E2F47B102A12270D009BD9EC /* Plan+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F47B0F2A12270D009BD9EC /* Plan+View.swift */; };
+		E2F47B122A13351C009BD9EC /* Plan.Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F47B112A13351C009BD9EC /* Plan.Rating.swift */; };
+		E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */; };
 		E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */; };
 		E2F9B1B7274CB8F800C8EC18 /* UIViewControllerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */; };
 		E2FD40AC26683A83004E4905 /* ImageSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40A926683A83004E4905 /* ImageSymbol.swift */; };
@@ -183,6 +185,8 @@
 		E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSceneFlow.swift; sourceTree = "<group>"; };
 		E2F47B0D2A1226A7009BD9EC /* Plan+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan+SwiftUI.swift"; sourceTree = "<group>"; };
 		E2F47B0F2A12270D009BD9EC /* Plan+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan+View.swift"; sourceTree = "<group>"; };
+		E2F47B112A13351C009BD9EC /* Plan.Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Rating.swift; sourceTree = "<group>"; };
+		E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Rating+View.swift"; sourceTree = "<group>"; };
 		E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitViewController.swift; sourceTree = "<group>"; };
 		E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerScene.swift; sourceTree = "<group>"; };
 		E2FD40A926683A83004E4905 /* ImageSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSymbol.swift; sourceTree = "<group>"; };
@@ -318,6 +322,7 @@
 				E2386BFC2A0B2BDE009FEA16 /* Plan.ListScene.swift */,
 				E2386BF82A0A0A50009FEA16 /* Plan.NavigationItem.swift */,
 				E286391A2A107CEA0038CB72 /* Plan.Rack.swift */,
+				E2F47B112A13351C009BD9EC /* Plan.Rating.swift */,
 				E2459F802A0335DE0068DCBB /* Plan.Section.swift */,
 				E2459F842A0351450068DCBB /* Plan.swift */,
 				E2386BF42A093B63009FEA16 /* Plan.Tab.swift */,
@@ -336,6 +341,7 @@
 				E2386BFE2A0B2EDF009FEA16 /* Plan.ListScene+View.swift */,
 				E2386BFA2A0A0B77009FEA16 /* Plan.NavigationItem+View.swift */,
 				E286391C2A107D040038CB72 /* Plan.Rack+View.swift */,
+				E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */,
 				E2386BF62A093C45009FEA16 /* Plan.Tab+View.swift */,
 				E2F47B0F2A12270D009BD9EC /* Plan+View.swift */,
 				E2BF0B702A00F05F0035DE5E /* View+Plan.List.Style.swift */,
@@ -651,6 +657,7 @@
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */,
 				E2F47B0E2A1226A7009BD9EC /* Plan+SwiftUI.swift in Sources */,
+				E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */,
 				E2BF0B712A00F05F0035DE5E /* View+Plan.List.Style.swift in Sources */,
 				E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
@@ -661,6 +668,7 @@
 				E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */,
 				E2C16B69266480C400BAC051 /* CompressibleSpacer.swift in Sources */,
 				E2459F852A0351450068DCBB /* Plan.swift in Sources */,
+				E2F47B122A13351C009BD9EC /* Plan.Rating.swift in Sources */,
 				E2BAAC1326FD899B00CFDE50 /* Image+Data.swift in Sources */,
 				E2386BFD2A0B2BDE009FEA16 /* Plan.ListScene.swift in Sources */,
 				E2386BE92A087314009FEA16 /* Plan.Image+View.swift in Sources */,
