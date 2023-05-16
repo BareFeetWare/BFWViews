@@ -36,6 +36,7 @@ public extension Plan.Cell {
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil,
+        imageWidth: CGFloat? = nil,
         trailingContent: (any View)? = nil,
         destination: (() async -> any View)? = nil
     ) -> Self {
@@ -45,6 +46,7 @@ public extension Plan.Cell {
                 subtitle: subtitle,
                 trailing: trailing,
                 image: image,
+                imageWidth: imageWidth,
                 trailingContent: trailingContent
             ),
             destination: destination

@@ -322,7 +322,6 @@
 				E2459F842A0351450068DCBB /* Plan.swift */,
 				E2386BF42A093B63009FEA16 /* Plan.Tab.swift */,
 				E2F47B0D2A1226A7009BD9EC /* Plan+SwiftUI.swift */,
-				E2F47B0F2A12270D009BD9EC /* Plan+View.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -338,6 +337,7 @@
 				E2386BFA2A0A0B77009FEA16 /* Plan.NavigationItem+View.swift */,
 				E286391C2A107D040038CB72 /* Plan.Rack+View.swift */,
 				E2386BF62A093C45009FEA16 /* Plan.Tab+View.swift */,
+				E2F47B0F2A12270D009BD9EC /* Plan+View.swift */,
 				E2BF0B702A00F05F0035DE5E /* View+Plan.List.Style.swift */,
 			);
 			path = View;

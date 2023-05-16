@@ -15,6 +15,7 @@ public extension Plan {
         public let subtitle: String?
         public let trailing: String?
         public let image: Plan.Image?
+        public let imageWidth: CGFloat?
         public let trailingContent: (any View)?
     }
 }
@@ -26,6 +27,7 @@ public extension Plan.DetailRow {
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil,
+        imageWidth: CGFloat? = nil,
         trailingContent: (any View)? = nil
     ) {
         self.id = id ?? UUID().uuidString
@@ -33,6 +35,7 @@ public extension Plan.DetailRow {
         self.subtitle = subtitle
         self.trailing = trailing
         self.image = image
+        self.imageWidth = imageWidth
         self.trailingContent = trailingContent
     }
 }
