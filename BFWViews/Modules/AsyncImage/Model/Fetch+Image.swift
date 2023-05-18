@@ -17,15 +17,15 @@ public extension Fetch {
         if let cache = cacheForURL[url],
            case .image(let image) = cache
         {
-            debugPrint("cached image     url.last = \(url.lastPathComponent)")
+            debugPrint("cached image     url = \(url.absoluteString)")
             return Just(image)
                 .mapError { _ -> Error in }
                 .eraseToAnyPublisher()
         } else if let publisher = publisherForURL[url] {
-            debugPrint("cached publisher url.last = \(url.lastPathComponent)")
+            debugPrint("cached publisher url = \(url.absoluteString)")
             return publisher
         } else {
-            debugPrint("new publisher    url.last = \(url.lastPathComponent)")
+            debugPrint("new publisher    url = \(url.absoluteString)")
             let publisher = imagePublisher(url: url)
                 .share()
                 .eraseToAnyPublisher()
@@ -122,8 +122,11 @@ private extension Fetch {
     
     static func size(svg: String) throws -> CGSize {
         // TODO: Replace scanning of all groups with just first match.
-        guard let widthString = try svg.groups(regexPattern: "<svg.*?width=\"(.*?)\"").last?.last,
-              let heightString = try svg.groups(regexPattern: "<svg.*?height=\"(.*?)\"").last?.last,
+        // TODO: More robust regex.
+        guard let widthString = try svg.groups(regexPattern: "<svg.*?width=\"(.*?)\"").last?.last
+                ?? svg.groups(regexPattern: "<svg.*?viewBox=\".*? .*? (.*?) .*?\"").last?.last,
+              let heightString = try svg.groups(regexPattern: "<svg.*?height=\"(.*?)\"").last?.last
+                ?? svg.groups(regexPattern: "<svg.*?viewBox=\".*? .*? .*? (.*?)\"").last?.last,
               let width = Double(widthString),
               let height = Double(heightString)
         else { throw FetchError.parse }
@@ -210,20 +213,23 @@ private extension WKWebView {
 // Inspired by https://stackoverflow.com/questions/42789953/swift-3-how-do-i-extract-captured-groups-in-regular-expressions
 private extension String {
     func groups(regexPattern: String) throws -> [[String]] {
-        try NSRegularExpression(pattern: regexPattern)
-            .matches(
-                in: self,
-                range: NSRange(startIndex..., in: self)
-            )
-            .map { match in
-                (0 ..< match.numberOfRanges)
-                    .map {
-                        let rangeBounds = match.range(at: $0)
-                        guard let range = Range(rangeBounds, in: self) else {
-                            return ""
-                        }
-                        return String(self[range])
+        try NSRegularExpression(
+            pattern: regexPattern,
+            options: .dotMatchesLineSeparators
+        )
+        .matches(
+            in: self,
+            range: NSRange(startIndex..., in: self)
+        )
+        .map { match in
+            (0 ..< match.numberOfRanges)
+                .map {
+                    let rangeBounds = match.range(at: $0)
+                    guard let range = Range(rangeBounds, in: self) else {
+                        return ""
                     }
-            }
+                    return String(self[range])
+                }
+        }
     }
 }
