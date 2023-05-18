@@ -26,8 +26,8 @@ extension Plan.List: View {
                         }
                     }
                 } header: {
-                    section.title.map {
-                        Text($0)
+                    section.header.map {
+                        AnyView($0)
                             .textCase(nil)
                     }
                 }

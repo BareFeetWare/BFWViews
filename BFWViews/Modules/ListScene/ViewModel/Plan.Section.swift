@@ -7,24 +7,38 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension Plan {
     public struct Section: Identifiable {
         public let id: String
-        public let title: String?
+        public let header: (any View)?
         public var cells: [Cell]
     }
 }
 
 public extension Plan.Section {
+
+    init(
+        id: String? = nil,
+        header: (any View)?,
+        cells: [Plan.Cell]
+    ) {
+        self.id = id ?? UUID().uuidString
+        self.header = header
+        self.cells = cells
+    }
     
     init(
+        id: String? = nil,
         title: String? = nil,
         cells: [Plan.Cell]
     ) {
-        self.id = UUID().uuidString
-        self.title = title
-        self.cells = cells
+        self.init(
+            id: UUID().uuidString,
+            header: Plan.Text(title),
+            cells: cells
+        )
     }
     
 }
