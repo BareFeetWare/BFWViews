@@ -12,7 +12,9 @@ public extension Alert {
     init(error: Error?) {
         self.init(
             title: Text("Error"),
-            message: error.map { Text(String(describing: $0)) }
+            message: error.map {
+                Text($0.localizedDescription)
+            }
         )
     }
 }
