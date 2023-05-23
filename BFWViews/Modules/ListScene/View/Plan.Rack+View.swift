@@ -28,7 +28,7 @@ extension Plan.Rack: View {
                         .tag(tab)
                 }
             }
-            .tabViewStyle(.page)
+            .tabViewStyle(.page(indexDisplayMode: .never))
         }
     }
 }
