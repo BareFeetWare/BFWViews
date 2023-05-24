@@ -11,15 +11,16 @@ import SwiftUI
 extension Plan.Rack: View {
     public var body: some View {
         VStack {
-            Picker("Tab", selection: $tab) {
+            Picker("Tab", selection: $selection) {
                 ForEach(tabs) { tab in
                     Text(tab.title)
                         .tag(tab)
                 }
             }
             .pickerStyle(.segmented)
+            .disabled(isDisabledPicker)
             .padding(.horizontal)
-            TabView(selection: $tab) {
+            TabView(selection: $selection) {
                 ForEach(tabs) { tab in
                     tab
                         .tabItem {

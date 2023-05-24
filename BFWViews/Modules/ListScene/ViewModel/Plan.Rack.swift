@@ -7,30 +7,36 @@
 //
 
 import Foundation
-// TODO: Remove:
 import SwiftUI
 
 extension Plan {
     public struct Rack {
         
-        public init?(tabs: [Plan.Tab]) {
-            guard let firstTab = tabs.first
-            else { return nil }
+        public init(
+            selection: Binding<Tab>,
+            tabs: [Plan.Tab],
+            isDisabledPicker: Bool = false
+        ) {
+            self._selection = selection
             self.tabs = tabs
-            _tab = State(initialValue: firstTab)
+            self.isDisabledPicker = isDisabledPicker
         }
         
-        let tabs: [Tab]
-        @State var tab: Tab
+        public let tabs: [Tab]
+        @Binding public var selection: Tab
+        public let isDisabledPicker: Bool
         
     }
 }
 
 extension Plan.Rack {
-    static let preview = Plan.Rack(
-        tabs: [
+    
+    static let preview: Self = {
+        let tabs: [Plan.Tab] = [
             .init(title: "First", content: Plan.List(cells: [.detail("First")])),
             .init(title: "Second", content: Plan.List(cells: [.detail("Second")])),
         ]
-    )
+        return Plan.Rack(selection: .constant(tabs.first!), tabs: tabs)
+    }()
+    
 }
