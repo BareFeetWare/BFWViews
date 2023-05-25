@@ -24,12 +24,12 @@ extension Plan.Image {
     
     public static let space: Self = .init(source: .space)
     
-    public init(url: URL) {
+    public static func url(_ url: URL) -> Self {
         self.init(source: .url(url))
     }
     
-    public init(systemImageName: String) {
-        self.init(source: .system(systemImageName))
+    public static func system(imageName: String) -> Self {
+        .init(source: .system(imageName))
     }
 }
 
