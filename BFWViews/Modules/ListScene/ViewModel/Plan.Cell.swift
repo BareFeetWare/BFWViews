@@ -33,6 +33,7 @@ public extension Plan.Cell {
     
     static func detail(
         _ title: String,
+        id: String? = nil,
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil,
@@ -42,6 +43,7 @@ public extension Plan.Cell {
     ) -> Self {
         .init(
             content: Plan.DetailRow(
+                id: id,
                 title: title,
                 subtitle: subtitle,
                 trailing: trailing,
