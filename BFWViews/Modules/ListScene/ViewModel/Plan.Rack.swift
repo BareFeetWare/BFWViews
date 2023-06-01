@@ -13,17 +13,17 @@ extension Plan {
     public struct Rack {
         
         public init(
-            selection: Binding<Tab>,
+            selectedTabID: Binding<String>,
             tabs: [Plan.Tab],
             isDisabledPicker: Bool = false
         ) {
-            self._selection = selection
+            self._selectedTabID = selectedTabID
             self.tabs = tabs
             self.isDisabledPicker = isDisabledPicker
         }
         
         public let tabs: [Tab]
-        @Binding public var selection: Tab
+        @Binding public var selectedTabID: String
         public let isDisabledPicker: Bool
         
     }
@@ -36,7 +36,7 @@ extension Plan.Rack {
             .init(title: "First", content: Plan.List(cells: [.detail("First")])),
             .init(title: "Second", content: Plan.List(cells: [.detail("Second")])),
         ]
-        return Plan.Rack(selection: .constant(tabs.first!), tabs: tabs)
+        return Plan.Rack(selectedTabID: .constant(tabs.first!.id), tabs: tabs)
     }()
     
 }

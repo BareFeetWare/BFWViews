@@ -7,8 +7,9 @@
 //
 
 import Foundation
-// TODO: Remove:
 import SwiftUI
+
+// TODO: Replace any View with Content: View.
 
 extension Plan {
     public struct Tab {
@@ -28,16 +29,4 @@ extension Plan {
 
 extension Plan.Tab: Identifiable {
     public var id: String { title }
-}
-
-extension Plan.Tab: Hashable {
-    
-    public static func == (lhs: Plan.Tab, rhs: Plan.Tab) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
 }
