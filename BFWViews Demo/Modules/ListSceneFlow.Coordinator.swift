@@ -34,43 +34,32 @@ private extension ListSceneFlow.Coordinator {
                 .init(
                     title: "Push Immediate",
                     cells: [
-                        .init(
-                            id: "Pushed",
-                            content: NavigationLink {
-                                Plan.NavigationItem(
-                                    title: "Pushed",
-                                    content:
-                                        Plan.List(
-                                            cells: [
-                                                .detail("Child 1"),
-                                                .detail("Child 2"),
-                                            ]
-                                        )
+                        .detail("Push 1", trailing: "3") {
+                            Plan.NavigationItem(
+                                title: "Pushed",
+                                content: Plan.List(
+                                    cells: [
+                                        .detail("Child 1"),
+                                        .detail("Child 2"),
+                                    ]
                                 )
-                            } label: {
-                                Plan.DetailRow(title: "Push 1", trailing: "3")
-                            }
-                        ),
+                            )
+                        },
                     ]
                 ),
                 .init(
                     title: "Push Async",
                     cells: [
-                        .init(
-                            id: "Push 2",
-                            content: AsyncNavigationLink {
-                                await self.childrenScene()
-                            } label: {
-                                Plan.DetailRow(title: "Push 2", trailing: "3")
-                            }
-                        ),
+                        .detail("Push 2", trailing: "3") {
+                            await self.asyncChildrenScene()
+                        },
                     ]
                 ),
             ]
         )
     }
     
-    func childrenScene() async -> some View {
+    func asyncChildrenScene() async -> some View {
         // Arbitrary delay, pretending to be an async request.
         try? await Task.sleep(nanoseconds: 2000000000)
         let children = ["Child 1", "Child 2", "Child 3"]

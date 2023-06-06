@@ -24,6 +24,12 @@ extension Plan {
     }
 }
 
+extension Plan.Cell: View {
+    public var body: some View {
+        AnyView(content)
+    }
+}
+
 // MARK: - Static instances of Cell. Add your own custom instances in your project.
 
 public extension Plan.Cell {
@@ -37,19 +43,75 @@ public extension Plan.Cell {
         imageWidth: CGFloat? = nil,
         trailingContent: (any View)? = nil
     ) -> Self {
-        .init(
-            content: Plan.DetailRow(
-                id: id,
-                title: title,
-                subtitle: subtitle,
-                trailing: trailing,
-                image: image,
-                imageWidth: imageWidth,
-                trailingContent: trailingContent
-            )
+        let id = id ?? UUID().uuidString
+        let label = Plan.DetailRow(
+            id: id,
+            title: title,
+            subtitle: subtitle,
+            trailing: trailing,
+            image: image,
+            imageWidth: imageWidth,
+            trailingContent: trailingContent
         )
+        return .init(id: id, content: label)
     }
     
+    // TODO: Perhaps consolidate above and below functions.
+    
+    static func detail(
+        _ title: String,
+        id: String? = nil,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        image: Plan.Image? = nil,
+        imageWidth: CGFloat? = nil,
+        trailingContent: (any View)? = nil,
+        destination: @escaping () async -> some View
+    ) -> Self {
+        let id = id ?? UUID().uuidString
+        let label = Plan.DetailRow(
+            id: id,
+            title: title,
+            subtitle: subtitle,
+            trailing: trailing,
+            image: image,
+            imageWidth: imageWidth,
+            trailingContent: trailingContent
+        )
+        let content = AsyncNavigationLink(
+            destination: destination,
+            label: { label }
+        )
+        return .init(id: id, content: content)
+    }
+
+    static func detail(
+        _ title: String,
+        id: String? = nil,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        image: Plan.Image? = nil,
+        imageWidth: CGFloat? = nil,
+        trailingContent: (any View)? = nil,
+        destination: some View
+    ) -> Self {
+        let id = id ?? UUID().uuidString
+        let label = Plan.DetailRow(
+            id: id,
+            title: title,
+            subtitle: subtitle,
+            trailing: trailing,
+            image: image,
+            imageWidth: imageWidth,
+            trailingContent: trailingContent
+        )
+        let content = NavigationLink(
+            destination: destination,
+            label: { label }
+        )
+        return .init(id: id, content: content)
+    }
+
     static func button(_ title: String, action: @escaping () -> Void) -> Self {
         .init(content: Plan.Button(title: title, action: action))
     }

@@ -56,36 +56,23 @@ extension Plan.List {
             .init(
                 title: "NavigationLink",
                 cells: [
-                    .init(
-                        id: "Children",
-                        content: NavigationLink(
-                            destination: {
-                                childrenScene
-                            },
-                            label: {
-                                Plan.DetailRow(title: "Children", trailing: "3")
-                            }
-                        )
-                    )
+                    .detail("Children", trailing: "3") {
+                        childrenScene
+                    }
                 ]
             ),
             .init(
                 title: "Async children",
                 cells: [
-                    .init(
-                        id: "Children",
-                        content: AsyncNavigationLink {
-                            await childrenScene()
-                        } label: {
-                            Plan.DetailRow(title: "Children", trailing: "3")
-                        }
-                    ),
+                    .detail("Children", trailing: "3") {
+                        await asyncChildrenScene()
+                    },
                 ]
             ),
         ]
     )
     
-    static func childrenScene() async -> some View {
+    static func asyncChildrenScene() async -> some View {
         // Arbitrary delay, pretending to be an async request.
         try? await Task.sleep(nanoseconds: 2000000000)
         return childrenScene

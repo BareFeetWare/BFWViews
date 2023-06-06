@@ -22,7 +22,7 @@ public extension Plan {
 
 public extension Plan.DetailRow {
     init(
-        id: String? = nil,
+        id: String = UUID().uuidString,
         title: String,
         subtitle: String? = nil,
         trailing: String? = nil,
@@ -30,7 +30,7 @@ public extension Plan.DetailRow {
         imageWidth: CGFloat? = nil,
         trailingContent: (any View)? = nil
     ) {
-        self.id = id ?? UUID().uuidString
+        self.id = id
         self.title = title
         self.subtitle = subtitle
         self.trailing = trailing

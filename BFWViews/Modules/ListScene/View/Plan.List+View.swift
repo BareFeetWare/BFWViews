@@ -14,7 +14,7 @@ extension Plan.List: View {
             ForEach(sections) { section in
                 Section {
                     ForEach(section.cells) { cell in
-                        AnyView(cell.content)
+                        cell
                     }
                 } header: {
                     section.header.map {
