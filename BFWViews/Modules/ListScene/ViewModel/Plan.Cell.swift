@@ -12,16 +12,13 @@ extension Plan {
     public struct Cell: Identifiable {
         public let id: String
         public let content: any View
-        public let destination: (() async -> any View)?
         
         public init(
             id: String = UUID().uuidString,
-            content: any View,
-            destination: (() async -> any View)? = nil
+            content: any View
         ) {
             self.id = id
             self.content = content
-            self.destination = destination
         }
         
     }
@@ -38,8 +35,7 @@ public extension Plan.Cell {
         trailing: String? = nil,
         image: Plan.Image? = nil,
         imageWidth: CGFloat? = nil,
-        trailingContent: (any View)? = nil,
-        destination: (() async -> any View)? = nil
+        trailingContent: (any View)? = nil
     ) -> Self {
         .init(
             content: Plan.DetailRow(
@@ -50,8 +46,7 @@ public extension Plan.Cell {
                 image: image,
                 imageWidth: imageWidth,
                 trailingContent: trailingContent
-            ),
-            destination: destination
+            )
         )
     }
     

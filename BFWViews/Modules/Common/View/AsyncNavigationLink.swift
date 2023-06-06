@@ -10,92 +10,91 @@ import SwiftUI
 /**
  Facilitates:
  1. The cell shows a `>` disclosure indicator.
- 2. The user taps the cell. Tap anywhere on the cell.
+ 2. The user taps anywhere on the label/row.
  3. The cell indicator changes to a ProgressView.
- 4. The app performs the action, such as a fetch.
- 5. When the action completes, the indicator changes back to a disclosure indicator.
- 6. If isActive changes to true (eg if the action was successful), the app moves forward to the destination scene.
- 7. If isActive does not change to false (eg if the action failed), it does not move forward. No error shown yet.
+ 4. The app performs the asyncDestination, such as a fetching from an API.
+ 5. When the asyncDestination completes, the indicator changes back to a disclosure indicator.
+ 6. The app moves forward to the destination scene.
+ 7. No error handling yet.
  */
 public struct AsyncNavigationLink<Destination: View, Label: View> {
-    @Binding var isActive: Bool
-    let destination: () -> Destination
+    @State var isActive: Bool = false
+    let destination: () async -> Destination
     let label: () -> Label
-    let action: (() -> Void)?
     @State private var isInProgress = false
+    @State private var activeDestination: Destination?
     
     public init(
-        isActive: Binding<Bool>,
-        destination: @escaping () -> Destination,
-        label: @escaping () -> Label,
-        action: (() -> Void)?
+        destination: @escaping () async -> Destination,
+        label: @escaping () -> Label
     ) {
-        self._isActive = isActive
         self.destination = destination
         self.label = label
-        self.action = action
     }
     
 }
 
+extension AsyncNavigationLink: Identifiable where Label: Identifiable {
+    public var id: Label.ID { label().id }
+}
+
+extension AsyncNavigationLink {
+    func onTap() {
+        isInProgress = true
+        Task {
+            activeDestination = await destination()
+            isInProgress = false
+            isActive = true
+        }
+    }
+}
+
 extension AsyncNavigationLink: View {
     public var body: some View {
-        Group {
-            if let action = action {
-                Button {
-                    isInProgress = true
-                    action()
-                } label: {
-                    ZStack {
-                        HStack {
-                            label()
-                            Spacer()
-                            ProgressView()
-                                .progressViewStyle(.circular)
-                        }
-                        .opacity(isInProgress ? 1 : 0)
-                        NavigationLink(
-                            isActive: $isActive,
-                            destination: destination,
-                            label: label
-                        )
-                        .opacity(isInProgress ? 0 : 1)
-                    }
+        Button {
+            onTap()
+        } label: {
+            ZStack {
+                HStack {
+                    label()
+                    Spacer()
+                    ProgressView()
+                        .progressViewStyle(.circular)
                 }
-            } else {
-                label()
+                .opacity(isInProgress ? 1 : 0)
+                NavigationLink(
+                    isActive: $isActive,
+                    destination: { activeDestination },
+                    label: label
+                )
+                .opacity(isInProgress ? 0 : 1)
             }
         }
         .foregroundColor(.primary)
-        .onChange(of: isActive) { isActive in
-            if isActive {
-                isInProgress = false
-            }
-        }
     }
 }
 
 struct AsyncNavigationLink_Previews: PreviewProvider {
     
     struct PreviewScene: View {
-        
-        @State private var isActive = false
-        
         var body: some View {
             NavigationView {
                 List {
                     AsyncNavigationLink(
-                        isActive: $isActive,
-                        destination: { Text("Destination") },
-                        label: { Text("Async") },
-                        action: {
-                            DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .seconds(1))) {
-                                isActive = true
-                            }
+                        destination: asyncDestination,
+                        label: {
+                            Text("Async")
                         }
                     )
                 }
             }
+        }
+        
+        /// Dummy asyc destination, delayed by a timer. Typically this would instead be an async API call.
+        func asyncDestination() async -> some View {
+            // Arbitrary delay, pretending to be an async request.
+            try? await Task.sleep(nanoseconds: 2000000000)
+            return Text("Async Destination")
         }
     }
     

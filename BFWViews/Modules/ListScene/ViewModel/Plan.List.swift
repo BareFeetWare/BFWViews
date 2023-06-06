@@ -6,7 +6,6 @@
 //
 
 import Foundation
-// TODO: Remove:
 import SwiftUI
 
 public extension Plan {
@@ -16,39 +15,12 @@ public extension Plan {
             sections: [Section],
             listStyle: Style = .automatic
         ) {
-            self.state = .init(sections: sections)
+            self.sections = sections
             self.listStyle = listStyle
         }
         
         public let listStyle: Style
-        @ObservedObject public var state: State
-        
-        public var sections: [Section] {
-            get { state.sections }
-            set { state.sections = newValue }
-        }
-    }
-}
-
-public extension Plan.List {
-    class State: ObservableObject {
-        
-        init(sections: [Plan.Section]) {
-            self.sections = sections
-        }
-        
-        @Published var sections: [Plan.Section]
-        @Published var isActiveDestination = false
-        
-        @Published public var destination: (any View)? {
-            didSet {
-                // TODO: Perhaps instead use subscriber.
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    self.isActiveDestination = self.destination != nil
-                }
-            }
-        }
+        public let sections: [Section]
     }
 }
 
@@ -68,23 +40,6 @@ public extension Plan.List {
     
 }
 
-// MARK: - Public Functions
-
-public extension Plan.List {
-    
-    func action(
-        destination: @escaping () async -> any View
-    ) -> (() -> Void)? {
-        {
-            DispatchQueue.main.async {
-                Task {
-                    self.state.destination = await destination()
-                }
-            }
-        }
-    }
-}
-
 // MARK: - Previews
 
 extension Plan.List {
@@ -99,32 +54,52 @@ extension Plan.List {
                 ]
             ),
             .init(
+                title: "NavigationLink",
+                cells: [
+                    .init(
+                        id: "Children",
+                        content: NavigationLink(
+                            destination: {
+                                childrenScene
+                            },
+                            label: {
+                                Plan.DetailRow(title: "Children", trailing: "3")
+                            }
+                        )
+                    )
+                ]
+            ),
+            .init(
                 title: "Async children",
                 cells: [
-                    .detail("Children", trailing: "3") {
-                        Plan.ListScene(
-                            title: "Children",
-                            cells: childrenCells
-                        )
-                    },
+                    .init(
+                        id: "Children",
+                        content: AsyncNavigationLink {
+                            await childrenScene()
+                        } label: {
+                            Plan.DetailRow(title: "Children", trailing: "3")
+                        }
+                    ),
                 ]
             ),
         ]
     )
     
-//    static func childrenSceneViewModel() async -> Plan.List {
-//        // Arbitrary delay, pretending to be an async request.
-//        try? await Task.sleep(nanoseconds: 2000000000)
-//        return .init(
-//            title: "Children",
-//            cells: childrenCells
-//        )
-//    }
-    
-    static var childrenCells: [Plan.Cell] {
-        ["Child 1", "Child 2", "Child 3"]
-            .map { child in
-                    .detail(child)
-            }
+    static func childrenScene() async -> some View {
+        // Arbitrary delay, pretending to be an async request.
+        try? await Task.sleep(nanoseconds: 2000000000)
+        return childrenScene
     }
+    
+    static var childrenScene: some View {
+        Plan.ListScene(
+            title: "Children",
+            cells: [
+                .detail("Child 1"),
+                .detail("Child 2"),
+                .detail("Child 3"),
+            ]
+        )
+    }
+    
 }

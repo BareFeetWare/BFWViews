@@ -11,31 +11,23 @@ import BFWViews
 
 struct AsyncNavigationLinkScene {
     
-    @State private var isActiveNext = false
-    
-    func performTask() {
-        // Example async task. This would typically be a network fetch, or anything that takes some time.
-        DispatchQueue.main.asyncAfter(
-            deadline: .now().advanced(by: .seconds(2)),
-            execute: .init(
-                block: {
-                    isActiveNext = true
-                }
-            )
-        )
+    /// Dummy asyc destination, delayed by a timer. Typically this would instead be an async API call.
+    func asyncDestination() async -> some View {
+        // Arbitrary delay, pretending to be an async request.
+        try? await Task.sleep(nanoseconds: 2000000000)
+        return Text("Async Destination")
     }
+    
 }
 
 extension AsyncNavigationLinkScene: View {
     var body: some View {
         List {
             AsyncNavigationLink(
-                isActive: $isActiveNext,
-                destination: { Text("Next Scene") },
+                destination: asyncDestination,
                 label: {
                     Text("Do something asynchronous")
-                },
-                action: performTask
+                }
             )
         }
         .navigationTitle("AsyncNavigationLink")

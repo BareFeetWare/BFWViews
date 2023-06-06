@@ -14,16 +14,7 @@ extension Plan.List: View {
             ForEach(sections) { section in
                 Section {
                     ForEach(section.cells) { cell in
-                        if let destination = cell.destination {
-                            AsyncNavigationLink(
-                                isActive: $state.isActiveDestination,
-                                destination: { state.destination.map { AnyView($0) }},
-                                label: { AnyView(cell.content) },
-                                action: action(destination: destination)
-                            )
-                        } else {
-                            AnyView(cell.content)
-                        }
+                        AnyView(cell.content)
                     }
                 } header: {
                     section.header.map {
