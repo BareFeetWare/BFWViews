@@ -12,7 +12,6 @@ extension Plan.DetailRow: View {
     public var body: some View {
         HStack {
             image
-                .frame(width: imageWidth)
             VStack(alignment: .leading) {
                 title.map { Text($0) }
                 subtitle.map { Text($0) }
@@ -22,10 +21,6 @@ extension Plan.DetailRow: View {
             .multilineTextAlignment(.leading)
             Spacer()
                 .layoutPriority(-1)
-            trailing.map {
-                Text("\($0)")
-                    .multilineTextAlignment(.trailing)
-            }
             trailingContent.map {
                 AnyView($0)
                     .multilineTextAlignment(.trailing)

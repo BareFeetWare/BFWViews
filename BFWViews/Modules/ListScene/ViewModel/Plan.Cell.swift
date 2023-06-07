@@ -39,9 +39,7 @@ public extension Plan.Cell {
         id: String? = nil,
         subtitle: String? = nil,
         trailing: String? = nil,
-        image: Plan.Image? = nil,
-        imageWidth: CGFloat? = nil,
-        trailingContent: (any View)? = nil
+        image: Plan.Image? = nil
     ) -> Self {
         let id = id ?? UUID().uuidString
         let label = Plan.DetailRow(
@@ -49,9 +47,7 @@ public extension Plan.Cell {
             title: title,
             subtitle: subtitle,
             trailing: trailing,
-            image: image,
-            imageWidth: imageWidth,
-            trailingContent: trailingContent
+            image: image
         )
         return .init(id: id, content: label)
     }
@@ -64,8 +60,6 @@ public extension Plan.Cell {
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil,
-        imageWidth: CGFloat? = nil,
-        trailingContent: (any View)? = nil,
         destination: @escaping () async -> some View
     ) -> Self {
         let id = id ?? UUID().uuidString
@@ -74,9 +68,7 @@ public extension Plan.Cell {
             title: title,
             subtitle: subtitle,
             trailing: trailing,
-            image: image,
-            imageWidth: imageWidth,
-            trailingContent: trailingContent
+            image: image
         )
         let content = AsyncNavigationLink(
             destination: destination,
@@ -91,8 +83,6 @@ public extension Plan.Cell {
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil,
-        imageWidth: CGFloat? = nil,
-        trailingContent: (any View)? = nil,
         destination: some View
     ) -> Self {
         let id = id ?? UUID().uuidString
@@ -101,9 +91,7 @@ public extension Plan.Cell {
             title: title,
             subtitle: subtitle,
             trailing: trailing,
-            image: image,
-            imageWidth: imageWidth,
-            trailingContent: trailingContent
+            image: image
         )
         let content = NavigationLink(
             destination: destination,

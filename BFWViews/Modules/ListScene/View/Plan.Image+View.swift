@@ -12,7 +12,9 @@ extension Plan.Image: View {
     public var body: some View {
         switch source {
         case .space:
-            Color.clear
+            Rectangle()
+                .frame(width: width)
+                .foregroundColor(color ?? .clear)
         case .url(let url):
             AsyncImage(
                 url: url
@@ -20,11 +22,15 @@ extension Plan.Image: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .frame(width: width)
+                    .foregroundColor(color)
             } placeholder: {
                 ProgressView()
             }
         case .system(let name):
             Image(systemName: name)
+                .frame(width: width)
+                .foregroundColor(color)
         }
     }
 }

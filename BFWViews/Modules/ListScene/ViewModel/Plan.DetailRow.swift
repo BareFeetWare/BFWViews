@@ -13,31 +13,57 @@ public extension Plan {
         public let id: String
         public let title: String?
         public let subtitle: String?
-        public let trailing: String?
         public let image: Plan.Image?
-        public let imageWidth: CGFloat?
         public let trailingContent: (any View)?
     }
 }
 
 public extension Plan.DetailRow {
+    
     init(
         id: String = UUID().uuidString,
         title: String,
         subtitle: String? = nil,
-        trailing: String? = nil,
         image: Plan.Image? = nil,
-        imageWidth: CGFloat? = nil,
         trailingContent: (any View)? = nil
     ) {
         self.id = id
         self.title = title
         self.subtitle = subtitle
-        self.trailing = trailing
         self.image = image
-        self.imageWidth = imageWidth
         self.trailingContent = trailingContent
     }
+    
+    init(
+        id: String = UUID().uuidString,
+        title: String,
+        subtitle: String? = nil,
+        image: Plan.Image? = nil
+    ) {
+        self.id = id
+        self.title = title
+        self.subtitle = subtitle
+        self.image = image
+        self.trailingContent = nil
+    }
+    
+    init(
+        id: String = UUID().uuidString,
+        title: String,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        image: Plan.Image? = nil
+    ) {
+        self.id = id
+        self.title = title
+        self.subtitle = subtitle
+        self.image = image
+        self.trailingContent = trailing.map {
+            Text($0)
+                .multilineTextAlignment(.trailing)
+        }
+    }
+    
 }
 
 extension Plan.DetailRow {
