@@ -24,7 +24,6 @@ extension Plan.DetailRow: View {
             trailingContent.map {
                 AnyView($0)
                     .multilineTextAlignment(.trailing)
-                    .frame(maxWidth: 200)
             }
         }
     }

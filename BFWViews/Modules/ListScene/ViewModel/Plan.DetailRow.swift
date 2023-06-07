@@ -71,6 +71,9 @@ extension Plan.DetailRow {
         title: "Title",
         subtitle: "Subtitle",
         trailing: "trailing",
-        image: .init(source: .url(URL(string: "https://barefeetware.com/logo.png")!))
+        image: .init(
+            source: .url(URL(string: "https://barefeetware.com/logo.png")!),
+            width: 88
+        )
     )
 }
