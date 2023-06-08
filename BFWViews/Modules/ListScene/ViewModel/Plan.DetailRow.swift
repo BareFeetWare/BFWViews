@@ -66,14 +66,27 @@ public extension Plan.DetailRow {
     
 }
 
-extension Plan.DetailRow {
-    static let preview: Self = .init(
-        title: "Title",
-        subtitle: "Subtitle",
-        trailing: "trailing",
-        image: .init(
-            source: .url(URL(string: "https://barefeetware.com/logo.png")!),
-            width: 88
-        )
-    )
+extension Array where Element == Plan.DetailRow {
+    static let preview: Self = [
+        .init(
+            title: "Title",
+            subtitle: "Subtitle",
+            trailing: "trailing",
+            image: .init(
+                source: .url(URL(string: "https://barefeetware.com/logo.png")!),
+                width: 88
+            )
+        ),
+        .init(
+            title: "Title"
+        ),
+        .init(
+            title: "Title",
+            subtitle: "Subtitle",
+            trailing: "trailing",
+            image: .init(
+                source: .system("person")
+            )
+        ),
+    ]
 }

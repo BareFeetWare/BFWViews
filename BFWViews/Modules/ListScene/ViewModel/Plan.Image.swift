@@ -36,7 +36,14 @@ extension Plan {
 
 extension Plan.Image {
     
-    public static let space: Self = .init(source: .space)
+    public static func space(
+        width: CGFloat? = nil
+    ) -> Self {
+        self.init(
+            source: .space,
+            width: width
+        )
+    }
     
     public static func url(
         _ url: URL,

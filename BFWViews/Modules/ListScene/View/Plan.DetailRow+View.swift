@@ -31,6 +31,9 @@ extension Plan.DetailRow: View {
 
 struct PlanDetailRow_Previews: PreviewProvider {
     static var previews: some View {
-        Plan.DetailRow.preview
+        List {
+            ForEach([Plan.DetailRow].preview) { $0 }
+        }
+        .previewLayout(.sizeThatFits)
     }
 }
