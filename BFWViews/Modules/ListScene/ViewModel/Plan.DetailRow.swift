@@ -85,7 +85,7 @@ extension Array where Element == Plan.DetailRow {
             subtitle: "Subtitle",
             trailing: "trailing",
             image: .init(
-                source: .system("person")
+                source: .system(name: "person")
             )
         ),
     ]

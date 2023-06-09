@@ -29,7 +29,10 @@ extension Plan {
         public enum Source {
             case space
             case url(URL)
-            case system(String)
+            case system(
+                name: String,
+                scale: SwiftUI.Image.Scale = .medium
+            )
         }
     }
 }
@@ -58,12 +61,13 @@ extension Plan.Image {
     }
     
     public static func system(
-        imageName: String,
+        name: String,
+        scale: SwiftUI.Image.Scale = .medium,
         width: CGFloat? = nil,
         color: Color? = nil
     ) -> Self {
         .init(
-            source: .system(imageName),
+            source: .system(name: name, scale: scale),
             width: width,
             color: color
         )
