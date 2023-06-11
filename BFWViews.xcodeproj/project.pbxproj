@@ -19,7 +19,6 @@
 		E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */; };
 		E2386BE92A087314009FEA16 /* Plan.Image+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BE82A087314009FEA16 /* Plan.Image+View.swift */; };
 		E2386BEB2A08D54A009FEA16 /* Plan.List+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */; };
-		E2386BF32A08E52E009FEA16 /* Plan.Button+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BF22A08E52E009FEA16 /* Plan.Button+View.swift */; };
 		E2386BF52A093B63009FEA16 /* Plan.Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BF42A093B63009FEA16 /* Plan.Tab.swift */; };
 		E2386BF72A093C45009FEA16 /* Plan.Tab+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BF62A093C45009FEA16 /* Plan.Tab+View.swift */; };
 		E2386BF92A0A0A50009FEA16 /* Plan.NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BF82A0A0A50009FEA16 /* Plan.NavigationItem.swift */; };
@@ -32,7 +31,6 @@
 		E23AB44126817FEE0018DD04 /* TappableCellScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB44026817FEE0018DD04 /* TappableCellScene.swift */; };
 		E2459F812A0335DE0068DCBB /* Plan.Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F802A0335DE0068DCBB /* Plan.Section.swift */; };
 		E2459F852A0351450068DCBB /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F842A0351450068DCBB /* Plan.swift */; };
-		E2459F872A0351E60068DCBB /* Plan.Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F862A0351E60068DCBB /* Plan.Button.swift */; };
 		E2459F892A0352090068DCBB /* Plan.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F882A0352090068DCBB /* Plan.Image.swift */; };
 		E2459F8B2A0352750068DCBB /* Plan.List.Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F8A2A0352750068DCBB /* Plan.List.Style.swift */; };
 		E26A7AD42765A561007E3A6C /* BadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A7AD32765A561007E3A6C /* BadgeScene.swift */; };
@@ -130,7 +128,6 @@
 		E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHexScene.swift; sourceTree = "<group>"; };
 		E2386BE82A087314009FEA16 /* Plan.Image+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Image+View.swift"; sourceTree = "<group>"; };
 		E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.List+View.swift"; sourceTree = "<group>"; };
-		E2386BF22A08E52E009FEA16 /* Plan.Button+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Button+View.swift"; sourceTree = "<group>"; };
 		E2386BF42A093B63009FEA16 /* Plan.Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Tab.swift; sourceTree = "<group>"; };
 		E2386BF62A093C45009FEA16 /* Plan.Tab+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Tab+View.swift"; sourceTree = "<group>"; };
 		E2386BF82A0A0A50009FEA16 /* Plan.NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.NavigationItem.swift; sourceTree = "<group>"; };
@@ -143,7 +140,6 @@
 		E23AB44026817FEE0018DD04 /* TappableCellScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableCellScene.swift; sourceTree = "<group>"; };
 		E2459F802A0335DE0068DCBB /* Plan.Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Section.swift; sourceTree = "<group>"; };
 		E2459F842A0351450068DCBB /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
-		E2459F862A0351E60068DCBB /* Plan.Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Button.swift; sourceTree = "<group>"; };
 		E2459F882A0352090068DCBB /* Plan.Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Image.swift; sourceTree = "<group>"; };
 		E2459F8A2A0352750068DCBB /* Plan.List.Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.List.Style.swift; sourceTree = "<group>"; };
 		E26A7AD32765A561007E3A6C /* BadgeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeScene.swift; sourceTree = "<group>"; };
@@ -313,7 +309,6 @@
 		E28D1BCB283350C400064CCD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				E2459F862A0351E60068DCBB /* Plan.Button.swift */,
 				E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */,
 				E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */,
 				E2459F882A0352090068DCBB /* Plan.Image.swift */,
@@ -334,7 +329,6 @@
 		E28D1BD0283350C400064CCD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E2386BF22A08E52E009FEA16 /* Plan.Button+View.swift */,
 				E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+View.swift */,
 				E2386BE82A087314009FEA16 /* Plan.Image+View.swift */,
 				E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */,
@@ -645,7 +639,6 @@
 				E2FD40CD2669C9F5004E4905 /* Alert+Error.swift in Sources */,
 				E28B7ABF275C5E2F00ED5730 /* CellBorder.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
-				E2386BF32A08E52E009FEA16 /* Plan.Button+View.swift in Sources */,
 				E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */,
 				E2459F8B2A0352750068DCBB /* Plan.List.Style.swift in Sources */,
 				E2C16B68266480C400BAC051 /* View+Distributed.swift in Sources */,
@@ -653,7 +646,6 @@
 				E2386BF72A093C45009FEA16 /* Plan.Tab+View.swift in Sources */,
 				E2C16B7B2664816F00BAC051 /* DateFormatter+Style.swift in Sources */,
 				E286391D2A107D040038CB72 /* Plan.Rack+View.swift in Sources */,
-				E2459F872A0351E60068DCBB /* Plan.Button.swift in Sources */,
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */,

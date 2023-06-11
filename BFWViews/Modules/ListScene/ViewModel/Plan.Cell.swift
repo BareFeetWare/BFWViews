@@ -101,7 +101,7 @@ public extension Plan.Cell {
     }
 
     static func button(_ title: String, action: @escaping () -> Void) -> Self {
-        .init(content: Plan.Button(title: title, action: action))
+        .init(content: Button(title, action: action))
     }
     
     static func image(url: URL) -> Self {
