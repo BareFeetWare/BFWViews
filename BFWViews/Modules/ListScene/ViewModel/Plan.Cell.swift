@@ -63,6 +63,9 @@ public extension Plan.Cell {
         destination: @escaping () async -> some View
     ) -> Self {
         let id = id ?? UUID().uuidString
+        let navigationTitle = title.hasSuffix(":")
+        ? String(title.dropLast())
+        : title
         let label = Plan.DetailRow(
             id: id,
             title: title,
@@ -71,7 +74,10 @@ public extension Plan.Cell {
             image: image
         )
         let content = AsyncNavigationLink(
-            destination: destination,
+            destination: {
+                await destination()
+                    .navigationTitle(navigationTitle)
+            },
             label: { label }
         )
         return .init(id: id, content: content)

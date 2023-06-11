@@ -12,8 +12,8 @@ import SwiftUI
  1. The cell shows a `>` disclosure indicator.
  2. The user taps anywhere on the label/row.
  3. The cell indicator changes to a ProgressView.
- 4. The app performs the asyncDestination, such as a fetching from an API.
- 5. When the asyncDestination completes, the indicator changes back to a disclosure indicator.
+ 4. The app performs the destination(), such as fetching from an API.
+ 5. When the destination completes, the indicator changes back to a disclosure indicator.
  6. The app moves forward to the destination scene.
  7. No error handling yet.
  */
