@@ -19,9 +19,8 @@ extension ListSceneFlow {
 
 private extension ListSceneFlow.Coordinator {
     
-    func rootView() -> Plan.ListScene {
-        .init(
-            title: "ListScene",
+    func rootView() -> some View {
+        Plan.List(
             sections: [
                 .init(
                     title: "Static detail",
@@ -35,15 +34,13 @@ private extension ListSceneFlow.Coordinator {
                     title: "Push Immediate",
                     cells: [
                         .detail("Push 1", trailing: "3") {
-                            Plan.NavigationItem(
-                                title: "Pushed",
-                                content: Plan.List(
-                                    cells: [
-                                        .detail("Child 1"),
-                                        .detail("Child 2"),
-                                    ]
-                                )
+                            Plan.List(
+                                cells: [
+                                    .detail("Child 1"),
+                                    .detail("Child 2"),
+                                ]
                             )
+                            .navigationTitle("Pushed")
                         },
                     ]
                 ),
@@ -57,18 +54,19 @@ private extension ListSceneFlow.Coordinator {
                 ),
             ]
         )
+        .navigationTitle("ListScene")
     }
     
     func asyncChildrenScene() async -> some View {
         // Arbitrary delay, pretending to be an async request.
         try? await Task.sleep(nanoseconds: 2000000000)
         let children = ["Child 1", "Child 2", "Child 3"]
-        return Plan.ListScene(
-            title: "Children",
+        return Plan.List(
             cells: children.map { child in
                     .detail(child)
             }
         )
+        .navigationTitle("Children")
     }
     
 }

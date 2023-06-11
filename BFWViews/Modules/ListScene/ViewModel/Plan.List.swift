@@ -79,8 +79,7 @@ extension Plan.List {
     }
     
     static var childrenScene: some View {
-        Plan.ListScene(
-            title: "Children",
+        Plan.List(
             cells: [
                 .detail("Child 1"),
                 .detail("Child 2"),

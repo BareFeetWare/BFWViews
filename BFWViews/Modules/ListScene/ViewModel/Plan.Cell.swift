@@ -76,7 +76,7 @@ public extension Plan.Cell {
         )
         return .init(id: id, content: content)
     }
-
+    
     static func detail(
         _ title: String,
         id: String? = nil,
@@ -86,6 +86,9 @@ public extension Plan.Cell {
         destination: some View
     ) -> Self {
         let id = id ?? UUID().uuidString
+        let navigationTitle = title.hasSuffix(":")
+        ? String(title.dropLast())
+        : title
         let label = Plan.DetailRow(
             id: id,
             title: title,
@@ -94,12 +97,13 @@ public extension Plan.Cell {
             image: image
         )
         let content = NavigationLink(
-            destination: destination,
+            destination: destination
+                .navigationTitle(navigationTitle),
             label: { label }
         )
         return .init(id: id, content: content)
     }
-
+    
     static func button(_ title: String, action: @escaping () -> Void) -> Self {
         .init(content: Button(title, action: action))
     }
