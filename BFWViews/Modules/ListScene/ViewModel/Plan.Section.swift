@@ -36,7 +36,7 @@ public extension Plan.Section {
     ) {
         self.init(
             id: UUID().uuidString,
-            header: Plan.Text(title),
+            header: title.map { Text($0) },
             cells: cells
         )
     }
