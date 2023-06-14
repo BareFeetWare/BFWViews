@@ -16,7 +16,7 @@ extension Plan {
             source: Source,
             width: CGFloat? = nil,
             color: Color? = nil,
-            cornerRadius: CGFloat? = nil
+            cornerRadius: CGFloat = 0
         ) {
             self.source = source
             self.width = width
@@ -27,7 +27,7 @@ extension Plan {
         public let source: Source
         public let width: CGFloat?
         public let color: Color?
-        public let cornerRadius: CGFloat?
+        public let cornerRadius: CGFloat
         
         public enum Source {
             case space
