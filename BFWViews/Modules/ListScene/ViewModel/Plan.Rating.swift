@@ -14,19 +14,44 @@ extension Plan {
         public init(
             title: String? = nil,
             maximum: Int,
-            selection: Int = 0
+            selection: Binding<Int>
         ) {
             self.title = title
             self.maximum = maximum
-            self.selection = selection
+            self._selection = selection
         }
         
         public let title: String?
         public let maximum: Int
-        @State public var selection: Int
+        @Binding public var selection: Int
     }
 }
 
+// MARK: - Used by view
+
 extension Plan.Rating {
-    static let preview: Self = .init(title: "Rating", maximum: 5)
+    
+    func onTap(index: Int) {
+        // FIXME: UI isn't updating, but binding is.
+        selection = index
+    }
+    
+    func symbol(index: Int) -> ImageSymbol {
+        index <= selection ? .starFill : .star
+    }
+}
+
+// MARK: - Preview
+
+extension Plan.Rating {
+    
+    private struct Preview {
+        @State static var selection: Int = 0
+    }
+    
+    static let preview: Self = .init(
+        title: "Rating",
+        maximum: 5,
+        selection: Preview.$selection
+    )
 }

@@ -17,11 +17,12 @@ extension Plan.Rating: View {
             }
             ForEach(1...maximum, id: \.self) { index in
                 Button {
-                    selection = index
+                    onTap(index: index)
                 } label: {
-                    Image(symbol: index <= selection ? .starFill : .star)
+                    Image(symbol: symbol(index: index))
+                        .imageScale(.large)
                 }
-                // Tap on button, rather than encompassing cell:
+                // Make tap received by button, rather than by encompassing cell:
                 .buttonStyle(.borderless)
             }
         }
