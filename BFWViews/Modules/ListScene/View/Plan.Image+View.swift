@@ -24,6 +24,7 @@ extension Plan.Image: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: width)
                     .foregroundColor(color)
+                    .cornerRadius(cornerRadius ?? 0)
             } placeholder: {
                 ProgressView()
             }

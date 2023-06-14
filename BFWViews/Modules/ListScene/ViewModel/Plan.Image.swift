@@ -15,16 +15,19 @@ extension Plan {
         public init(
             source: Source,
             width: CGFloat? = nil,
-            color: Color? = nil
+            color: Color? = nil,
+            cornerRadius: CGFloat? = nil
         ) {
             self.source = source
             self.width = width
             self.color = color
+            self.cornerRadius = cornerRadius
         }
         
         public let source: Source
         public let width: CGFloat?
         public let color: Color?
+        public let cornerRadius: CGFloat?
         
         public enum Source {
             case space
