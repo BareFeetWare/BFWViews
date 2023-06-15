@@ -25,6 +25,7 @@ extension Plan.Image: View {
                     .frame(width: width)
                     .foregroundColor(color)
                     .cornerRadius(cornerRadius)
+                    .padding(.vertical, 4)
             } placeholder: {
                 ProgressView()
             }
