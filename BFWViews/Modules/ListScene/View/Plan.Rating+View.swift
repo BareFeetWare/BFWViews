@@ -30,7 +30,39 @@ extension Plan.Rating: View {
 }
 
 struct PlanRating_Previews: PreviewProvider {
-    static var previews: some View {
-        Plan.Rating.preview
+    
+    struct Five: View {
+        @State var selection: Int = 0
+        
+        var body: some View {
+            Plan.Rating(
+                title: "Title",
+                maximum: 5,
+                selection: $selection
+            )
+        }
+        
     }
+    
+    struct Seven: View {
+        @State var selection: Int = 0
+        
+        var body: some View {
+            Plan.Rating(
+                title: "Energy Rating",
+                maximum: 7,
+                selection: $selection
+            )
+        }
+        
+    }
+    
+    static var previews: some View {
+        List {
+            Five()
+            Seven()
+        }
+        .previewLayout(.sizeThatFits)
+    }
+    
 }

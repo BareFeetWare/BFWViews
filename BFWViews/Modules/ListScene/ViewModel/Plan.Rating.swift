@@ -40,18 +40,3 @@ extension Plan.Rating {
         index <= selection ? .starFill : .star
     }
 }
-
-// MARK: - Preview
-
-extension Plan.Rating {
-    
-    private struct Preview {
-        @State static var selection: Int = 0
-    }
-    
-    static let preview: Self = .init(
-        title: "Rating",
-        maximum: 5,
-        selection: Preview.$selection
-    )
-}
