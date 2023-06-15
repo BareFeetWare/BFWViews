@@ -115,7 +115,7 @@ public extension Plan.Cell {
     }
     
     static func image(url: URL) -> Self {
-        .init(content: Plan.Image.url(url))
+        .init(content: Plan.Image.url(url, cornerRadius: 12))
     }
     
 }

@@ -54,12 +54,14 @@ extension Plan.Image {
     public static func url(
         _ url: URL,
         width: CGFloat? = nil,
-        color: Color? = nil
+        color: Color? = nil,
+        cornerRadius: CGFloat
     ) -> Self {
         self.init(
             source: .url(url),
             width: width,
-            color: color
+            color: color,
+            cornerRadius: cornerRadius
         )
     }
     
