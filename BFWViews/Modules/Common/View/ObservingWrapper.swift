@@ -24,20 +24,3 @@ extension ObservingWrapper: View {
         content()
     }
 }
-
-// TODO: Perhaps change to use modifier, as below.
-
-extension View {
-    func observing<Observed: ObservableObject>(observed: Observed) -> some View {
-        modifier(ObservingModifier(observed: observed))
-    }
-}
-
-struct ObservingModifier<Observed: ObservableObject>: ViewModifier {
-    
-    @ObservedObject var observed: Observed
-    
-    func body(content: Content) -> some View {
-        content
-    }
-}
