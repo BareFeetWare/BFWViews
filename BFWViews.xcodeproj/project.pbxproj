@@ -30,6 +30,7 @@
 		E2459F892A0352090068DCBB /* Plan.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F882A0352090068DCBB /* Plan.Image.swift */; };
 		E2459F8B2A0352750068DCBB /* Plan.List.Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F8A2A0352750068DCBB /* Plan.List.Style.swift */; };
 		E2606CEC2A415378004E6400 /* ObservingWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CEB2A415378004E6400 /* ObservingWrapper.swift */; };
+		E2606CEE2A417C1A004E6400 /* PropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CED2A417C1A004E6400 /* PropertyList.swift */; };
 		E26A7AD42765A561007E3A6C /* BadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A7AD32765A561007E3A6C /* BadgeScene.swift */; };
 		E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */; };
 		E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27BCFF927870D320004F48C /* TableViewProxy.swift */; };
@@ -134,6 +135,7 @@
 		E2459F882A0352090068DCBB /* Plan.Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Image.swift; sourceTree = "<group>"; };
 		E2459F8A2A0352750068DCBB /* Plan.List.Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.List.Style.swift; sourceTree = "<group>"; };
 		E2606CEB2A415378004E6400 /* ObservingWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservingWrapper.swift; sourceTree = "<group>"; };
+		E2606CED2A417C1A004E6400 /* PropertyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyList.swift; sourceTree = "<group>"; };
 		E26A7AD32765A561007E3A6C /* BadgeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeScene.swift; sourceTree = "<group>"; };
 		E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLink.swift; sourceTree = "<group>"; };
 		E27BCFF927870D320004F48C /* TableViewProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProxy.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
 				E2606CEB2A415378004E6400 /* ObservingWrapper.swift */,
+				E2606CED2A417C1A004E6400 /* PropertyList.swift */,
 				E23AB43A268157720018DD04 /* ReadFrame.swift */,
 				E28B7ABC275AC77700ED5730 /* UIKitView.swift */,
 				E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */,
@@ -626,6 +629,7 @@
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
 				E2606CEC2A415378004E6400 /* ObservingWrapper.swift in Sources */,
 				E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */,
+				E2606CEE2A417C1A004E6400 /* PropertyList.swift in Sources */,
 				E2459F8B2A0352750068DCBB /* Plan.List.Style.swift in Sources */,
 				E2C16B68266480C400BAC051 /* View+Distributed.swift in Sources */,
 				E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */,
