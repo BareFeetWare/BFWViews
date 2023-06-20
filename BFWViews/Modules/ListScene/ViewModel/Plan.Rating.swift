@@ -32,7 +32,6 @@ extension Plan {
 extension Plan.Rating {
     
     func onTap(index: Int) {
-        // FIXME: UI isn't updating, but binding is.
         selection = index
     }
     

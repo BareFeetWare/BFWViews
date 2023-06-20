@@ -15,7 +15,7 @@ extension Plan.DetailRow: View {
             VStack(alignment: .leading) {
                 title.map { Text($0) }
                 subtitle.map { Text($0) }
-                    .font(.caption)
+                    .font(.callout)
                     .foregroundColor(.secondary)
             }
             .multilineTextAlignment(.leading)
