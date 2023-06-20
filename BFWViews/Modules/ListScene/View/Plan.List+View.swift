@@ -24,7 +24,6 @@ extension Plan.List: View {
                 }
             }
         }
-        .listStyle(listStyle)
     }
 }
 
