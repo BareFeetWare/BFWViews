@@ -28,7 +28,8 @@
 		E2459F812A0335DE0068DCBB /* Plan.Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F802A0335DE0068DCBB /* Plan.Section.swift */; };
 		E2459F852A0351450068DCBB /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F842A0351450068DCBB /* Plan.swift */; };
 		E2459F892A0352090068DCBB /* Plan.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F882A0352090068DCBB /* Plan.Image.swift */; };
-		E2459F8B2A0352750068DCBB /* Plan.List.Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F8A2A0352750068DCBB /* Plan.List.Style.swift */; };
+		E2606CEC2A415378004E6400 /* ObservingWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CEB2A415378004E6400 /* ObservingWrapper.swift */; };
+		E2606CEE2A417C1A004E6400 /* PropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CED2A417C1A004E6400 /* PropertyList.swift */; };
 		E26A7AD42765A561007E3A6C /* BadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A7AD32765A561007E3A6C /* BadgeScene.swift */; };
 		E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */; };
 		E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27BCFF927870D320004F48C /* TableViewProxy.swift */; };
@@ -51,7 +52,6 @@
 		E2BAAC1526FD8A8000CFDE50 /* Fetch+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1426FD8A8000CFDE50 /* Fetch+Image.swift */; };
 		E2BAAC1926FEFF0400CFDE50 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1826FEFF0400CFDE50 /* AsyncImage.swift */; };
 		E2BAAC1C26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1B26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift */; };
-		E2BF0B712A00F05F0035DE5E /* View+Plan.List.Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF0B702A00F05F0035DE5E /* View+Plan.List.Style.swift */; };
 		E2C16B5826647C4400BAC051 /* BFWViews.h in Headers */ = {isa = PBXBuildFile; fileRef = E2C16B5626647C4400BAC051 /* BFWViews.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2C16B5B26647C4400BAC051 /* BFWViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C16B5426647C4400BAC051 /* BFWViews.framework */; };
 		E2C16B5C26647C4400BAC051 /* BFWViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2C16B5426647C4400BAC051 /* BFWViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -131,7 +131,8 @@
 		E2459F802A0335DE0068DCBB /* Plan.Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Section.swift; sourceTree = "<group>"; };
 		E2459F842A0351450068DCBB /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		E2459F882A0352090068DCBB /* Plan.Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Image.swift; sourceTree = "<group>"; };
-		E2459F8A2A0352750068DCBB /* Plan.List.Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.List.Style.swift; sourceTree = "<group>"; };
+		E2606CEB2A415378004E6400 /* ObservingWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservingWrapper.swift; sourceTree = "<group>"; };
+		E2606CED2A417C1A004E6400 /* PropertyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyList.swift; sourceTree = "<group>"; };
 		E26A7AD32765A561007E3A6C /* BadgeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeScene.swift; sourceTree = "<group>"; };
 		E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLink.swift; sourceTree = "<group>"; };
 		E27BCFF927870D320004F48C /* TableViewProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProxy.swift; sourceTree = "<group>"; };
@@ -154,7 +155,6 @@
 		E2BAAC1426FD8A8000CFDE50 /* Fetch+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fetch+Image.swift"; sourceTree = "<group>"; };
 		E2BAAC1826FEFF0400CFDE50 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		E2BAAC1B26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.ViewModel.swift; sourceTree = "<group>"; };
-		E2BF0B702A00F05F0035DE5E /* View+Plan.List.Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Plan.List.Style.swift"; sourceTree = "<group>"; };
 		E2C16B5426647C4400BAC051 /* BFWViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BFWViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C16B5626647C4400BAC051 /* BFWViews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFWViews.h; sourceTree = "<group>"; };
 		E2C16B5726647C4400BAC051 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -300,7 +300,6 @@
 				E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */,
 				E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */,
 				E2459F882A0352090068DCBB /* Plan.Image.swift */,
-				E2459F8A2A0352750068DCBB /* Plan.List.Style.swift */,
 				E28D1BCD283350C400064CCD /* Plan.List.swift */,
 				E286391A2A107CEA0038CB72 /* Plan.Rack.swift */,
 				E2F47B112A13351C009BD9EC /* Plan.Rating.swift */,
@@ -320,7 +319,6 @@
 				E286391C2A107D040038CB72 /* Plan.Rack+View.swift */,
 				E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */,
 				E2386BF62A093C45009FEA16 /* Plan.Tab+View.swift */,
-				E2BF0B702A00F05F0035DE5E /* View+Plan.List.Style.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -413,6 +411,8 @@
 				E224C9A126E8661100AC5CD2 /* Color+Hex.swift */,
 				E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
+				E2606CEB2A415378004E6400 /* ObservingWrapper.swift */,
+				E2606CED2A417C1A004E6400 /* PropertyList.swift */,
 				E23AB43A268157720018DD04 /* ReadFrame.swift */,
 				E28B7ABC275AC77700ED5730 /* UIKitView.swift */,
 				E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */,
@@ -621,8 +621,9 @@
 				E2FD40CD2669C9F5004E4905 /* Alert+Error.swift in Sources */,
 				E28B7ABF275C5E2F00ED5730 /* CellBorder.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
+				E2606CEC2A415378004E6400 /* ObservingWrapper.swift in Sources */,
 				E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */,
-				E2459F8B2A0352750068DCBB /* Plan.List.Style.swift in Sources */,
+				E2606CEE2A417C1A004E6400 /* PropertyList.swift in Sources */,
 				E2C16B68266480C400BAC051 /* View+Distributed.swift in Sources */,
 				E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */,
 				E2386BF72A093C45009FEA16 /* Plan.Tab+View.swift in Sources */,
@@ -632,7 +633,6 @@
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */,
 				E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */,
-				E2BF0B712A00F05F0035DE5E /* View+Plan.List.Style.swift in Sources */,
 				E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
 				E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */,

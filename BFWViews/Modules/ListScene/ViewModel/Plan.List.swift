@@ -12,14 +12,11 @@ public extension Plan {
     struct List {
         
         public init(
-            sections: [Section],
-            listStyle: Style = .automatic
+            sections: [Section]
         ) {
             self.sections = sections
-            self.listStyle = listStyle
         }
         
-        public let listStyle: Style
         public let sections: [Section]
     }
 }
