@@ -15,16 +15,19 @@ extension Plan {
         public init(
             source: Source,
             width: CGFloat? = nil,
-            color: Color? = nil
+            color: Color? = nil,
+            cornerRadius: CGFloat = 0
         ) {
             self.source = source
             self.width = width
             self.color = color
+            self.cornerRadius = cornerRadius
         }
         
         public let source: Source
         public let width: CGFloat?
         public let color: Color?
+        public let cornerRadius: CGFloat
         
         public enum Source {
             case space
@@ -51,12 +54,14 @@ extension Plan.Image {
     public static func url(
         _ url: URL,
         width: CGFloat? = nil,
-        color: Color? = nil
+        color: Color? = nil,
+        cornerRadius: CGFloat = 0
     ) -> Self {
         self.init(
             source: .url(url),
             width: width,
-            color: color
+            color: color,
+            cornerRadius: cornerRadius
         )
     }
     
