@@ -55,7 +55,7 @@ extension Plan.Image {
         _ url: URL,
         width: CGFloat? = nil,
         color: Color? = nil,
-        cornerRadius: CGFloat
+        cornerRadius: CGFloat = 0
     ) -> Self {
         self.init(
             source: .url(url),
