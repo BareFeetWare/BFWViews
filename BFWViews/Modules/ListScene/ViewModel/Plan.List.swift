@@ -45,9 +45,9 @@ extension Plan.List {
             .init(
                 title: "Buttons and detail",
                 cells: [
-                    .button("Start") {},
+                    .init(id: "start") { Button("Start") {} },
                     .detail("Status", trailing: "Off line"),
-                    .button("Scan") {},
+                    .init(id: "Scan") { Button("Scan") {} },
                 ]
             ),
             .init(

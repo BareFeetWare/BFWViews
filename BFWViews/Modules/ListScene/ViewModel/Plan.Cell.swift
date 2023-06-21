@@ -11,22 +11,28 @@ import SwiftUI
 extension Plan {
     public struct Cell: Identifiable {
         public let id: String
-        public let content: any View
+        public let content: () -> any View
+        
+        public init<Content>(
+            content: @escaping () -> Content
+        ) where Content: View & Identifiable, Content.ID == String {
+            self.id = content().id
+            self.content = content
+        }
         
         public init(
-            id: String = UUID().uuidString,
-            content: any View
+            id: String,
+            content: @escaping () -> any View
         ) {
             self.id = id
             self.content = content
         }
-        
     }
 }
 
 extension Plan.Cell: View {
     public var body: some View {
-        AnyView(content)
+        AnyView(content())
     }
 }
 
@@ -41,15 +47,15 @@ public extension Plan.Cell {
         trailing: String? = nil,
         image: Plan.Image? = nil
     ) -> Self {
-        let id = id ?? UUID().uuidString
-        let label = Plan.DetailRow(
-            id: id,
-            title: title,
-            subtitle: subtitle,
-            trailing: trailing,
-            image: image
-        )
-        return .init(id: id, content: label)
+        .init {
+            Plan.DetailRow(
+                id: id,
+                title: title,
+                subtitle: subtitle,
+                trailing: trailing,
+                image: image
+            )
+        }
     }
     
     // TODO: Perhaps consolidate above and below functions.
@@ -80,7 +86,7 @@ public extension Plan.Cell {
             },
             label: { label }
         )
-        return .init(id: id, content: content)
+        return .init(id: id, content: { content })
     }
     
     static func detail(
@@ -107,15 +113,7 @@ public extension Plan.Cell {
                 .navigationTitle(navigationTitle),
             label: { label }
         )
-        return .init(id: id, content: content)
-    }
-    
-    static func button(_ title: String, action: @escaping () -> Void) -> Self {
-        .init(content: Button(title, action: action))
-    }
-    
-    static func image(url: URL) -> Self {
-        .init(content: Plan.Image.url(url))
+        return .init(id: id, content: { content })
     }
     
 }

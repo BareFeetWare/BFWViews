@@ -21,13 +21,13 @@ public extension Plan {
 public extension Plan.DetailRow {
     
     init(
-        id: String = UUID().uuidString,
+        id: String? = nil,
         title: String,
         subtitle: String? = nil,
         image: Plan.Image? = nil,
         trailingContent: (any View)? = nil
     ) {
-        self.id = id
+        self.id = id ?? UUID().uuidString
         self.title = title
         self.subtitle = subtitle
         self.image = image
@@ -35,12 +35,12 @@ public extension Plan.DetailRow {
     }
     
     init(
-        id: String = UUID().uuidString,
+        id: String? = nil,
         title: String,
         subtitle: String? = nil,
         image: Plan.Image? = nil
     ) {
-        self.id = id
+        self.id = id ?? UUID().uuidString
         self.title = title
         self.subtitle = subtitle
         self.image = image
@@ -48,13 +48,13 @@ public extension Plan.DetailRow {
     }
     
     init(
-        id: String = UUID().uuidString,
+        id: String? = nil,
         title: String,
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil
     ) {
-        self.id = id
+        self.id = id ?? UUID().uuidString
         self.title = title
         self.subtitle = subtitle
         self.image = image
