@@ -82,7 +82,7 @@ public extension Plan.Cell {
         let content = AsyncNavigationLink(
             destination: {
                 await destination()
-                    .navigationTitle(navigationTitle)
+                    .navigationHeader(title: navigationTitle, subtitle: subtitle)
             },
             label: { label }
         )
@@ -110,7 +110,7 @@ public extension Plan.Cell {
         )
         let content = NavigationLink(
             destination: destination
-                .navigationTitle(navigationTitle),
+                .navigationHeader(title: navigationTitle, subtitle: subtitle),
             label: { label }
         )
         return .init(id: id, content: { content })
