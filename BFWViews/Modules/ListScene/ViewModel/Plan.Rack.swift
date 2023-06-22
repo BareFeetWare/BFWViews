@@ -14,17 +14,17 @@ extension Plan {
         
         public init(
             selectedTabID: Binding<String>,
-            tabs: [Plan.Tab],
-            isDisabledPicker: Bool = false
+            isDisabledPicker: Binding<Bool> = .constant(false),
+            tabs: [Plan.Tab]
         ) {
             self._selectedTabID = selectedTabID
+            self._isDisabledPicker = isDisabledPicker
             self.tabs = tabs
-            self.isDisabledPicker = isDisabledPicker
         }
         
         public let tabs: [Tab]
         @Binding public var selectedTabID: String
-        public let isDisabledPicker: Bool
+        @Binding public var isDisabledPicker: Bool
         
     }
 }
@@ -36,7 +36,10 @@ extension Plan.Rack {
             .init(title: "First", content: Plan.List(cells: [.detail("First")])),
             .init(title: "Second", content: Plan.List(cells: [.detail("Second")])),
         ]
-        return Plan.Rack(selectedTabID: .constant(tabs.first!.id), tabs: tabs)
+        return Plan.Rack(
+            selectedTabID: .constant(tabs.first!.id),
+            tabs: tabs
+        )
     }()
     
 }
