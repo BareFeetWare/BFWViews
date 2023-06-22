@@ -12,7 +12,7 @@ extension Plan.DetailRow: View {
     public var body: some View {
         HStack {
             image
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 title.map { Text($0) }
                 subtitle.map { Text($0) }
                     .font(.callout)
