@@ -30,6 +30,42 @@ extension Plan {
     }
 }
 
+public extension Array where Element == Plan.Cell {
+    /// Adjusts the layout of an array of cells to keep titles horizontally aligned, by adding Image.space in cells that have no image, if at least one cell has an image.
+    func alignedTitles() -> Self {
+        guard let maxWidth = compactMap(
+            {
+                ($0.content() as? Plan.DetailRow)?.image?.width
+            }
+        )
+            .max()
+        else { return self }
+        return map { cell in
+            guard let detailRow = (cell.content() as? Plan.DetailRow),
+                  detailRow.image == nil
+            else { return cell }
+            return .init(id: cell.id) {
+                Plan.DetailRow(
+                    id: detailRow.id,
+                    title: detailRow.title,
+                    subtitle: detailRow.subtitle,
+                    image: {
+                        guard let image = detailRow.image
+                        else { return .space(width: maxWidth) }
+                        return .init(
+                            source: image.source,
+                            width: maxWidth,
+                            color: image.color,
+                            cornerRadius: image.cornerRadius
+                        )
+                    }(),
+                    trailingContent: detailRow.trailingContent
+                )
+            }
+        }
+    }
+}
+
 extension Plan.Cell: View {
     public var body: some View {
         AnyView(content())
