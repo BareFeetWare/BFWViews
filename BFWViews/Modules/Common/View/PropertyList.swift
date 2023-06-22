@@ -18,7 +18,9 @@ public class PropertyList: ObservableObject {
 
 public extension PropertyList {
     
-    func binding<T: Hashable & Equatable>(id: String) -> Binding<T?> {
+    func binding<T: Hashable & Equatable>(
+        id: String
+    ) -> Binding<T?> {
         .init {
             self.dictionary[id] as? T
         } set: {
@@ -26,25 +28,11 @@ public extension PropertyList {
         }
     }
     
-    func intBinding(id: String) -> Binding<Int> {
+    func binding<T: Hashable & Equatable>(
+        id: String, default: T
+    ) -> Binding<T> {
         .init {
-            self.dictionary[id] as? Int ?? 0
-        } set: {
-            self.dictionary[id] = $0
-        }
-    }
-    
-    func boolBinding(id: String) -> Binding<Bool> {
-        .init {
-            self.dictionary[id] as? Bool ?? false
-        } set: {
-            self.dictionary[id] = $0
-        }
-    }
-    
-    func stringBinding(id: String) -> Binding<String> {
-        .init {
-            self.dictionary[id] as? String ?? ""
+            self.dictionary[id] as? T ?? `default`
         } set: {
             self.dictionary[id] = $0
         }
