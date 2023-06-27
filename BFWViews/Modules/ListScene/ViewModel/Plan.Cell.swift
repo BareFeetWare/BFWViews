@@ -102,7 +102,7 @@ public extension Plan.Cell {
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil,
-        destination: @escaping () async -> some View
+        destination: @escaping () async throws -> some View
     ) -> Self {
         let id = id ?? UUID().uuidString
         let navigationTitle = title.hasSuffix(":")
@@ -117,7 +117,7 @@ public extension Plan.Cell {
         )
         let content = AsyncNavigationLink(
             destination: {
-                await destination()
+                try await destination()
                     .navigationHeader(title: navigationTitle, subtitle: subtitle)
             },
             label: { label }

@@ -19,13 +19,17 @@ import SwiftUI
  */
 public struct AsyncNavigationLink<Destination: View, Label: View> {
     @State var isActive: Bool = false
-    let destination: () async -> Destination
+    let destination: () async throws -> Destination
     let label: () -> Label
     @State private var isInProgress = false
     @State private var activeDestination: Destination?
+    @State private var error: Error? {
+        didSet { isPresentedError = error != nil }
+    }
+    @State private var isPresentedError = false
     
     public init(
-        destination: @escaping () async -> Destination,
+        destination: @escaping () async throws -> Destination,
         label: @escaping () -> Label
     ) {
         self.destination = destination
@@ -42,9 +46,13 @@ extension AsyncNavigationLink {
     func onTap() {
         isInProgress = true
         Task {
-            activeDestination = await destination()
-            isInProgress = false
-            isActive = true
+            do {
+                activeDestination = try await destination()
+                isInProgress = false
+                isActive = true
+            } catch {
+                self.error = error
+            }
         }
     }
 }
@@ -71,6 +79,9 @@ extension AsyncNavigationLink: View {
             }
         }
         .foregroundColor(.primary)
+        .alert(isPresented: $isPresentedError) {
+            Alert(error: error)
+        }
     }
 }
 
@@ -91,9 +102,9 @@ struct AsyncNavigationLink_Previews: PreviewProvider {
         }
         
         /// Dummy asyc destination, delayed by a timer. Typically this would instead be an async API call.
-        func asyncDestination() async -> some View {
+        func asyncDestination() async throws -> some View {
             // Arbitrary delay, pretending to be an async request.
-            try? await Task.sleep(nanoseconds: 2000000000)
+            try await Task.sleep(nanoseconds: 2000000000)
             return Text("Async Destination")
         }
     }

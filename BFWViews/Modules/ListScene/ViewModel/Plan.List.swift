@@ -62,16 +62,16 @@ extension Plan.List {
                 title: "Async children",
                 cells: [
                     .detail("Children", trailing: "3") {
-                        await asyncChildrenScene()
+                        try await asyncChildrenScene()
                     },
                 ]
             ),
         ]
     )
     
-    static func asyncChildrenScene() async -> some View {
+    static func asyncChildrenScene() async throws -> some View {
         // Arbitrary delay, pretending to be an async request.
-        try? await Task.sleep(nanoseconds: 2000000000)
+        try await Task.sleep(nanoseconds: 2000000000)
         return childrenScene
     }
     
