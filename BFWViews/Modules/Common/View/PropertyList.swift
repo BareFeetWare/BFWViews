@@ -38,4 +38,11 @@ public extension PropertyList {
         }
     }
     
+    func isNotNilBinding(id: String) -> Binding<Bool> {
+        .init {
+            self.dictionary[id] != nil
+        } set: {
+            self.dictionary[id] = $0 ? "not nil" : nil
+        }
+    }
 }
