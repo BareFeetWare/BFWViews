@@ -38,11 +38,34 @@ public extension PropertyList {
         }
     }
     
+    /// Stores true or nil in dictionary. False is stored as nil.
+    func trueBinding(
+        id: String
+    ) -> Binding<Bool> {
+        .init {
+            self.dictionary[id] as? Bool ?? false
+        } set: {
+            self.dictionary[id] = ($0 == true) ? true : nil
+        }
+    }
+    
     func isNotNilBinding(id: String) -> Binding<Bool> {
         .init {
             self.dictionary[id] != nil
         } set: {
             self.dictionary[id] = $0 ? "not nil" : nil
+        }
+    }
+    
+    func isAllNotNilBinding(ids: [String]) -> Binding<Bool> {
+        .init {
+            ids.reduce(true) { partialResult, id in
+                partialResult && self.dictionary[id] != nil
+            }
+        } set: { newValue in
+            ids.forEach { id in
+                self.dictionary[id] = newValue ? "not nil" : nil
+            }
         }
     }
 }
