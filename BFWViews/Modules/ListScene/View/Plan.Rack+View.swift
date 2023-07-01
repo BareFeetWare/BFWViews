@@ -20,16 +20,8 @@ extension Plan.Rack: View {
             .pickerStyle(.segmented)
             .disabled(isDisabledPicker)
             .padding(.horizontal)
-            TabView(selection: $selectedTabID) {
-                ForEach(tabs) { tab in
-                    tab
-                        .tabItem {
-                            Text(tab.title)
-                        }
-                        .tag(tab.id)
-                }
-            }
-            .tabViewStyle(.page(indexDisplayMode: .never))
+            tabs.first { $0.id == selectedTabID }
+            // Using TabView with style .page proved unreliable, where it sometimes failed to switch tabs when the selectedTabID changed.
         }
     }
 }
