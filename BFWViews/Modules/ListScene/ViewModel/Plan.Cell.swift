@@ -55,7 +55,8 @@ public extension Array where Element == Plan.Cell {
                         return .init(
                             source: image.source,
                             width: maxWidth,
-                            color: image.color,
+                            foregroundColor: image.foregroundColor,
+                            backgroundColor: image.backgroundColor,
                             cornerRadius: image.cornerRadius
                         )
                     }(),

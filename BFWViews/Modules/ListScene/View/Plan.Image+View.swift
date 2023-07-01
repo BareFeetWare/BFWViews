@@ -13,8 +13,10 @@ extension Plan.Image: View {
         switch source {
         case .space:
             Rectangle()
+                .foregroundColor(backgroundColor ?? .clear)
                 .frame(width: width)
-                .foregroundColor(color ?? .clear)
+                .frame(minHeight: backgroundColor != nil ? width : 0)
+                .cornerRadius(cornerRadius)
         case .url(let url):
             AsyncImage(
                 url: url
@@ -22,8 +24,10 @@ extension Plan.Image: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .foregroundColor(foregroundColor)
                     .frame(width: width)
-                    .foregroundColor(color)
+                    .frame(minHeight: backgroundColor != nil ? width : 0)
+                    .background(backgroundColor)
                     .cornerRadius(cornerRadius)
             } placeholder: {
                 ProgressView()
@@ -31,8 +35,11 @@ extension Plan.Image: View {
         case .system(let name, let scale):
             Image(systemName: name)
                 .imageScale(scale)
+                .foregroundColor(foregroundColor)
                 .frame(width: width)
-                .foregroundColor(color)
+                .frame(minHeight: backgroundColor != nil ? width : 0)
+                .background(backgroundColor)
+                .cornerRadius(cornerRadius)
         }
     }
 }

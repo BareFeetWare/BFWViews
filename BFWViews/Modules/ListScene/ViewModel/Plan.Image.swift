@@ -15,18 +15,21 @@ extension Plan {
         public init(
             source: Source,
             width: CGFloat? = nil,
-            color: Color? = nil,
+            foregroundColor: Color? = nil,
+            backgroundColor: Color? = nil,
             cornerRadius: CGFloat = 0
         ) {
             self.source = source
             self.width = width
-            self.color = color
+            self.foregroundColor = foregroundColor
+            self.backgroundColor = backgroundColor
             self.cornerRadius = cornerRadius
         }
         
         public let source: Source
         public let width: CGFloat?
-        public let color: Color?
+        public let foregroundColor: Color?
+        public let backgroundColor: Color?
         public let cornerRadius: CGFloat
         
         public enum Source {
@@ -54,13 +57,13 @@ extension Plan.Image {
     public static func url(
         _ url: URL,
         width: CGFloat? = nil,
-        color: Color? = nil,
+        foregroundColor: Color? = nil,
         cornerRadius: CGFloat = 0
     ) -> Self {
         self.init(
             source: .url(url),
             width: width,
-            color: color,
+            foregroundColor: foregroundColor,
             cornerRadius: cornerRadius
         )
     }
@@ -69,16 +72,20 @@ extension Plan.Image {
         name: String,
         scale: SwiftUI.Image.Scale = .medium,
         width: CGFloat? = nil,
-        color: Color? = nil
+        foregroundColor: Color? = nil
     ) -> Self {
         .init(
             source: .system(name: name, scale: scale),
             width: width,
-            color: color
+            foregroundColor: foregroundColor
         )
     }
 }
 
 extension Plan.Image {
-    static let preview = Plan.Image(source: .url(URL(string: "https://www.barefeetware.com/logo.png")!))
+    static let preview = Plan.Image(
+        source: .url(
+            URL(string: "https://www.barefeetware.com/logo.png")!
+        )
+    )
 }
