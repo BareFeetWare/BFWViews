@@ -15,6 +15,7 @@
 		E21311202586F385001496C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E213111F2586F385001496C7 /* Assets.xcassets */; };
 		E21311232586F385001496C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E21311222586F385001496C7 /* Preview Assets.xcassets */; };
 		E21311372586F5BF001496C7 /* MiniSheetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21311362586F5BF001496C7 /* MiniSheetScene.swift */; };
+		E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21636C82A500AD4005A7D48 /* PassedObject.swift */; };
 		E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A126E8661100AC5CD2 /* Color+Hex.swift */; };
 		E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */; };
 		E2386BE92A087314009FEA16 /* Plan.Image+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BE82A087314009FEA16 /* Plan.Image+View.swift */; };
@@ -119,6 +120,7 @@
 		E21311242586F385001496C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E21311312586F418001496C7 /* MiniSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSheet.swift; sourceTree = "<group>"; };
 		E21311362586F5BF001496C7 /* MiniSheetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSheetScene.swift; sourceTree = "<group>"; };
+		E21636C82A500AD4005A7D48 /* PassedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassedObject.swift; sourceTree = "<group>"; };
 		E224C9A126E8661100AC5CD2 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHexScene.swift; sourceTree = "<group>"; };
 		E2386BE82A087314009FEA16 /* Plan.Image+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Image+View.swift"; sourceTree = "<group>"; };
@@ -279,6 +281,14 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
+		E21636C72A500AB6005A7D48 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E21636C82A500AD4005A7D48 /* PassedObject.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E27BCFF827870D190004F48C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				E27BCFF827870D190004F48C /* Controller */,
+				E21636C72A500AB6005A7D48 /* Model */,
 				E2C16B642664809B00BAC051 /* View */,
 			);
 			path = Common;
@@ -640,6 +651,7 @@
 				E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
 				E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */,
+				E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */,
 				E28D1BD5283350C400064CCD /* Plan.List.swift in Sources */,
 				E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */,
 				E2C16B69266480C400BAC051 /* CompressibleSpacer.swift in Sources */,
