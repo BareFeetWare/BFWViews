@@ -16,6 +16,7 @@
 		E21311232586F385001496C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E21311222586F385001496C7 /* Preview Assets.xcassets */; };
 		E21311372586F5BF001496C7 /* MiniSheetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21311362586F5BF001496C7 /* MiniSheetScene.swift */; };
 		E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21636C82A500AD4005A7D48 /* PassedObject.swift */; };
+		E21636D12A519C3F005A7D48 /* Plan.Section+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21636D02A519C3F005A7D48 /* Plan.Section+View.swift */; };
 		E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A126E8661100AC5CD2 /* Color+Hex.swift */; };
 		E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */; };
 		E2386BE92A087314009FEA16 /* Plan.Image+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BE82A087314009FEA16 /* Plan.Image+View.swift */; };
@@ -121,6 +122,7 @@
 		E21311312586F418001496C7 /* MiniSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSheet.swift; sourceTree = "<group>"; };
 		E21311362586F5BF001496C7 /* MiniSheetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSheetScene.swift; sourceTree = "<group>"; };
 		E21636C82A500AD4005A7D48 /* PassedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassedObject.swift; sourceTree = "<group>"; };
+		E21636D02A519C3F005A7D48 /* Plan.Section+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Section+View.swift"; sourceTree = "<group>"; };
 		E224C9A126E8661100AC5CD2 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHexScene.swift; sourceTree = "<group>"; };
 		E2386BE82A087314009FEA16 /* Plan.Image+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Image+View.swift"; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */,
 				E286391C2A107D040038CB72 /* Plan.Rack+View.swift */,
 				E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */,
+				E21636D02A519C3F005A7D48 /* Plan.Section+View.swift */,
 				E2386BF62A093C45009FEA16 /* Plan.Tab+View.swift */,
 			);
 			path = View;
@@ -646,6 +649,7 @@
 				E286391D2A107D040038CB72 /* Plan.Rack+View.swift in Sources */,
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
+				E21636D12A519C3F005A7D48 /* Plan.Section+View.swift in Sources */,
 				E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */,
 				E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */,
 				E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */,

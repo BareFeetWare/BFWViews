@@ -11,18 +11,7 @@ import SwiftUI
 extension Plan.List: View {
     public var body: some View {
         List {
-            ForEach(sections) { section in
-                Section {
-                    ForEach(section.cells) { cell in
-                        cell
-                    }
-                } header: {
-                    section.header.map {
-                        AnyView($0)
-                            .textCase(nil)
-                    }
-                }
-            }
+            ForEach(sections) { $0 }
         }
     }
 }
