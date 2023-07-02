@@ -62,23 +62,22 @@ extension AsyncNavigationLink: View {
         Button {
             onTap()
         } label: {
-            ZStack {
-                HStack {
-                    label()
-                    Spacer()
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                }
-                .opacity(isInProgress ? 1 : 0)
-                NavigationLink(
-                    isActive: $isActive,
-                    destination: { activeDestination },
-                    label: label
-                )
-                .opacity(isInProgress ? 0 : 1)
-            }
+            NavigationLink(
+                isActive: $isActive,
+                destination: { activeDestination },
+                label: label
+            )
+            .foregroundColor(.primary)
+            .overlay(
+                Group {
+                    if isInProgress {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                    }
+                },
+                alignment: .trailing
+            )
         }
-        .foregroundColor(.primary)
         .alert(isPresented: $isPresentedError) {
             Alert(error: error)
         }
