@@ -8,7 +8,6 @@
 
 import Foundation
 import BFWViews
-// TODO: Remove:
 import SwiftUI
 
 extension ListSceneFlow {
@@ -25,7 +24,7 @@ private extension ListSceneFlow.Coordinator {
                 .init(
                     title: "Static detail",
                     cells: [
-                        .button("Button") {},
+                        .init(id: "button") { Button("Button") {}},
                         .detail("Detail 1", trailing: "trailing"),
                         .detail("Detail 2", subtitle: "subtitle", trailing: "trailing"),
                     ]
