@@ -22,7 +22,7 @@ extension Plan.DetailRow: View {
             Spacer()
                 .layoutPriority(-1)
             trailingContent.map {
-                AnyView($0)
+                AnyView($0())
                     .multilineTextAlignment(.trailing)
             }
         }
