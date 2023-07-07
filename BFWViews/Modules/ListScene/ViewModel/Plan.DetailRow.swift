@@ -90,7 +90,7 @@ extension Array where Element == Plan.DetailRow {
             subtitle: "Subtitle",
             trailing: "trailing",
             image: .init(
-                source: .system(name: "person")
+                source: .system(symbol: .person)
             )
         ),
     ]

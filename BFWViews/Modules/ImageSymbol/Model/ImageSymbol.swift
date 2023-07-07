@@ -5,116 +5,132 @@
 //  Copyright © 2020 BareFeetWare. All rights reserved.
 //
 
-// TODO: Make extendable, such as by changing from enum to struct.
-
-public enum ImageSymbol: String {
-    case arrowUp = "arrow.up"
-    case arrowUpCircleFill = "arrow.up.circle.fill"
-    case arrowUpLeftAndArrowDownRight = "arrow.up.left.and.arrow.down.right"
-    case arrowtriangleDownSquare = "arrowtriangle.down.square"
-    case arrowDownCircleFill = "arrow.down.circle.fill"
-    case battery0 = "battery.0"
-    case battery25 = "battery.25"
-    case battery100 = "battery.100"
-    case bell
-    case bolt
-    case boltFill = "bolt.fill"
-    case boltHeart = "bolt.heart"
-    case boltHeartFill = "bolt.heart.fill"
-    case building
-    case building2 = "building.2"
-    case calendarBadgeClock = "calendar.badge.clock"
-    case camera
-    case chartBarFill = "chart.bar.fill"
-    case checkmark = "checkmark"
-    case checkmarkCircle = "checkmark.circle"
-    case checkmarkCircleFill = "checkmark.circle.fill"
-    case checkmarkSquareFill = "checkmark.square.fill"
-    case checkmarkShield = "checkmark.shield"
-    case chevronDown = "chevron.down"
-    case chevronLeft = "chevron.left"
-    case chevronRight = "chevron.right"
-    case chevronUp = "chevron.up"
-    case circle = "circle"
-    case circleBottomthirdSplit = "circle.bottomthird.split"
-    case circleFill = "circle.fill"
-    case clock
-    case docRichText = "doc.richtext"
-    case docText = "doc.text"
-    case docTextFill = "doc.text.fill"
-    case docTextMagnifyingglass = "doc.text.magnifyingglass"
-    case dollarSignCircle = "dollarsign.circle"
-    case dollarSignCircleFill = "dollarsign.circle.fill"
-    case dollarSignSquare = "dollarsign.square"
-    case dotSquare = "dot.square"
-    case ellipsis
-    case envelopeFill = "envelope.fill"
-    case equal
-    case exclamationmark
-    case exclamationmarkCircleFill = "exclamationmark.circle.fill"
-    case exclamationmarkTriangle = "exclamationmark.triangle"
-    case exclamationmarkTriangleFill = "exclamationmark.triangle.fill"
-    case eye
-    case eyeSlash = "eye.slash"
-    case filemenuAndSelection = "filemenu.and.selection"
-    case gauge
-    case gear
-    case goforward = "goforward"
-    case globe
-    case handThumbsup = "hand.thumbsup"
-    case handThumbsupFill = "hand.thumbsup.fill"
-    case heart
-    case heartFill = "heart.fill"
-    case home
-    case house
-    case houseFill = "house.fill"
-    case hifispeaker
-    case infoCircle = "info.circle"
-    case infoCircleFill = "info.circle.fill"
-    case leafArrowCirclePath = "leaf.arrow.circlepath"
-    case listBulletRectangle = "list.bullet.rectangle"
-    case lightbulb
-    case lightbulbFill = "lightbulb.fill"
-    case lockFill = "lock.fill"
-    case magnifyingglass
-    case message
-    case messageFill = "message.fill"
-    case moonFill = "moon.fill"
-    case pauseCircleFill = "pause.circle.fill"
-    case pauseFill = "pause.fill"
-    case pencil = "pencil"
-    case pencilCircleFill = "pencil.circle.fill"
-    case person
-    case personCropRectangleFill = "person.crop.rectangle.fill"
-    case personCropCircleBadgeQuestionmark = "person.crop.circle.badge.questionmark"
-    case personFill = "person.fill"
-    case person2Fill = "person.2.fill"
-    case personCircle = "person.circle"
-    case phoneFill = "phone.fill"
-    case photo
-    case plus
-    case rectangleGrid2x2Fill = "rectangle.grid.2x2.fill"
-    case rectangleGrid3x2 = "rectangle.grid.3x2"
-    case share = "square.and.arrow.up"
-    case star
-    case starFill = "star.fill"
-    case starCircle = "star.circle"
-    case startCircleFill = "star.circle.fill"
-    case sunMax = "sun.max"
-    case sunMaxFill = "sun.max.fill"
-    case sunMinFill = "sun.min.fill"
-    case square
-    case tag
-    case trashCircleFill = "trash.circle.fill"
-    case water
-    case waveformPathEcg = "waveform.path.ecg"
-    case windSnow = "wind.snow"
-    case wifi
-    case wrench
-    case xCircleFill = "x.circle.fill"
-    case xmark
+public struct ImageSymbol {
+    public let name: String
+    
+    public init(_ name: String) {
+        self.name = name
+    }
 }
 
-extension ImageSymbol {
-    var name: String { rawValue }
+public extension ImageSymbol {
+    static let arrowDown: Self = .init("arrow.down")
+    static let arrowLeft: Self = .init("arrow.left")
+    static let arrowRight: Self = .init("arrow.right")
+    static let arrowUp: Self = .init("arrow.up")
+    static let arrowUpCircleFill: Self = .init("arrow.up.circle.fill")
+    static let arrowUpLeftAndArrowDownRight: Self = .init("arrow.up.left.and.arrow.down.right")
+    static let arrowtriangleDownSquare: Self = .init("arrowtriangle.down.square")
+    static let arrowDownCircleFill: Self = .init("arrow.down.circle.fill")
+    static let battery0: Self = .init("battery.0")
+    static let battery25: Self = .init("battery.25")
+    static let battery100: Self = .init("battery.100")
+    static let bell: Self = .init("bell")
+    static let bolt: Self = .init("bolt")
+    static let boltFill: Self = .init("bolt.fill")
+    static let boltHeart: Self = .init("bolt.heart")
+    static let boltHeartFill: Self = .init("bolt.heart.fill")
+    static let building: Self = .init("building")
+    static let building2: Self = .init("building.2")
+    static let calendarBadgeClock: Self = .init("calendar.badge.clock")
+    static let camera: Self = .init("camera")
+    static let chartBarFill: Self = .init("chart.bar.fill")
+    static let checkmark: Self = .init("checkmark")
+    static let checkmarkCircle: Self = .init("checkmark.circle")
+    static let checkmarkCircleFill: Self = .init("checkmark.circle.fill")
+    static let checkmarkDiamond: Self = .init("checkmark.diamond")
+    static let checkmarkSquareFill: Self = .init("checkmark.square.fill")
+    static let checkmarkShield: Self = .init("checkmark.shield")
+    static let chevronDown: Self = .init("chevron.down")
+    static let chevronLeft: Self = .init("chevron.left")
+    static let chevronRight: Self = .init("chevron.right")
+    static let chevronUp: Self = .init("chevron.up")
+    static let circle: Self = .init("circle")
+    static let circleBottomthirdSplit: Self = .init("circle.bottomthird.split")
+    static let circleFill: Self = .init("circle.fill")
+    static let clock: Self = .init("clock")
+    static let docRichText: Self = .init("doc.richtext")
+    static let docText: Self = .init("doc.text")
+    static let docTextFill: Self = .init("doc.text.fill")
+    static let docTextMagnifyingglass: Self = .init("doc.text.magnifyingglass")
+    static let dollarSignCircle: Self = .init("dollarsign.circle")
+    static let dollarSignCircleFill: Self = .init("dollarsign.circle.fill")
+    static let dollarSignSquare: Self = .init("dollarsign.square")
+    static let dotSquare: Self = .init("dot.square")
+    static let drop: Self = .init("drop")
+    static let dropFill: Self = .init("drop.fill")
+    static let ellipsis: Self = .init("ellipsis")
+    static let envelopeFill: Self = .init("envelope.fill")
+    static let equal: Self = .init("equal")
+    static let exclamationmark: Self = .init("exclamationmark")
+    static let exclamationmarkCircleFill: Self = .init("exclamationmark.circle.fill")
+    static let exclamationmarkTriangle: Self = .init("exclamationmark.triangle")
+    static let exclamationmarkTriangleFill: Self = .init("exclamationmark.triangle.fill")
+    static let eye: Self = .init("eye")
+    static let eyeSlash: Self = .init("eye.slash")
+    static let filemenuAndSelection: Self = .init("filemenu.and.selection")
+    static let gauge: Self = .init("gauge")
+    static let gear: Self = .init("gear")
+    static let goforward: Self = .init("goforward")
+    static let globe: Self = .init("globe")
+    static let hammer: Self = .init("hammer")
+    static let hammerFill: Self = .init("hammer.fill")
+    static let handPointUp: Self = .init("hand.point.up")
+    static let handPointUpFill: Self = .init("hand.point.up.fill")
+    static let handThumbsup: Self = .init("hand.thumbsup")
+    static let handThumbsupFill: Self = .init("hand.thumbsup.fill")
+    static let heart: Self = .init("heart")
+    static let heartFill: Self = .init("heart.fill")
+    static let home: Self = .init("home")
+    static let house: Self = .init("house")
+    static let houseFill: Self = .init("house.fill")
+    static let hifispeaker: Self = .init("hifispeaker")
+    static let infoCircle: Self = .init("info.circle")
+    static let infoCircleFill: Self = .init("info.circle.fill")
+    static let leafArrowCirclePath: Self = .init("leaf.arrow.circlepath")
+    static let listBulletRectangle: Self = .init("list.bullet.rectangle")
+    static let lightbulb: Self = .init("lightbulb")
+    static let lightbulbFill: Self = .init("lightbulb.fill")
+    static let lockFill: Self = .init("lock.fill")
+    static let magnifyingglass: Self = .init("magnifyingglass")
+    static let map: Self = .init("map")
+    static let message: Self = .init("message")
+    static let messageFill: Self = .init("message.fill")
+    static let moonFill: Self = .init("moon.fill")
+    static let pauseCircleFill: Self = .init("pause.circle.fill")
+    static let pauseFill: Self = .init("pause.fill")
+    static let pencil: Self = .init("pencil")
+    static let pencilCircleFill: Self = .init("pencil.circle.fill")
+    static let person: Self = .init("person")
+    static let personCropRectangleFill: Self = .init("person.crop.rectangle.fill")
+    static let personCropCircleBadgeQuestionmark: Self = .init("person.crop.circle.badge.questionmark")
+    static let personFill: Self = .init("person.fill")
+    static let person2Fill: Self = .init("person.2.fill")
+    static let personCircle: Self = .init("person.circle")
+    static let phoneFill: Self = .init("phone.fill")
+    static let photo: Self = .init("photo")
+    static let pin: Self = .init("pin")
+    static let plus: Self = .init("plus")
+    static let rectangleGrid2x2Fill: Self = .init("rectangle.grid.2x2.fill")
+    static let rectangleGrid3x2: Self = .init("rectangle.grid.3x2")
+    static let ruler: Self = .init("ruler")
+    static let rulerFill: Self = .init("ruler.fill")
+    static let share: Self = .init("square.and.arrow.up")
+    static let star: Self = .init("star")
+    static let starFill: Self = .init("star.fill")
+    static let starCircle: Self = .init("star.circle")
+    static let startCircleFill: Self = .init("star.circle.fill")
+    static let sunMax: Self = .init("sun.max")
+    static let sunMaxFill: Self = .init("sun.max.fill")
+    static let sunMinFill: Self = .init("sun.min.fill")
+    static let square: Self = .init("square")
+    static let tag: Self = .init("tag")
+    static let trashCircleFill: Self = .init("trash.circle.fill")
+    static let water: Self = .init("water")
+    static let waveformPathEcg: Self = .init("waveform.path.ecg")
+    static let windSnow: Self = .init("wind.snow")
+    static let wifi: Self = .init("wifi")
+    static let wrench: Self = .init("wrench")
+    static let xCircleFill: Self = .init("x.circle.fill")
+    static let xmark: Self = .init("xmark")
 }

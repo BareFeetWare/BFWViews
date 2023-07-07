@@ -41,7 +41,7 @@ extension Plan.Section: View {
                     }
                 } label: {
                     // TODO: Rotate animated
-                    Image(systemName: isExpanded ? "chevron.down" : "chevron.right")
+                    Image(symbol: isExpanded ? .chevronDown : .chevronRight)
                 }
             }
         }

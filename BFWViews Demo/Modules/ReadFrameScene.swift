@@ -33,10 +33,10 @@ extension ReadFrameScene: View {
                                 .foregroundColor(.secondary)
                                 .padding()
                         )
-                    Image(systemName: "arrow.right")
+                    Image(symbol: .arrowRight)
                 }
                 VStack(alignment: .leading, spacing: 8) {
-                    Image(systemName: "photo")
+                    Image(symbol: .photo)
                         .imageScale(.large)
                     Text("Subtitle with lots of text that often wraps over multiple lines, making the height change")
                         .foregroundColor(.secondary)

@@ -36,7 +36,7 @@ extension Plan {
             case space
             case url(URL)
             case system(
-                name: String,
+                symbol: ImageSymbol,
                 scale: SwiftUI.Image.Scale = .medium
             )
         }
@@ -69,13 +69,13 @@ extension Plan.Image {
     }
     
     public static func system(
-        name: String,
+        symbol: ImageSymbol,
         scale: SwiftUI.Image.Scale = .medium,
         width: CGFloat? = nil,
         foregroundColor: Color? = nil
     ) -> Self {
         .init(
-            source: .system(name: name, scale: scale),
+            source: .system(symbol: symbol, scale: scale),
             width: width,
             foregroundColor: foregroundColor
         )

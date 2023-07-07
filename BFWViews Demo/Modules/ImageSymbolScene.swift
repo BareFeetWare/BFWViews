@@ -10,25 +10,29 @@ import SwiftUI
 import BFWViews
 
 struct ImageSymbolScene {
-    let symbols: [ImageSymbol] = [
-        .battery0,
-        .battery25,
-        .battery100,
-        .arrowUpCircleFill
+    let symbols: [String: ImageSymbol] = [
+        ".battery0": .battery0,
+        ".battery25": .battery25,
+        ".battery100": .battery100,
+        ".arrowUpCircleFill": .arrowUpCircleFill
     ]
+    
+    var symbolKeys: [String] { Array(symbols.keys).sorted() }
 }
 
 extension ImageSymbolScene: View {
     var body: some View {
         List {
-            ForEach(0 ..< symbols.count, id: \.self) { index in
+            ForEach(symbolKeys, id: \.self) { key in
+                let symbol = symbols[key]!
                 HStack {
-                    Image(symbol: symbols[index])
-                        .frame(width: 44)
-                    Text(String(describing: symbols[index]))
+                    Image(symbol: symbol)
+                        .frame(width: 32)
+                    Text(key)
                     Spacer()
-                    Text(String(describing: symbols[index].rawValue))
+                    Text(symbol.name)
                         .foregroundColor(.secondary)
+                        .multilineTextAlignment(.trailing)
                 }
             }
         }

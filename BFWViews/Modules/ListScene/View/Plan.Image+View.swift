@@ -32,8 +32,8 @@ extension Plan.Image: View {
             } placeholder: {
                 ProgressView()
             }
-        case .system(let name, let scale):
-            Image(systemName: name)
+        case .system(let symbol, let scale):
+            Image(symbol: symbol)
                 .imageScale(scale)
                 .foregroundColor(foregroundColor)
                 .frame(width: width)
