@@ -21,10 +21,8 @@ extension Plan.DetailRow: View {
             .multilineTextAlignment(.leading)
             Spacer()
                 .layoutPriority(-1)
-            trailingContent.map {
-                AnyView($0())
-                    .multilineTextAlignment(.trailing)
-            }
+            AnyView(trailingContent())
+                .multilineTextAlignment(.trailing)
         }
     }
 }

@@ -15,7 +15,7 @@ public extension Plan {
         public let subtitle: String?
         public let image: Plan.Image?
         // TODO: Change to generic?
-        public let trailingContent: (() -> any View)?
+        @ViewBuilder public let trailingContent: () -> any View
     }
 }
 
@@ -26,7 +26,7 @@ public extension Plan.DetailRow {
         title: String,
         subtitle: String? = nil,
         image: Plan.Image? = nil,
-        trailingContent: (() -> any View)?
+        @ViewBuilder trailingContent: @escaping () -> any View
     ) {
         self.id = id ?? UUID().uuidString
         self.title = title
@@ -45,7 +45,7 @@ public extension Plan.DetailRow {
         self.title = title
         self.subtitle = subtitle
         self.image = image
-        self.trailingContent = nil
+        self.trailingContent = { EmptyView() }
     }
     
     init(
@@ -59,10 +59,12 @@ public extension Plan.DetailRow {
         self.title = title
         self.subtitle = subtitle
         self.image = image
-        self.trailingContent = trailing.map { trailing in
-            {
+        self.trailingContent = {
+            if let trailing {
                 Text(trailing)
                     .multilineTextAlignment(.trailing)
+            } else {
+                EmptyView()
             }
         }
     }

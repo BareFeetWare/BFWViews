@@ -10,13 +10,16 @@ import SwiftUI
 /// Wrap a view that needs to update when the `observed` object changes. Useful when injecting a view init into a view hierarchy.
 public struct ObservingWrapper<Content: View, Observed: ObservableObject> {
     
-    public init(observed: Observed, content: @escaping () -> Content) {
+    public init(
+        observed: Observed,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
         self.observed = observed
         self.content = content
     }
     
     @ObservedObject var observed: Observed
-    let content: () -> Content
+    @ViewBuilder let content: () -> Content
 }
 
 extension ObservingWrapper: View {
