@@ -34,8 +34,13 @@ extension Plan.Rating {
     func onTap(index: Int) {
         selection = index
     }
-    
-    func symbol(index: Int) -> ImageSymbol {
-        index <= selection ? .starFill : .star
+
+    func planImage(index: Int) -> Plan.Image {
+        .system(
+            symbol: .star,
+            variants: index <= selection ? .fill : .none,
+            scale: .large
+        )
     }
+    
 }

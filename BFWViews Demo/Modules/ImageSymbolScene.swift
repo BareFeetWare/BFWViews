@@ -14,7 +14,7 @@ struct ImageSymbolScene {
         ".battery0": .battery0,
         ".battery25": .battery25,
         ".battery100": .battery100,
-        ".arrowUpCircleFill": .arrowUpCircleFill
+        ".arrowUp": .arrowUp
     ]
     
     var symbolKeys: [String] { Array(symbols.keys).sorted() }

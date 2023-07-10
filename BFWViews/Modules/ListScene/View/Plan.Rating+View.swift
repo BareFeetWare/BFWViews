@@ -19,8 +19,7 @@ extension Plan.Rating: View {
                 Button {
                     onTap(index: index)
                 } label: {
-                    Image(symbol: symbol(index: index))
-                        .imageScale(.large)
+                    planImage(index: index)
                 }
                 // Make tap received by button, rather than by encompassing cell:
                 .buttonStyle(.borderless)
