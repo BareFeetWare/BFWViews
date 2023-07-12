@@ -40,8 +40,8 @@ extension Plan.Section: View {
                         isExpanded.toggle()
                     }
                 } label: {
-                    // TODO: Rotate animated
-                    Image(symbol: isExpanded ? .chevronDown : .chevronRight)
+                    Image(symbol: .chevronRight)
+                        .rotationEffect(.degrees(isExpanded ? 90 : 0))
                 }
             }
         }

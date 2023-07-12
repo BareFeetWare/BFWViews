@@ -20,6 +20,7 @@ extension Plan.Rack: View {
             .pickerStyle(.segmented)
             .disabled(isDisabledPicker)
             .padding(.horizontal)
+            // TODO: Keep state of tab (eg scroll) when switching.
             tabs.first { $0.id == selectedTabID }
             // Using TabView with style .page proved unreliable, where it sometimes failed to switch tabs when the selectedTabID changed.
         }
