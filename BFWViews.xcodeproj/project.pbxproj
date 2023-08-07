@@ -68,6 +68,7 @@
 		E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */; };
 		E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */; };
 		E2DDC20529FA54CB00DE6C84 /* Plan.DetailRow+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+View.swift */; };
+		E2E42BE42A80731E00B6E66E /* LabeledControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E42BE32A80731E00B6E66E /* LabeledControl.swift */; };
 		E2EA561E2838D3240053BDAC /* ListSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */; };
 		E2F47B122A13351C009BD9EC /* Plan.Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F47B112A13351C009BD9EC /* Plan.Rating.swift */; };
 		E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */; };
@@ -174,6 +175,7 @@
 		E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Cell.swift; sourceTree = "<group>"; };
 		E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.DetailRow+View.swift"; sourceTree = "<group>"; };
+		E2E42BE32A80731E00B6E66E /* LabeledControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledControl.swift; sourceTree = "<group>"; };
 		E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSceneFlow.swift; sourceTree = "<group>"; };
 		E2F47B112A13351C009BD9EC /* Plan.Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Rating.swift; sourceTree = "<group>"; };
 		E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Rating+View.swift"; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				E28B7ABE275C5E2F00ED5730 /* CellBorder.swift */,
 				E224C9A126E8661100AC5CD2 /* Color+Hex.swift */,
 				E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */,
+				E2E42BE32A80731E00B6E66E /* LabeledControl.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
 				E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */,
 				E2606CEB2A415378004E6400 /* ObservingWrapper.swift */,
@@ -655,6 +658,7 @@
 				E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
 				E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */,
+				E2E42BE42A80731E00B6E66E /* LabeledControl.swift in Sources */,
 				E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */,
 				E28D1BD5283350C400064CCD /* Plan.List.swift in Sources */,
 				E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */,

@@ -10,19 +10,19 @@ import SwiftUI
 
 extension Plan.Rating: View {
     public var body: some View {
-        HStack {
-            title.map {
-                Text($0)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            ForEach(1...maximum, id: \.self) { index in
-                Button {
-                    onTap(index: index)
-                } label: {
-                    planImage(index: index)
+        LabeledControl {
+            title.map { Text($0) }
+        } control: {
+            HStack {
+                ForEach(1...maximum, id: \.self) { index in
+                    Button {
+                        onTap(index: index)
+                    } label: {
+                        planImage(index: index)
+                    }
+                    // Make tap received by button, rather than by encompassing cell:
+                    .buttonStyle(.borderless)
                 }
-                // Make tap received by button, rather than by encompassing cell:
-                .buttonStyle(.borderless)
             }
         }
     }
