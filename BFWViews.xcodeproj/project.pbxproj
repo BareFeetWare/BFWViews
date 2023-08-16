@@ -30,7 +30,7 @@
 		E2459F812A0335DE0068DCBB /* Plan.Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F802A0335DE0068DCBB /* Plan.Section.swift */; };
 		E2459F852A0351450068DCBB /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F842A0351450068DCBB /* Plan.swift */; };
 		E2459F892A0352090068DCBB /* Plan.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F882A0352090068DCBB /* Plan.Image.swift */; };
-		E2606CEC2A415378004E6400 /* ObservingWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CEB2A415378004E6400 /* ObservingWrapper.swift */; };
+		E2606CEC2A415378004E6400 /* Observing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CEB2A415378004E6400 /* Observing.swift */; };
 		E2606CEE2A417C1A004E6400 /* PropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CED2A417C1A004E6400 /* PropertyList.swift */; };
 		E2606D0B2A430FA5004E6400 /* NavigationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */; };
 		E26A7AD42765A561007E3A6C /* BadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A7AD32765A561007E3A6C /* BadgeScene.swift */; };
@@ -137,7 +137,7 @@
 		E2459F802A0335DE0068DCBB /* Plan.Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Section.swift; sourceTree = "<group>"; };
 		E2459F842A0351450068DCBB /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		E2459F882A0352090068DCBB /* Plan.Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Image.swift; sourceTree = "<group>"; };
-		E2606CEB2A415378004E6400 /* ObservingWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservingWrapper.swift; sourceTree = "<group>"; };
+		E2606CEB2A415378004E6400 /* Observing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observing.swift; sourceTree = "<group>"; };
 		E2606CED2A417C1A004E6400 /* PropertyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyList.swift; sourceTree = "<group>"; };
 		E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHeader.swift; sourceTree = "<group>"; };
 		E26A7AD32765A561007E3A6C /* BadgeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeScene.swift; sourceTree = "<group>"; };
@@ -431,7 +431,7 @@
 				E2E42BE32A80731E00B6E66E /* LabeledControl.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
 				E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */,
-				E2606CEB2A415378004E6400 /* ObservingWrapper.swift */,
+				E2606CEB2A415378004E6400 /* Observing.swift */,
 				E2606CED2A417C1A004E6400 /* PropertyList.swift */,
 				E23AB43A268157720018DD04 /* ReadFrame.swift */,
 				E28B7ABC275AC77700ED5730 /* UIKitView.swift */,
@@ -642,7 +642,7 @@
 				E2FD40CD2669C9F5004E4905 /* Alert+Error.swift in Sources */,
 				E28B7ABF275C5E2F00ED5730 /* CellBorder.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
-				E2606CEC2A415378004E6400 /* ObservingWrapper.swift in Sources */,
+				E2606CEC2A415378004E6400 /* Observing.swift in Sources */,
 				E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */,
 				E2606CEE2A417C1A004E6400 /* PropertyList.swift in Sources */,
 				E2C16B68266480C400BAC051 /* View+Distributed.swift in Sources */,
