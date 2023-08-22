@@ -60,11 +60,13 @@ public extension Plan.DetailRow {
         self.subtitle = subtitle
         self.image = image
         self.trailingContent = {
-            if let trailing {
-                Text(trailing)
-                    .multilineTextAlignment(.trailing)
-            } else {
-                EmptyView()
+            Group {
+                if let trailing {
+                    Text(trailing)
+                        .multilineTextAlignment(.trailing)
+                } else {
+                    EmptyView()
+                }
             }
         }
     }

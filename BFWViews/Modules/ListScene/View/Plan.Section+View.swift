@@ -11,11 +11,14 @@ import SwiftUI
 extension Plan.Section: View {
     public var body: some View {
         if #available(iOS 17.0, *) {
+            // TODO: Enable when moved to Xcode 15 non beta.
+            /*
             Section(isExpanded: $isExpanded) {
                 ForEach(cells) { $0 }
             } header: {
                 headerView
             }
+             */
         } else {
             Section {
                 if isExpanded {

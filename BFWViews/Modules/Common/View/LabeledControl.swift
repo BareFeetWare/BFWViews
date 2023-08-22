@@ -57,10 +57,12 @@ public struct LabeledControl<Label: View, Control: View>: View {
 
 }
 
-#Preview {
-    LabeledControl {
-        Text("Title with lots of words")
-    } control: {
-        Text("Trailing Control")
+struct LabeledControl_Previews: PreviewProvider {
+    static var previews: some View {
+        LabeledControl {
+            Text("Title with lots of words")
+        } control: {
+            Text("Trailing Control")
+        }
     }
 }
