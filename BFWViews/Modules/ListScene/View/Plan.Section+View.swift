@@ -22,7 +22,10 @@ extension Plan.Section: View {
          */
             Section {
                 if isExpanded {
-                    ForEach(cells) { $0 }
+                    ForEach(cells) { $0
+                        // `.borderless` on the row allows any contained buttons to show in their button style.
+                        .buttonStyle(.borderless)
+                    }
                 }
             } header: {
                 headerView
