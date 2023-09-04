@@ -18,8 +18,22 @@ public class PropertyList: ObservableObject {
 
 public extension PropertyList {
     
+    func value<T>(id: String) -> T? {
+        self.dictionary[id] as? T
+    }
+    
     func binding<T: Hashable & Equatable>(
         id: String
+    ) -> Binding<T?> {
+        .init {
+            self.dictionary[id] as? T
+        } set: {
+            self.dictionary[id] = $0
+        }
+    }
+    
+    func binding<T: Hashable & Equatable>(
+        id: String, as type: T.Type
     ) -> Binding<T?> {
         .init {
             self.dictionary[id] as? T
