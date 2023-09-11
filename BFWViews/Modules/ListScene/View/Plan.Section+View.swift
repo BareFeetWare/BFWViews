@@ -10,44 +10,47 @@ import SwiftUI
 
 extension Plan.Section: View {
     public var body: some View {
-        // TODO: Enable when moved to Xcode 15 non beta.
-        /*
         if #available(iOS 17.0, *) {
             Section(isExpanded: $isExpanded) {
-                ForEach(cells) { $0 }
+                cellsView
             } header: {
                 headerView
             }
         } else {
-         */
             Section {
                 if isExpanded {
-                    ForEach(cells) { $0
-                        // `.borderless` on the row allows any contained buttons to show in their button style.
-                        .buttonStyle(.borderless)
-                    }
+                    cellsView
                 }
             } header: {
                 headerView
             }
-        //}
+        }
     }
     
+    var cellsView: some View {
+        ForEach(cells) {
+            $0
+            // `.borderless` on the row allows any contained buttons to show in their button style.
+                .buttonStyle(.borderless)
+        }
+    }
+    
+    @ViewBuilder
     var headerView: some View {
-        HStack {
-            header.map {
-                AnyView($0)
+        if let header {
+            HStack {
+                AnyView(header)
                     .textCase(nil)
-            }
-            if isExpandable {
-                Spacer()
-                Button {
-                    withAnimation {
-                        isExpanded.toggle()
+                if isExpandable {
+                    Spacer()
+                    Button {
+                        withAnimation {
+                            isExpanded.toggle()
+                        }
+                    } label: {
+                        Image(symbol: .chevronRight)
+                            .rotationEffect(.degrees(isExpanded ? 90 : 0))
                     }
-                } label: {
-                    Image(symbol: .chevronRight)
-                        .rotationEffect(.degrees(isExpanded ? 90 : 0))
                 }
             }
         }
