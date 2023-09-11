@@ -28,8 +28,9 @@ extension Plan.Section: View {
     }
     
     var cellsView: some View {
-        ForEach(cells) {
-            $0
+        ForEach(cells) { cell in
+            cell
+                .tag(cell.id)
             // `.borderless` on the row allows any contained buttons to show in their button style.
                 .buttonStyle(.borderless)
         }
