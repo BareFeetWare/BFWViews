@@ -13,9 +13,9 @@ extension Plan {
     public struct Section: Identifiable {
         public let id: String
         public let isExpandable: Bool
+        @State var isExpanded: Bool = true
         public let header: (any View)?
         public var cells: [Cell]
-        @State var isExpanded: Bool = true
     }
 }
 
@@ -24,12 +24,14 @@ public extension Plan.Section {
     init(
         id: String? = nil,
         isExpandable: Bool = false,
+        isExpanded: Bool = true,
         header: (any View)?,
         cells: [Plan.Cell]
     ) {
         self.init(
             id: id ?? UUID().uuidString,
             isExpandable: isExpandable,
+            isExpanded: isExpanded,
             header: header,
             cells: cells
         )
@@ -38,12 +40,14 @@ public extension Plan.Section {
     init(
         id: String? = nil,
         isExpandable: Bool = false,
+        isExpanded: Bool = true,
         title: String? = nil,
         cells: [Plan.Cell]
     ) {
         self.init(
             id: id,
             isExpandable: isExpandable,
+            isExpanded: isExpanded,
             header: title.map { Text($0) },
             cells: cells
         )
