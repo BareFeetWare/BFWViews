@@ -10,6 +10,6 @@ import SwiftUI
 
 extension Plan.Tab: View {
     public var body: some View {
-        AnyView(content)
+        AnyView(content())
     }
 }

@@ -16,14 +16,14 @@ extension Plan {
         
         public init(
             title: String,
-            content: any View
+            content: @escaping () -> any View
         ) {
             self.title = title
             self.content = content
         }
         
         public let title: String
-        public let content: any View
+        public let content: () -> any View
     }
 }
 

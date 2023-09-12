@@ -33,8 +33,12 @@ extension Plan.Rack {
     
     static let preview: Self = {
         let tabs: [Plan.Tab] = [
-            .init(title: "First", content: Plan.List(cells: [.detail("First")])),
-            .init(title: "Second", content: Plan.List(cells: [.detail("Second")])),
+            .init(title: "First") {
+                Plan.List(cells: [.detail("First")])
+            },
+            .init(title: "Second") {
+                Plan.List(cells: [.detail("Second")])
+            },
         ]
         return Plan.Rack(
             selectedTabID: .constant(tabs.first!.id),
