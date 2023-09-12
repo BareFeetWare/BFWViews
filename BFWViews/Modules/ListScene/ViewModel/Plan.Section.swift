@@ -12,9 +12,8 @@ import SwiftUI
 extension Plan {
     public struct Section: Identifiable {
         public let id: String
-        public let isExpandable: Bool
-        @State var isExpanded: Bool = true
-        public let header: (any View)?
+        var isExpanded: Binding<Bool>? = nil
+        public let header: (() -> any View)?
         public var cells: [Cell]
     }
 }
@@ -23,14 +22,12 @@ public extension Plan.Section {
 
     init(
         id: String? = nil,
-        isExpandable: Bool = false,
-        isExpanded: Bool = true,
-        header: (any View)?,
+        isExpanded: Binding<Bool>? = nil,
+        header: (() -> any View)?,
         cells: [Plan.Cell]
     ) {
         self.init(
             id: id ?? UUID().uuidString,
-            isExpandable: isExpandable,
             isExpanded: isExpanded,
             header: header,
             cells: cells
@@ -39,16 +36,18 @@ public extension Plan.Section {
     
     init(
         id: String? = nil,
-        isExpandable: Bool = false,
-        isExpanded: Bool = true,
+        isExpanded: Binding<Bool>? = nil,
         title: String? = nil,
         cells: [Plan.Cell]
     ) {
         self.init(
             id: id,
-            isExpandable: isExpandable,
             isExpanded: isExpanded,
-            header: title.map { Text($0) },
+            header: title.map { title in
+                {
+                    Text(title)
+                }
+            },
             cells: cells
         )
     }
