@@ -103,12 +103,19 @@ public extension Plan.Cell {
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil,
+        // TODO: Avoid needing overrides
+        overridingNavigationTitle: String? = nil,
+        overridingNavigationSubtitle: String? = nil,
         destination: @escaping () async throws -> some View
     ) -> Self {
         let id = id ?? UUID().uuidString
-        let navigationTitle = title.hasSuffix(":")
-        ? String(title.dropLast())
-        : title
+        let navigationTitle = overridingNavigationTitle
+        ?? (
+            title.hasSuffix(":")
+            ? String(title.dropLast())
+            : title
+        )
+        let navigationSubtitle = overridingNavigationSubtitle ?? subtitle
         let label = Plan.DetailRow(
             id: id,
             title: title,
@@ -119,12 +126,17 @@ public extension Plan.Cell {
         let content = AsyncNavigationLink(
             destination: {
                 try await destination()
-                    .navigationHeader(title: navigationTitle, subtitle: subtitle)
+                    .navigationHeader(
+                        title: navigationTitle,
+                        subtitle: navigationSubtitle
+                    )
             },
             label: { label }
         )
         return .init(id: id, content: { content })
     }
+    
+    // TODO: Consolidate above and below functions.
     
     static func detail(
         _ title: String,
@@ -132,12 +144,18 @@ public extension Plan.Cell {
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil,
+        overridingNavigationTitle: String? = nil,
+        overridingNavigationSubtitle: String? = nil,
         destination: some View
     ) -> Self {
         let id = id ?? UUID().uuidString
-        let navigationTitle = title.hasSuffix(":")
-        ? String(title.dropLast())
-        : title
+        let navigationTitle = overridingNavigationTitle
+        ?? (
+            title.hasSuffix(":")
+            ? String(title.dropLast())
+            : title
+        )
+        let navigationSubtitle = overridingNavigationSubtitle ?? subtitle
         let label = Plan.DetailRow(
             id: id,
             title: title,
@@ -147,7 +165,10 @@ public extension Plan.Cell {
         )
         let content = NavigationLink(
             destination: destination
-                .navigationHeader(title: navigationTitle, subtitle: subtitle),
+                    .navigationHeader(
+                        title: navigationTitle,
+                        subtitle: navigationSubtitle
+                    ),
             label: { label }
         )
         return .init(id: id, content: { content })
