@@ -93,6 +93,7 @@ public extension ImageSymbol {
     static let sunMax: Self = .init("sun.max")
     static let sunMin: Self = .init("sun.min")
     static let square: Self = .init("square")
+    static let squareAndPencil: Self = .init("square.and.pencil")
     static let tag: Self = .init("tag")
     static let trash: Self = .init("trash")
     static let water: Self = .init("water")
