@@ -20,7 +20,8 @@ import SwiftUI
 public struct AsyncNavigationLink<Destination: View, Label: View, Tag: Hashable> {
     let tag: Tag
     let selection: Binding<Tag?>?
-    @State private var defaultSelection: Tag?
+    /// Only changes when activeDestination is ready.
+    @State private var activeSelection: Tag?
     let destination: () async throws -> Destination
     let label: () -> Label
     @State private var isInProgress = false
@@ -44,41 +45,34 @@ public struct AsyncNavigationLink<Destination: View, Label: View, Tag: Hashable>
     
 }
 
-extension AsyncNavigationLink {
-    func activateDestination() {
-        isInProgress = true
-        Task {
-            do {
-                activeDestination = try await destination()
-                isInProgress = false
-                activeSelectionBinding.wrappedValue = tag
-            } catch {
-                self.error = error
-            }
-        }
-    }
-}
-
 private extension AsyncNavigationLink {
-
-    var activeSelectionBinding: Binding<Tag?> {
-        .init {
-            if let selection {
-                return selection.wrappedValue
-            } else {
-                return defaultSelection
-            }
-        } set: { newValue in
-            if let selection {
-                selection.wrappedValue = newValue
-            } else {
-                defaultSelection = newValue
+    
+    func activateDestination() {
+        DispatchQueue.main.async {
+            isInProgress = true
+            Task {
+                do {
+                    activeDestination = try await destination()
+                    activeSelection = tag
+                    isInProgress = false
+                } catch {
+                    self.error = error
+                }
             }
         }
     }
     
     func onTap() {
         activateDestination()
+    }
+    
+    /// Observe changes to selection binding.
+    var bindingObserver: String {
+        let selection = selection
+        if selection?.wrappedValue == tag && activeSelection != tag {
+            activateDestination()
+        }
+        return ""
     }
 }
 
@@ -89,9 +83,12 @@ extension AsyncNavigationLink: View {
         } label: {
             NavigationLink(
                 tag: tag,
-                selection: activeSelectionBinding,
+                selection: $activeSelection,
                 destination: { activeDestination },
                 label: label
+            )
+            .overlay(
+                Text(bindingObserver)
             )
             .foregroundColor(.primary)
             .overlay(
