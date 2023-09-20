@@ -17,8 +17,9 @@ import SwiftUI
  6. The app moves forward to the destination scene.
  7. No error handling yet.
  */
-public struct AsyncNavigationLink<Destination: View, Label: View> {
-    @State var isActive: Bool = false
+public struct AsyncNavigationLink<Destination: View, Label: View & Identifiable> {
+    var selection: Binding<Label.ID?>?
+    @State private var defaultSelection: Label.ID?
     let destination: () async throws -> Destination
     let label: () -> Label
     @State private var isInProgress = false
@@ -29,27 +30,46 @@ public struct AsyncNavigationLink<Destination: View, Label: View> {
     @State private var isPresentedError = false
     
     public init(
+        selection: Binding<Label.ID?>? = nil,
         destination: @escaping () async throws -> Destination,
         label: @escaping () -> Label
     ) {
+        self.selection = selection
         self.destination = destination
         self.label = label
     }
     
 }
 
-extension AsyncNavigationLink: Identifiable where Label: Identifiable {
+extension AsyncNavigationLink: Identifiable {
     public var id: Label.ID { label().id }
 }
 
-extension AsyncNavigationLink {
+private extension AsyncNavigationLink {
+
+    var activeSelectionBinding: Binding<Label.ID?> {
+        .init {
+            if let selection {
+                return selection.wrappedValue
+            } else {
+                return defaultSelection
+            }
+        } set: { newValue in
+            if let selection {
+                selection.wrappedValue = newValue
+            } else {
+                defaultSelection = newValue
+            }
+        }
+    }
+    
     func onTap() {
         isInProgress = true
         Task {
             do {
                 activeDestination = try await destination()
                 isInProgress = false
-                isActive = true
+                activeSelectionBinding.wrappedValue = id
             } catch {
                 self.error = error
             }
@@ -63,7 +83,8 @@ extension AsyncNavigationLink: View {
             onTap()
         } label: {
             NavigationLink(
-                isActive: $isActive,
+                tag: label().id,
+                selection: activeSelectionBinding,
                 destination: { activeDestination },
                 label: label
             )
@@ -87,13 +108,19 @@ extension AsyncNavigationLink: View {
 struct AsyncNavigationLink_Previews: PreviewProvider {
     
     struct PreviewScene: View {
+        
+        @State var selection: String?
+        
         var body: some View {
             NavigationView {
                 List {
                     AsyncNavigationLink(
+                        selection: $selection,
                         destination: asyncDestination,
                         label: {
-                            Text("Async")
+                            Plan.Cell(id: "async") {
+                                Text("Async")
+                            }
                         }
                     )
                 }

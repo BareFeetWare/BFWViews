@@ -26,7 +26,9 @@ extension AsyncNavigationLinkScene: View {
             AsyncNavigationLink(
                 destination: asyncDestination,
                 label: {
-                    Text("Do something asynchronous")
+                    Plan.Cell(id: "1") {
+                        Text("Do something asynchronous")
+                    }
                 }
             )
         }
