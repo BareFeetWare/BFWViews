@@ -124,6 +124,7 @@ public extension Plan.Cell {
             image: image
         )
         let content = AsyncNavigationLink(
+            tag: id,
             destination: {
                 try await destination()
                     .navigationHeader(

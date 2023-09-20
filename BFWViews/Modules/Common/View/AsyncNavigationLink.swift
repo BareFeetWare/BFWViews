@@ -17,9 +17,10 @@ import SwiftUI
  6. The app moves forward to the destination scene.
  7. No error handling yet.
  */
-public struct AsyncNavigationLink<Destination: View, Label: View & Identifiable> {
-    var selection: Binding<Label.ID?>?
-    @State private var defaultSelection: Label.ID?
+public struct AsyncNavigationLink<Destination: View, Label: View, Tag: Hashable> {
+    let tag: Tag
+    let selection: Binding<Tag?>?
+    @State private var defaultSelection: Tag?
     let destination: () async throws -> Destination
     let label: () -> Label
     @State private var isInProgress = false
@@ -30,10 +31,12 @@ public struct AsyncNavigationLink<Destination: View, Label: View & Identifiable>
     @State private var isPresentedError = false
     
     public init(
-        selection: Binding<Label.ID?>? = nil,
+        tag: Tag,
+        selection: Binding<Tag?>? = nil,
         destination: @escaping () async throws -> Destination,
         label: @escaping () -> Label
     ) {
+        self.tag = tag
         self.selection = selection
         self.destination = destination
         self.label = label
@@ -41,13 +44,24 @@ public struct AsyncNavigationLink<Destination: View, Label: View & Identifiable>
     
 }
 
-extension AsyncNavigationLink: Identifiable {
-    public var id: Label.ID { label().id }
+extension AsyncNavigationLink {
+    func activateDestination() {
+        isInProgress = true
+        Task {
+            do {
+                activeDestination = try await destination()
+                isInProgress = false
+                activeSelectionBinding.wrappedValue = tag
+            } catch {
+                self.error = error
+            }
+        }
+    }
 }
 
 private extension AsyncNavigationLink {
 
-    var activeSelectionBinding: Binding<Label.ID?> {
+    var activeSelectionBinding: Binding<Tag?> {
         .init {
             if let selection {
                 return selection.wrappedValue
@@ -64,16 +78,7 @@ private extension AsyncNavigationLink {
     }
     
     func onTap() {
-        isInProgress = true
-        Task {
-            do {
-                activeDestination = try await destination()
-                isInProgress = false
-                activeSelectionBinding.wrappedValue = id
-            } catch {
-                self.error = error
-            }
-        }
+        activateDestination()
     }
 }
 
@@ -83,7 +88,7 @@ extension AsyncNavigationLink: View {
             onTap()
         } label: {
             NavigationLink(
-                tag: label().id,
+                tag: tag,
                 selection: activeSelectionBinding,
                 destination: { activeDestination },
                 label: label
@@ -115,13 +120,10 @@ struct AsyncNavigationLink_Previews: PreviewProvider {
             NavigationView {
                 List {
                     AsyncNavigationLink(
+                        tag: "1",
                         selection: $selection,
                         destination: asyncDestination,
-                        label: {
-                            Plan.Cell(id: "async") {
-                                Text("Async")
-                            }
-                        }
+                        label: { Text("Async") }
                     )
                 }
             }

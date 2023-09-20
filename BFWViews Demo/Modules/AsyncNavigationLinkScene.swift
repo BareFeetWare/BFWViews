@@ -24,11 +24,10 @@ extension AsyncNavigationLinkScene: View {
     var body: some View {
         List {
             AsyncNavigationLink(
+                tag: "1",
                 destination: asyncDestination,
                 label: {
-                    Plan.Cell(id: "1") {
-                        Text("Do something asynchronous")
-                    }
+                    Text("Do something asynchronous")
                 }
             )
         }
