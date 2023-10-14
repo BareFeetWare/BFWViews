@@ -22,6 +22,10 @@ public extension PropertyList {
         self.dictionary[id] as? T
     }
     
+    func setValue<T: Hashable>(_ value: T, forID id: String) {
+        self.dictionary[id] = value
+    }
+    
     func binding<T: Hashable & Equatable>(
         id: String
     ) -> Binding<T?> {
