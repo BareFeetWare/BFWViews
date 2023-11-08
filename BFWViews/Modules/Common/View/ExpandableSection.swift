@@ -23,7 +23,7 @@ public struct ExpandableSection<Header: View, Content: View> {
         self.content = content
         self.header = header
     }
-
+    
     public init(
         @ViewBuilder content: @escaping () -> Content,
         header: (() -> Header)?
@@ -32,11 +32,11 @@ public struct ExpandableSection<Header: View, Content: View> {
         self.content = content
         self.header = header
     }
-
+    
 }
 
 extension ExpandableSection where Header == Text {
-
+    
     public init(
         _ title: String,
         isExpanded: Binding<Bool>,
@@ -47,7 +47,7 @@ extension ExpandableSection where Header == Text {
         self.header = { Text(title) }
         
     }
-
+    
     public init(
         _ title: String?,
         @ViewBuilder content: @escaping () -> Content
@@ -58,32 +58,18 @@ extension ExpandableSection where Header == Text {
             { Text(title) }
         }
     }
-
+    
 }
 
 extension ExpandableSection: View {
     public var body: some View {
-        // TODO: Make the expander chevron apppear when using iOS17 native isExpanded
-        /*
-         if #available(iOS 17.0, *) {
-         if let isExpanded {
-         Section(isExpanded: isExpanded) {
-         content()
-         } header: {
-         headerView
-         }
-         } else {
-         nonExpandableSection
-         }
-         } else {
-         */
         if let isExpanded {
             Section {
-                if isExpanded.wrappedValue {
+                DisclosureGroup(isExpanded: isExpanded) {
                     content()
+                } label: {
+                    headerView
                 }
-            } header: {
-                headerAndArrow
             }
         } else {
             nonExpandableSection
@@ -106,27 +92,6 @@ private extension ExpandableSection {
         header?()
     }
     
-    @ViewBuilder
-    var headerAndArrow: some View {
-        if let header {
-            HStack {
-                header()
-                    .textCase(nil)
-                if let isExpanded {
-                    Spacer()
-                    Button {
-                        withAnimation {
-                            isExpanded.wrappedValue.toggle()
-                        }
-                    } label: {
-                        Image(symbol: .chevronRight)
-                            .rotationEffect(.degrees(isExpanded.wrappedValue ? 90 : 0))
-                    }
-                }
-            }
-        }
-    }
-    
 }
 
 struct ExpandableSection_Preview: PreviewProvider {
@@ -134,7 +99,7 @@ struct ExpandableSection_Preview: PreviewProvider {
     struct Preview: View {
         @State var isExpandedSection1 = true
         @State var isExpandedSection2 = false
-
+        
         var body: some View {
             List {
                 ExpandableSection(
@@ -150,7 +115,7 @@ struct ExpandableSection_Preview: PreviewProvider {
                 } header: {
                     Text("Header")
                 }
-           }
+            }
         }
     }
     
