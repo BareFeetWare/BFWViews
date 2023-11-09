@@ -17,6 +17,16 @@ extension Plan.Image: View {
                 .frame(width: width)
                 .frame(minHeight: backgroundColor != nil ? width : 0)
                 .cornerRadius(cornerRadius)
+        case .uiImage(let uiImage):
+            Image(uiImage: uiImage)
+            // TODO: Consolidate the same modifiers between cases.
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .foregroundColor(foregroundColor)
+                .frame(width: width)
+                .frame(minHeight: backgroundColor != nil ? width : 0)
+                .background(backgroundColor)
+                .cornerRadius(cornerRadius)
         case .url(let url):
             AsyncImage(
                 url: url

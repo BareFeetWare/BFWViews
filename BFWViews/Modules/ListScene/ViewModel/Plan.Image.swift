@@ -34,6 +34,7 @@ extension Plan {
         
         public enum Source {
             case space
+            case uiImage(UIImage)
             case url(URL)
             case system(
                 symbol: ImageSymbol,
