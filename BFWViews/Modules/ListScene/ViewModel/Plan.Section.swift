@@ -14,7 +14,7 @@ extension Plan {
         public let id: String
         var isExpanded: Binding<Bool>? = nil
         public let header: (() -> any View)?
-        public var cells: [Cell]
+        public var cells: [Cell?]
     }
 }
 
@@ -24,7 +24,7 @@ public extension Plan.Section {
         id: String? = nil,
         isExpanded: Binding<Bool>? = nil,
         header: (() -> any View)?,
-        cells: [Plan.Cell]
+        cells: [Plan.Cell?]
     ) {
         self.init(
             id: id ?? UUID().uuidString,
@@ -38,7 +38,7 @@ public extension Plan.Section {
         id: String? = nil,
         isExpanded: Binding<Bool>? = nil,
         title: String? = nil,
-        cells: [Plan.Cell]
+        cells: [Plan.Cell?]
     ) {
         self.init(
             id: id,

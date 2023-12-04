@@ -11,7 +11,7 @@ import SwiftUI
 extension Plan.List: View {
     public var body: some View {
         List {
-            ForEach(sections) { $0 }
+            ForEach(sections.compactMap { $0 }) { $0 }
         }
     }
 }

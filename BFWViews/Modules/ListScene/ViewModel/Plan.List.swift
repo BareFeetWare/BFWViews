@@ -12,12 +12,12 @@ public extension Plan {
     struct List {
         
         public init(
-            sections: [Section]
+            sections: [Section?]
         ) {
             self.sections = sections
         }
         
-        public let sections: [Section]
+        public let sections: [Section?]
     }
 }
 
@@ -26,7 +26,7 @@ public extension Plan {
 public extension Plan.List {
     
     init(
-        cells: [Plan.Cell]
+        cells: [Plan.Cell?]
     ) {
         self.init(
             sections: [
