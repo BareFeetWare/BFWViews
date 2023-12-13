@@ -8,6 +8,14 @@
 
 import SwiftUI
 
+public extension View {
+    func alert(error: Binding<Error?>) -> some View {
+        alert(isPresented: error.isPresented) {
+            Alert(error: error.wrappedValue)
+        }
+    }
+}
+
 public extension Alert {
     init(error: Error?) {
         self.init(
@@ -19,16 +27,37 @@ public extension Alert {
     }
 }
 
+private extension Binding where Value == Optional<Error> {
+    var isPresented: Binding<Bool> {
+        .init {
+            wrappedValue != nil
+        } set: {
+            if !$0 {
+                wrappedValue = nil
+            }
+        }
+    }
+}
+
 struct Alert_Error_Previews: PreviewProvider {
     
-    private enum Error: Swift.Error {
-        case test
+    struct Preview: View {
+        @State private var error: Error?
+        
+        var body: some View {
+            List {
+                Button("Show alert with error") {
+                    error = NSError(domain: "com.test", code: 0, userInfo: nil)
+                }
+                .alert(error: $error)
+            }
+            .navigationTitle("Alert error")
+        }
     }
     
     static var previews: some View {
-        Text("Text")
-            .alert(isPresented: .constant(true)) {
-                Alert(error: Error.test)
-            }
+        NavigationView {
+            Preview()
+        }
     }
 }
