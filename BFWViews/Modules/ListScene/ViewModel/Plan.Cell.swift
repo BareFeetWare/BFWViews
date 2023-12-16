@@ -77,6 +77,17 @@ extension Plan.Cell: View {
 
 public extension Plan.Cell {
     
+    static func button(
+        _ title: String,
+        action: @escaping () -> Void
+    ) -> Self {
+        .init(id: "button: \(title)") {
+            Button(title) {
+                action()
+            }
+        }
+    }
+    
     static func detail(
         _ title: String,
         id: String? = nil,
