@@ -109,19 +109,35 @@ extension AsyncNavigationLink: View {
 
 struct AsyncNavigationLink_Previews: PreviewProvider {
     
-    struct PreviewScene: View {
+    struct Preview: View {
         
         @State var selection: String?
         
         var body: some View {
             NavigationView {
                 List {
-                    AsyncNavigationLink(
-                        tag: "1",
-                        selection: $selection,
-                        destination: asyncDestination,
-                        label: { Text("Async") }
-                    )
+                    Section {
+                        AsyncNavigationLink(
+                            tag: "1",
+                            selection: $selection,
+                            destination: asyncDestination,
+                            label: { Text("Async 1") }
+                        )
+                        AsyncNavigationLink(
+                            tag: "2",
+                            selection: $selection,
+                            destination: asyncDestination,
+                            label: { Text("Async 2") }
+                        )
+                    }
+                    Section {
+                        Button("Activate 1") {
+                            selection = "1"
+                        }
+                        Button("Activate 2") {
+                            selection = "2"
+                        }
+                    }
                 }
             }
         }
@@ -135,6 +151,6 @@ struct AsyncNavigationLink_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        PreviewScene()
+        Preview()
     }
 }
