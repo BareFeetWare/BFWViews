@@ -19,7 +19,9 @@ import SwiftUI
  */
 public struct AsyncNavigationLink<Destination: View, Label: View, Tag: Hashable> {
     let tag: Tag
-    let selection: Binding<Tag?>?
+    let externalSelectionBinding: Binding<Tag?>?
+    /// Used internally if no external selection binding is provided.
+    @State private var internalSelection: Tag?
     /// Only changes when activeDestination is ready.
     @State private var activeSelection: Tag?
     let destination: () async throws -> Destination
@@ -35,7 +37,7 @@ public struct AsyncNavigationLink<Destination: View, Label: View, Tag: Hashable>
         label: @escaping () -> Label
     ) {
         self.tag = tag
-        self.selection = selection
+        self.externalSelectionBinding = selection
         self.destination = destination
         self.label = label
     }
@@ -43,6 +45,24 @@ public struct AsyncNavigationLink<Destination: View, Label: View, Tag: Hashable>
 }
 
 private extension AsyncNavigationLink {
+    
+    /// Used by the view
+    var selectionBinding: Binding<Tag?> {
+        .init {
+            externalSelectionBinding?.wrappedValue ?? internalSelection
+        } set: { newValue in
+            if externalSelectionBinding != nil {
+                externalSelectionBinding?.wrappedValue = newValue
+            } else {
+                internalSelection = newValue
+            }
+        }
+    }
+    
+    var selection: Tag? {
+        get { selectionBinding.wrappedValue }
+        set { selectionBinding.wrappedValue = newValue }
+    }
     
     func activateDestination() {
         DispatchQueue.main.async {
@@ -59,17 +79,20 @@ private extension AsyncNavigationLink {
         }
     }
     
+    func activateDestinationIfNeeded() {
+        if selection == tag && activeSelection != tag {
+            activateDestination()
+        }
+    }
+    
     func onTap() {
         activateDestination()
     }
     
-    /// Observe changes to selection binding.
-    var bindingObserver: String {
-        let selection = selection
-        if selection?.wrappedValue == tag && activeSelection != tag {
+    func onChange(selection: Tag?) {
+        if selection == tag {
             activateDestination()
         }
-        return ""
     }
 }
 
@@ -84,10 +107,10 @@ extension AsyncNavigationLink: View {
                 destination: { activeDestination },
                 label: label
             )
-            .overlay(
-                Text(bindingObserver)
-            )
             .foregroundColor(.primary)
+            .onChange(of: selection) {
+                onChange(selection: $0)
+            }
             .overlay(
                 Group {
                     if isInProgress {
@@ -102,50 +125,70 @@ extension AsyncNavigationLink: View {
     }
 }
 
-struct AsyncNavigationLink_Previews: PreviewProvider {
+public struct AsyncNavigationLink_Previews: PreviewProvider {
     
-    struct Preview: View {
+    public struct Preview: View {
+        
+        public init() {}
         
         @State var selection: String?
         
-        var body: some View {
-            NavigationView {
-                List {
-                    Section {
-                        AsyncNavigationLink(
-                            tag: "1",
-                            selection: $selection,
-                            destination: asyncDestination,
-                            label: { Text("Async 1") }
-                        )
-                        AsyncNavigationLink(
-                            tag: "2",
-                            selection: $selection,
-                            destination: asyncDestination,
-                            label: { Text("Async 2") }
-                        )
+        public var body: some View {
+            List {
+                Section {
+                    AsyncNavigationLink(
+                        tag: "1",
+                        selection: $selection,
+                        destination: {
+                            try await asyncDestination(
+                                title: "Async Destination 1"
+                            )
+                        },
+                        label: { Text("Async 1") }
+                    )
+                    AsyncNavigationLink(
+                        tag: "2",
+                        selection: $selection,
+                        destination: {
+                            try await asyncDestination(
+                                title: "Async Destination 2"
+                            )
+                        },
+                        label: { Text("Async 2") }
+                    )
+                    AsyncNavigationLink(
+                        tag: "3",
+                        destination: {
+                            try await asyncDestination(
+                                title: "Async Destination 3"
+                            )
+                        },
+                        label: { Text("Async 3") }
+                    )
+                }
+                Section {
+                    Button("Activate 1") {
+                        selection = "1"
                     }
-                    Section {
-                        Button("Activate 1") {
-                            selection = "1"
-                        }
-                        Button("Activate 2") {
-                            selection = "2"
-                        }
+                    Button("Activate 2") {
+                        selection = "2"
                     }
                 }
             }
+            .navigationTitle("AsyncNavigationLink")
         }
         
         /// Dummy asyc destination, delayed by a timer. Typically this would instead be an async API call.
-        func asyncDestination() async throws -> some View {
+        func asyncDestination(title: String) async throws -> some View {
             // Arbitrary delay, pretending to be an async request.
             try await Task.sleep(nanoseconds: 2000000000)
-            return Text("Async Destination")
+            return Text(title)
         }
     }
     
-    static var previews: some View {
-        Preview()
+    public static var previews: some View {
+        NavigationView {
+            Preview()
+        }
     }
 }

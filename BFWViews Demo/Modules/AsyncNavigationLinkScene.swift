@@ -22,16 +22,7 @@ struct AsyncNavigationLinkScene {
 
 extension AsyncNavigationLinkScene: View {
     var body: some View {
-        List {
-            AsyncNavigationLink(
-                tag: "1",
-                destination: asyncDestination,
-                label: {
-                    Text("Do something asynchronous")
-                }
-            )
-        }
-        .navigationTitle("AsyncNavigationLink")
+        AsyncNavigationLink_Previews.Preview()
     }
 }
 
