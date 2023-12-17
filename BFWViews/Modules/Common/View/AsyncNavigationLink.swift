@@ -26,10 +26,7 @@ public struct AsyncNavigationLink<Destination: View, Label: View, Tag: Hashable>
     let label: () -> Label
     @State private var isInProgress = false
     @State private var activeDestination: Destination?
-    @State private var error: Error? {
-        didSet { isPresentedError = error != nil }
-    }
-    @State private var isPresentedError = false
+    @State private var error: Error?
     
     public init(
         tag: Tag,
@@ -101,9 +98,7 @@ extension AsyncNavigationLink: View {
                 alignment: .trailing
             )
         }
-        .alert(isPresented: $isPresentedError) {
-            Alert(error: error)
-        }
+        .alert(error: $error)
     }
 }
 
