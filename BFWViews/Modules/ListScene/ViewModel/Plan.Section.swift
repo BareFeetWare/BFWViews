@@ -52,4 +52,25 @@ public extension Plan.Section {
         )
     }
     
+    init<T: View>(
+        id: String? = nil,
+        isExpanded: Binding<Bool>? = nil,
+        title: String? = nil,
+        trailing: @escaping () -> T,
+        cells: [Plan.Cell?]
+    ) {
+        self.init(
+            id: id,
+            isExpanded: isExpanded,
+            header: {
+                HStack {
+                    title.map { Text($0) }
+                    Spacer()
+                    trailing()
+                }
+            },
+            cells: cells
+        )
+    }
+    
 }
