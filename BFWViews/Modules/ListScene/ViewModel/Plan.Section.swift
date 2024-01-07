@@ -15,22 +15,25 @@ extension Plan {
         var isExpanded: Binding<Bool>? = nil
         public let header: (() -> any View)?
         public var cells: [Cell?]
+        public var emptyPlaceholder: String?
     }
 }
 
 public extension Plan.Section {
-
+    
     init(
         id: String? = nil,
         isExpanded: Binding<Bool>? = nil,
         header: (() -> any View)?,
-        cells: [Plan.Cell?]
+        cells: [Plan.Cell?],
+        emptyPlaceholder: String? = nil
     ) {
         self.init(
             id: id ?? UUID().uuidString,
             isExpanded: isExpanded,
             header: header,
-            cells: cells
+            cells: cells,
+            emptyPlaceholder: emptyPlaceholder
         )
     }
     
@@ -38,7 +41,8 @@ public extension Plan.Section {
         id: String? = nil,
         isExpanded: Binding<Bool>? = nil,
         title: String? = nil,
-        cells: [Plan.Cell?]
+        cells: [Plan.Cell?],
+        emptyPlaceholder: String? = nil
     ) {
         self.init(
             id: id,
@@ -46,9 +50,27 @@ public extension Plan.Section {
             header: title.map { title in
                 {
                     Text(title)
+                        .textCase(.none)
                 }
             },
-            cells: cells
+            cells: cells,
+            emptyPlaceholder: emptyPlaceholder
+        )
+    }
+    
+    init(
+        id: String? = nil,
+        placeholder: String
+    ) {
+        self.init(
+            id: id,
+            header: {
+                Text(placeholder)
+                    .textCase(.none)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            },
+            cells: []
         )
     }
     
@@ -57,7 +79,8 @@ public extension Plan.Section {
         isExpanded: Binding<Bool>? = nil,
         title: String? = nil,
         trailing: @escaping () -> T,
-        cells: [Plan.Cell?]
+        cells: [Plan.Cell?],
+        emptyPlaceholder: String? = nil
     ) {
         self.init(
             id: id,
@@ -69,8 +92,15 @@ public extension Plan.Section {
                     trailing()
                 }
             },
-            cells: cells
+            cells: cells,
+            emptyPlaceholder: emptyPlaceholder
         )
+    }
+    
+    var rowPlaceholderString: String? {
+        guard let emptyPlaceholder, cells.isEmpty
+        else { return nil }
+        return emptyPlaceholder
     }
     
 }

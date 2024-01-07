@@ -32,7 +32,12 @@ extension Plan.Section: View {
         }
     }
     
+    @ViewBuilder
     var cellsView: some View {
+        rowPlaceholderString.map {
+            Text($0)
+                .foregroundStyle(.secondary)
+        }
         ForEach(cells.compactMap { $0 }) { cell in
             cell
                 .tag(cell.id)
