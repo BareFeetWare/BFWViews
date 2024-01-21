@@ -31,7 +31,7 @@ extension Plan.Rating: View {
 struct PlanRating_Previews: PreviewProvider {
     
     struct Five: View {
-        @State var selection: Int = 0
+        @State var selection: Int?
         
         var body: some View {
             Plan.Rating(
@@ -44,7 +44,7 @@ struct PlanRating_Previews: PreviewProvider {
     }
     
     struct Seven: View {
-        @State var selection: Int = 0
+        @State var selection: Int?
         
         var body: some View {
             Plan.Rating(

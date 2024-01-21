@@ -14,7 +14,7 @@ extension Plan {
         public init(
             title: String? = nil,
             maximum: Int,
-            selection: Binding<Int>
+            selection: Binding<Int?>
         ) {
             self.title = title
             self.maximum = maximum
@@ -23,13 +23,21 @@ extension Plan {
         
         public let title: String?
         public let maximum: Int
-        @Binding public var selection: Int
+        @Binding public var selection: Int?
     }
 }
 
 // MARK: - Used by view
 
 extension Plan.Rating {
+    
+    var selectionBinding: Binding<Int> {
+        .init {
+            selection ?? 0
+        } set: {
+            selection = $0
+        }
+    }
     
     func onTap(index: Int) {
         selection = index
@@ -38,7 +46,7 @@ extension Plan.Rating {
     func planImage(index: Int) -> Plan.Image {
         .system(
             symbol: .star,
-            variants: index <= selection ? .fill : .none,
+            variants: index <= (selection ?? 0) ? .fill : .none,
             scale: .large
         )
     }
