@@ -37,6 +37,36 @@ public extension Plan.List {
     
 }
 
+// MARK: - Modifiers
+
+public extension Plan.List {
+    
+    func wrappingCellsInButton(action: @escaping (Plan.Cell) -> Void) -> Plan.List {
+        .init(
+            sections: sections.compactMap { $0 }
+                .map { section in
+                Plan.Section(
+                    id: section.id,
+                    isExpanded: section.isExpanded,
+                    header: section.header,
+                    cells: section.cells.compactMap { $0 }.map { cell in
+                        Plan.Cell(id: cell.id) {
+                            Button {
+                                action(cell)
+                            } label: {
+                                AnyView(
+                                    cell.content()
+                                )
+                            }
+                        }
+                    },
+                    emptyPlaceholder: section.emptyPlaceholder
+                )
+            }
+        )
+    }
+}
+
 // MARK: - Previews
 
 extension Plan.List {

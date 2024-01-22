@@ -12,7 +12,7 @@ import SwiftUI
 extension Plan {
     public struct Section: Identifiable {
         public let id: String
-        var isExpanded: Binding<Bool>? = nil
+        public var isExpanded: Binding<Bool>? = nil
         public let header: (() -> any View)?
         public var cells: [Cell?]
         public var emptyPlaceholder: String?
