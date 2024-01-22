@@ -19,8 +19,8 @@ extension Plan.DetailRow: View {
                     .foregroundColor(.secondary)
             }
             .multilineTextAlignment(.leading)
-            Spacer()
-                .layoutPriority(-1)
+            // Note: Using a Spacer() here instead of frame, causes a containing Menu to show multiple rows per row. Weird.
+            .frame(maxWidth: .infinity, alignment: .leading)
             AnyView(trailingContent())
                 .multilineTextAlignment(.trailing)
         }
