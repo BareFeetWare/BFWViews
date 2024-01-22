@@ -36,6 +36,9 @@
 		E26FDBF92AAEEFAA00AC992B /* ExpandableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26FDBF82AAEEFAA00AC992B /* ExpandableSection.swift */; };
 		E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */; };
 		E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27BCFF927870D320004F48C /* TableViewProxy.swift */; };
+		E2803FC62B5E72A20023A74E /* SheetLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FC52B5E72A20023A74E /* SheetLink.swift */; };
+		E2803FCA2B5E74B00023A74E /* Plan.Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FC92B5E74B00023A74E /* Plan.Button.swift */; };
+		E2803FCC2B5E74D70023A74E /* Plan.Button+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FCB2B5E74D70023A74E /* Plan.Button+View.swift */; };
 		E281557B2701219200D56072 /* emptySquare100.svg in Resources */ = {isa = PBXBuildFile; fileRef = E28155792701219100D56072 /* emptySquare100.svg */; };
 		E281557C2701219200D56072 /* filledSquare100.svg in Resources */ = {isa = PBXBuildFile; fileRef = E281557A2701219200D56072 /* filledSquare100.svg */; };
 		E286391B2A107CEA0038CB72 /* Plan.Rack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286391A2A107CEA0038CB72 /* Plan.Rack.swift */; };
@@ -143,6 +146,9 @@
 		E26FDBF82AAEEFAA00AC992B /* ExpandableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSection.swift; sourceTree = "<group>"; };
 		E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLink.swift; sourceTree = "<group>"; };
 		E27BCFF927870D320004F48C /* TableViewProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProxy.swift; sourceTree = "<group>"; };
+		E2803FC52B5E72A20023A74E /* SheetLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetLink.swift; sourceTree = "<group>"; };
+		E2803FC92B5E74B00023A74E /* Plan.Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.Button.swift; sourceTree = "<group>"; };
+		E2803FCB2B5E74D70023A74E /* Plan.Button+View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plan.Button+View.swift"; sourceTree = "<group>"; };
 		E28155792701219100D56072 /* emptySquare100.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = emptySquare100.svg; sourceTree = "<group>"; };
 		E281557A2701219200D56072 /* filledSquare100.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = filledSquare100.svg; sourceTree = "<group>"; };
 		E286391A2A107CEA0038CB72 /* Plan.Rack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.Rack.swift; sourceTree = "<group>"; };
@@ -313,6 +319,7 @@
 		E28D1BCB283350C400064CCD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E2803FC92B5E74B00023A74E /* Plan.Button.swift */,
 				E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */,
 				E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */,
 				E2459F882A0352090068DCBB /* Plan.Image.swift */,
@@ -329,6 +336,7 @@
 		E28D1BD0283350C400064CCD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E2803FCB2B5E74D70023A74E /* Plan.Button+View.swift */,
 				E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+View.swift */,
 				E2386BE82A087314009FEA16 /* Plan.Image+View.swift */,
 				E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */,
@@ -434,6 +442,7 @@
 				E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */,
 				E2606CEB2A415378004E6400 /* Observing.swift */,
 				E23AB43A268157720018DD04 /* ReadFrame.swift */,
+				E2803FC52B5E72A20023A74E /* SheetLink.swift */,
 				E28B7ABC275AC77700ED5730 /* UIKitView.swift */,
 				E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */,
 				E2C16B65266480C400BAC051 /* View+Distributed.swift */,
@@ -644,6 +653,7 @@
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
 				E2606CEC2A415378004E6400 /* Observing.swift in Sources */,
 				E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */,
+				E2803FC62B5E72A20023A74E /* SheetLink.swift in Sources */,
 				E2C16B68266480C400BAC051 /* View+Distributed.swift in Sources */,
 				E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */,
 				E2386BF72A093C45009FEA16 /* Plan.Tab+View.swift in Sources */,
@@ -680,7 +690,9 @@
 				E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */,
 				E2459F892A0352090068DCBB /* Plan.Image.swift in Sources */,
 				E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */,
+				E2803FCC2B5E74D70023A74E /* Plan.Button+View.swift in Sources */,
 				E2FD40AD26683A83004E4905 /* Image+Symbol.swift in Sources */,
+				E2803FCA2B5E74B00023A74E /* Plan.Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
