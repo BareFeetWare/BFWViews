@@ -10,12 +10,12 @@ import SwiftUI
 
 extension Plan {
     public struct Confirmation {
-        public let title: String
+        public let title: String?
         public let buttonTitle: String
         public let action: () -> Void
         
         public init(
-            title: String,
+            title: String?,
             buttonTitle: String,
             action: @escaping () -> Void
         ) {
@@ -34,8 +34,9 @@ extension View {
     ) -> some View {
         if let confirmation = confirmationBinding.wrappedValue {
             self.confirmationDialog(
-                confirmation.title,
-                isPresented: confirmationBinding.isNotNil
+                confirmation.title ?? "Confirm",
+                isPresented: confirmationBinding.isNotNil,
+                titleVisibility: confirmation.title != nil ? .visible : .hidden
             ) {
                 Button(confirmation.buttonTitle, role: .none) {
                     confirmation.action()
