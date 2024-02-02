@@ -30,7 +30,8 @@ public extension Plan.List {
     ) {
         self.init(
             sections: [
-                .init(cells: cells)
+                // Note: The id is needed here so it consistently has the same id for this section, otherwise animations will not track it correctly, such as in an expanding/collpasing DisclosureGroup.
+                .init(id: "only one section", cells: cells)
             ]
         )
     }

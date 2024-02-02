@@ -21,24 +21,10 @@ extension Plan {
 
 public extension Plan.Section {
     
-    init(
-        id: String? = nil,
-        isExpanded: Binding<Bool>? = nil,
-        header: (() -> any View)?,
-        cells: [Plan.Cell?],
-        emptyPlaceholder: String? = nil
-    ) {
-        self.init(
-            id: id ?? UUID().uuidString,
-            isExpanded: isExpanded,
-            header: header,
-            cells: cells,
-            emptyPlaceholder: emptyPlaceholder
-        )
-    }
+    // TODO: Consolidate/merge some of the following inits.
     
     init(
-        id: String? = nil,
+        id: String,
         isExpanded: Binding<Bool>? = nil,
         title: String? = nil,
         cells: [Plan.Cell?],
@@ -59,11 +45,29 @@ public extension Plan.Section {
     }
     
     init(
+        isExpanded: Binding<Bool>? = nil,
+        title: String,
+        cells: [Plan.Cell?],
+        emptyPlaceholder: String? = nil
+    ) {
+        self.init(
+            id: "title: " + title,
+            isExpanded: isExpanded,
+            header: {
+                Text(title)
+                    .textCase(.none)
+            },
+            cells: cells,
+            emptyPlaceholder: emptyPlaceholder
+        )
+    }
+    
+    init(
         id: String? = nil,
         placeholder: String
     ) {
         self.init(
-            id: id,
+            id: id ?? "placeholder: " + placeholder,
             header: {
                 Text(placeholder)
                     .textCase(.none)
@@ -75,7 +79,7 @@ public extension Plan.Section {
     }
     
     init<T: View>(
-        id: String? = nil,
+        id: String,
         isExpanded: Binding<Bool>? = nil,
         title: String? = nil,
         trailing: @escaping () -> T,
@@ -96,7 +100,30 @@ public extension Plan.Section {
             emptyPlaceholder: emptyPlaceholder
         )
     }
-    
+
+    init<T: View>(
+        id: String? = nil,
+        isExpanded: Binding<Bool>? = nil,
+        title: String,
+        trailing: @escaping () -> T,
+        cells: [Plan.Cell?],
+        emptyPlaceholder: String? = nil
+    ) {
+        self.init(
+            id: id ?? "title: " + title,
+            isExpanded: isExpanded,
+            header: {
+                HStack {
+                    Text(title)
+                    Spacer()
+                    trailing()
+                }
+            },
+            cells: cells,
+            emptyPlaceholder: emptyPlaceholder
+        )
+    }
+
     var rowPlaceholderString: String? {
         guard let emptyPlaceholder, cells.isEmpty
         else { return nil }

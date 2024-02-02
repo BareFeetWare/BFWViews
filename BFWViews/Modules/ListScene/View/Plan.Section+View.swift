@@ -63,18 +63,14 @@ struct PlanSection_Previews: PreviewProvider {
                 sections: [
                     Plan.Section(
                         isExpanded: $isExpanded,
-                        header: {
-                            Text("expandable")
-                        },
+                        title: "Expandable",
                         cells: [
                             .detail("cell 1"),
                             .detail("cell 2"),
                         ]
                     ),
                     Plan.Section(
-                        header: {
-                            Text("not expandable")
-                        },
+                        title: "not expandable",
                         cells: [
                             .detail("cell 1"),
                             .detail("cell 2"),
