@@ -119,7 +119,7 @@ public extension Plan.Cell {
         overridingNavigationSubtitle: String? = nil,
         destination: @escaping () async throws -> some View
     ) -> Self {
-        let id = id ?? UUID().uuidString
+        let id = id ?? "title: " + title
         let navigationTitle = overridingNavigationTitle
         ?? (
             title.hasSuffix(":")
@@ -160,7 +160,7 @@ public extension Plan.Cell {
         overridingNavigationSubtitle: String? = nil,
         destination: some View
     ) -> Self {
-        let id = id ?? UUID().uuidString
+        let id = id ?? "title: " + title
         let navigationTitle = overridingNavigationTitle
         ?? (
             title.hasSuffix(":")
