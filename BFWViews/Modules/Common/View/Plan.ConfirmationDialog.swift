@@ -1,5 +1,5 @@
 //
-//  Plan.Confirmation.swift
+//  Plan.ConfirmationDialog.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 23/1/2024.
@@ -9,7 +9,7 @@
 import SwiftUI
 
 extension Plan {
-    public struct Confirmation {
+    public struct ConfirmationDialog {
         public let title: String?
         public let buttonTitle: String
         public let action: () -> Void
@@ -30,7 +30,7 @@ extension View {
     
     @ViewBuilder
     public func confirmationDialog(
-        _ confirmationBinding: Binding<Plan.Confirmation?>
+        _ confirmationBinding: Binding<Plan.ConfirmationDialog?>
     ) -> some View {
         if let confirmation = confirmationBinding.wrappedValue {
             self.confirmationDialog(
@@ -39,6 +39,7 @@ extension View {
                 titleVisibility: confirmation.title != nil ? .visible : .hidden
             ) {
                 Button(confirmation.buttonTitle, role: .none) {
+                    // TODO: Perform after dismiss of confirmationDialog, so it animates if required.
                     confirmation.action()
                 }
                 Button("Cancel", role: .cancel) {}
@@ -59,7 +60,7 @@ struct PlanConfirmationDialog_Previews: PreviewProvider {
     }
     
     struct Preview: View {
-        @State var confirmation: Plan.Confirmation?
+        @State var confirmation: Plan.ConfirmationDialog?
         @State var result: String = "None"
         
         var body: some View {

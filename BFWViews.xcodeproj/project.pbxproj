@@ -39,7 +39,7 @@
 		E2803FC62B5E72A20023A74E /* SheetLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FC52B5E72A20023A74E /* SheetLink.swift */; };
 		E2803FCA2B5E74B00023A74E /* Plan.Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FC92B5E74B00023A74E /* Plan.Button.swift */; };
 		E2803FCC2B5E74D70023A74E /* Plan.Button+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FCB2B5E74D70023A74E /* Plan.Button+View.swift */; };
-		E2803FD42B5FE05D0023A74E /* Plan.Confirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FD32B5FE05D0023A74E /* Plan.Confirmation.swift */; };
+		E2803FD42B5FE05D0023A74E /* Plan.ConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FD32B5FE05D0023A74E /* Plan.ConfirmationDialog.swift */; };
 		E2803FD62B5FE1430023A74E /* Binding+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FD52B5FE1430023A74E /* Binding+Transform.swift */; };
 		E281557B2701219200D56072 /* emptySquare100.svg in Resources */ = {isa = PBXBuildFile; fileRef = E28155792701219100D56072 /* emptySquare100.svg */; };
 		E281557C2701219200D56072 /* filledSquare100.svg in Resources */ = {isa = PBXBuildFile; fileRef = E281557A2701219200D56072 /* filledSquare100.svg */; };
@@ -151,7 +151,7 @@
 		E2803FC52B5E72A20023A74E /* SheetLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetLink.swift; sourceTree = "<group>"; };
 		E2803FC92B5E74B00023A74E /* Plan.Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.Button.swift; sourceTree = "<group>"; };
 		E2803FCB2B5E74D70023A74E /* Plan.Button+View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plan.Button+View.swift"; sourceTree = "<group>"; };
-		E2803FD32B5FE05D0023A74E /* Plan.Confirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Confirmation.swift; sourceTree = "<group>"; };
+		E2803FD32B5FE05D0023A74E /* Plan.ConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.ConfirmationDialog.swift; sourceTree = "<group>"; };
 		E2803FD52B5FE1430023A74E /* Binding+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Transform.swift"; sourceTree = "<group>"; };
 		E28155792701219100D56072 /* emptySquare100.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = emptySquare100.svg; sourceTree = "<group>"; };
 		E281557A2701219200D56072 /* filledSquare100.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = filledSquare100.svg; sourceTree = "<group>"; };
@@ -446,7 +446,7 @@
 				E21311312586F418001496C7 /* MiniSheet.swift */,
 				E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */,
 				E2606CEB2A415378004E6400 /* Observing.swift */,
-				E2803FD32B5FE05D0023A74E /* Plan.Confirmation.swift */,
+				E2803FD32B5FE05D0023A74E /* Plan.ConfirmationDialog.swift */,
 				E23AB43A268157720018DD04 /* ReadFrame.swift */,
 				E2803FC52B5E72A20023A74E /* SheetLink.swift */,
 				E28B7ABC275AC77700ED5730 /* UIKitView.swift */,
@@ -685,7 +685,7 @@
 				E2BAAC1326FD899B00CFDE50 /* Image+Data.swift in Sources */,
 				E2386BE92A087314009FEA16 /* Plan.Image+View.swift in Sources */,
 				E286391B2A107CEA0038CB72 /* Plan.Rack.swift in Sources */,
-				E2803FD42B5FE05D0023A74E /* Plan.Confirmation.swift in Sources */,
+				E2803FD42B5FE05D0023A74E /* Plan.ConfirmationDialog.swift in Sources */,
 				E2DDC20529FA54CB00DE6C84 /* Plan.DetailRow+View.swift in Sources */,
 				E2C16B7A2664816F00BAC051 /* ColorScheme+Identifiable.swift in Sources */,
 				E2BAAC1126FD88F700CFDE50 /* Fetch.swift in Sources */,
