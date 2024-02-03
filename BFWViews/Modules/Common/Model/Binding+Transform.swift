@@ -37,3 +37,13 @@ public extension Binding where Value: OptionalProtocol {
     }
     
 }
+
+public extension Binding where Value == Bool {
+    func toggled() -> Binding<Bool> {
+        .init {
+            !wrappedValue
+        } set: {
+            wrappedValue = !$0
+        }
+    }
+}
