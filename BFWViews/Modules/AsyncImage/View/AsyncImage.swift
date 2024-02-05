@@ -13,12 +13,13 @@ public struct AsyncImage<Content: View, Placeholder: View> {
     public init(
         // TODO: Allow for URL? to match SwiftUI.AsyncImage
         url: URL,
+        caching: Fetch.Caching,
         @ViewBuilder content: @escaping (Image) -> Content,
         @ViewBuilder placeholder: @escaping () -> Placeholder
     ) {
         self.content = content
         self.placeholder = placeholder()
-        self.viewModel = ViewModel(url: url)
+        self.viewModel = ViewModel(url: url, caching: caching)
     }
     
     let content: (Image) -> Content
@@ -30,10 +31,12 @@ public struct AsyncImage<Content: View, Placeholder: View> {
 extension AsyncImage where Placeholder == EmptyView {
     public init(
         url: URL,
+        caching: Fetch.Caching,
         @ViewBuilder content: @escaping (Image) -> Content
     ) {
         self.init(
             url: url,
+            caching: caching,
             content: content,
             placeholder: { EmptyView() }
         )
@@ -53,7 +56,8 @@ extension AsyncImage: View {
 struct AsyncImage_Previews: PreviewProvider {
     static var previews: some View {
         AsyncImage(
-            url: Bundle.main.url(forResource: "SVG_logo.svg", withExtension: nil)!
+            url: Bundle.main.url(forResource: "SVG_logo.svg", withExtension: nil)!,
+            caching: .file
         ) {
             $0
                 .resizable()

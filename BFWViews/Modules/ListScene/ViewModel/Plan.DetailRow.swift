@@ -80,7 +80,7 @@ extension Array where Element == Plan.DetailRow {
             subtitle: "Subtitle",
             trailing: "trailing",
             image: .init(
-                source: .url(URL(string: "https://barefeetware.com/logo.png")!),
+                source: .url(URL(string: "https://barefeetware.com/logo.png")!, caching: .none),
                 width: 88
             )
         ),

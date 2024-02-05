@@ -27,9 +27,10 @@ extension Plan.Image: View {
                 .frame(minHeight: backgroundColor != nil ? width : 0)
                 .background(backgroundColor)
                 .cornerRadius(cornerRadius)
-        case .url(let url):
+        case .url(let url, let caching):
             AsyncImage(
-                url: url
+                url: url,
+                caching: caching
             ) { image in
                 image
                     .resizable()

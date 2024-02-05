@@ -13,8 +13,8 @@ import UIKit // For UIImage
 extension AsyncImage {
     class ViewModel: ObservableObject {
         
-        init(url: URL) {
-            self.fetchImage(url: url)
+        init(url: URL, caching: Fetch.Caching) {
+            self.fetchImage(url: url, caching: caching)
         }
         
         @Published var image: UIImage?
@@ -27,9 +27,9 @@ private extension AsyncImage.ViewModel {
     
     // Don't call fetchImage from onAppear, since that is only called when the AsyncImage first appears and not when reinstantiated by an update of the superview, such as with a new URL.
     
-    func fetchImage(url: URL) {
+    func fetchImage(url: URL, caching: Fetch.Caching) {
         Fetch
-            .publisher(url: url)
+            .imagePublisher(url: url, caching: caching)
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { completion in

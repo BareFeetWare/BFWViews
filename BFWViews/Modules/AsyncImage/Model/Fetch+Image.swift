@@ -12,7 +12,17 @@ import WebKit
 
 public extension Fetch {
     
-    static func publisher(url: URL) -> AnyPublisher<UIImage, Error> {
+    // TODO: Consolidate Caching and Cache
+    
+    static func imagePublisher(url: URL, caching: Caching) -> AnyPublisher<UIImage, Error> {
+        dataPublisher(url: url, caching: caching)
+            .flatMap { data in
+                imagePublisher(url: url, data: data)
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    static func imagePublisher(url: URL) -> AnyPublisher<UIImage, Error> {
         // TODO: Refactor with switch.
         if let cache = cacheForURL[url],
            case .image(let image) = cache
@@ -26,7 +36,7 @@ public extension Fetch {
             return publisher
         } else {
             debugPrint("new publisher    url = \(url.absoluteString)")
-            let publisher = imagePublisher(url: url)
+            let publisher = cachedImagePublisher(url: url)
                 .share()
                 .eraseToAnyPublisher()
             publisherForURL[url] = publisher
@@ -80,7 +90,7 @@ private extension Fetch {
             .eraseToAnyPublisher()
     }
     
-    static func imagePublisher(url: URL) -> AnyPublisher<UIImage, Error> {
+    static func cachedImagePublisher(url: URL) -> AnyPublisher<UIImage, Error> {
         dataPublisher(url: url)
             .flatMap { data in
                 imagePublisher(url: url, data: data)

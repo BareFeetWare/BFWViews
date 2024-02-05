@@ -35,7 +35,7 @@ extension Plan {
         public enum Source {
             case space
             case uiImage(UIImage)
-            case url(URL)
+            case url(URL, caching: Fetch.Caching)
             case system(
                 symbol: ImageSymbol,
                 variants: SymbolVariants = .none,
@@ -58,12 +58,13 @@ extension Plan.Image {
     
     public static func url(
         _ url: URL,
+        caching: Fetch.Caching,
         width: CGFloat? = nil,
         foregroundColor: Color? = nil,
         cornerRadius: CGFloat = 0
     ) -> Self {
         self.init(
-            source: .url(url),
+            source: .url(url, caching: caching),
             width: width,
             foregroundColor: foregroundColor,
             cornerRadius: cornerRadius
@@ -92,7 +93,8 @@ extension Plan.Image {
 extension Plan.Image {
     static let preview = Plan.Image(
         source: .url(
-            URL(string: "https://www.barefeetware.com/logo.png")!
+            URL(string: "https://www.barefeetware.com/logo.png")!,
+            caching: .file
         )
     )
 }
