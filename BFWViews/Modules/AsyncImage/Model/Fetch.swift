@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import CryptoKit
 
 public enum FetchError: LocalizedError {
     case httpResponse(HTTPURLResponse, data: Data)
@@ -23,6 +24,23 @@ public enum Fetch {
         case none
         case file
     }
+}
+
+public extension Fetch {
+    
+    static func isCached(url: URL) -> Bool {
+        FileManager.default.isCached(url: url)
+    }
+    
+    static func flushCache() throws {
+        try FileManager.default.flushCache()
+    }
+    
+}
+
+// MARK: - Combine
+
+public extension Fetch {
     
     static func dataPublisher(url: URL, caching: Caching) -> AnyPublisher<Data, Error> {
         switch caching {
@@ -71,26 +89,43 @@ public enum Fetch {
     
 }
 
+// MARK: - Private extensions
+
 private extension FileManager {
-    func cachedFilePath(url: URL) throws -> String {
-        // Create a directory named "Cache" in the app's document directory
+    
+    func cacheFolderURL() throws -> URL {
         let cacheDirectory = try self.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        let cacheFolder = cacheDirectory.appendingPathComponent("Cache", isDirectory: true)
-
-        // Ensure the cache directory exists
-        if !self.fileExists(atPath: cacheFolder.path) {
-            try self.createDirectory(at: cacheFolder, withIntermediateDirectories: true, attributes: nil)
+        let cacheFolderURL = cacheDirectory.appendingPathComponent("Downloads", isDirectory: true)
+        if !self.fileExists(atPath: cacheFolderURL.path) {
+            try self.createDirectory(at: cacheFolderURL, withIntermediateDirectories: true, attributes: nil)
         }
-
-        // Generate a unique filename based on the stable hash of the URL
-        var hasher = Hasher()
-        url.hash(into: &hasher)
-        let hashValue = hasher.finalize()
+        return cacheFolderURL
+    }
+    
+    func uniqueFileName(url: URL) -> String {
+        let urlString = url.absoluteString
+        let urlData = Data(urlString.utf8)
+        let hash = SHA256.hash(data: urlData)
+        let hashString = hash.map { String(format: "%02hhx", $0) }.joined()
+        let lastPathComponent = url.lastPathComponent
+        let fileName = "\(hashString)_\(lastPathComponent)"
+        return fileName
+    }
+    
+    func cachedFilePath(url: URL) throws -> String {
+        let cacheFolderURL = try cacheFolderURL()
         
-        let fileName = url.lastPathComponent.isEmpty ? "defaultFileName" : url.lastPathComponent
-        let uniqueFileName = "\(fileName)_\(hashValue)"
-        let cachedFilePath = cacheFolder.appendingPathComponent(uniqueFileName)
-
+        let uniqueFileName = uniqueFileName(url: url)
+        let cachedFilePath = cacheFolderURL.appendingPathComponent(uniqueFileName)
         return cachedFilePath.path
+    }
+    
+    func isCached(url: URL) -> Bool {
+        (try? fileExists(atPath: cachedFilePath(url: url))) ?? false
+    }
+    
+    func flushCache() throws {
+        let cacheFolderURL = try cacheFolderURL()
+        try removeItem(at: cacheFolderURL)
     }
 }
