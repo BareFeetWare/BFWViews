@@ -108,18 +108,19 @@ public extension Plan.Cell {
     
     // TODO: Perhaps consolidate above and below functions.
     
-    static func detail(
+    static func detail<Destination: View>(
         _ title: String,
-        id: String? = nil,
+        id explicitID: String? = nil,
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil,
         // TODO: Avoid needing overrides
         overridingNavigationTitle: String? = nil,
         overridingNavigationSubtitle: String? = nil,
-        destination: @escaping () async throws -> some View
+        selection: Binding<String?>? = nil,
+        destination: @escaping () async throws -> Destination
     ) -> Self {
-        let id = id ?? "title: " + title
+        let appliedID = explicitID ?? "title: " + title
         let navigationTitle = overridingNavigationTitle
         ?? (
             title.hasSuffix(":")
@@ -128,39 +129,43 @@ public extension Plan.Cell {
         )
         let navigationSubtitle = overridingNavigationSubtitle ?? subtitle
         let label = Plan.DetailRow(
-            id: id,
+            id: appliedID,
             title: title,
             subtitle: subtitle,
             trailing: trailing,
             image: image
         )
+        let titledDestination = {
+            try await destination()
+                .navigationHeader(
+                    title: navigationTitle,
+                    subtitle: navigationSubtitle
+                )
+        }
         let content = AsyncNavigationLink(
-            tag: id,
-            destination: {
-                try await destination()
-                    .navigationHeader(
-                        title: navigationTitle,
-                        subtitle: navigationSubtitle
-                    )
-            },
+            tag: appliedID,
+            selection: selection,
+            destination: titledDestination,
             label: { label }
         )
-        return .init(id: id, content: { content })
+        return .init(id: appliedID, content: { content })
     }
     
     // TODO: Consolidate above and below functions.
     
-    static func detail(
+    static func detail<Destination: View>(
         _ title: String,
-        id: String? = nil,
+        id explicitID: String? = nil,
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil,
+        // TODO: Avoid needing overrides
         overridingNavigationTitle: String? = nil,
         overridingNavigationSubtitle: String? = nil,
-        destination: some View
+        selection: Binding<String?>? = nil,
+        destination: () -> Destination
     ) -> Self {
-        let id = id ?? "title: " + title
+        let appliedID = explicitID ?? "title: " + title
         let navigationTitle = overridingNavigationTitle
         ?? (
             title.hasSuffix(":")
@@ -169,21 +174,103 @@ public extension Plan.Cell {
         )
         let navigationSubtitle = overridingNavigationSubtitle ?? subtitle
         let label = Plan.DetailRow(
-            id: id,
+            id: appliedID,
             title: title,
             subtitle: subtitle,
             trailing: trailing,
             image: image
         )
-        let content = NavigationLink(
-            destination: destination
-                    .navigationHeader(
-                        title: navigationTitle,
-                        subtitle: navigationSubtitle
-                    ),
-            label: { label }
-        )
-        return .init(id: id, content: { content })
+        let titledDestination = {
+            destination()
+                .navigationHeader(
+                    title: navigationTitle,
+                    subtitle: navigationSubtitle
+                )
+        }
+        let content = if let selection {
+            NavigationLink(
+                tag: appliedID,
+                selection: selection,
+                destination: titledDestination,
+                label: { label }
+            )
+        } else {
+            NavigationLink(
+                destination: titledDestination,
+                label: { label }
+            )
+        }
+        return .init(id: appliedID, content: { content })
     }
     
+}
+
+private extension View {
+    
+    // TODO: Refactor the above functions to use this shared code.
+    
+    func parsedNavigationHeader(
+        title: String,
+        subtitle: String?,
+        // TODO: Avoid needing overrides
+        overridingNavigationTitle: String? = nil,
+        overridingNavigationSubtitle: String? = nil
+    ) -> some View {
+        let navigationTitle = overridingNavigationTitle
+        ?? (
+            title.hasSuffix(":")
+            ? String(title.dropLast())
+            : title
+        )
+        let navigationSubtitle = overridingNavigationSubtitle ?? subtitle
+        return navigationHeader(
+            title: navigationTitle,
+            subtitle: navigationSubtitle
+        )
+    }
+}
+
+struct PlanCell_Previews: PreviewProvider {
+    
+    struct Preview: View {
+        
+        @State var selectedCellID: String?
+        
+        var body: some View {
+            NavigationView {
+                Plan.List(
+                    cells: [
+                        Plan.Cell(id: "1") {
+                            NavigationLink(
+                                tag: "1",
+                                selection: $selectedCellID
+                            ) {
+                                Text("Destination 1")
+                            } label: {
+                                Text("Cell 1")
+                            }
+                        },
+                        Plan.Cell(id: "2") {
+                            NavigationLink(
+                                tag: "2",
+                                selection: $selectedCellID
+                            ) {
+                                Text("Destination 2")
+                            } label: {
+                                Text("Cell 2")
+                            }
+                        },
+                        .detail("Cell 3", id: "3", selection: $selectedCellID) {
+                            Text("selection = \(selectedCellID ?? "nil")")
+                        },
+                    ]
+                )
+                .navigationTitle("Plan.Cell")
+            }
+        }
+    }
+    
+    static var previews: some View {
+        Preview()
+    }
 }
