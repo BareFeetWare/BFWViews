@@ -70,6 +70,9 @@ private extension AsyncNavigationLink {
             Task {
                 do {
                     activeDestination = try await destination()
+                    if selectionBinding.wrappedValue != tag {
+                        selectionBinding.wrappedValue = tag
+                    }
                     activeSelection = tag
                     isInProgress = false
                 } catch {
@@ -90,38 +93,36 @@ private extension AsyncNavigationLink {
     }
     
     func onChange(selection: Tag?) {
-        if selection == tag {
-            activateDestination()
-        }
+        activateDestinationIfNeeded()
     }
+    
+    func onAppear() {
+        activateDestinationIfNeeded()
+    }
+    
 }
 
 extension AsyncNavigationLink: View {
     public var body: some View {
-        Button {
-            onTap()
+        NavigationLink(tag: tag, selection: $activeSelection) {
+            activeDestination
         } label: {
-            NavigationLink(
-                tag: tag,
-                selection: $activeSelection,
-                destination: { activeDestination },
-                label: label
-            )
-            .foregroundColor(.primary)
-            .onChange(of: selection) {
-                onChange(selection: $0)
-            }
-            .overlay(
-                Group {
-                    if isInProgress {
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                    }
-                },
-                alignment: .trailing
-            )
+            label()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .onTapGesture { onTap() }
+                .onChange(of: selection) { onChange(selection: $0) }
+                .overlay(
+                    Group {
+                        if isInProgress {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                        }
+                    },
+                    alignment: .trailing
+                )
+                .onAppear { onAppear() }
+                .alert(error: $error)
         }
-        .alert(error: $error)
     }
 }
 
