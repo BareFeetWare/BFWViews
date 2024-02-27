@@ -54,6 +54,16 @@ extension Compatible {
         case all
         case detailOnly
         case doubleColumn
+        
+        var displayMode: UISplitViewController.DisplayMode {
+            switch self {
+            case .automatic: .automatic
+            case .all: .twoBesideSecondary
+            case .detailOnly: .secondaryOnly
+            case .doubleColumn: .oneBesideSecondary
+            }
+        }
+        
     }
     
     public enum NavigationSplitViewColumn {
@@ -84,6 +94,7 @@ public extension NavigationSplitViewVisibility {
         default: .automatic
         }
     }
+    
 }
 
 @available(iOS 17.0, *)
@@ -110,11 +121,7 @@ public extension NavigationSplitViewColumn {
 @available(iOS 17.0, *)
 extension Binding where Value == Compatible.NavigationSplitViewColumn {
     var newer: Binding<NavigationSplitViewColumn> {
-        map {
-            .init($0)
-        } reverse: {
-            $0.compatible
-        }
+        map { .init($0) } reverse: { $0.compatible }
     }
 }
 
@@ -146,8 +153,38 @@ extension Compatible.NavigationSplitView: View {
             NavigationView {
                 sidebar()
                 content()
-                detail()
+                    .splitViewDisplayMode(columnVisibility.wrappedValue.displayMode)
+              detail()
             }
         }
     }
+}
+
+private extension View {
+    
+    // TODO: Delete if not needed.
+    func splitViewShowColumn(
+        _ column: UISplitViewController.Column?
+    ) -> some View {
+        uiSplitViewController { splitViewController in
+            guard let splitViewController,
+                  let column
+            else { return }
+            DispatchQueue.main.async {
+                splitViewController.show(column)
+            }
+        }
+    }
+    
+    func splitViewDisplayMode(
+        _ displayMode: UISplitViewController.DisplayMode
+    ) -> some View {
+        uiSplitViewController { splitViewController in
+            guard let splitViewController else { return }
+            DispatchQueue.main.async {
+                splitViewController.preferredDisplayMode = displayMode
+            }
+        }
+    }
+    
 }

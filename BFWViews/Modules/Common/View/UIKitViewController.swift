@@ -21,6 +21,12 @@ public extension View {
             UIKitViewController(customize: { customize($0?.navigationController) })
         )
     }
+
+    func uiSplitViewController(_ customize: @escaping (UISplitViewController?) -> Void) -> some View {
+        background(
+            UIKitViewController(customize: { customize($0?.splitViewController) })
+        )
+    }
     
 }
 
