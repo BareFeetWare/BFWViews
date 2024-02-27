@@ -38,12 +38,20 @@ public extension Binding where Value: OptionalProtocol {
     
 }
 
+public extension Binding {
+    func map<Transform>(
+        transform: @escaping (Value) -> Transform,
+        reverse: @escaping (Transform) -> Value
+    ) -> Binding<Transform> {
+        .init(
+            get: { transform(wrappedValue) },
+            set: { wrappedValue = reverse($0) }
+        )
+    }
+}
+
 public extension Binding where Value == Bool {
     func toggled() -> Binding<Bool> {
-        .init {
-            !wrappedValue
-        } set: {
-            wrappedValue = !$0
-        }
+        map { !$0 } reverse: { !$0 }
     }
 }

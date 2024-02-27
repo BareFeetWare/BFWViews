@@ -30,6 +30,8 @@
 		E2459F812A0335DE0068DCBB /* Plan.Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F802A0335DE0068DCBB /* Plan.Section.swift */; };
 		E2459F852A0351450068DCBB /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F842A0351450068DCBB /* Plan.swift */; };
 		E2459F892A0352090068DCBB /* Plan.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F882A0352090068DCBB /* Plan.Image.swift */; };
+		E258A41A2B8DBF950035E549 /* Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E258A4192B8DBF950035E549 /* Compatible.swift */; };
+		E258A41C2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E258A41B2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift */; };
 		E2606CEC2A415378004E6400 /* Observing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CEB2A415378004E6400 /* Observing.swift */; };
 		E2606D0B2A430FA5004E6400 /* NavigationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */; };
 		E26A7AD42765A561007E3A6C /* BadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A7AD32765A561007E3A6C /* BadgeScene.swift */; };
@@ -142,6 +144,8 @@
 		E2459F802A0335DE0068DCBB /* Plan.Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Section.swift; sourceTree = "<group>"; };
 		E2459F842A0351450068DCBB /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		E2459F882A0352090068DCBB /* Plan.Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Image.swift; sourceTree = "<group>"; };
+		E258A4192B8DBF950035E549 /* Compatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compatible.swift; sourceTree = "<group>"; };
+		E258A41B2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compatible.NavigationSplitView.swift; sourceTree = "<group>"; };
 		E2606CEB2A415378004E6400 /* Observing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observing.swift; sourceTree = "<group>"; };
 		E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHeader.swift; sourceTree = "<group>"; };
 		E26A7AD32765A561007E3A6C /* BadgeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeScene.swift; sourceTree = "<group>"; };
@@ -304,6 +308,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		E258A4182B8DBF790035E549 /* Compatible */ = {
+			isa = PBXGroup;
+			children = (
+				E258A4192B8DBF950035E549 /* Compatible.swift */,
+				E258A41B2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift */,
+			);
+			path = Compatible;
+			sourceTree = "<group>";
+		};
 		E27BCFF827870D190004F48C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +427,7 @@
 			children = (
 				E2BAAC1626FEFEC000CFDE50 /* AsyncImage */,
 				E2C16B632664808E00BAC051 /* Common */,
+				E258A4182B8DBF790035E549 /* Compatible */,
 				E2FD40A726683A83004E4905 /* ImageSymbol */,
 				E28D1BCA2833508800064CCD /* ListScene */,
 				E2C16B6D2664816F00BAC051 /* Style */,
@@ -653,6 +667,7 @@
 				E2FD40AC26683A83004E4905 /* ImageSymbol.swift in Sources */,
 				E2BAAC1526FD8A8000CFDE50 /* Fetch+Image.swift in Sources */,
 				E28B7ABD275AC77700ED5730 /* UIKitView.swift in Sources */,
+				E258A41A2B8DBF950035E549 /* Compatible.swift in Sources */,
 				E2606D0B2A430FA5004E6400 /* NavigationHeader.swift in Sources */,
 				E2FD40CD2669C9F5004E4905 /* Alert+Error.swift in Sources */,
 				E28B7ABF275C5E2F00ED5730 /* CellBorder.swift in Sources */,
@@ -700,6 +715,7 @@
 				E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */,
 				E2803FCC2B5E74D70023A74E /* Plan.Button+View.swift in Sources */,
 				E2FD40AD26683A83004E4905 /* Image+Symbol.swift in Sources */,
+				E258A41C2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift in Sources */,
 				E2803FCA2B5E74B00023A74E /* Plan.Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
