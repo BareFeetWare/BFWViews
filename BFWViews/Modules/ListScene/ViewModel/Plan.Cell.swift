@@ -239,6 +239,7 @@ struct PlanCell_Previews: PreviewProvider {
         var body: some View {
             NavigationView {
                 Plan.List(
+                    selection: $selectedCellID,
                     cells: [
                         Plan.Cell(id: "1") {
                             NavigationLink(

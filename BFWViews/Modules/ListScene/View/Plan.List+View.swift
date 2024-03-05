@@ -10,7 +10,7 @@ import SwiftUI
 
 extension Plan.List: View {
     public var body: some View {
-        List {
+        List(selection: selection) {
             ForEach(sections.compactMap { $0 }) { $0 }
         }
     }
@@ -19,7 +19,8 @@ extension Plan.List: View {
 struct PlanListDisplay_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Plan.List.preview
+            Plan.List.Preview().list
+                .navigationTitle("Plan.List")
         }
     }
 }
