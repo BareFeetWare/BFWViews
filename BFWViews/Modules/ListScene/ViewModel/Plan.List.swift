@@ -9,17 +9,17 @@ import Foundation
 import SwiftUI
 
 public extension Plan {
-    struct List {
+    struct List<Selection: Hashable> {
         
         public init(
-            selection: Binding<String?>? = nil,
+            selection: Binding<Selection?>? = nil,
             sections: [Section?]
         ) {
             self.selection = selection
             self.sections = sections
         }
         
-        public let selection: Binding<String?>?
+        public let selection: Binding<Selection?>?
         public let sections: [Section?]
     }
 }
@@ -29,7 +29,15 @@ public extension Plan {
 public extension Plan.List {
     
     init(
-        selection: Binding<String?>? = nil,
+        selection: Binding<Selection?>,
+        sections: [Plan.Section?]
+    ) {
+        self.selection = selection
+        self.sections = sections
+    }
+    
+    init(
+        selection: Binding<Selection?>,
         cells: [Plan.Cell?]
     ) {
         self.init(
@@ -43,11 +51,35 @@ public extension Plan.List {
     
 }
 
+public extension Plan.List where Selection == String {
+    
+    init(
+        sections: [Plan.Section?]
+    ) {
+        self.selection = nil
+        self.sections = sections
+    }
+    
+    init(
+        cells: [Plan.Cell?]
+    ) {
+        self.init(
+            sections: [
+                // Note: The id is needed here so it consistently has the same id for this section, otherwise animations will not track it correctly, such as in an expanding/collpasing DisclosureGroup.
+                .init(id: "only one section", cells: cells)
+            ]
+        )
+    }
+    
+}
+
 // MARK: - Modifiers
 
 public extension Plan.List {
     
-    func wrappingCellsInButton(action: @escaping (Plan.Cell) -> Void) -> Plan.List {
+    func wrappingCellsInButton(
+        action: @escaping (Plan.Cell) -> Void
+    ) -> Plan.List<Selection> {
         .init(
             selection: selection,
             sections: sections.compactMap { $0 }
@@ -81,7 +113,7 @@ extension Plan.List {
     struct Preview {
         @State var selectedCellID: String?
         
-        var list: Plan.List {
+        var list: Plan.List<String> {
             Plan.List(
                 selection: $selectedCellID,
                 sections: [

@@ -60,7 +60,6 @@ struct PlanSection_Previews: PreviewProvider {
         
         var body: some View {
             Plan.List(
-                selection: nil,
                 sections: [
                     Plan.Section(
                         isExpanded: $isExpanded,

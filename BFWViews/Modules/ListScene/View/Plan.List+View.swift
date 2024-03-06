@@ -19,7 +19,7 @@ extension Plan.List: View {
 struct PlanListDisplay_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Plan.List.Preview().list
+            Plan.List<String>.Preview().list
                 .navigationTitle("Plan.List")
         }
     }
