@@ -19,39 +19,32 @@ extension Plan.Image: View {
                 .cornerRadius(cornerRadius)
         case .uiImage(let uiImage):
             Image(uiImage: uiImage)
-            // TODO: Consolidate the same modifiers between cases.
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .foregroundColor(foregroundColor)
-                .frame(width: width)
-                .frame(minHeight: backgroundColor != nil ? width : 0)
-                .background(backgroundColor)
-                .cornerRadius(cornerRadius)
+                .formattedResizedFit(planImage: self)
         case .url(let url, let caching):
-            AsyncImage(
-                url: url,
-                caching: caching
-            ) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(foregroundColor)
-                    .frame(width: width)
-                    .frame(minHeight: backgroundColor != nil ? width : 0)
-                    .background(backgroundColor)
-                    .cornerRadius(cornerRadius)
-            } placeholder: {
-                ProgressView()
+            if caching == .file && Fetch.isCached(url: url)
+                || url.isFileURL
+            {
+                AsyncImage(
+                    url: url,
+                    caching: caching
+                ) {
+                    $0.formattedResizedFit(planImage: self)
+                }
+            } else {
+                AsyncImage(
+                    url: url,
+                    caching: caching
+                ) {
+                    $0.formattedResizedFit(planImage: self)
+                } placeholder: {
+                    ProgressView()
+                }
             }
         case .system(let symbol, let variant, let scale):
             Image(symbol: symbol)
                 .symbolVariant(variant)
                 .imageScale(scale)
-                .foregroundColor(foregroundColor)
-                .frame(width: width)
-                .frame(minHeight: backgroundColor != nil ? width : 0)
-                .background(backgroundColor)
-                .cornerRadius(cornerRadius)
+                .formatted(planImage: self)
         }
     }
 }
@@ -59,5 +52,27 @@ extension Plan.Image: View {
 extension Plan.Image: PreviewProvider {
     public static var previews: some View {
         Plan.Image.preview
+    }
+}
+
+private extension Image {
+    
+    func formattedResizedFit(planImage: Plan.Image) -> some View {
+        self
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .formatted(planImage: planImage)
+    }
+}
+
+private extension View {
+    
+    func formatted(planImage: Plan.Image) -> some View {
+        self
+            .foregroundColor(planImage.foregroundColor)
+            .frame(width: planImage.width)
+            .frame(minHeight: planImage.backgroundColor != nil ? planImage.width : 0)
+            .background(planImage.backgroundColor)
+            .cornerRadius(planImage.cornerRadius)
     }
 }
