@@ -19,6 +19,7 @@
 		E21636D12A519C3F005A7D48 /* Plan.Section+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21636D02A519C3F005A7D48 /* Plan.Section+View.swift */; };
 		E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A126E8661100AC5CD2 /* Color+Hex.swift */; };
 		E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */; };
+		E2299CF12BA93F740040CE93 /* SVGRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2299CF02BA93F730040CE93 /* SVGRender.swift */; };
 		E2386BE92A087314009FEA16 /* Plan.Image+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BE82A087314009FEA16 /* Plan.Image+View.swift */; };
 		E2386BEB2A08D54A009FEA16 /* Plan.List+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */; };
 		E2386BF52A093B63009FEA16 /* Plan.Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BF42A093B63009FEA16 /* Plan.Tab.swift */; };
@@ -61,7 +62,6 @@
 		E2BAAC1326FD899B00CFDE50 /* Image+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1226FD899B00CFDE50 /* Image+Data.swift */; };
 		E2BAAC1526FD8A8000CFDE50 /* Fetch+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1426FD8A8000CFDE50 /* Fetch+Image.swift */; };
 		E2BAAC1926FEFF0400CFDE50 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1826FEFF0400CFDE50 /* AsyncImage.swift */; };
-		E2BAAC1C26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1B26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift */; };
 		E2C16B5826647C4400BAC051 /* BFWViews.h in Headers */ = {isa = PBXBuildFile; fileRef = E2C16B5626647C4400BAC051 /* BFWViews.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2C16B5B26647C4400BAC051 /* BFWViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C16B5426647C4400BAC051 /* BFWViews.framework */; };
 		E2C16B5C26647C4400BAC051 /* BFWViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2C16B5426647C4400BAC051 /* BFWViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -133,6 +133,7 @@
 		E21636D02A519C3F005A7D48 /* Plan.Section+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Section+View.swift"; sourceTree = "<group>"; };
 		E224C9A126E8661100AC5CD2 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHexScene.swift; sourceTree = "<group>"; };
+		E2299CF02BA93F730040CE93 /* SVGRender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGRender.swift; sourceTree = "<group>"; };
 		E2386BE82A087314009FEA16 /* Plan.Image+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Image+View.swift"; sourceTree = "<group>"; };
 		E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.List+View.swift"; sourceTree = "<group>"; };
 		E2386BF42A093B63009FEA16 /* Plan.Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Tab.swift; sourceTree = "<group>"; };
@@ -175,7 +176,6 @@
 		E2BAAC1226FD899B00CFDE50 /* Image+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Data.swift"; sourceTree = "<group>"; };
 		E2BAAC1426FD8A8000CFDE50 /* Fetch+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fetch+Image.swift"; sourceTree = "<group>"; };
 		E2BAAC1826FEFF0400CFDE50 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
-		E2BAAC1B26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.ViewModel.swift; sourceTree = "<group>"; };
 		E2C16B5426647C4400BAC051 /* BFWViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BFWViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C16B5626647C4400BAC051 /* BFWViews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFWViews.h; sourceTree = "<group>"; };
 		E2C16B5726647C4400BAC051 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -381,6 +381,7 @@
 			children = (
 				E2BAAC1026FD88F700CFDE50 /* Fetch.swift */,
 				E2BAAC1426FD8A8000CFDE50 /* Fetch+Image.swift */,
+				E2299CF02BA93F730040CE93 /* SVGRender.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -390,7 +391,6 @@
 			children = (
 				E2BAAC0F26FD888F00CFDE50 /* Model */,
 				E2BAAC1726FEFEE300CFDE50 /* View */,
-				E2BAAC1A26FEFF6800CFDE50 /* ViewModel */,
 			);
 			path = AsyncImage;
 			sourceTree = "<group>";
@@ -402,14 +402,6 @@
 				E2BAAC1226FD899B00CFDE50 /* Image+Data.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		E2BAAC1A26FEFF6800CFDE50 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				E2BAAC1B26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		E2C16B5526647C4400BAC051 /* BFWViews */ = {
@@ -663,7 +655,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2459F812A0335DE0068DCBB /* Plan.Section.swift in Sources */,
-				E2BAAC1C26FEFF8F00CFDE50 /* AsyncImage.ViewModel.swift in Sources */,
 				E2FD40AC26683A83004E4905 /* ImageSymbol.swift in Sources */,
 				E2BAAC1526FD8A8000CFDE50 /* Fetch+Image.swift in Sources */,
 				E28B7ABD275AC77700ED5730 /* UIKitView.swift in Sources */,
@@ -696,6 +687,7 @@
 				E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */,
 				E2C16B69266480C400BAC051 /* CompressibleSpacer.swift in Sources */,
 				E2459F852A0351450068DCBB /* Plan.swift in Sources */,
+				E2299CF12BA93F740040CE93 /* SVGRender.swift in Sources */,
 				E2F47B122A13351C009BD9EC /* Plan.Rating.swift in Sources */,
 				E2BAAC1326FD899B00CFDE50 /* Image+Data.swift in Sources */,
 				E2386BE92A087314009FEA16 /* Plan.Image+View.swift in Sources */,

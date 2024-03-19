@@ -7,22 +7,29 @@
 //
 
 import Foundation
-import Combine
 import CryptoKit
 
 public enum FetchError: LocalizedError {
+    case empty
     case httpResponse(HTTPURLResponse, data: Data)
-    case parse
-    case snapshot
-    case renderTimeout
-    case terminated
+    
+    public var errorDescription: String? {
+        switch self {
+        case .httpResponse(let response, _):
+            "http response error: " + response.description
+        default:
+            "Fetch error: \(self)"
+        }
+    }
 }
 
 public enum Fetch {
     
-    public enum Caching {
+    public enum Caching: CaseIterable, Identifiable {
         case none
         case file
+        
+        public var id: Self { self }
     }
 }
 
@@ -38,53 +45,45 @@ public extension Fetch {
     
 }
 
-// MARK: - Combine
+// MARK: - Network
 
 public extension Fetch {
     
-    static func dataPublisher(url: URL, caching: Caching) -> AnyPublisher<Data, Error> {
+    static func data(url: URL, caching: Caching) async throws -> Data {
         switch caching {
         case .none:
-            return dataPublisher(url: url)
+            return try await data(url: url)
         case .file:
-            do {
-                let cachedFilePath = try FileManager.default.cachedFilePath(url: url)
-                guard FileManager.default.fileExists(atPath: cachedFilePath)
-                else {
-                    return dataPublisher(url: url)
-                        .map { data in
-                            // TODO: Add thread safety.
-                            debugPrint("Cache writing data to file \(URL(fileURLWithPath: cachedFilePath).lastPathComponent) for URL path: \(url.path)")
-                            FileManager.default.createFile(atPath: cachedFilePath, contents: data, attributes: nil)
-                            return data
-                        }
-                        .eraseToAnyPublisher()
-                }
-                debugPrint("Cache reading data from file \(URL(fileURLWithPath: cachedFilePath).lastPathComponent) for URL path: \(url.path)")
-                return dataPublisher(url: URL(fileURLWithPath: cachedFilePath))
-                    .eraseToAnyPublisher()
-            } catch {
-                return Fail<Data, Error>(error: error)
-                    .eraseToAnyPublisher()
+            let data: Data
+            let cachedFilePath = try FileManager.default.cachedFilePath(url: url)
+            if FileManager.default.fileExists(atPath: cachedFilePath) {
+                let cachedFileURL = URL(fileURLWithPath: cachedFilePath)
+                debugPrint("Cache reading data from file \(cachedFileURL.lastPathComponent) for URL path: \(url.path)")
+                data = try await self.data(url: cachedFileURL)
+            } else {
+                try await data = self.data(url: url)
+                guard !data.isEmpty else { throw FetchError.empty }
+                // TODO: Add thread safety.
+                debugPrint("Cache writing data to file \(URL(fileURLWithPath: cachedFilePath).lastPathComponent) for URL path: \(url.path)")
+                FileManager.default.createFile(atPath: cachedFilePath, contents: data, attributes: nil)
             }
+            return data
         }
     }
     
     /// DIrectly fetches, without caching.
-    static func dataPublisher(url: URL) -> AnyPublisher<Data, Error> {
-        URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { (data: Data, response: URLResponse) in
-                if let httpResponse = response as? HTTPURLResponse,
-                   httpResponse.statusCode >= 400
-                {
-                    throw FetchError.httpResponse(
-                        httpResponse,
-                        data: data
-                    )
-                }
-                return data
-            }
-            .eraseToAnyPublisher()
+    static func data(url: URL) async throws -> Data {
+        let (data, response) = try await URLSession.shared.data(from: url)
+        if let httpResponse = response as? HTTPURLResponse,
+           httpResponse.statusCode >= 400
+        {
+            throw FetchError.httpResponse(
+                httpResponse,
+                data: data
+            )
+        } else {
+            return data
+        }
     }
     
 }

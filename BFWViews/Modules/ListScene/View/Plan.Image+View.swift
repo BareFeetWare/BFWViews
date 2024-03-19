@@ -21,24 +21,13 @@ extension Plan.Image: View {
             Image(uiImage: uiImage)
                 .formattedResizedFit(planImage: self)
         case .url(let url, let caching):
-            if caching == .file && Fetch.isCached(url: url)
-                || url.isFileURL
-            {
-                AsyncImage(
-                    url: url,
-                    caching: caching
-                ) {
-                    $0.formattedResizedFit(planImage: self)
-                }
-            } else {
-                AsyncImage(
-                    url: url,
-                    caching: caching
-                ) {
-                    $0.formattedResizedFit(planImage: self)
-                } placeholder: {
-                    ProgressView()
-                }
+            AsyncImage(
+                url: url,
+                caching: caching
+            ) {
+                $0.formattedResizedFit(planImage: self)
+            } placeholder: {
+                ProgressView()
             }
         case .system(let symbol, let variant, let scale):
             Image(symbol: symbol)

@@ -11,21 +11,24 @@ import SwiftUI
 public struct AsyncImage<Content: View, Placeholder: View> {
     
     public init(
-        // TODO: Allow for URL? to match SwiftUI.AsyncImage
-        url: URL,
+        url: URL?,
         caching: Fetch.Caching,
         @ViewBuilder content: @escaping (Image) -> Content,
         @ViewBuilder placeholder: @escaping () -> Placeholder
     ) {
+        self.url = url
+        self.caching = caching
         self.content = content
-        self.placeholder = placeholder()
-        self.viewModel = ViewModel(url: url, caching: caching)
+        self.placeholder = placeholder
     }
     
+    let url: URL?
+    let caching: Fetch.Caching
     let content: (Image) -> Content
-    let placeholder: Placeholder
-    @ObservedObject var viewModel: ViewModel
+    let placeholder: () -> Placeholder
     
+    @State var image: UIImage?
+    @State var error: Error?
 }
 
 extension AsyncImage where Placeholder == EmptyView {
@@ -43,15 +46,61 @@ extension AsyncImage where Placeholder == EmptyView {
     }
 }
 
-extension AsyncImage: View {
-    public var body: some View {
-        if let image = viewModel.image {
-            content(Image(uiImage: image))
-        } else {
-            placeholder
+private extension AsyncImage {
+    
+    var isVisiblePlaceholder: Bool {
+        !isLocalFile
+    }
+    
+    var isLocalFile: Bool {
+        guard let url else { return false }
+        return caching == .file && Fetch.isCached(url: url)
+        || url.isFileURL
+    }
+    
+    // Don't call fetchImage() from onAppear, since that is only called when the AsyncImage first appears and not when reinstantiated by an update of the superview, such as with a new URL.
+    
+    func fetchImage() {
+        guard let url else {
+            self.image = nil
+            return
+        }
+        Task {
+            do {
+                self.image = try await Fetch.image(url: url, caching: caching)
+            } catch {
+                debugPrint("image error = \(error)")
+                self.error = error
+            }
         }
     }
+    
+    func task() {
+        fetchImage()
+    }
 }
+
+// MARK: - View
+
+extension AsyncImage: View {
+    public var body: some View {
+        Group {
+            if let image {
+                content(Image(uiImage: image))
+            } else if let error {
+                Text(error.localizedDescription)
+            } else if isVisiblePlaceholder {
+                placeholder()
+            } else {
+                // Required to appear so task is called.
+                Color.clear
+            }
+        }
+        .task(id: url) { task() }
+    }
+}
+
+// MARK: - Preview
 
 struct AsyncImage_Previews: PreviewProvider {
     static var previews: some View {
