@@ -88,7 +88,11 @@ extension AsyncImage: View {
             if let image {
                 content(Image(uiImage: image))
             } else if let error {
-                Text(error.localizedDescription)
+                    Image(symbol: .network)
+                        .symbolVariant(.slash)
+                        .imageScale(.large)
+                        .foregroundStyle(.orange)
+                        .padding()
             } else if isVisiblePlaceholder {
                 placeholder()
             } else {

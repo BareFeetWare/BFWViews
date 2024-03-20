@@ -75,6 +75,7 @@ public extension ImageSymbol {
     static let map: Self = .init("map")
     static let message: Self = .init("message")
     static let moon: Self = .init("moon")
+    static let network: Self = .init("network")
     static let paperclip: Self = .init("paperclip")
     static let pause: Self = .init("pause")
     static let pencil: Self = .init("pencil")
