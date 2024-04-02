@@ -52,6 +52,11 @@ private extension AsyncImage {
         !isLocalFile
     }
     
+    var errorImage: Plan.Image? {
+        guard error != nil else { return nil }
+        return .system(symbol: .network, variants: .slash, foregroundColor: .orange)
+    }
+    
     var isLocalFile: Bool {
         guard let url else { return false }
         return caching == .file && Fetch.isCached(url: url)
@@ -87,12 +92,9 @@ extension AsyncImage: View {
         Group {
             if let image {
                 content(Image(uiImage: image))
-            } else if let error {
-                    Image(symbol: .network)
-                        .symbolVariant(.slash)
-                        .imageScale(.large)
-                        .foregroundStyle(.orange)
-                        .padding()
+            } else if let errorImage {
+                errorImage
+                    .padding()
             } else if isVisiblePlaceholder {
                 placeholder()
             } else {
