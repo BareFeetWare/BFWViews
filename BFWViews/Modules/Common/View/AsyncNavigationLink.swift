@@ -109,6 +109,8 @@ extension AsyncNavigationLink: View {
         } label: {
             label()
                 .frame(maxWidth: .infinity, alignment: .leading)
+            // Note: .contentShape(Rectangle()) is required to extend the tappable area across the whole cell width.
+                .contentShape(Rectangle())
                 .onTapGesture { onTap() }
                 .onChange(of: selection) { onChange(selection: $0) }
                 .overlay(
