@@ -19,10 +19,10 @@ extension Card {
     static let cornerRadius: CGFloat = 16
     static let shadowRadius: CGFloat = 16
     
-    enum Color {
-        static let background = SwiftUI.Color(.secondarySystemGroupedBackground)
-        static let shadow = SwiftUI.Color.secondary.opacity(0.2)
-        static let outside = SwiftUI.Color(.systemGroupedBackground)
+    public enum Color {
+        public static let background = SwiftUI.Color(.secondarySystemGroupedBackground)
+        public static let shadow = SwiftUI.Color.secondary.opacity(0.2)
+        public static let outside = SwiftUI.Color(.systemGroupedBackground)
     }
     
     var shadowRadius: CGFloat {
