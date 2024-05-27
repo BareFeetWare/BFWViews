@@ -46,16 +46,19 @@ public extension Plan.Section {
     
     init(
         isExpanded: Binding<Bool>? = nil,
-        title: String,
+        title: String? = nil,
         cells: [Plan.Cell?],
         emptyPlaceholder: String? = nil
     ) {
         self.init(
-            id: "title: " + title,
+            // TODO: Centralise UUID.
+            id: title.map { "title: " + $0 } ?? UUID().uuidString,
             isExpanded: isExpanded,
             header: {
-                Text(title)
-                    .textCase(.none)
+                title.map {
+                    Text($0)
+                        .textCase(.none)
+                }
             },
             cells: cells,
             emptyPlaceholder: emptyPlaceholder
