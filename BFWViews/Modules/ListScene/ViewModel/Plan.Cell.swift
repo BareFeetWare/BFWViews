@@ -108,6 +108,39 @@ public extension Plan.Cell {
     
     // TODO: Perhaps consolidate above and below functions.
     
+    static func navigationLink<Destination: View>(
+        detailRow: Plan.DetailRow,
+        // TODO: Avoid needing overrides
+        overridingNavigationTitle: String? = nil,
+        overridingNavigationSubtitle: String? = nil,
+        selection: Binding<String?>? = nil,
+        destination: @escaping () async throws -> Destination
+    ) -> Self {
+        let navigationTitle = overridingNavigationTitle
+        ?? (
+            detailRow.title.map { title in
+                title.hasSuffix(":")
+                ? String(title.dropLast())
+                : title
+            }
+        )
+        let navigationSubtitle = overridingNavigationSubtitle ?? detailRow.subtitle
+        let titledDestination = {
+            try await destination()
+                .navigationHeader(
+                    title: navigationTitle,
+                    subtitle: navigationSubtitle
+                )
+        }
+        let content = AsyncNavigationLink(
+            tag: detailRow.id,
+            selection: selection,
+            destination: titledDestination,
+            label: { detailRow }
+        )
+        return .init(id: detailRow.id, content: { content })
+    }
+    
     static func detail<Destination: View>(
         _ title: String,
         id explicitID: String? = nil,
@@ -121,34 +154,20 @@ public extension Plan.Cell {
         destination: @escaping () async throws -> Destination
     ) -> Self {
         let appliedID = explicitID ?? "title: " + title
-        let navigationTitle = overridingNavigationTitle
-        ?? (
-            title.hasSuffix(":")
-            ? String(title.dropLast())
-            : title
-        )
-        let navigationSubtitle = overridingNavigationSubtitle ?? subtitle
-        let label = Plan.DetailRow(
+        let detailRow = Plan.DetailRow(
             id: appliedID,
             title: title,
             subtitle: subtitle,
             trailing: trailing,
             image: image
         )
-        let titledDestination = {
-            try await destination()
-                .navigationHeader(
-                    title: navigationTitle,
-                    subtitle: navigationSubtitle
-                )
-        }
-        let content = AsyncNavigationLink(
-            tag: appliedID,
+        return .navigationLink(
+            detailRow: detailRow,
+            overridingNavigationTitle: overridingNavigationTitle,
+            overridingNavigationSubtitle: overridingNavigationSubtitle,
             selection: selection,
-            destination: titledDestination,
-            label: { label }
+            destination: destination
         )
-        return .init(id: appliedID, content: { content })
     }
     
     // TODO: Consolidate above and below functions.
