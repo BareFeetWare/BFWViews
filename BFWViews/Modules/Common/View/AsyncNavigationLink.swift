@@ -108,15 +108,17 @@ private extension AsyncNavigationLink {
     
     func activateDestination() {
         DispatchQueue.main.async {
-            isInProgress = true
             Task {
+                isInProgress = true
+                defer {
+                    isInProgress = false
+                }
                 do {
                     activeDestination = try await destination()
                     if selectionBinding.wrappedValue != tag {
                         selectionBinding.wrappedValue = tag
                     }
                     activeSelection = tag
-                    isInProgress = false
                 } catch {
                     self.error = error
                 }
