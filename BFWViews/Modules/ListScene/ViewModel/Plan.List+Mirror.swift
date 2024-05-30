@@ -26,16 +26,25 @@ public extension Array where Element == Plan.Cell {
 
 public extension Plan.Cell {
     
+    init(
+        title: String,
+        subjects: Array<Any>
+    ) {
+        self = .detail(title, trailing: "\(subjects.count)") {
+            Plan.List(
+                cells: subjects.map { subject in
+                        .init(reflecting: subject)
+                }
+            )
+        }
+    }
+    
     init(child: Mirror.Child) {
-        if let array = child.value as? Array<Any> {
-            self = .detail(
-                child.label ?? "?",
-                trailing: String(describing: array.count)
-            ) {
-                Plan.List(
-                    cells: array.map { .init(reflecting: $0) }
-                )
-            }
+        if let subjects = child.value as? Array<Any> {
+            self.init(
+                title: child.label ?? "?",
+                subjects: subjects
+            )
         } else {
             self = .detail(
                 child.label ?? "?",
