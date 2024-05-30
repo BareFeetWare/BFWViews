@@ -10,12 +10,17 @@ import Foundation
 
 public extension Plan.List where Selection == String {
     init?(reflecting subject: Any) {
-        let children = Mirror(reflecting: subject).children
-        guard !children.isEmpty
+        let cells: [Plan.Cell] = .init(reflecting: subject)
+        guard !cells.isEmpty
         else { return nil }
-        self.init(
-            cells: children.map { .init(child: $0) }
-        )
+        self.init(cells: cells)
+    }
+}
+
+public extension Array where Element == Plan.Cell {
+    init(reflecting subject: Any) {
+        self = Mirror(reflecting: subject).children
+            .map { .init(child: $0) }
     }
 }
 
