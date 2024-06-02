@@ -48,7 +48,7 @@ public extension Plan.Cell {
         } else {
             self = .detail(
                 child.label ?? "?",
-                trailing: String.unwrappedDescription(any: child.value)
+                trailing: String(unwrapping: child.value)
             )
         }
     }
@@ -69,13 +69,14 @@ public extension Plan.Cell {
 }
 
 private extension String {
-    static func unwrappedDescription(any: Any) -> Self {
-        // TODO: Ignore compiler warning.
-        let anyOptional = any as! Optional<Any>
-        switch anyOptional {
-        case .none: return "nil"
-        case .some(let value):
-            return String(describing: value)
+    init(unwrapping subject: Any) {
+        switch subject {
+        case let .some(wrapped) as Any?:
+            self.init(describing: wrapped)
+        case .none as Any?:
+            self.init("nil")
+        default:
+            self.init(describing: subject)
         }
     }
 }
