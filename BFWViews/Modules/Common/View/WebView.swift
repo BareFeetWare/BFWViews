@@ -15,17 +15,20 @@ public struct WebView: UIViewRepresentable {
     
     public init(
         title: Binding<String>,
-        url: URL,
-        loadStatusChanged: ((Bool, Error?) -> Void)? = nil
+        urlRequest: URLRequest,
+        loadStatusChanged: ((Bool, Error?) -> Void)? = nil,
+        policyForNavigationAction: ((_ navigationAction: WKNavigationAction) -> WKNavigationActionPolicy)? = nil
     ) {
         self.title = title
-        self.url = url
+        self.urlRequest = urlRequest
         self.loadStatusChanged = loadStatusChanged
+        self.policyForNavigationAction = policyForNavigationAction
     }
     
-    var title: Binding<String>
-    var url: URL
+    let title: Binding<String>
+    let urlRequest: URLRequest
     var loadStatusChanged: ((Bool, Error?) -> Void)?
+    let policyForNavigationAction: ((_ navigationAction: WKNavigationAction) -> WKNavigationActionPolicy)?
     
     public func makeCoordinator() -> WebView.Coordinator {
         Coordinator(self)
@@ -34,7 +37,7 @@ public struct WebView: UIViewRepresentable {
     public func makeUIView(context: Context) -> WKWebView {
         let view = WKWebView()
         view.navigationDelegate = context.coordinator
-        view.load(URLRequest(url: url))
+        view.load(urlRequest)
         return view
     }
 
@@ -68,6 +71,13 @@ public struct WebView: UIViewRepresentable {
         public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
             parent.loadStatusChanged?(false, error)
         }
+        
+        public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            guard let policyForNavigationAction = parent.policyForNavigationAction else { return }
+            let policy = policyForNavigationAction(navigationAction)
+            decisionHandler(policy)
+        }
+        
     }
 }
 
@@ -75,7 +85,7 @@ struct WebView_Previews: PreviewProvider {
     static var previews: some View {
         WebView(
             title: .constant("Title"),
-            url: URL(string: "https://www.barefeetware.com")!,
+            urlRequest: URLRequest(url: URL(string: "https://www.barefeetware.com")!),
             loadStatusChanged: nil
         )
     }
