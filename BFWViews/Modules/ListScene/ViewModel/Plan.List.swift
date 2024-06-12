@@ -43,7 +43,7 @@ public extension Plan.List {
         self.init(
             selection: selection,
             sections: [
-                // Note: The id is needed here so it consistently has the same id for this section, otherwise animations will not track it correctly, such as in an expanding/collpasing DisclosureGroup.
+                // Note: The id is needed here so it consistently has the same id for this section, otherwise animations will not track it correctly, such as in an expanding/collapsing DisclosureGroup.
                 .init(id: "only one section", cells: cells)
             ]
         )
@@ -108,7 +108,7 @@ public extension Plan.List {
 
 // MARK: - Previews
 
-extension Plan.List {
+extension Plan.List<String> {
     
     struct Preview {
         @State var selectedCellID: String?
