@@ -72,7 +72,6 @@
 		E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B67266480C400BAC051 /* View+Trailing.swift */; };
 		E2C16B6C266480F900BAC051 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B6B266480F900BAC051 /* Card.swift */; };
 		E2C16B7A2664816F00BAC051 /* ColorScheme+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B712664816F00BAC051 /* ColorScheme+Identifiable.swift */; };
-		E2C16B7B2664816F00BAC051 /* DateFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B722664816F00BAC051 /* DateFormatter+Style.swift */; };
 		E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */; };
 		E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */; };
 		E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */; };
@@ -188,7 +187,6 @@
 		E2C16B67266480C400BAC051 /* View+Trailing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Trailing.swift"; sourceTree = "<group>"; };
 		E2C16B6B266480F900BAC051 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E2C16B712664816F00BAC051 /* ColorScheme+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ColorScheme+Identifiable.swift"; sourceTree = "<group>"; };
-		E2C16B722664816F00BAC051 /* DateFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Cell.swift; sourceTree = "<group>"; };
@@ -483,7 +481,6 @@
 			isa = PBXGroup;
 			children = (
 				E2C16B712664816F00BAC051 /* ColorScheme+Identifiable.swift */,
-				E2C16B722664816F00BAC051 /* DateFormatter+Style.swift */,
 				E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */,
 				E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */,
 			);
@@ -676,7 +673,6 @@
 				E2C16B68266480C400BAC051 /* View+Distributed.swift in Sources */,
 				E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */,
 				E2386BF72A093C45009FEA16 /* Plan.Tab+View.swift in Sources */,
-				E2C16B7B2664816F00BAC051 /* DateFormatter+Style.swift in Sources */,
 				E286391D2A107D040038CB72 /* Plan.Rack+View.swift in Sources */,
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
 				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
