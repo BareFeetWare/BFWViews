@@ -13,7 +13,7 @@ struct WebScene: View {
     var body: some View {
         WebView(
             title: .constant("Title"),
-            url: URL(string: "https://www.barefeetware.com")!
+            urlRequest: URLRequest(url: URL(string: "https://www.barefeetware.com")!)
         )
     }
 }
