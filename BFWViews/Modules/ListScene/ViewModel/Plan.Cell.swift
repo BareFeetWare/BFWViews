@@ -182,16 +182,9 @@ public extension Plan.Cell {
         overridingNavigationTitle: String? = nil,
         overridingNavigationSubtitle: String? = nil,
         selection: Binding<String?>? = nil,
-        destination: () -> Destination
+        destination: () -> Destination?
     ) -> Self {
         let appliedID = explicitID ?? "title: " + title
-        let navigationTitle = overridingNavigationTitle
-        ?? (
-            title.hasSuffix(":")
-            ? String(title.dropLast())
-            : title
-        )
-        let navigationSubtitle = overridingNavigationSubtitle ?? subtitle
         let label = Plan.DetailRow(
             id: appliedID,
             title: title,
@@ -199,27 +192,38 @@ public extension Plan.Cell {
             trailing: trailing,
             image: image
         )
-        let titledDestination = {
-            destination()
-                .navigationHeader(
-                    title: navigationTitle,
-                    subtitle: navigationSubtitle
+        if let destination = destination() {
+            let navigationTitle = overridingNavigationTitle
+            ?? (
+                title.hasSuffix(":")
+                ? String(title.dropLast())
+                : title
+            )
+            let navigationSubtitle = overridingNavigationSubtitle ?? subtitle
+            let titledDestination = {
+                destination
+                    .navigationHeader(
+                        title: navigationTitle,
+                        subtitle: navigationSubtitle
+                    )
+            }
+            let content = if let selection {
+                NavigationLink(
+                    tag: appliedID,
+                    selection: selection,
+                    destination: titledDestination,
+                    label: { label }
                 )
-        }
-        let content = if let selection {
-            NavigationLink(
-                tag: appliedID,
-                selection: selection,
-                destination: titledDestination,
-                label: { label }
-            )
+            } else {
+                NavigationLink(
+                    destination: titledDestination,
+                    label: { label }
+                )
+            }
+            return .init(id: appliedID, content: { content })
         } else {
-            NavigationLink(
-                destination: titledDestination,
-                label: { label }
-            )
+            return .init(id: appliedID, content: { label })
         }
-        return .init(id: appliedID, content: { content })
     }
     
 }

@@ -30,6 +30,7 @@ public extension ImageSymbol {
     static let building2: Self = .init("building.2")
     static let calendarBadgeClock: Self = .init("calendar.badge.clock")
     static let camera: Self = .init("camera")
+    static let car: Self = .init("car")
     static let chartBar: Self = .init("chart.bar")
     static let checkmark: Self = .init("checkmark")
     static let checkmarkDiamond: Self = .init("checkmark.diamond")
