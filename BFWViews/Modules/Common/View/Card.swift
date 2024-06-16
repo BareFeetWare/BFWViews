@@ -63,7 +63,7 @@ public extension View {
 
 struct Card_Preview: PreviewProvider {
     static var previews: some View {
-        ForEach(ColorScheme.allCases) { colorScheme in
+        ForEach(ColorScheme.allCases, id: \.self) { colorScheme in
             Group {
                 Form {
                     Text("Form, for comparison")

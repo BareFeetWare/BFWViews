@@ -140,7 +140,7 @@ private extension CACornerMask {
 
 struct CellBorder_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(ColorScheme.allCases) { colorScheme in
+        ForEach(ColorScheme.allCases, id: \.self) { colorScheme in
             Group {
                 List {
                     Section(

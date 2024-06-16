@@ -71,7 +71,6 @@
 		E2C16B69266480C400BAC051 /* CompressibleSpacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */; };
 		E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B67266480C400BAC051 /* View+Trailing.swift */; };
 		E2C16B6C266480F900BAC051 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B6B266480F900BAC051 /* Card.swift */; };
-		E2C16B7A2664816F00BAC051 /* ColorScheme+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B712664816F00BAC051 /* ColorScheme+Identifiable.swift */; };
 		E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */; };
 		E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */; };
 		E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */; };
@@ -186,7 +185,6 @@
 		E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompressibleSpacer.swift; sourceTree = "<group>"; };
 		E2C16B67266480C400BAC051 /* View+Trailing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Trailing.swift"; sourceTree = "<group>"; };
 		E2C16B6B266480F900BAC051 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		E2C16B712664816F00BAC051 /* ColorScheme+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ColorScheme+Identifiable.swift"; sourceTree = "<group>"; };
 		E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Cell.swift; sourceTree = "<group>"; };
@@ -480,7 +478,6 @@
 		E2C16B702664816F00BAC051 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E2C16B712664816F00BAC051 /* ColorScheme+Identifiable.swift */,
 				E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */,
 				E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */,
 			);
@@ -698,7 +695,6 @@
 				E286391B2A107CEA0038CB72 /* Plan.Rack.swift in Sources */,
 				E2803FD42B5FE05D0023A74E /* Plan.ConfirmationDialog.swift in Sources */,
 				E2DDC20529FA54CB00DE6C84 /* Plan.DetailRow+View.swift in Sources */,
-				E2C16B7A2664816F00BAC051 /* ColorScheme+Identifiable.swift in Sources */,
 				E2BAAC1126FD88F700CFDE50 /* Fetch.swift in Sources */,
 				E2386BEB2A08D54A009FEA16 /* Plan.List+View.swift in Sources */,
 				E2386BF52A093B63009FEA16 /* Plan.Tab.swift in Sources */,
