@@ -57,7 +57,7 @@ public extension Plan.Cell {
             self = .detail(
                 label,
                 trailing: optionalValue
-                    .map { String(describing: $0).truncated(50) }
+                    .map { String(describing: $0).truncated(length: 50) }
                 ?? "nil"
             ) {
                 optionalValue.flatMap { Plan.List(reflecting: $0) }
@@ -94,7 +94,7 @@ private extension Plan.DetailRow {
         self = title.map { .init(title: $0) }
         ?? (any as? (any DetailRowRepresentable))?.detailRow
         ?? .init(
-            title: String(describing: any).truncated(200)
+            title: String(describing: any).truncated(length: 200)
         )
     }
 }
@@ -118,8 +118,8 @@ private extension String {
         }
     }
     
-    func truncated(_ length: Int) -> String {
-        count < length
+    func truncated(length: Int) -> String {
+        count > length
         ? String(prefix(length)) + "…"
         : self
     }
