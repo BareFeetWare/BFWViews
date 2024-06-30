@@ -8,26 +8,41 @@
 import SwiftUI
 
 public extension View {
+    
     func navigationHeader(
-        title: String?,
-        subtitle: String?
+        _ navigationHeader: NavigationHeader
     ) -> some View {
         toolbar {
             ToolbarItem(placement: .principal) {
-                NavigationHeader(title: title, subtitle: subtitle)
+                navigationHeader
             }
         }
         .navigationBarTitleDisplayMode(.inline)
     }
+    
+    func navigationHeader(
+        title: String?,
+        subtitle: String?
+    ) -> some View {
+        navigationHeader(
+            .init(title: title, subtitle: subtitle)
+        )
+    }
+
 }
 
-struct NavigationHeader {
+public struct NavigationHeader {
     let title: String?
     let subtitle: String?
+    
+    public init(title: String?, subtitle: String?) {
+        self.title = title
+        self.subtitle = subtitle
+    }
 }
 
 extension NavigationHeader: View {
-    var body: some View {
+    public var body: some View {
         VStack {
             title.map {
                 Text($0)
