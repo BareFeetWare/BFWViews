@@ -19,8 +19,10 @@ extension Plan.DetailRow: View {
                     .foregroundColor(.secondary)
             }
             .multilineTextAlignment(.leading)
-            // Note: Using a Spacer() here instead of frame, causes a containing Menu to show multiple rows per row. Weird.
-            .frame(maxWidth: .infinity, alignment: .leading)
+            Spacer()
+            // Note: On iOS 13 - 15?, using a Spacer() here instead of frame, causes a containing Menu to show multiple rows per row. Weird.
+            // Alternatively, use frame, but spacing is too wide:
+            //.frame(maxWidth: .infinity, alignment: .leading)
             AnyView(trailingContent())
                 .multilineTextAlignment(.trailing)
         }

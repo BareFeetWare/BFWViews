@@ -95,5 +95,20 @@ extension Array where Element == Plan.DetailRow {
                 source: .system(symbol: .person)
             )
         ),
+        .init(
+            title: "Long title that wraps over a few lines to see how spacing adjusts",
+            subtitle: "Subtitle",
+            trailing: "Long trailing text that wraps over a few lines to force spacing",
+            image: .init(
+                source: .system(symbol: .person)
+            )
+        ),
+        .init(
+            title: "Short title",
+            trailing: "Long trailing text that wraps over a few lines to force spacing",
+            image: .init(
+                source: .system(symbol: .person)
+            )
+        ),
     ]
 }
