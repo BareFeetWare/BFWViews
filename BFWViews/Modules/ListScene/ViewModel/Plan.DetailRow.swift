@@ -23,7 +23,7 @@ public extension Plan.DetailRow {
     
     init(
         id: String? = nil,
-        title: String,
+        title: String?,
         subtitle: String? = nil,
         image: Plan.Image? = nil,
         @ViewBuilder trailingContent: @escaping () -> any View
@@ -69,6 +69,16 @@ public extension Plan.DetailRow {
                 }
             }
         }
+    }
+    
+    func withImageWidth(_ width: CGFloat?) -> Self {
+        .init(
+            id: id,
+            title: title,
+            subtitle: subtitle,
+            image: image?.withWidth(width),
+            trailingContent: trailingContent
+        )
     }
     
 }

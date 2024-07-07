@@ -45,9 +45,9 @@ extension Plan {
     }
 }
 
-extension Plan.Image {
+public extension Plan.Image {
     
-    public static func space(
+    static func space(
         width: CGFloat? = nil
     ) -> Self {
         self.init(
@@ -56,7 +56,7 @@ extension Plan.Image {
         )
     }
     
-    public static func url(
+    static func url(
         _ url: URL,
         caching: Fetch.Caching,
         width: CGFloat? = nil,
@@ -71,7 +71,7 @@ extension Plan.Image {
         )
     }
     
-    public static func system(
+    static func system(
         symbol: ImageSymbol,
         variants: SymbolVariants = .none,
         scale: SwiftUI.Image.Scale = .medium,
@@ -88,6 +88,17 @@ extension Plan.Image {
             foregroundColor: foregroundColor
         )
     }
+    
+    func withWidth(_ width: CGFloat?) -> Self {
+        .init(
+            source: source,
+            width: width,
+            foregroundColor: foregroundColor,
+            backgroundColor: backgroundColor,
+            cornerRadius: cornerRadius
+        )
+    }
+    
 }
 
 extension Plan.Image {
