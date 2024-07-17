@@ -17,13 +17,15 @@ extension Plan {
             width: CGFloat? = nil,
             foregroundColor: Color? = nil,
             backgroundColor: Color? = nil,
-            cornerRadius: CGFloat = 0
+            cornerRadius: CGFloat = 0,
+            isZoomable: Bool = false
         ) {
             self.source = source
             self.width = width
             self.foregroundColor = foregroundColor
             self.backgroundColor = backgroundColor
             self.cornerRadius = cornerRadius
+            self.isZoomable = isZoomable
         }
         
         public let source: Source
@@ -31,6 +33,7 @@ extension Plan {
         public let foregroundColor: Color?
         public let backgroundColor: Color?
         public let cornerRadius: CGFloat
+        public let isZoomable: Bool
         
         public enum Source {
             case space
@@ -61,13 +64,15 @@ public extension Plan.Image {
         caching: Fetch.Caching,
         width: CGFloat? = nil,
         foregroundColor: Color? = nil,
-        cornerRadius: CGFloat = 0
+        cornerRadius: CGFloat = 0,
+        isZoomable: Bool = false
     ) -> Self {
         self.init(
             source: .url(url, caching: caching),
             width: width,
             foregroundColor: foregroundColor,
-            cornerRadius: cornerRadius
+            cornerRadius: cornerRadius,
+            isZoomable: isZoomable
         )
     }
     

@@ -10,6 +10,20 @@ import SwiftUI
 
 extension Plan.Image: View {
     public var body: some View {
+        if isZoomable {
+            FullScreenZoomView {
+                imageView
+            }
+        } else {
+            imageView
+        }
+    }
+}
+
+private extension Plan.Image {
+    
+    @ViewBuilder
+    var imageView: some View {
         switch source {
         case .space:
             Rectangle()
