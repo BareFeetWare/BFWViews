@@ -11,8 +11,10 @@ import SwiftUI
 extension Plan.Image: View {
     public var body: some View {
         if isZoomable {
-            FullScreenZoomView {
-                imageView
+            FullScreenFillScene {
+                ZoomView {
+                    imageView
+                }
             }
         } else {
             imageView

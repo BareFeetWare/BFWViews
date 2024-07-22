@@ -1,5 +1,5 @@
 //
-//  FullScreenZoom.swift
+//  FullScreenFillScene.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 17/7/2024.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct FullScreenZoomView<Content: View>: View {
+public struct FullScreenFillScene<Content: View>: View {
     
     public init(content: @escaping () -> Content) {
         self.content = content
@@ -17,41 +17,58 @@ public struct FullScreenZoomView<Content: View>: View {
     let content: () -> Content
     @State var isFullScreen = false
     
+    func onTapClose() {
+        isFullScreen = false
+    }
+    
+    func onTapSmall() {
+        isFullScreen = true
+    }
+    
     public var body: some View {
         content()
+            .onTapGesture {
+                onTapSmall()
+            }
             .fullScreenCover(isPresented: $isFullScreen) {
                 ZStack {
                     Color.black.ignoresSafeArea()
                     content()
                 }
-                .onTapGesture {
-                    isFullScreen = false
+                .overlay(alignment: .topTrailing) {
+                    Button {
+                        onTapClose()
+                    } label: {
+                        Plan.Image(source: .system(symbol: .xmark, scale: .large))
+                            .foregroundColor(.primary)
+                            .colorScheme(.dark)
+                    }
+                    .padding()
                 }
-            }
-            .onTapGesture {
-                isFullScreen = true
             }
     }
 }
 
-struct FullScreenZoom: ViewModifier {
+struct FullScreenFillSceneModifier: ViewModifier {
     @State var isFullScreen = true
     
     func body(content: Content) -> some View {
         // TODO: Make this work. For some reason, embedding this in a ViewModifier, the content does not appear in the fullscreenCover.
-        FullScreenZoomView {
+        FullScreenFillScene {
             content
         }
     }
 }
 
 extension View {
-    func fullScreenZoomable() -> some View {
-        modifier(FullScreenZoom())
+    func fullScreenFillScene() -> some View {
+        modifier(FullScreenFillSceneModifier())
     }
 }
 
-struct FullScreenZoom_Previews: PreviewProvider {
+// MARK: - Previews
+
+struct FullScreenFillScene_Previews: PreviewProvider {
     
     private struct Preview: View {
         let image: Image = Image(systemName: "photo")
@@ -60,15 +77,17 @@ struct FullScreenZoom_Previews: PreviewProvider {
         var body: some View {
             List {
                 HStack {
-                    FullScreenZoomView {
-                        imageView
+                    FullScreenFillScene {
+                        ZoomView {
+                            imageView
+                        }
                     }
                     .frame(maxWidth: 100)
                     Text("FullScreenZoomView")
                 }
                 HStack {
                     imageView
-                        .fullScreenZoomable()
+                        .fullScreenFillScene()
                         .frame(maxWidth: 100)
                     Text("fullScreenZoomable")
                 }

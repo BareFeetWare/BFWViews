@@ -35,6 +35,7 @@
 		E258A41C2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E258A41B2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift */; };
 		E2606CEC2A415378004E6400 /* Observing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CEB2A415378004E6400 /* Observing.swift */; };
 		E2606D0B2A430FA5004E6400 /* NavigationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */; };
+		E26342B02C4E1DD20096D91B /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26342AF2C4E1DC90096D91B /* ZoomView.swift */; };
 		E269F7C42C06D4BC00D83739 /* DetailRowRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269F7C32C06D4BC00D83739 /* DetailRowRepresentable.swift */; };
 		E269F7C62C06D4FE00D83739 /* Plan.List+Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269F7C52C06D4FE00D83739 /* Plan.List+Mirror.swift */; };
 		E26A7AD42765A561007E3A6C /* BadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A7AD32765A561007E3A6C /* BadgeScene.swift */; };
@@ -58,7 +59,7 @@
 		E28D1BD6283350C400064CCD /* Plan.DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */; };
 		E28D1BDC2833582A00064CCD /* ListSceneFlow.Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D1BDB2833582A00064CCD /* ListSceneFlow.Coordinator.swift */; };
 		E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */; };
-		E293393E2C475EDB00810E45 /* FullScreenZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293393D2C475EDB00810E45 /* FullScreenZoom.swift */; };
+		E293393E2C475EDB00810E45 /* FullScreenFillScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293393D2C475EDB00810E45 /* FullScreenFillScene.swift */; };
 		E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC0426FD4EC900CFDE50 /* WebView.swift */; };
 		E2BAAC0926FD6D4D00CFDE50 /* AsyncImageScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC0826FD6D4D00CFDE50 /* AsyncImageScene.swift */; };
 		E2BAAC1126FD88F700CFDE50 /* Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1026FD88F700CFDE50 /* Fetch.swift */; };
@@ -150,6 +151,7 @@
 		E258A41B2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compatible.NavigationSplitView.swift; sourceTree = "<group>"; };
 		E2606CEB2A415378004E6400 /* Observing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observing.swift; sourceTree = "<group>"; };
 		E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHeader.swift; sourceTree = "<group>"; };
+		E26342AF2C4E1DC90096D91B /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
 		E269F7C32C06D4BC00D83739 /* DetailRowRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRowRepresentable.swift; sourceTree = "<group>"; };
 		E269F7C52C06D4FE00D83739 /* Plan.List+Mirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.List+Mirror.swift"; sourceTree = "<group>"; };
 		E26A7AD32765A561007E3A6C /* BadgeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeScene.swift; sourceTree = "<group>"; };
@@ -173,7 +175,7 @@
 		E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.DetailRow.swift; sourceTree = "<group>"; };
 		E28D1BDB2833582A00064CCD /* ListSceneFlow.Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSceneFlow.Coordinator.swift; sourceTree = "<group>"; };
 		E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLinkScene.swift; sourceTree = "<group>"; };
-		E293393D2C475EDB00810E45 /* FullScreenZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenZoom.swift; sourceTree = "<group>"; };
+		E293393D2C475EDB00810E45 /* FullScreenFillScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenFillScene.swift; sourceTree = "<group>"; };
 		E2BAAC0426FD4EC900CFDE50 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		E2BAAC0826FD6D4D00CFDE50 /* AsyncImageScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageScene.swift; sourceTree = "<group>"; };
 		E2BAAC1026FD88F700CFDE50 /* Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch.swift; sourceTree = "<group>"; };
@@ -452,7 +454,7 @@
 				E224C9A126E8661100AC5CD2 /* Color+Hex.swift */,
 				E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */,
 				E26FDBF82AAEEFAA00AC992B /* ExpandableSection.swift */,
-				E293393D2C475EDB00810E45 /* FullScreenZoom.swift */,
+				E293393D2C475EDB00810E45 /* FullScreenFillScene.swift */,
 				E2E42BE32A80731E00B6E66E /* LabeledControl.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
 				E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */,
@@ -466,6 +468,7 @@
 				E23AB43E26817EC50018DD04 /* View+TappableCell.swift */,
 				E2C16B67266480C400BAC051 /* View+Trailing.swift */,
 				E2BAAC0426FD4EC900CFDE50 /* WebView.swift */,
+				E26342AF2C4E1DC90096D91B /* ZoomView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -664,7 +667,8 @@
 				E258A41A2B8DBF950035E549 /* Compatible.swift in Sources */,
 				E2606D0B2A430FA5004E6400 /* NavigationHeader.swift in Sources */,
 				E2FD40CD2669C9F5004E4905 /* Alert+Error.swift in Sources */,
-				E293393E2C475EDB00810E45 /* FullScreenZoom.swift in Sources */,
+				E26342B02C4E1DD20096D91B /* ZoomView.swift in Sources */,
+				E293393E2C475EDB00810E45 /* FullScreenFillScene.swift in Sources */,
 				E28B7ABF275C5E2F00ED5730 /* CellBorder.swift in Sources */,
 				E269F7C62C06D4FE00D83739 /* Plan.List+Mirror.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
