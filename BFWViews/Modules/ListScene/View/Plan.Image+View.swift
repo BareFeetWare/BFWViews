@@ -12,11 +12,12 @@ extension Plan.Image: View {
     public var body: some View {
         Group {
             if isZoomable {
-                FullScreenFillScene {
-                    ZoomView {
-                        imageView
+                imageView
+                    .onTapFullScreenCover {
+                        ZoomView {
+                            imageView
+                        }
                     }
-                }
             } else {
                 imageView
             }
