@@ -16,6 +16,10 @@ extension Plan.Image: View {
                     imageView
                 }
             }
+            .frame(width: width)
+            .frame(minHeight: backgroundColor != nil ? width : 0)
+            .background(backgroundColor)
+            .cornerRadius(cornerRadius)
         } else {
             imageView
         }
@@ -49,7 +53,7 @@ private extension Plan.Image {
             Image(symbol: symbol)
                 .symbolVariant(variant)
                 .imageScale(scale)
-                .formatted(planImage: self)
+                .foregroundColor(foregroundColor)
         }
     }
 }
@@ -66,18 +70,6 @@ private extension Image {
         self
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .formatted(planImage: planImage)
-    }
-}
-
-private extension View {
-    
-    func formatted(planImage: Plan.Image) -> some View {
-        self
             .foregroundColor(planImage.foregroundColor)
-            .frame(width: planImage.width)
-            .frame(minHeight: planImage.backgroundColor != nil ? planImage.width : 0)
-            .background(planImage.backgroundColor)
-            .cornerRadius(planImage.cornerRadius)
     }
 }
