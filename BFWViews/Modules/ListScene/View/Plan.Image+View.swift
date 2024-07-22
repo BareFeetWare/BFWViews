@@ -10,19 +10,21 @@ import SwiftUI
 
 extension Plan.Image: View {
     public var body: some View {
-        if isZoomable {
-            FullScreenFillScene {
-                ZoomView {
-                    imageView
+        Group {
+            if isZoomable {
+                FullScreenFillScene {
+                    ZoomView {
+                        imageView
+                    }
                 }
+            } else {
+                imageView
             }
-            .frame(width: width)
-            .frame(minHeight: backgroundColor != nil ? width : 0)
-            .background(backgroundColor)
-            .cornerRadius(cornerRadius)
-        } else {
-            imageView
         }
+        .frame(width: width)
+        .frame(minHeight: backgroundColor != nil ? width : 0)
+        .background(backgroundColor)
+        .cornerRadius(cornerRadius)
     }
 }
 
