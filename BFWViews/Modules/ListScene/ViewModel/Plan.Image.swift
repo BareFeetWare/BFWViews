@@ -100,7 +100,8 @@ public extension Plan.Image {
             width: width,
             foregroundColor: foregroundColor,
             backgroundColor: backgroundColor,
-            cornerRadius: cornerRadius
+            cornerRadius: cornerRadius,
+            isZoomable: isZoomable
         )
     }
     
