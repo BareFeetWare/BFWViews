@@ -7,15 +7,26 @@
 //
 
 import SwiftUI
+import AVKit
 
 extension Plan.Image: View {
     public var body: some View {
         Group {
-            if isZoomable {
+            if let zoomedURL {
                 imageView
+                    .overlay(
+                        playImage?
+                            .colorScheme(.dark)
+                            .opacity(0.5)
+                    )
                     .onTapFullScreenCover {
                         ZoomView {
-                            imageView
+                            if let avPlayer {
+                                VideoPlayer(player: avPlayer)
+                                    .onAppear { onAppearVideoPlayer() }
+                            } else {
+                                Plan.Image(source: .url(zoomedURL, caching: .file))
+                            }
                         }
                     }
             } else {
@@ -74,5 +85,11 @@ private extension Image {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .foregroundColor(planImage.foregroundColor)
+    }
+}
+
+struct PlanImage_Preview: PreviewProvider {
+    static var previews: some View {
+        Plan.Image.preview
     }
 }

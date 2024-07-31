@@ -87,6 +87,7 @@ public extension ImageSymbol {
     static let phone: Self = .init("phone")
     static let photo: Self = .init("photo")
     static let pin: Self = .init("pin")
+    static let play: Self = .init("play")
     static let plus: Self = .init("plus")
     static let rectangleGrid2x2: Self = .init("rectangle.grid.2x2")
     static let rectangleGrid3x2: Self = .init("rectangle.grid.3x2")

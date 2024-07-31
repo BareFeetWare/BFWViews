@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import AVKit
 
 extension Plan {
     public struct Image {
@@ -18,14 +19,14 @@ extension Plan {
             foregroundColor: Color? = nil,
             backgroundColor: Color? = nil,
             cornerRadius: CGFloat = 0,
-            isZoomable: Bool = false
+            zoomedURL: URL? = nil
         ) {
             self.source = source
             self.width = width
             self.foregroundColor = foregroundColor
             self.backgroundColor = backgroundColor
             self.cornerRadius = cornerRadius
-            self.isZoomable = isZoomable
+            self.zoomedURL = zoomedURL
         }
         
         public let source: Source
@@ -33,7 +34,7 @@ extension Plan {
         public let foregroundColor: Color?
         public let backgroundColor: Color?
         public let cornerRadius: CGFloat
-        public let isZoomable: Bool
+        public let zoomedURL: URL?
         
         public enum Source {
             case space
@@ -55,7 +56,8 @@ public extension Plan.Image {
     ) -> Self {
         self.init(
             source: .space,
-            width: width
+            width: width,
+            zoomedURL: nil
         )
     }
     
@@ -65,14 +67,14 @@ public extension Plan.Image {
         width: CGFloat? = nil,
         foregroundColor: Color? = nil,
         cornerRadius: CGFloat = 0,
-        isZoomable: Bool = false
+        zoomedURL: URL? = nil
     ) -> Self {
         self.init(
             source: .url(url, caching: caching),
             width: width,
             foregroundColor: foregroundColor,
             cornerRadius: cornerRadius,
-            isZoomable: isZoomable
+            zoomedURL: zoomedURL
         )
     }
     
@@ -90,7 +92,8 @@ public extension Plan.Image {
                 scale: scale
             ),
             width: width,
-            foregroundColor: foregroundColor
+            foregroundColor: foregroundColor,
+            zoomedURL: nil
         )
     }
     
@@ -101,10 +104,39 @@ public extension Plan.Image {
             foregroundColor: foregroundColor,
             backgroundColor: backgroundColor,
             cornerRadius: cornerRadius,
-            isZoomable: isZoomable
+            zoomedURL: zoomedURL
         )
     }
     
+}
+
+// MARK - For the view.
+
+extension Plan.Image {
+    
+    var isZoomedVideo: Bool {
+        // TODO: More robust test.
+        zoomedURL?.pathExtension == "mp4"
+    }
+    
+    var playImage: Plan.Image? {
+        guard isZoomedVideo else { return nil }
+        return Plan.Image(source: .system(symbol: .play, variants: .circle.fill, scale: .large))
+    }
+    
+    var avPlayer: AVPlayer? {
+        guard isZoomedVideo else { return nil }
+        return zoomedURL.map {
+            AVPlayer(url: $0)
+        }
+    }
+    
+    func onAppearVideoPlayer() {
+        DispatchQueue.main.async {
+            avPlayer?.play()
+        }
+    }
+
 }
 
 extension Plan.Image {
@@ -112,6 +144,8 @@ extension Plan.Image {
         source: .url(
             URL(string: "https://www.barefeetware.com/logo.png")!,
             caching: .file
-        )
+        ),
+        // TODO: Add video URL.
+        zoomedURL: URL(string: "https://www.barefeetware.com/logo.png")
     )
 }
