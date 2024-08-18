@@ -6,16 +6,14 @@
 //
 
 import Foundation
-import SwiftUI
 
 public extension Plan {
     struct DetailRow: Identifiable {
         public let id: String
         public let title: String?
         public let subtitle: String?
+        public let trailing: String?
         public let image: Plan.Image?
-        // TODO: Change to generic?
-        @ViewBuilder public let trailingContent: () -> any View
     }
 }
 
@@ -25,33 +23,6 @@ public extension Plan.DetailRow {
         id: String? = nil,
         title: String?,
         subtitle: String? = nil,
-        image: Plan.Image? = nil,
-        @ViewBuilder trailingContent: @escaping () -> any View
-    ) {
-        self.id = id ?? UUID().uuidString
-        self.title = title
-        self.subtitle = subtitle
-        self.image = image
-        self.trailingContent = trailingContent
-    }
-    
-    init(
-        id: String? = nil,
-        title: String,
-        subtitle: String? = nil,
-        image: Plan.Image? = nil
-    ) {
-        self.id = id ?? UUID().uuidString
-        self.title = title
-        self.subtitle = subtitle
-        self.image = image
-        self.trailingContent = { EmptyView() }
-    }
-    
-    init(
-        id: String? = nil,
-        title: String,
-        subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil
     ) {
@@ -59,16 +30,7 @@ public extension Plan.DetailRow {
         self.title = title
         self.subtitle = subtitle
         self.image = image
-        self.trailingContent = {
-            Group {
-                if let trailing {
-                    Text(trailing)
-                        .multilineTextAlignment(.trailing)
-                } else {
-                    EmptyView()
-                }
-            }
-        }
+        self.trailing = trailing
     }
     
     func withImageWidth(_ width: CGFloat?) -> Self {
@@ -76,8 +38,8 @@ public extension Plan.DetailRow {
             id: id,
             title: title,
             subtitle: subtitle,
-            image: image?.withWidth(width),
-            trailingContent: trailingContent
+            trailing: trailing,
+            image: image?.withWidth(width)
         )
     }
     

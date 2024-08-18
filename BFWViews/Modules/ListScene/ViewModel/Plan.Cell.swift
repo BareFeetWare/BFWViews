@@ -49,6 +49,7 @@ public extension Array where Element == Plan.Cell {
                     id: detailRow.id,
                     title: detailRow.title,
                     subtitle: detailRow.subtitle,
+                    trailing: detailRow.trailing,
                     image: {
                         guard let image = detailRow.image
                         else { return .space(width: maxWidth) }
@@ -59,8 +60,7 @@ public extension Array where Element == Plan.Cell {
                             backgroundColor: image.backgroundColor,
                             cornerRadius: image.cornerRadius
                         )
-                    }(),
-                    trailingContent: detailRow.trailingContent
+                    }()
                 )
             }
         }

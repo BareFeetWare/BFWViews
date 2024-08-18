@@ -23,8 +23,11 @@ extension Plan.DetailRow: View {
             // Note: On iOS 13 - 15?, using a Spacer() here instead of frame, causes a containing Menu to show multiple rows per row. Weird.
             // Alternatively, use frame, but spacing is too wide:
             //.frame(maxWidth: .infinity, alignment: .leading)
-            AnyView(trailingContent())
-                .multilineTextAlignment(.trailing)
+            trailing.map {
+                Text($0)
+                    .multilineTextAlignment(.trailing)
+                    .foregroundColor(.secondary)
+            }
         }
     }
 }
