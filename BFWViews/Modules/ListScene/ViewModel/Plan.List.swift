@@ -87,7 +87,7 @@ public extension Plan.List {
                 Plan.Section(
                     id: section.id,
                     isExpanded: section.isExpanded,
-                    header: section.header,
+                    title: section.title,
                     cells: section.cells.compactMap { $0 }.map { cell in
                         Plan.Cell(id: cell.id) {
                             Button {

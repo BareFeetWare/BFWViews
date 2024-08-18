@@ -27,8 +27,9 @@ extension Plan.Section: View {
     
     @ViewBuilder
     var headerView: some View {
-        if let header = header {
-            AnyView(header())
+        title.map {
+            Text($0)
+                .textCase(.none)
         }
     }
     
