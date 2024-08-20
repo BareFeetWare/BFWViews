@@ -64,7 +64,7 @@ public extension Fetch {
                 try await data = self.data(url: url)
                 guard !data.isEmpty else { throw FetchError.empty }
                 // TODO: Add thread safety.
-                debugPrint("Cache writing data to file \(URL(fileURLWithPath: cachedFilePath).lastPathComponent) for URL path: \(url.path)")
+                //debugPrint("Cache writing data to file \(URL(fileURLWithPath: cachedFilePath).lastPathComponent) for URL path: \(url.path)")
                 FileManager.default.createFile(atPath: cachedFilePath, contents: data, attributes: nil)
             }
             return data
