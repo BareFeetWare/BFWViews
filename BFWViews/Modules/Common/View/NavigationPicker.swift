@@ -6,7 +6,7 @@
 //  Copyright © 2024 BareFeetWare. All rights reserved.
 //
 
-// Extracted from BFWViews: https://bitbucket.org/barefeetware/bfwviews/
+//  Extracted from BFWViews: https://bitbucket.org/barefeetware/bfwviews/
 
 import SwiftUI
 
@@ -47,6 +47,31 @@ extension NavigationPicker where Option == IdentifiableText {
         self.isSearchMatch = isSearchMatch
     }
 
+}
+
+extension NavigationPicker {
+    
+    init<V: View & Identifiable>(
+        _ title: String,
+        selection: Binding<V?>,
+        options: [V],
+        isSearchMatch: ((V, String) -> Bool)? = nil
+    ) where Option == OptionalRow<V> {
+        self.title = title
+        self.selection = selection.map { option in
+            OptionalRow(content: option)
+        } reverse: { optionalRow in
+            optionalRow.content
+        }
+        self.options = options.map { OptionalRow(content: $0) }
+        self.isSearchMatch = isSearchMatch.map { isSearchMatch in
+            { option, searchString in
+                guard let content = option.content else { return true }
+                return isSearchMatch(content, searchString)
+            }
+        }
+    }
+    
 }
 
 extension NavigationPicker {
@@ -142,27 +167,9 @@ struct NavigationPicker_Previews: PreviewProvider {
         StringPreview()
     }
     
-    struct StringPreview: View {
-        @State var selection: String = "apple"
-        let fruits: [String] = ["apple", "banana", "orange"]
-        
-        var body: some View {
-            NavigationView {
-                Form {
-                    NavigationPicker(
-                        "Fruit",
-                        selection: $selection,
-                        options: fruits,
-                        isSearchMatch: { $0.title.matchesSearch($1) }
-                    )
-                }
-                .navigationTitle("Text Picker")
-            }
-        }
-    }
-    
     struct Preview: View {
         @State var selection: Fruit = .apple
+        @State var opitonalSelection: Fruit?
         let fruits: [Fruit] = [.apple, .banana, .orange]
         
         enum Fruit: Identifiable & View {
@@ -201,11 +208,39 @@ struct NavigationPicker_Previews: PreviewProvider {
                         fruit.name.matchesSearch(searchString)
                         || fruit.emoji.matchesSearch(searchString)
                     }
+                    NavigationPicker(
+                        "Optional Fruit",
+                        selection: $opitonalSelection,
+                        options: fruits
+                    ) { fruit, searchString in
+                        fruit.name.matchesSearch(searchString)
+                        || fruit.emoji.matchesSearch(searchString)
+                    }
                 }
                 .navigationTitle("View Picker")
             }
         }
     }
+    
+    struct StringPreview: View {
+        @State var selection: String = "apple"
+        let fruits: [String] = ["apple", "banana", "orange"]
+        
+        var body: some View {
+            NavigationView {
+                Form {
+                    NavigationPicker(
+                        "Fruit",
+                        selection: $selection,
+                        options: fruits,
+                        isSearchMatch: { $0.title.matchesSearch($1) }
+                    )
+                }
+                .navigationTitle("Text Picker")
+            }
+        }
+    }
+    
 }
 
 private extension String {
