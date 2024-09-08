@@ -16,16 +16,20 @@ struct NavigationPicker<Option: Identifiable & View> {
     let title: String
     let selection: Binding<Option>
     let options: [Option]?
+    let isSearchMatch: ((Option, String) -> Bool)?
     @State var isActive = false
+    @State var searchString = ""
     
     init(
         _ title: String,
         selection: Binding<Option>,
-        options: [Option]
+        options: [Option],
+        isSearchMatch: ((Option, String) -> Bool)? = nil
     ) {
         self.title = title
         self.selection = selection
         self.options = options
+        self.isSearchMatch = isSearchMatch
     }
 }
 
@@ -34,14 +38,29 @@ extension NavigationPicker where Option == IdentifiableText {
     init(
         _ title: String,
         selection: Binding<String>,
-        options: [String]?
+        options: [String]?,
+        isSearchMatch: ((Option, String) -> Bool)? = nil
     ) {
         self.title = title
         self.selection = selection.map { IdentifiableText($0) } reverse: { $0.title }
         self.options = options?.map { IdentifiableText($0) }
+        self.isSearchMatch = isSearchMatch
     }
 
 }
+
+extension NavigationPicker {
+    
+    var displayedOptions: [Option]? {
+        guard let isSearchMatch, !searchString.isEmpty
+        else { return options }
+        return options?.filter { option in
+            isSearchMatch(option, searchString)
+        }
+    }
+    
+}
+
 private struct TickRow<Option: View & Identifiable> {
     @Binding var selection: Option
     let option: Option
@@ -61,15 +80,16 @@ private struct TickRow<Option: View & Identifiable> {
 
 extension NavigationPicker: View {
     var body: some View {
-        if let options {
+        if let displayedOptions {
             NavigationLink(isActive: $isActive) {
                 Form {
                     Section {
-                        ForEach(options) { option in
+                        ForEach(displayedOptions) { option in
                             tickRow(option: option)
                         }
                     }
                 }
+                .searchable(text: $searchString)
                 .navigationTitle(title)
             } label: {
                 HStack {
@@ -132,7 +152,8 @@ struct NavigationPicker_Previews: PreviewProvider {
                     NavigationPicker(
                         "Fruit",
                         selection: $selection,
-                        options: fruits
+                        options: fruits,
+                        isSearchMatch: { $0.title.matchesSearch($1) }
                     )
                 }
                 .navigationTitle("Text Picker")
@@ -176,10 +197,19 @@ struct NavigationPicker_Previews: PreviewProvider {
                         "Fruit",
                         selection: $selection,
                         options: fruits
-                    )
+                    ) { fruit, searchString in
+                        fruit.name.matchesSearch(searchString)
+                        || fruit.emoji.matchesSearch(searchString)
+                    }
                 }
                 .navigationTitle("View Picker")
             }
         }
+    }
+}
+
+private extension String {
+    func matchesSearch(_ search: String) -> Bool {
+        localizedCaseInsensitiveContains(search)
     }
 }
