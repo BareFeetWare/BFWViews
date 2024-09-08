@@ -6,6 +6,8 @@
 //  Copyright © 2024 BareFeetWare. All rights reserved.
 //
 
+// Extracted from BFWViews: https://bitbucket.org/barefeetware/bfwviews/
+
 import SwiftUI
 
 public protocol OptionalProtocol {
@@ -36,6 +38,14 @@ public extension Binding where Value: OptionalProtocol {
         }
     }
     
+    func nilSubstitute(_ nilValue: Value.Wrapped) -> Binding<Value.Wrapped> {
+        .init {
+            wrappedValue.optional ?? nilValue
+        } set: {
+            wrappedValue.optional = $0
+        }
+    }
+    
 }
 
 public extension Binding {
@@ -53,5 +63,17 @@ public extension Binding {
 public extension Binding where Value == Bool {
     func toggled() -> Binding<Bool> {
         map { !$0 } reverse: { !$0 }
+    }
+}
+
+extension Binding where Value == String {
+    func isMinCount(_ minCount: Int) -> Binding<Bool> {
+        .init {
+            wrappedValue.count == minCount
+        } set: {
+            if !$0 {
+                wrappedValue = ""
+            }
+        }
     }
 }
