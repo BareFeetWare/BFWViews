@@ -19,6 +19,7 @@
 		E21636D12A519C3F005A7D48 /* Plan.Section+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21636D02A519C3F005A7D48 /* Plan.Section+View.swift */; };
 		E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A126E8661100AC5CD2 /* Color+Hex.swift */; };
 		E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */; };
+		E226BCC52C924FF700A62B9E /* LoopingVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226BCC42C924FF700A62B9E /* LoopingVideoPlayer.swift */; };
 		E2299CF12BA93F740040CE93 /* SVGRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2299CF02BA93F730040CE93 /* SVGRender.swift */; };
 		E2386BE92A087314009FEA16 /* Plan.Image+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BE82A087314009FEA16 /* Plan.Image+View.swift */; };
 		E2386BEB2A08D54A009FEA16 /* Plan.List+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */; };
@@ -140,6 +141,7 @@
 		E21636D02A519C3F005A7D48 /* Plan.Section+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Section+View.swift"; sourceTree = "<group>"; };
 		E224C9A126E8661100AC5CD2 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHexScene.swift; sourceTree = "<group>"; };
+		E226BCC42C924FF700A62B9E /* LoopingVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingVideoPlayer.swift; sourceTree = "<group>"; };
 		E2299CF02BA93F730040CE93 /* SVGRender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGRender.swift; sourceTree = "<group>"; };
 		E2386BE82A087314009FEA16 /* Plan.Image+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Image+View.swift"; sourceTree = "<group>"; };
 		E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.List+View.swift"; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 				E26FDBF82AAEEFAA00AC992B /* ExpandableSection.swift */,
 				E280939D2C8D8F8A00CB11A0 /* IdentifiableText.swift */,
 				E2E42BE32A80731E00B6E66E /* LabeledControl.swift */,
+				E226BCC42C924FF700A62B9E /* LoopingVideoPlayer.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
 				E280939F2C8D8F9800CB11A0 /* Modified.swift */,
 				E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */,
@@ -710,6 +713,7 @@
 				E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */,
 				E28D1BD5283350C400064CCD /* Plan.List.swift in Sources */,
 				E26FDBF92AAEEFAA00AC992B /* ExpandableSection.swift in Sources */,
+				E226BCC52C924FF700A62B9E /* LoopingVideoPlayer.swift in Sources */,
 				E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */,
 				E2C16B69266480C400BAC051 /* CompressibleSpacer.swift in Sources */,
 				E2459F852A0351450068DCBB /* Plan.swift in Sources */,
