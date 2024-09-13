@@ -12,24 +12,31 @@ import SwiftUI
 
 // TODO: Consolidate with NavigationOptionalPicker
 
-struct NavigationPicker<Option: Identifiable & View> {
+struct NavigationPicker<Header: View, Option: Identifiable & View> {
     let title: String
+    /// The navigationTitle should be less than 15 characters. If nil, then it uses the title.
+    let navigationTitle: String?
     let selection: Binding<Option>
     let options: [Option]?
     let isSearchMatch: ((Option, String) -> Bool)?
+    let header: () -> Header
     @State var isActive = false
     @State var searchString = ""
     
     init(
         _ title: String,
+        navigationTitle: String? = nil,
         selection: Binding<Option>,
         options: [Option],
-        isSearchMatch: ((Option, String) -> Bool)? = nil
+        isSearchMatch: ((Option, String) -> Bool)? = nil,
+        header: @escaping (() -> Header) = { EmptyView() }
     ) {
         self.title = title
+        self.navigationTitle = navigationTitle
         self.selection = selection
         self.options = options
         self.isSearchMatch = isSearchMatch
+        self.header = header
     }
 }
 
@@ -37,14 +44,18 @@ extension NavigationPicker where Option == IdentifiableText {
     
     init(
         _ title: String,
+        navigationTitle: String? = nil,
         selection: Binding<String>,
         options: [String]?,
-        isSearchMatch: ((Option, String) -> Bool)? = nil
+        isSearchMatch: ((Option, String) -> Bool)? = nil,
+        header: @escaping (() -> Header) = { EmptyView() }
     ) {
         self.title = title
+        self.navigationTitle = navigationTitle
         self.selection = selection.map { IdentifiableText($0) } reverse: { $0.title }
         self.options = options?.map { IdentifiableText($0) }
         self.isSearchMatch = isSearchMatch
+        self.header = header
     }
 
 }
@@ -53,11 +64,14 @@ extension NavigationPicker {
     
     init<V: View & Identifiable>(
         _ title: String,
+        navigationTitle: String? = nil,
         selection: Binding<V?>,
         options: [V],
-        isSearchMatch: ((V, String) -> Bool)? = nil
+        isSearchMatch: ((V, String) -> Bool)? = nil,
+        header: @escaping (() -> Header) = { EmptyView() }
     ) where Option == OptionalRow<V> {
         self.title = title
+        self.navigationTitle = navigationTitle
         self.selection = selection.map { option in
             OptionalRow(content: option)
         } reverse: { optionalRow in
@@ -70,6 +84,7 @@ extension NavigationPicker {
                 return isSearchMatch(content, searchString)
             }
         }
+        self.header = header
     }
     
 }
@@ -84,6 +99,9 @@ extension NavigationPicker {
         }
     }
     
+    var preferredNavigationTitle: String {
+        navigationTitle ?? title
+    }
 }
 
 private struct TickRow<Option: View & Identifiable> {
@@ -112,10 +130,12 @@ extension NavigationPicker: View {
                         ForEach(displayedOptions) { option in
                             tickRow(option: option)
                         }
+                    } header: {
+                        header()
                     }
                 }
                 .searchable(text: $searchString)
-                .navigationTitle(title)
+                .navigationTitle(preferredNavigationTitle)
             } label: {
                 HStack {
                     Text(title)
@@ -201,12 +221,16 @@ struct NavigationPicker_Previews: PreviewProvider {
             NavigationView {
                 Form {
                     NavigationPicker(
-                        "Fruit",
+                        "Favorite Fruit",
+                        navigationTitle: "Fruit",
                         selection: $selection,
                         options: fruits
                     ) { fruit, searchString in
                         fruit.name.matchesSearch(searchString)
                         || fruit.emoji.matchesSearch(searchString)
+                    } header: {
+                        Text("Choose your favorite fruit")
+                            .textCase(.none)
                     }
                     NavigationPicker(
                         "Optional Fruit",
