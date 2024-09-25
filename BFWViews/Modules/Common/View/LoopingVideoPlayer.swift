@@ -10,7 +10,7 @@
 import SwiftUI
 import AVKit
 
-struct LoopingVideoPlayer {
+public struct LoopingVideoPlayer {
     
     let url: URL
     let isAutoPlay: Bool
@@ -20,7 +20,7 @@ struct LoopingVideoPlayer {
     private var playerLooper: AVPlayerLooper
     @State private var height: CGFloat = 150
     
-    init(url: URL, isAutoPlay: Bool) {
+    public init(url: URL, isAutoPlay: Bool) {
         self.url = url
         self.asset = AVAsset(url: url)
         let item = AVPlayerItem(asset: asset)
@@ -60,7 +60,7 @@ extension LoopingVideoPlayer {
 // MARK: - Views
 
 extension LoopingVideoPlayer: View {
-    var body: some View {
+    public var body: some View {
         VideoPlayer(player: player)
             .readFrame { onReadFrame($0) }
             .frame(height: height)

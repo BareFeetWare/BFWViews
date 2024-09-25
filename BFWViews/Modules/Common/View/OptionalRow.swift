@@ -10,12 +10,12 @@
 
 import SwiftUI
 
-struct OptionalRow<Content: Identifiable & View> {
+public struct OptionalRow<Content: Identifiable & View> {
     let content: Content?
 }
 
 extension OptionalRow: Identifiable {
-    var id: String {
+    public var id: String {
         guard let content
         else { return "None" }
         return String(describing: content.id)
@@ -25,7 +25,7 @@ extension OptionalRow: Identifiable {
 // MARK: - Views
 
 extension OptionalRow: View {
-    var body: some View {
+    public var body: some View {
         if let content {
             content
         } else {

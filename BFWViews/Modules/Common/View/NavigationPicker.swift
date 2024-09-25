@@ -12,7 +12,7 @@ import SwiftUI
 
 // TODO: Consolidate with NavigationOptionalPicker
 
-struct NavigationPicker<Header: View, Option: Identifiable & View> {
+public struct NavigationPicker<Header: View, Option: Identifiable & View> {
     let title: String
     /// The navigationTitle should be less than 15 characters. If nil, then it uses the title.
     let navigationTitle: String?
@@ -40,7 +40,7 @@ struct NavigationPicker<Header: View, Option: Identifiable & View> {
     }
 }
 
-extension NavigationPicker where Option == IdentifiableText {
+public extension NavigationPicker where Option == IdentifiableText {
     
     init(
         _ title: String,
@@ -60,7 +60,7 @@ extension NavigationPicker where Option == IdentifiableText {
 
 }
 
-extension NavigationPicker {
+public extension NavigationPicker {
     
     init<V: View & Identifiable>(
         _ title: String,
@@ -89,7 +89,7 @@ extension NavigationPicker {
     
 }
 
-extension NavigationPicker {
+public extension NavigationPicker {
     
     var displayedOptions: [Option]? {
         guard let isSearchMatch, !searchString.isEmpty
@@ -122,7 +122,7 @@ private struct TickRow<Option: View & Identifiable> {
 // MARK: - Views
 
 extension NavigationPicker: View {
-    var body: some View {
+    public var body: some View {
         if let displayedOptions {
             NavigationLink(isActive: $isActive) {
                 Form {

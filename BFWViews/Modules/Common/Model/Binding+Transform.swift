@@ -66,7 +66,7 @@ public extension Binding where Value == Bool {
     }
 }
 
-extension Binding where Value == String {
+public extension Binding where Value == String {
     func isMinCount(_ minCount: Int) -> Binding<Bool> {
         .init {
             wrappedValue.count == minCount

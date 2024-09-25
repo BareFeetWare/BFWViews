@@ -12,13 +12,13 @@ import SwiftUI
 
 // TODO: Consolidate with NavigationPicker
 
-struct NavigationOptionalPicker<Option: Identifiable & View> where Option.ID == String {
+public struct NavigationOptionalPicker<Option: Identifiable & View> where Option.ID == String {
     let title: String
     let selection: Binding<Option?>
     let options: [Option]?
     @State var isActive = false
     
-    init(
+    public init(
         _ title: String,
         selection: Binding<Option?>,
         options: [Option]
@@ -32,6 +32,22 @@ struct NavigationOptionalPicker<Option: Identifiable & View> where Option.ID == 
         selection.wrappedValue = option
     }
     
+}
+
+public extension NavigationOptionalPicker where Option == IdentifiableText {
+    init(
+        _ title: String,
+        selection: Binding<String?>,
+        options: [String]
+    ) {
+        self.title = title
+        self.selection = selection.map {
+            $0.map { IdentifiableText($0) }
+        } reverse: {
+            $0?.title
+        }
+        self.options = options.map { IdentifiableText($0) }
+    }
 }
 
 private struct OptionalTickRow<Option: View & Identifiable> {
@@ -61,7 +77,7 @@ private struct OptionalView<Content: View> {
 // MARK: - Views
 
 extension NavigationOptionalPicker: View {
-    var body: some View {
+    public var body: some View {
         if let options {
             NavigationLink(isActive: $isActive) {
                 Form {
@@ -131,10 +147,13 @@ extension OptionalTickRow: View {
 struct NavigationOptionalPicker_Previews: PreviewProvider {
     
     static var previews: some View {
-        Preview()
+        FruitsPreview()
+            .previewDisplayName("Fruits")
+        StringsPreview()
+            .previewDisplayName("Strings")
     }
     
-    struct Preview: View {
+    struct FruitsPreview: View {
         @State var selection: Fruit?
         let fruits: [Fruit] = [.apple, .banana, .orange]
         
@@ -172,8 +191,27 @@ struct NavigationOptionalPicker_Previews: PreviewProvider {
                         options: fruits
                     )
                 }
-                .navigationTitle("Snack?")
+                .navigationTitle("Fruits")
             }
         }
     }
+    
+    struct StringsPreview: View {
+        @State var selection: String?
+        let options: [String] = ["apple", "banana", "orange"]
+        
+        var body: some View {
+            NavigationView {
+                Form {
+                    NavigationOptionalPicker(
+                        "Fruit",
+                        selection: $selection,
+                        options: options
+                    )
+                }
+                .navigationTitle("Strings")
+            }
+        }
+    }
+
 }

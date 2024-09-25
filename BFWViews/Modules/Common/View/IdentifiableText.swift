@@ -10,20 +10,20 @@
 
 import SwiftUI
 
-struct IdentifiableText: Identifiable {
+public struct IdentifiableText: Identifiable {
     let title: String
     
     init(_ title: String) {
         self.title = title
     }
     
-    var id: String { title }
+    public var id: String { title }
 }
 
 // MARK: - Views
 
 extension IdentifiableText: View {
-    var body: some View {
+    public var body: some View {
         Text(title)
     }
 }
