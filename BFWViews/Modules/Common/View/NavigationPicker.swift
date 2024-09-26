@@ -23,7 +23,7 @@ public struct NavigationPicker<Header: View, Option: Identifiable & View> {
     @State var isActive = false
     @State var searchString = ""
     
-    init(
+    public init(
         _ title: String,
         navigationTitle: String? = nil,
         selection: Binding<Option>,
@@ -40,9 +40,9 @@ public struct NavigationPicker<Header: View, Option: Identifiable & View> {
     }
 }
 
-public extension NavigationPicker where Option == IdentifiableText {
+extension NavigationPicker where Option == IdentifiableText {
     
-    init(
+    public init(
         _ title: String,
         navigationTitle: String? = nil,
         selection: Binding<String>,
@@ -60,9 +60,9 @@ public extension NavigationPicker where Option == IdentifiableText {
 
 }
 
-public extension NavigationPicker {
+extension NavigationPicker {
     
-    init<V: View & Identifiable>(
+    public init<V: View & Identifiable>(
         _ title: String,
         navigationTitle: String? = nil,
         selection: Binding<V?>,
@@ -89,7 +89,7 @@ public extension NavigationPicker {
     
 }
 
-public extension NavigationPicker {
+extension NavigationPicker {
     
     var displayedOptions: [Option]? {
         guard let isSearchMatch, !searchString.isEmpty
