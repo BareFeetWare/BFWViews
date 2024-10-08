@@ -11,9 +11,9 @@
 import SwiftUI
 
 public struct IdentifiableText: Identifiable {
-    public let title: String
+    let title: String
     
-    public init(_ title: String) {
+    init(_ title: String) {
         self.title = title
     }
     
