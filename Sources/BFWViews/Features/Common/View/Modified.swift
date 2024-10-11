@@ -17,6 +17,18 @@ public extension View {
         modify(self)
     }
     
+    @ViewBuilder
+    func modified<V: View>(
+        if condition: Bool,
+        @ViewBuilder modify: (Self) -> V
+    ) -> some View {
+        if condition {
+            modify(self)
+        } else {
+            self
+        }
+    }
+    
 }
 
 struct Modified_Preview: PreviewProvider {
