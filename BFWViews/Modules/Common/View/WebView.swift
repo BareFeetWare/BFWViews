@@ -11,7 +11,12 @@
 import SwiftUI
 import WebKit
 
-public struct WebView: UIViewRepresentable {
+public struct WebView {
+    
+    let title: Binding<String>
+    let urlRequest: URLRequest
+    var loadStatusChanged: ((Bool, Error?) -> Void)?
+    let policyForNavigationAction: ((_ navigationAction: WKNavigationAction) -> WKNavigationActionPolicy)?
     
     public init(
         title: Binding<String>,
@@ -25,10 +30,17 @@ public struct WebView: UIViewRepresentable {
         self.policyForNavigationAction = policyForNavigationAction
     }
     
-    let title: Binding<String>
-    let urlRequest: URLRequest
-    var loadStatusChanged: ((Bool, Error?) -> Void)?
-    let policyForNavigationAction: ((_ navigationAction: WKNavigationAction) -> WKNavigationActionPolicy)?
+    func onLoadStatusChanged(perform: ((Bool, Error?) -> Void)?) -> some View {
+        var copy = self
+        copy.loadStatusChanged = perform
+        return copy
+    }
+    
+}
+
+// MARK: - Views
+
+extension WebView: UIViewRepresentable {
     
     public func makeCoordinator() -> WebView.Coordinator {
         Coordinator(self)
@@ -44,12 +56,6 @@ public struct WebView: UIViewRepresentable {
     public func updateUIView(_ uiView: WKWebView, context: Context) {
         // you can access environment via context.environment here
         // Note that this method will be called A LOT
-    }
-
-    func onLoadStatusChanged(perform: ((Bool, Error?) -> Void)?) -> some View {
-        var copy = self
-        copy.loadStatusChanged = perform
-        return copy
     }
 
     public class Coordinator: NSObject, WKNavigationDelegate {
