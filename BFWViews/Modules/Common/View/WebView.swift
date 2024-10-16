@@ -65,22 +65,36 @@ extension WebView: UIViewRepresentable {
             self.parent = parent
         }
 
-        public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        public func webView(
+            _ webView: WKWebView,
+            didCommit navigation: WKNavigation!
+        ) {
             parent.loadStatusChanged?(true, nil)
         }
 
-        public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        public func webView(
+            _ webView: WKWebView,
+            didFinish navigation: WKNavigation!
+        ) {
             parent.title.wrappedValue = webView.title ?? ""
             parent.loadStatusChanged?(false, nil)
         }
 
-        public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        public func webView(
+            _ webView: WKWebView,
+            didFail navigation: WKNavigation!,
+            withError error: Error
+        ) {
             parent.loadStatusChanged?(false, error)
         }
         
-        public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-            guard let policyForNavigationAction = parent.policyForNavigationAction else { return }
-            let policy = policyForNavigationAction(navigationAction)
+        public func webView(
+            _ webView: WKWebView,
+            decidePolicyFor navigationAction: WKNavigationAction,
+            decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+        ) {
+            let policy = parent.policyForNavigationAction?(navigationAction)
+            ?? .allow
             decisionHandler(policy)
         }
         
