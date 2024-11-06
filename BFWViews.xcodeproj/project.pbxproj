@@ -66,6 +66,7 @@
 		E28D1BDC2833582A00064CCD /* ListSceneFlow.Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D1BDB2833582A00064CCD /* ListSceneFlow.Coordinator.swift */; };
 		E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */; };
 		E293393E2C475EDB00810E45 /* OnTapFullScreenCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293393D2C475EDB00810E45 /* OnTapFullScreenCover.swift */; };
+		E2B310F52CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B310F42CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift */; };
 		E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC0426FD4EC900CFDE50 /* WebView.swift */; };
 		E2BAAC0926FD6D4D00CFDE50 /* AsyncImageScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC0826FD6D4D00CFDE50 /* AsyncImageScene.swift */; };
 		E2BAAC1126FD88F700CFDE50 /* Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC1026FD88F700CFDE50 /* Fetch.swift */; };
@@ -188,6 +189,7 @@
 		E28D1BDB2833582A00064CCD /* ListSceneFlow.Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSceneFlow.Coordinator.swift; sourceTree = "<group>"; };
 		E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLinkScene.swift; sourceTree = "<group>"; };
 		E293393D2C475EDB00810E45 /* OnTapFullScreenCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTapFullScreenCover.swift; sourceTree = "<group>"; };
+		E2B310F42CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackButtonTitle.swift; sourceTree = "<group>"; };
 		E2BAAC0426FD4EC900CFDE50 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		E2BAAC0826FD6D4D00CFDE50 /* AsyncImageScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageScene.swift; sourceTree = "<group>"; };
 		E2BAAC1026FD88F700CFDE50 /* Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 				E226BCC42C924FF700A62B9E /* LoopingVideoPlayer.swift */,
 				E21311312586F418001496C7 /* MiniSheet.swift */,
 				E280939F2C8D8F9800CB11A0 /* Modified.swift */,
+				E2B310F42CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift */,
 				E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */,
 				E28093A22C8D8FA700CB11A0 /* NavigationOptionalPicker.swift */,
 				E28093A12C8D8FA700CB11A0 /* NavigationPicker.swift */,
@@ -735,6 +738,7 @@
 				E2C16B6C266480F900BAC051 /* Card.swift in Sources */,
 				E28D1BD6283350C400064CCD /* Plan.DetailRow.swift in Sources */,
 				E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */,
+				E2B310F52CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift in Sources */,
 				E2459F892A0352090068DCBB /* Plan.Image.swift in Sources */,
 				E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */,
 				E2803FCC2B5E74D70023A74E /* Plan.Button+View.swift in Sources */,
