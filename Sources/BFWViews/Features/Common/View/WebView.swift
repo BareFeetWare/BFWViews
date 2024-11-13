@@ -11,7 +11,12 @@
 import SwiftUI
 import WebKit
 
-public struct WebView: UIViewRepresentable {
+public struct WebView {
+    
+    let title: Binding<String>
+    let urlRequest: URLRequest
+    var loadStatusChanged: ((Bool, Error?) -> Void)?
+    let policyForNavigationAction: ((_ navigationAction: WKNavigationAction) -> WKNavigationActionPolicy)?
     
     public init(
         title: Binding<String>,
@@ -25,10 +30,17 @@ public struct WebView: UIViewRepresentable {
         self.policyForNavigationAction = policyForNavigationAction
     }
     
-    let title: Binding<String>
-    let urlRequest: URLRequest
-    var loadStatusChanged: ((Bool, Error?) -> Void)?
-    let policyForNavigationAction: ((_ navigationAction: WKNavigationAction) -> WKNavigationActionPolicy)?
+    func onLoadStatusChanged(perform: ((Bool, Error?) -> Void)?) -> some View {
+        var copy = self
+        copy.loadStatusChanged = perform
+        return copy
+    }
+    
+}
+
+// MARK: - Views
+
+extension WebView: UIViewRepresentable {
     
     public func makeCoordinator() -> WebView.Coordinator {
         Coordinator(self)
@@ -46,12 +58,6 @@ public struct WebView: UIViewRepresentable {
         // Note that this method will be called A LOT
     }
 
-    func onLoadStatusChanged(perform: ((Bool, Error?) -> Void)?) -> some View {
-        var copy = self
-        copy.loadStatusChanged = perform
-        return copy
-    }
-
     public class Coordinator: NSObject, WKNavigationDelegate {
         let parent: WebView
 
@@ -59,22 +65,36 @@ public struct WebView: UIViewRepresentable {
             self.parent = parent
         }
 
-        public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        public func webView(
+            _ webView: WKWebView,
+            didCommit navigation: WKNavigation!
+        ) {
             parent.loadStatusChanged?(true, nil)
         }
 
-        public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        public func webView(
+            _ webView: WKWebView,
+            didFinish navigation: WKNavigation!
+        ) {
             parent.title.wrappedValue = webView.title ?? ""
             parent.loadStatusChanged?(false, nil)
         }
 
-        public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        public func webView(
+            _ webView: WKWebView,
+            didFail navigation: WKNavigation!,
+            withError error: Error
+        ) {
             parent.loadStatusChanged?(false, error)
         }
         
-        public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-            guard let policyForNavigationAction = parent.policyForNavigationAction else { return }
-            let policy = policyForNavigationAction(navigationAction)
+        public func webView(
+            _ webView: WKWebView,
+            decidePolicyFor navigationAction: WKNavigationAction,
+            decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+        ) {
+            let policy = parent.policyForNavigationAction?(navigationAction)
+            ?? .allow
             decisionHandler(policy)
         }
         
