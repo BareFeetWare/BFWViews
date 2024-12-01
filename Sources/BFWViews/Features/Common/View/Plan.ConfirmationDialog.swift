@@ -11,17 +11,35 @@ import SwiftUI
 extension Plan {
     public struct ConfirmationDialog {
         public let title: String?
-        public let buttonTitle: String
-        public let action: () -> Void
+        public let message: String?
+        public let buttons: [Plan.Button]
         
+        public init(
+            title: String?,
+            message: String? = nil,
+            buttons: [Plan.Button]
+        ) {
+            self.title = title
+            self.message = message
+            self.buttons = buttons
+        }
+        
+        /*
+        /// For backwards compatiblity
         public init(
             title: String?,
             buttonTitle: String,
             action: @escaping () -> Void
         ) {
             self.title = title
-            self.buttonTitle = buttonTitle
-            self.action = action
+            self.buttons = [
+                Plan.Button(buttonTitle) { action() }
+            ]
+        }
+        */
+        
+        var titleVisibility: Visibility {
+            title != nil ? .visible : .hidden
         }
     }
 }
@@ -36,13 +54,13 @@ extension View {
             self.confirmationDialog(
                 confirmation.title ?? "Confirm",
                 isPresented: confirmationBinding.isNotNil,
-                titleVisibility: confirmation.title != nil ? .visible : .hidden
+                titleVisibility: confirmation.titleVisibility
             ) {
-                Button(confirmation.buttonTitle, role: .none) {
-                    // TODO: Perform after dismiss of confirmationDialog, so it animates if required.
-                    confirmation.action()
+                ForEach(confirmation.buttons, id: \.title) { $0 }
+            } message: {
+                if let message = confirmation.message {
+                    Text(message)
                 }
-                Button("Cancel", role: .cancel) {}
             }
         } else {
             self
@@ -73,18 +91,18 @@ struct PlanConfirmationDialog_Previews: PreviewProvider {
                 Button("Do First") {
                     confirmation = .init(
                         title: "Do First?",
-                        buttonTitle: "First"
-                    ) {
-                        self.result = "First"
-                    }
+                        buttons: [
+                            .init("First") { self.result = "First" },
+                        ]
+                    )
                 }
                 Button("Do Second") {
                     confirmation = .init(
                         title: "Do Second?",
-                        buttonTitle: "Second"
-                    ) {
-                        self.result = "Second"
-                    }
+                        buttons: [
+                            .init("Second") { self.result = "Second" },
+                        ]
+                    )
                 }
             }
             .confirmationDialog($confirmation)
