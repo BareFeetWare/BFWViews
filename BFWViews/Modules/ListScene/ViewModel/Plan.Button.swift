@@ -13,15 +13,18 @@ import SwiftUI
 extension Plan {
     public struct Button {
         public let title: String
+        public let systemImage: String?
         public let role: ButtonRole?
         public let action: () -> Void
         
         public init(
             _ title: String,
+            systemImage: String? = nil,
             role: ButtonRole? = nil,
             action: @escaping () -> Void
         ) {
             self.title = title
+            self.systemImage = systemImage
             self.role = role
             self.action = action
         }
