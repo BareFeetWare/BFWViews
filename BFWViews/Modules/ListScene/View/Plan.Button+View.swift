@@ -10,7 +10,7 @@ import SwiftUI
 
 extension Plan.Button: View {
     public var body: some View {
-        Button(title, action: action)
+        Button(title, role: role, action: action)
     }
 }
 
