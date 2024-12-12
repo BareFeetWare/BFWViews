@@ -8,16 +8,21 @@
 
 import SwiftUI
 
-struct ZoomView<Content: View> {
+public struct ZoomView<Content: View> {
     @State private var scale: CGFloat = 1.0
     @State private var offset: CGSize = .zero
     @State private var lastOffset: CGSize = .zero
     
     let content: Content
     
-    init(@ViewBuilder content: () -> Content) {
+    public init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
+}
+
+// MARK: - Functions
+
+extension ZoomView {
     
     func onChangedMagnification(value: CGFloat) {
         scale = value
@@ -46,8 +51,10 @@ struct ZoomView<Content: View> {
     
 }
 
+// MARK: - Views
+
 extension ZoomView: View {
-    var body: some View {
+    public var body: some View {
         content
             .scaleEffect(scale)
             .offset(offset)
