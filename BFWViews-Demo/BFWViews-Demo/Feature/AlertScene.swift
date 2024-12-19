@@ -11,29 +11,68 @@ import BFWViews
 
 struct AlertScene {
     
-    @State private var error: Error? {
-        didSet {
-            isPresentedAlert = true
+    @State private var presentedError: Error?
+    @State private var presentedAlert: Plan.Alert?
+    
+    enum SomeError: LocalizedError {
+        case test
+        
+        var errorDescription: String {
+            switch self {
+            case .test: "Problem description"
+            }
+        }
+        
+        var localizedDescription: String {
+            switch self {
+            case .test: "localizedDescription"
+            }
+        }
+        
+        var recoverySuggestion: String? {
+            switch self {
+            case .test: "recoverySuggestion"
+            }
         }
     }
-    
-    @State private var isPresentedAlert = false
-    
-    enum Error: Swift.Error {
-        case test
-    }
 }
+
+// MARK: - Functions
+
+extension AlertScene {
+    
+    var buttons: [Plan.Button] {
+        [
+            .init("Show Error Alert") {
+                presentedError = SomeError.test
+            },
+            .init("Show Custom Alert") {
+                presentedAlert = Plan.Alert(
+                    title: "Title",
+                    message: "Message",
+                    buttons: [
+                        .init("Button") {}
+                    ]
+                )
+            },
+        ]
+    }
+    
+}
+
+// MARK: - Views
 
 extension AlertScene: View {
     var body: some View {
         Form {
-            Button("Error Alert") { error = .test }
+            ForEach(buttons, id: \.title) { $0 }
         }
-        .alert(isPresented: $isPresentedAlert) {
-            Alert(error: error)
-        }
+        .alert(error: $presentedError)
+        .alert($presentedAlert)
     }
 }
+
+// MARK: - Previews
 
 struct AlertScene_Previews: PreviewProvider {
     static var previews: some View {
