@@ -52,6 +52,7 @@ private extension DecodingError {
         }
     }
     
+    /// Parsed readable description of the decoding error.
     var debugDescription: String? {
         guard let context else { return nil }
         let codingPath = context.codingPath.map { $0.stringValue }
