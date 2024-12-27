@@ -10,7 +10,7 @@
 
 import SwiftUI
 
-public struct IdentifiableText: Identifiable {
+public struct IdentifiableText: Identifiable, Titled {
     public let title: String
     
     public init(_ title: String) {
