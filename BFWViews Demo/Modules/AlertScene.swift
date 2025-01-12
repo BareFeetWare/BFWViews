@@ -10,22 +10,15 @@ import SwiftUI
 import BFWViews
 
 struct AlertScene {
-    
     @State private var presentedError: Error?
     @State private var presentedAlert: Plan.Alert?
     
     enum SomeError: LocalizedError {
         case test
         
-        var errorDescription: String {
+        var errorDescription: String? {
             switch self {
             case .test: "Problem description"
-            }
-        }
-        
-        var localizedDescription: String {
-            switch self {
-            case .test: "localizedDescription"
             }
         }
         
@@ -40,7 +33,7 @@ struct AlertScene {
 // MARK: - Functions
 
 extension AlertScene {
-    
+        
     var buttons: [Plan.Button] {
         [
             .init("Show Error Alert") {

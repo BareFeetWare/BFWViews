@@ -14,7 +14,6 @@
 		E213111E2586F380001496C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213111D2586F380001496C7 /* ContentView.swift */; };
 		E21311202586F385001496C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E213111F2586F385001496C7 /* Assets.xcassets */; };
 		E21311232586F385001496C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E21311222586F385001496C7 /* Preview Assets.xcassets */; };
-		E21311372586F5BF001496C7 /* MiniSheetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21311362586F5BF001496C7 /* MiniSheetScene.swift */; };
 		E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21636C82A500AD4005A7D48 /* PassedObject.swift */; };
 		E21636D12A519C3F005A7D48 /* Plan.Section+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21636D02A519C3F005A7D48 /* Plan.Section+View.swift */; };
 		E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A126E8661100AC5CD2 /* Color+Hex.swift */; };
@@ -94,7 +93,6 @@
 		E2F9B1B7274CB8F800C8EC18 /* UIViewControllerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9B1B6274CB8F800C8EC18 /* UIViewControllerScene.swift */; };
 		E2FD40AC26683A83004E4905 /* ImageSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40A926683A83004E4905 /* ImageSymbol.swift */; };
 		E2FD40AD26683A83004E4905 /* Image+Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40AB26683A83004E4905 /* Image+Symbol.swift */; };
-		E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21311312586F418001496C7 /* MiniSheet.swift */; };
 		E2FD40B12668600A004E4905 /* ImageSymbolScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40B02668600A004E4905 /* ImageSymbolScene.swift */; };
 		E2FD40B326688DF5004E4905 /* CardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40B226688DF5004E4905 /* CardScene.swift */; };
 		E2FD40B5266890AC004E4905 /* CompressibleSpacerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40B4266890AC004E4905 /* CompressibleSpacerScene.swift */; };
@@ -138,8 +136,6 @@
 		E213111F2586F385001496C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E21311222586F385001496C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E21311242586F385001496C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E21311312586F418001496C7 /* MiniSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSheet.swift; sourceTree = "<group>"; };
-		E21311362586F5BF001496C7 /* MiniSheetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSheetScene.swift; sourceTree = "<group>"; };
 		E21636C82A500AD4005A7D48 /* PassedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassedObject.swift; sourceTree = "<group>"; };
 		E21636D02A519C3F005A7D48 /* Plan.Section+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Section+View.swift"; sourceTree = "<group>"; };
 		E224C9A126E8661100AC5CD2 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
@@ -310,7 +306,6 @@
 				E2FD40B02668600A004E4905 /* ImageSymbolScene.swift */,
 				E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */,
 				E28D1BDB2833582A00064CCD /* ListSceneFlow.Coordinator.swift */,
-				E21311362586F5BF001496C7 /* MiniSheetScene.swift */,
 				E23AB43C268157A90018DD04 /* ReadFrameScene.swift */,
 				E23AB44026817FEE0018DD04 /* TappableCellScene.swift */,
 				E2FD40B826689384004E4905 /* TrailingScene.swift */,
@@ -475,7 +470,6 @@
 				E280939D2C8D8F8A00CB11A0 /* IdentifiableText.swift */,
 				E2E42BE32A80731E00B6E66E /* LabeledControl.swift */,
 				E226BCC42C924FF700A62B9E /* LoopingVideoPlayer.swift */,
-				E21311312586F418001496C7 /* MiniSheet.swift */,
 				E280939F2C8D8F9800CB11A0 /* Modified.swift */,
 				E2B310F42CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift */,
 				E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */,
@@ -671,7 +665,6 @@
 				E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */,
 				8798E0D52877E9BE00FB1344 /* WebScene.swift in Sources */,
 				E23AB44126817FEE0018DD04 /* TappableCellScene.swift in Sources */,
-				E21311372586F5BF001496C7 /* MiniSheetScene.swift in Sources */,
 				E2EA561E2838D3240053BDAC /* ListSceneFlow.swift in Sources */,
 				E2FD40B5266890AC004E4905 /* CompressibleSpacerScene.swift in Sources */,
 				E2FD40B926689384004E4905 /* TrailingScene.swift in Sources */,
@@ -711,7 +704,6 @@
 				E2386BF72A093C45009FEA16 /* Plan.Tab+View.swift in Sources */,
 				E286391D2A107D040038CB72 /* Plan.Rack+View.swift in Sources */,
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
-				E2FD40AF26683C1D004E4905 /* MiniSheet.swift in Sources */,
 				E21636D12A519C3F005A7D48 /* Plan.Section+View.swift in Sources */,
 				E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */,
 				E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */,

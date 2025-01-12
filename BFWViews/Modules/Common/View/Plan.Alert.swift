@@ -57,10 +57,8 @@ public extension View {
             .constant(
                 .init(
                     title: "Title",
-                    message: "Message",
-                    buttons: [
-                        // No buttons, shows system OK.
-                    ]
+                    message: "Message"
+                    // No buttons, shows system OK.
                 )
             )
         )

@@ -14,7 +14,6 @@ struct BFWViewsDemoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(MiniSheet())
         }
     }
 }
