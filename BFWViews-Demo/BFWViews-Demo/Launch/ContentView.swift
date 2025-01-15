@@ -10,57 +10,48 @@ import SwiftUI
 import BFWViews
 
 struct ContentView {
-    @EnvironmentObject var miniSheet: MiniSheet
 }
 
-extension ContentView: View {
-    var body: some View {
-        NavigationView {
-            List(cells) { cell in
-                NavigationLink(
-                    cell.name,
-                    destination: cell.destination
-                        .navigationTitle(cell.name)
-                )
-            }
-            .navigationTitle("BFWViews")
-        }
-        .overlay(miniSheet.overlay)
-    }
-}
+// MARK: - Functions
 
 private extension ContentView {
     
-    struct Cell: Identifiable {
-        let id = UUID()
-        let name: String
-        let destination: AnyView
-    }
-    
-    var cells: [Cell] {
+    var cells: [Plan.Cell] {
         [
-            .init(name: "Alert+Error", destination: AnyView(AlertScene())),
-            .init(name: "AsyncImage", destination: AnyView(AsyncImageScene())),
-            .init(name: "AsyncNavigationLink", destination: AnyView(AsyncNavigationLinkScene())),
-            .init(name: "Badge", destination: AnyView(BadgeScene())),
-            .init(name: "Card", destination: AnyView(CardScene())),
-            .init(name: "CellBorder", destination: AnyView(CellBorderScene())),
-            .init(name: "Color+Hex", destination: AnyView(ColorHexScene())),
-            .init(name: "CompressibleSpacer", destination: AnyView(CompressibleSpacerScene())),
-            .init(name: "Distributed", destination: AnyView(DistributedScene())),
-            .init(name: "ImageSymbol", destination: AnyView(ImageSymbolScene())),
-            .init(name: "MiniSheet", destination: AnyView(MiniSheetScene())),
-            .init(name: "Plan.List", destination: AnyView(ListSceneFlow())),
-            .init(name: "ReadFrame", destination: AnyView(ReadFrameScene())),
-            .init(name: "TappableCell", destination: AnyView(TappableCellScene())),
-            .init(name: "Trailing", destination: AnyView(TrailingScene())),
-            .init(name: "UIView", destination: AnyView(UIViewScene())),
-            .init(name: "UIViewController", destination: AnyView(UIViewControllerScene())),
-            .init(name: "WebView", destination: AnyView(WebScene())),
+            .detail("Alert") { AlertScene() },
+            .detail("AsyncImage") { AsyncImageScene() },
+            .detail("AsyncNavigationLink") { AsyncNavigationLinkScene() },
+            .detail("Badge") { BadgeScene() },
+            .detail("Card") { CardScene() },
+            .detail("CellBorder") { CellBorderScene() },
+            .detail("Color+Hex") { ColorHexScene() },
+            .detail("CompressibleSpacer") { CompressibleSpacerScene() },
+            .detail("Distributed") { DistributedScene() },
+            .detail("ImageSymbol") { ImageSymbolScene() },
+            .detail("Plan.List") { ListSceneFlow() },
+            .detail("ReadFrame") { ReadFrameScene() },
+            .detail("TappableCell") { TappableCellScene() },
+            .detail("Trailing") { TrailingScene() },
+            .detail("UIView") { UIViewScene() },
+            .detail("UIViewController") { UIViewControllerScene() },
+            .detail("WebView") { WebScene() },
         ]
     }
     
 }
+
+// MARK: - Views
+
+extension ContentView: View {
+    var body: some View {
+        NavigationView {
+            List(cells) { $0 }
+                .navigationTitle("BFWViews")
+        }
+    }
+}
+
+// MARK: - Previews
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
