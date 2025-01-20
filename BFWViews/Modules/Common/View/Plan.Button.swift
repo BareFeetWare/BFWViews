@@ -30,3 +30,23 @@ extension Plan {
         }
     }
 }
+
+// MARK: - Views
+
+extension Plan.Button: View {
+    public var body: some View {
+        if let systemImage {
+            Button(title, systemImage: systemImage, role: role, action: action)
+        } else {
+            Button(title, role: role, action: action)
+        }
+    }
+}
+
+// MARK: - Previews
+
+struct Plan_Button_Previews: PreviewProvider {
+    static var previews: some View {
+        Plan.Button("Button") {}
+    }
+}

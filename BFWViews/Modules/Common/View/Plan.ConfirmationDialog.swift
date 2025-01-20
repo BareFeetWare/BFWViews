@@ -6,6 +6,8 @@
 //  Copyright © 2024 BareFeetWare. All rights reserved.
 //
 
+// Extracted from BFWViews: https://bitbucket.org/barefeetware/bfwviews/
+
 import SwiftUI
 
 extension Plan {
@@ -44,6 +46,8 @@ extension Plan {
     }
 }
 
+// MARK: - Views
+
 extension View {
     
     @ViewBuilder
@@ -68,6 +72,8 @@ extension View {
     }
     
 }
+
+// MARK: - Previews
 
 struct PlanConfirmationDialog_Previews: PreviewProvider {
     static var previews: some View {
