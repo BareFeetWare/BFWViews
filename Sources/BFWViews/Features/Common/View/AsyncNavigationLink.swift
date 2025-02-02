@@ -46,6 +46,8 @@ public struct AsyncNavigationLink<Destination: View, Label: View, Tag: Hashable>
     
 }
 
+// MARK: - Inits
+
 extension AsyncNavigationLink {
     
     public init(
@@ -85,6 +87,8 @@ extension AsyncNavigationLink where Label == Text, Tag == String {
     }
     
 }
+
+// MARK: - Functions
 
 private extension AsyncNavigationLink {
     
@@ -146,9 +150,11 @@ private extension AsyncNavigationLink {
     
 }
 
+// MARK: - Views
+
 extension AsyncNavigationLink: View {
     public var body: some View {
-        NavigationLink(tag: tag, selection: $activeSelection) {
+        NavigationLink(tag: tag, selection: selectionBinding) {
             activeDestination
         } label: {
             labelView
@@ -176,6 +182,8 @@ extension AsyncNavigationLink: View {
     }
 }
 
+// MARK: - Previews
+
 public struct AsyncNavigationLink_Previews: PreviewProvider {
     
     public struct Preview: View {
@@ -186,7 +194,7 @@ public struct AsyncNavigationLink_Previews: PreviewProvider {
         
         public var body: some View {
             List {
-                Section {
+                Section("External selection") {
                     AsyncNavigationLink(
                         tag: "1",
                         selection: $selection,
@@ -207,10 +215,20 @@ public struct AsyncNavigationLink_Previews: PreviewProvider {
                         },
                         label: { Text("Async 2") }
                     )
+                }
+                Section("Internal selection") {
                     AsyncNavigationLink("Async 3") {
                         try await asyncDestination(
                             title: "Async Destination 3"
                         )
+                    }
+                    AsyncNavigationLink("Async 4") {
+                        try await asyncDestination(
+                            title: "Async Destination 4"
+                        )
+                    }
+                    AsyncNavigationLink("Non async 5") {
+                        Text("Non async Destination 5")
                     }
                 }
                 Section {
