@@ -13,13 +13,17 @@ import SwiftUI
  Facilitates:
  1. The cell shows a `>` disclosure indicator.
  2. The user taps anywhere on the label/row.
- 3. The cell indicator changes to a ProgressView.
+ 3. The cell indicator changes to a placeholder, or defaults to a trailing ProgressView.
  4. The app performs the destination(), such as fetching from an API.
  5. When the destination completes, the indicator changes back to a disclosure indicator.
  6. The app moves forward to the destination scene.
- 7. No error handling yet.
  */
-public struct AsyncNavigationLink<Destination: View, Label: View, Tag: Hashable> {
+public struct AsyncNavigationLink<
+    Destination: View,
+    Label: View,
+    Tag: Hashable,
+    Placeholder: View
+> {
     let tag: Tag
     let externalSelectionBinding: Binding<Tag?>?
     /// Used internally if no external selection binding is provided.
@@ -28,10 +32,31 @@ public struct AsyncNavigationLink<Destination: View, Label: View, Tag: Hashable>
     @State private var activeSelection: Tag?
     let destination: () async throws -> Destination
     let label: () -> Label
+    let placeholder: (() -> Placeholder)?
     @State private var isInProgress = false
     @State private var activeDestination: Destination?
     @State private var error: Error?
-    
+}
+
+// MARK: - Inits
+
+extension AsyncNavigationLink {
+    public init(
+        tag: Tag,
+        selection: Binding<Tag?>? = nil,
+        destination: @escaping () async throws -> Destination,
+        label: @escaping () -> Label,
+        placeholder: @escaping () -> Placeholder
+    ) {
+        self.tag = tag
+        self.externalSelectionBinding = selection
+        self.destination = destination
+        self.label = label
+        self.placeholder = placeholder
+    }
+}
+
+extension AsyncNavigationLink where Placeholder == EmptyView {
     public init(
         tag: Tag,
         selection: Binding<Tag?>? = nil,
@@ -42,38 +67,65 @@ public struct AsyncNavigationLink<Destination: View, Label: View, Tag: Hashable>
         self.externalSelectionBinding = selection
         self.destination = destination
         self.label = label
+        self.placeholder = nil
     }
-    
 }
 
-// MARK: - Inits
-
 extension AsyncNavigationLink {
-    
     public init(
         _ title: String,
         tag: Tag,
         selection: Binding<Tag?>? = nil,
-        destination: @escaping () async throws -> Destination
+        destination: @escaping () async throws -> Destination,
+        placeholder: @escaping () -> Placeholder
     ) where Label == Text {
         self.tag = tag
         self.externalSelectionBinding = selection
         self.destination = destination
         self.label = { Text(title) }
+        self.placeholder = placeholder
     }
-    
 }
 
 extension AsyncNavigationLink where Label == Text, Tag == String {
     
     public init(
         _ title: String,
+        destination: @escaping () async throws -> Destination,
+        placeholder: @escaping () -> Placeholder
+    ) {
+        self.tag = UUID().uuidString
+        self.externalSelectionBinding = nil
+        self.destination = destination
+        self.label = { Text(title) }
+        self.placeholder = placeholder
+    }
+    
+    public init(
+        destination: @escaping () async throws -> Destination,
+        label: @escaping () -> Label,
+        placeholder: @escaping () -> Placeholder
+    ) {
+        self.tag = UUID().uuidString
+        self.externalSelectionBinding = nil
+        self.destination = destination
+        self.label = label
+        self.placeholder = placeholder
+    }
+    
+}
+
+extension AsyncNavigationLink where Label == Text, Tag == String, Placeholder == EmptyView {
+    
+    public init(
+        _ title: String,
         destination: @escaping () async throws -> Destination
     ) {
         self.tag = UUID().uuidString
         self.externalSelectionBinding = nil
         self.destination = destination
         self.label = { Text(title) }
+        self.placeholder = nil
     }
     
     public init(
@@ -84,6 +136,7 @@ extension AsyncNavigationLink where Label == Text, Tag == String {
         self.externalSelectionBinding = nil
         self.destination = destination
         self.label = label
+        self.placeholder = nil
     }
     
 }
@@ -108,6 +161,14 @@ private extension AsyncNavigationLink {
     var selection: Tag? {
         get { selectionBinding.wrappedValue }
         set { selectionBinding.wrappedValue = newValue }
+    }
+    
+    var isDisabled: Bool {
+        isInProgress
+    }
+    
+    var isVisibleProgress: Bool {
+        isInProgress
     }
     
     func activateDestination() {
@@ -157,8 +218,20 @@ extension AsyncNavigationLink: View {
         NavigationLink(tag: tag, selection: selectionBinding) {
             activeDestination
         } label: {
-            labelView
+            if isVisibleProgress {
+                if let placeholder = placeholder?() {
+                    placeholder
+                } else {
+                    labelView
+                        .overlay(alignment: .trailing) {
+                            ProgressView()
+                        }
+                }
+            } else {
+                labelView
+            }
         }
+        .disabled(isDisabled)
     }
     
     var labelView: some View {
@@ -168,15 +241,6 @@ extension AsyncNavigationLink: View {
             .contentShape(Rectangle())
             .onTapGesture { onTap() }
             .onChange(of: selection) { onChange(selection: $0) }
-            .overlay(
-                Group {
-                    if isInProgress {
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                    }
-                },
-                alignment: .trailing
-            )
             .onAppear { onAppear() }
             .alert(error: $error)
     }
@@ -227,8 +291,19 @@ public struct AsyncNavigationLink_Previews: PreviewProvider {
                             title: "Async Destination 4"
                         )
                     }
-                    AsyncNavigationLink("Non async 5") {
-                        Text("Non async Destination 5")
+                    AsyncNavigationLink(tag: "5") {
+                        try await asyncDestination(
+                            title: "Async Destination 5"
+                        )
+                    } label: {
+                        Text("Async 5")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    } placeholder: {
+                        Text("Loading...")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    AsyncNavigationLink("Non async 6") {
+                        Text("Non async Destination 6")
                     }
                 }
                 Section {
