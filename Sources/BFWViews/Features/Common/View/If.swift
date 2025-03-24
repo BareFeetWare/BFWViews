@@ -1,5 +1,5 @@
 //
-//  Modified.swift
+//  If.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 30/8/2024.
@@ -28,7 +28,7 @@ public extension View {
     @ViewBuilder
     func `if`<V: View>(
         _ condition: Bool,
-        @ViewBuilder then: (Self) -> V,
+        @ViewBuilder then: (Self) -> V
     ) -> some View {
         if condition {
             then(self)
