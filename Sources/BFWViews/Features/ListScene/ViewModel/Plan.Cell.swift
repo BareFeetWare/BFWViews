@@ -77,15 +77,21 @@ extension Plan.Cell: View {
 
 public extension Plan.Cell {
     
+    static func button(_ button: Plan.Button) -> Self {
+        .init(id: "button.title: \(button.title)") {
+            button
+        }
+    }
+    
     static func button(
         _ title: String,
         action: @escaping () -> Void
     ) -> Self {
-        .init(id: "button: \(title)") {
-            Button(title) {
+        .button(
+            Plan.Button(title) {
                 action()
             }
-        }
+        )
     }
     
     static func detail(
