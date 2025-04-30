@@ -14,24 +14,13 @@ public struct Observing<
     Observed2: ObservableObject,
     Observed3: ObservableObject
 > {
-    
-    public init(
-        _ observed1: Observed1,
-        _ observed2: Observed2,
-        _ observed3: Observed3,
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.observed1 = observed1
-        self.observed2 = observed2
-        self.observed3 = observed3
-        self.content = content
-    }
-    
-    @ObservedObject var observed1: Observed1
-    @ObservedObject var observed2: Observed2
-    @ObservedObject var observed3: Observed3
+    @StateObject var observed1: Observed1
+    @StateObject var observed2: Observed2
+    @StateObject var observed3: Observed3
     @ViewBuilder let content: () -> Content
 }
+
+// MARK: - Inits
 
 public extension Observing where Observed2 == EmptyObserved, Observed3 == EmptyObserved {
     
@@ -39,9 +28,9 @@ public extension Observing where Observed2 == EmptyObserved, Observed3 == EmptyO
         _ observed1: Observed1,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.observed1 = observed1
-        self.observed2 = EmptyObserved()
-        self.observed3 = EmptyObserved()
+        self._observed1 = StateObject(wrappedValue: observed1)
+        self._observed2 = StateObject(wrappedValue: EmptyObserved())
+        self._observed3 = StateObject(wrappedValue: EmptyObserved())
         self.content = content
     }
 }
@@ -53,17 +42,19 @@ public extension Observing where Observed3 == EmptyObserved {
         _ observed2: Observed2,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.observed1 = observed1
-        self.observed2 = observed2
-        self.observed3 = EmptyObserved()
+        self._observed1 = StateObject(wrappedValue: observed1)
+        self._observed2 = StateObject(wrappedValue: observed2)
+        self._observed3 = StateObject(wrappedValue: EmptyObserved())
         self.content = content
     }
 }
+
+public class EmptyObserved: ObservableObject {}
+
+// MARK: - Views
 
 extension Observing: View {
     public var body: some View {
         content()
     }
 }
-
-public class EmptyObserved: ObservableObject {}

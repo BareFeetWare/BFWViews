@@ -30,6 +30,8 @@
 		E23AB43D268157A90018DD04 /* ReadFrameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43C268157A90018DD04 /* ReadFrameScene.swift */; };
 		E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB43E26817EC50018DD04 /* View+TappableCell.swift */; };
 		E23AB44126817FEE0018DD04 /* TappableCellScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23AB44026817FEE0018DD04 /* TappableCellScene.swift */; };
+		E23F78182DC1AB10002E0C4E /* ObservingArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F78172DC1AAEC002E0C4E /* ObservingArray.swift */; };
+		E23F781A2DC1ACD8002E0C4E /* AnyObservedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F78192DC1ACD0002E0C4E /* AnyObservedObject.swift */; };
 		E2459F812A0335DE0068DCBB /* Plan.Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F802A0335DE0068DCBB /* Plan.Section.swift */; };
 		E2459F852A0351450068DCBB /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F842A0351450068DCBB /* Plan.swift */; };
 		E2459F892A0352090068DCBB /* Plan.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F882A0352090068DCBB /* Plan.Image.swift */; };
@@ -155,6 +157,8 @@
 		E23AB43C268157A90018DD04 /* ReadFrameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFrameScene.swift; sourceTree = "<group>"; };
 		E23AB43E26817EC50018DD04 /* View+TappableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+TappableCell.swift"; sourceTree = "<group>"; };
 		E23AB44026817FEE0018DD04 /* TappableCellScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableCellScene.swift; sourceTree = "<group>"; };
+		E23F78172DC1AAEC002E0C4E /* ObservingArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservingArray.swift; sourceTree = "<group>"; };
+		E23F78192DC1ACD0002E0C4E /* AnyObservedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyObservedObject.swift; sourceTree = "<group>"; };
 		E2459F802A0335DE0068DCBB /* Plan.Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Section.swift; sourceTree = "<group>"; };
 		E2459F842A0351450068DCBB /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		E2459F882A0352090068DCBB /* Plan.Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Image.swift; sourceTree = "<group>"; };
@@ -325,6 +329,7 @@
 		E21636C72A500AB6005A7D48 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E23F78192DC1ACD0002E0C4E /* AnyObservedObject.swift */,
 				E2803FD52B5FE1430023A74E /* Binding+Transform.swift */,
 				E21636C82A500AD4005A7D48 /* PassedObject.swift */,
 				E23480CC2D1E79A100A9A9D0 /* Titled.swift */,
@@ -482,6 +487,7 @@
 				E28093A22C8D8FA700CB11A0 /* NavigationOptionalPicker.swift */,
 				E28093A12C8D8FA700CB11A0 /* NavigationPicker.swift */,
 				E2606CEB2A415378004E6400 /* Observing.swift */,
+				E23F78172DC1AAEC002E0C4E /* ObservingArray.swift */,
 				E293393D2C475EDB00810E45 /* OnTapFullScreenCover.swift */,
 				E28093A52C8DD49500CB11A0 /* OptionalRow.swift */,
 				E2459F842A0351450068DCBB /* Plan.swift */,
@@ -704,6 +710,7 @@
 				E269F7C62C06D4FE00D83739 /* Plan.List+Mirror.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
 				E2606CEC2A415378004E6400 /* Observing.swift in Sources */,
+				E23F781A2DC1ACD8002E0C4E /* AnyObservedObject.swift in Sources */,
 				E22B2D772D0FE7AE00E79C92 /* Plan.Alert.swift in Sources */,
 				E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */,
 				E28093A32C8D8FA700CB11A0 /* NavigationPicker.swift in Sources */,
@@ -724,6 +731,7 @@
 				E2803FD62B5FE1430023A74E /* Binding+Transform.swift in Sources */,
 				E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */,
 				E28D1BD5283350C400064CCD /* Plan.List.swift in Sources */,
+				E23F78182DC1AB10002E0C4E /* ObservingArray.swift in Sources */,
 				E26FDBF92AAEEFAA00AC992B /* ExpandableSection.swift in Sources */,
 				E226BCC52C924FF700A62B9E /* LoopingVideoPlayer.swift in Sources */,
 				E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */,
