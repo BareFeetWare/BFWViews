@@ -12,10 +12,10 @@ import SwiftUI
 
 public extension Plan {
     struct Alert {
-        let title: String
-        let message: String?
+        public let title: String
+        public let message: String?
         /// The buttons to display. Use role: .cancel for a cancel button. Provide no buttons to show system default OK button.
-        let buttons: [Plan.Button]
+        public let buttons: [Plan.Button]
         
         public init(
             title: String,

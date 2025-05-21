@@ -12,21 +12,24 @@ import SwiftUI
 
 public extension Plan.Alert {
     
-    init(error: Error) {
+    init(error: Error, buttons: [Plan.Button] = []) {
         if let error = error as? DecodingError {
             self.init(
                 title: "Decoding Error",
-                message: error.debugDescription
+                message: error.debugDescription,
+                buttons: buttons
             )
         } else if let error = error as? LocalizedError {
             self.init(
                 title: error.failureReason ?? error.localizedDescription,
-                message: error.recoverySuggestion
+                message: error.recoverySuggestion,
+                buttons: buttons
             )
         } else {
             self.init(
                 title: "Error: \(error)",
-                message: nil
+                message: nil,
+                buttons: buttons
             )
         }
     }
