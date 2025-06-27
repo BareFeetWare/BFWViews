@@ -117,6 +117,11 @@ private struct TickRow<Option: View & Identifiable> {
         selection = option
         dismiss()
     }
+    
+    var isHidden: Bool {
+        option.id != selection.id
+    }
+    
 }
 
 // MARK: - Views
@@ -166,10 +171,11 @@ extension TickRow: View {
             HStack {
                 option
                 Spacer()
-                if option.id == selection.id {
-                    Image(systemName: "checkmark")
-                        .foregroundColor(.accentColor)
-                }
+                Image(systemName: "checkmark")
+                    .foregroundColor(.accentColor)
+                    .if(isHidden) {
+                        $0.hidden()
+                    }
             }
             // Note: .contentShape(Rectangle()) is required to extend the tappable area across the whole cell width.
             .contentShape(Rectangle())
