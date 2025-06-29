@@ -12,9 +12,9 @@ import SwiftUI
 
 // TODO: Consolidate with NavigationOptionalPicker
 
-public struct NavigationPicker<Header: View, Option: Identifiable & View> {
-    let title: String
-    /// The navigationTitle should be less than 15 characters. If nil, then it uses the title.
+public struct NavigationPicker<Label: View, Header: View, Option: Identifiable & View> {
+    let label: () -> Label
+    /// The navigationTitle should be less than 15 characters. If nil, then it uses the label.
     let navigationTitle: String?
     let selection: Binding<Option>
     let options: [Option]?
@@ -24,6 +24,35 @@ public struct NavigationPicker<Header: View, Option: Identifiable & View> {
     @State var searchString = ""
     
     public init(
+        navigationTitle: String? = nil,
+        selection: Binding<Option>,
+        options: [Option],
+        label: @escaping () -> Label,
+        isSearchMatch: ((Option, String) -> Bool)? = nil,
+        header: @escaping (() -> Header) = { EmptyView() }
+    ) {
+        self.navigationTitle = navigationTitle
+        self.selection = selection
+        self.options = options
+        self.label = label
+        self.isSearchMatch = isSearchMatch
+        self.header = header
+    }
+}
+
+// MARK: - Types
+
+private struct TickRow<Option: View & Identifiable> {
+    @Binding var selection: Option
+    let option: Option
+    @Environment(\.dismiss) var dismiss
+}
+
+// MARK: - Convenience Inits
+
+extension NavigationPicker where Label == Text {
+    
+    public init(
         _ title: String,
         navigationTitle: String? = nil,
         selection: Binding<Option>,
@@ -31,16 +60,17 @@ public struct NavigationPicker<Header: View, Option: Identifiable & View> {
         isSearchMatch: ((Option, String) -> Bool)? = nil,
         header: @escaping (() -> Header) = { EmptyView() }
     ) {
-        self.title = title
         self.navigationTitle = navigationTitle
         self.selection = selection
         self.options = options
+        self.label = { Text(title) }
         self.isSearchMatch = isSearchMatch
         self.header = header
     }
+    
 }
 
-extension NavigationPicker where Option == IdentifiableText {
+extension NavigationPicker where Label == Text, Option == IdentifiableText {
     
     public init(
         _ title: String,
@@ -50,27 +80,26 @@ extension NavigationPicker where Option == IdentifiableText {
         isSearchMatch: ((Option, String) -> Bool)? = nil,
         header: @escaping (() -> Header) = { EmptyView() }
     ) {
-        self.title = title
         self.navigationTitle = navigationTitle
         self.selection = selection.map { IdentifiableText($0) } reverse: { $0.title }
         self.options = options?.map { IdentifiableText($0) }
+        self.label = { Text(title) }
         self.isSearchMatch = isSearchMatch
         self.header = header
     }
-
+    
 }
 
 extension NavigationPicker {
     
     public init<V: View & Identifiable>(
-        _ title: String,
         navigationTitle: String? = nil,
         selection: Binding<V?>,
         options: [V],
+        label: @escaping () -> Label,
         isSearchMatch: ((V, String) -> Bool)? = nil,
         header: @escaping (() -> Header) = { EmptyView() }
     ) where Option == OptionalRow<V> {
-        self.title = title
         self.navigationTitle = navigationTitle
         self.selection = selection.map { option in
             OptionalRow(content: option)
@@ -78,6 +107,7 @@ extension NavigationPicker {
             optionalRow.content
         }
         self.options = options.map { OptionalRow(content: $0) }
+        self.label = label
         self.isSearchMatch = isSearchMatch.map { isSearchMatch in
             { option, searchString in
                 guard let content = option.content else { return true }
@@ -87,7 +117,27 @@ extension NavigationPicker {
         self.header = header
     }
     
+    public init<V: View & Identifiable>(
+        _ title: String,
+        navigationTitle: String? = nil,
+        selection: Binding<V?>,
+        options: [V],
+        isSearchMatch: ((V, String) -> Bool)? = nil,
+        header: @escaping (() -> Header) = { EmptyView() }
+    ) where Option == OptionalRow<V>, Label == Text {
+        self.init(
+            navigationTitle: navigationTitle,
+            selection: selection,
+            options: options,
+            label: { Text(title) },
+            isSearchMatch: isSearchMatch,
+            header: header
+        )
+    }
+    
 }
+
+// MARK: - Functions
 
 extension NavigationPicker {
     
@@ -99,15 +149,9 @@ extension NavigationPicker {
         }
     }
     
-    var preferredNavigationTitle: String {
-        navigationTitle ?? title
-    }
 }
 
-private struct TickRow<Option: View & Identifiable> {
-    @Binding var selection: Option
-    let option: Option
-    @Environment(\.dismiss) var dismiss
+extension TickRow {
     
     var id: Option.ID {
         option.id
@@ -122,6 +166,14 @@ private struct TickRow<Option: View & Identifiable> {
         option.id != selection.id
     }
     
+}
+
+// MARK: - Private Extensions
+
+private extension String {
+    func matchesSearch(_ search: String) -> Bool {
+        localizedCaseInsensitiveContains(search)
+    }
 }
 
 // MARK: - Views
@@ -140,20 +192,33 @@ extension NavigationPicker: View {
                     }
                 }
                 .searchable(text: $searchString)
-                .navigationTitle(preferredNavigationTitle)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        navigationBarContent
+                    }
+                }
             } label: {
                 HStack {
-                    Text(title)
+                    label()
                     Spacer()
                     selection.wrappedValue
                 }
             }
         } else {
             HStack {
-                Text(title)
+                label()
                 Spacer()
                 ProgressView()
             }
+        }
+    }
+    
+    @ViewBuilder
+    var navigationBarContent: some View {
+        if let navigationTitle {
+            Text(navigationTitle)
+        } else {
+            label()
         }
     }
     
@@ -173,9 +238,7 @@ extension TickRow: View {
                 Spacer()
                 Image(systemName: "checkmark")
                     .foregroundColor(.accentColor)
-                    .if(isHidden) {
-                        $0.hidden()
-                    }
+                    .if(isHidden) { $0.hidden() }
             }
             // Note: .contentShape(Rectangle()) is required to extend the tappable area across the whole cell width.
             .contentShape(Rectangle())
@@ -195,7 +258,7 @@ struct NavigationPicker_Previews: PreviewProvider {
     
     struct Preview: View {
         @State var selection: Fruit = .apple
-        @State var opitonalSelection: Fruit?
+        @State var optionalSelection: Fruit?
         let fruits: [Fruit] = [.apple, .banana, .orange]
         
         enum Fruit: Identifiable & View {
@@ -226,25 +289,42 @@ struct NavigationPicker_Previews: PreviewProvider {
         var body: some View {
             NavigationView {
                 Form {
-                    NavigationPicker(
-                        "Favorite Fruit",
-                        navigationTitle: "Fruit",
-                        selection: $selection,
-                        options: fruits
-                    ) { fruit, searchString in
-                        fruit.name.matchesSearch(searchString)
-                        || fruit.emoji.matchesSearch(searchString)
-                    } header: {
-                        Text("Choose your favorite fruit")
-                            .textCase(.none)
+                    Section("NavigationPicker") {
+                        NavigationPicker(
+                            "Fruit Title",
+                            selection: $selection,
+                            options: fruits
+                        ) { fruit, searchString in
+                            fruit.name.matchesSearch(searchString)
+                            || fruit.emoji.matchesSearch(searchString)
+                        } header: {
+                            Text("Choose your favorite fruit")
+                                .textCase(.none)
+                        }
+                        NavigationPicker(
+                            selection: $optionalSelection,
+                            options: fruits
+                        ) {
+                            Text("Favorite Fruit")
+                        } isSearchMatch: { fruit, searchString in
+                            fruit.name.matchesSearch(searchString)
+                            || fruit.emoji.matchesSearch(searchString)
+                        }
                     }
-                    NavigationPicker(
-                        "Optional Fruit",
-                        selection: $opitonalSelection,
-                        options: fruits
-                    ) { fruit, searchString in
-                        fruit.name.matchesSearch(searchString)
-                        || fruit.emoji.matchesSearch(searchString)
+                    Section("SwiftUI Picker (for comparison)") {
+                        Picker(selection: $selection) {
+                            ForEach(fruits) { $0 }
+                        } label: {
+                            VStack {
+                                Text("Top")
+                                Text("Bottom")
+                            }
+                        }
+                        .modified {
+                            if #available(iOS 16, *) {
+                                $0.pickerStyle(.navigationLink)
+                            }
+                        }
                     }
                 }
                 .navigationTitle("View Picker")
@@ -271,10 +351,4 @@ struct NavigationPicker_Previews: PreviewProvider {
         }
     }
     
-}
-
-private extension String {
-    func matchesSearch(_ search: String) -> Bool {
-        localizedCaseInsensitiveContains(search)
-    }
 }
