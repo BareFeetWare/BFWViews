@@ -96,17 +96,20 @@ extension NavigationPicker {
         navigationTitle: String? = nil,
         selection: Binding<V?>,
         options: [V],
+        noneString: String,
         label: @escaping () -> Label,
         isSearchMatch: ((V, String) -> Bool)? = nil,
         header: @escaping (() -> Header) = { EmptyView() }
     ) where Option == OptionalRow<V> {
         self.navigationTitle = navigationTitle
         self.selection = selection.map { option in
-            OptionalRow(content: option)
+            OptionalRow(noneString: noneString, content: option)
         } reverse: { optionalRow in
             optionalRow.content
         }
-        self.options = options.map { OptionalRow(content: $0) }
+        self.options = options.map {
+            OptionalRow(noneString: noneString, content: $0)
+        }
         self.label = label
         self.isSearchMatch = isSearchMatch.map { isSearchMatch in
             { option, searchString in
@@ -122,6 +125,7 @@ extension NavigationPicker {
         navigationTitle: String? = nil,
         selection: Binding<V?>,
         options: [V],
+        noneString: String,
         isSearchMatch: ((V, String) -> Bool)? = nil,
         header: @escaping (() -> Header) = { EmptyView() }
     ) where Option == OptionalRow<V>, Label == Text {
@@ -129,6 +133,7 @@ extension NavigationPicker {
             navigationTitle: navigationTitle,
             selection: selection,
             options: options,
+            noneString: noneString,
             label: { Text(title) },
             isSearchMatch: isSearchMatch,
             header: header
@@ -260,6 +265,7 @@ struct NavigationPicker_Previews: PreviewProvider {
         @State var selection: Fruit = .apple
         @State var optionalSelection: Fruit?
         let fruits: [Fruit] = [.apple, .banana, .orange]
+        let noneString = "None"
         
         enum Fruit: Identifiable & View {
             case apple, banana, orange
@@ -303,7 +309,8 @@ struct NavigationPicker_Previews: PreviewProvider {
                         }
                         NavigationPicker(
                             selection: $optionalSelection,
-                            options: fruits
+                            options: fruits,
+                            noneString: noneString
                         ) {
                             Text("Favorite Fruit")
                         } isSearchMatch: { fruit, searchString in

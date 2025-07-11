@@ -16,16 +16,19 @@ public struct NavigationOptionalPicker<Option: Identifiable & View> where Option
     let title: String
     let selection: Binding<Option?>
     let options: [Option]?
+    let noneString: String
     @State var isActive = false
     
     public init(
         _ title: String,
         selection: Binding<Option?>,
-        options: [Option]
+        options: [Option],
+        noneString: String
     ) {
         self.title = title
         self.selection = selection
         self.options = options
+        self.noneString = noneString
     }
     
     func onTap(option: Option?) {
@@ -38,7 +41,8 @@ public extension NavigationOptionalPicker where Option == IdentifiableText {
     init(
         _ title: String,
         selection: Binding<String?>,
-        options: [String]
+        options: [String],
+        noneString: String
     ) {
         self.title = title
         self.selection = selection.map {
@@ -47,12 +51,14 @@ public extension NavigationOptionalPicker where Option == IdentifiableText {
             $0?.title
         }
         self.options = options.map { IdentifiableText($0) }
+        self.noneString = noneString
     }
 }
 
 private struct OptionalTickRow<Option: View & Identifiable> {
     @Binding var selection: Option?
     let option: Option?
+    let noneString: String
     @Environment(\.dismiss) var dismiss
     
     var id: String {
@@ -70,8 +76,8 @@ private struct OptionalTickRow<Option: View & Identifiable> {
 }
 
 private struct OptionalView<Content: View> {
+    let noneString: String
     let content: () -> Content?
-    let nilString: String = "None"
 }
 
 // MARK: - Views
@@ -95,7 +101,9 @@ extension NavigationOptionalPicker: View {
                 HStack {
                     Text(title)
                     Spacer()
-                    OptionalView { selection.wrappedValue }
+                    OptionalView(noneString: noneString) {
+                        selection.wrappedValue
+                    }
                 }
             }
         } else {
@@ -108,7 +116,7 @@ extension NavigationOptionalPicker: View {
     }
     
     func tickRow(option: Option?) -> some View {
-        OptionalTickRow(selection: selection, option: option)
+        OptionalTickRow(selection: selection, option: option, noneString: noneString)
     }
 }
 
@@ -117,7 +125,7 @@ extension OptionalView: View {
         if let content = content() {
             content
         } else {
-            Text(nilString)
+            Text(noneString)
         }
     }
 }
@@ -128,7 +136,7 @@ extension OptionalTickRow: View {
             onTap(option: option)
         } label: {
             HStack {
-                OptionalView { option }
+                OptionalView(noneString: noneString) { option }
                 Spacer()
                 if option?.id == selection?.id {
                     Image(systemName: "checkmark")
@@ -188,7 +196,8 @@ struct NavigationOptionalPicker_Previews: PreviewProvider {
                     NavigationOptionalPicker(
                         "Fruit",
                         selection: $selection,
-                        options: fruits
+                        options: fruits,
+                        noneString: "None"
                     )
                 }
                 .navigationTitle("Fruits")
@@ -206,7 +215,8 @@ struct NavigationOptionalPicker_Previews: PreviewProvider {
                     NavigationOptionalPicker(
                         "Fruit",
                         selection: $selection,
-                        options: options
+                        options: options,
+                        noneString: "None"
                     )
                 }
                 .navigationTitle("Strings")
