@@ -11,13 +11,14 @@
 import SwiftUI
 
 public struct OptionalRow<Content: Identifiable & View> {
+    let noneString: String
     let content: Content?
 }
 
 extension OptionalRow: Identifiable {
     public var id: String {
         guard let content
-        else { return "None" }
+        else { return noneString }
         return String(describing: content.id)
     }
 }
@@ -29,7 +30,7 @@ extension OptionalRow: View {
         if let content {
             content
         } else {
-            IdentifiableText("None")
+            IdentifiableText(noneString)
         }
     }
 }
@@ -46,8 +47,8 @@ struct OptionalRow_Previews: PreviewProvider {
         
         var body: some View {
             List {
-                OptionalRow(content: nonNilText)
-                OptionalRow(content: nilText)
+                OptionalRow(noneString: "None", content: nonNilText)
+                OptionalRow(noneString: "None", content: nilText)
             }
         }
     }
