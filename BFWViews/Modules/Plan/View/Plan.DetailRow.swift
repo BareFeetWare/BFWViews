@@ -5,23 +5,25 @@
 //  Copyright © 2022 BareFeetWare. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
 public extension Plan {
-    struct DetailRow: Identifiable {
+    struct DetailRow: Identifiable, Titled {
         public let id: String
-        public let title: String?
+        public let title: String
         public let subtitle: String?
         public let trailing: String?
         public let image: Plan.Image?
     }
 }
 
+// MARK: - Convenience Inits
+
 public extension Plan.DetailRow {
     
     init(
         id: String? = nil,
-        title: String?,
+        title: String,
         subtitle: String? = nil,
         trailing: String? = nil,
         image: Plan.Image? = nil
@@ -32,6 +34,11 @@ public extension Plan.DetailRow {
         self.image = image
         self.trailing = trailing
     }
+}
+
+// MARK: - Functions
+
+public extension Plan.DetailRow {
     
     func withImageWidth(_ width: CGFloat?) -> Self {
         .init(
@@ -45,7 +52,35 @@ public extension Plan.DetailRow {
     
 }
 
-extension Array where Element == Plan.DetailRow {
+// MARK: - Views
+
+extension Plan.DetailRow: View {
+    public var body: some View {
+        HStack {
+            image
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                subtitle.map { Text($0) }
+                    .font(.callout)
+                    .foregroundColor(.secondary)
+            }
+            .multilineTextAlignment(.leading)
+            Spacer()
+            // Note: On iOS 13 - 15?, using a Spacer() here instead of frame, causes a containing Menu to show multiple rows per row. Weird.
+            // Alternatively, use frame, but spacing is too wide:
+            //.frame(maxWidth: .infinity, alignment: .leading)
+            trailing.map {
+                Text($0)
+                    .multilineTextAlignment(.trailing)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+}
+
+// MARK: - Previews
+
+private extension Array where Element == Plan.DetailRow {
     static let preview: Self = [
         .init(
             title: "Title",
@@ -83,4 +118,15 @@ extension Array where Element == Plan.DetailRow {
             )
         ),
     ]
+}
+
+struct PlanDetailRow_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            List {
+                ForEach([Plan.DetailRow].preview) { $0 }
+            }
+            .navigationTitle("Plan.DetailRow")
+        }
+    }
 }

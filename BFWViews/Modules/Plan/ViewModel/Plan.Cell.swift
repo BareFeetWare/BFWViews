@@ -124,11 +124,9 @@ public extension Plan.Cell {
     ) -> Self {
         let navigationTitle = overridingNavigationTitle
         ?? (
-            detailRow.title.map { title in
-                title.hasSuffix(":")
-                ? String(title.dropLast())
-                : title
-            }
+            detailRow.title.hasSuffix(":")
+            ? String(detailRow.title.dropLast())
+            : detailRow.title
         )
         let navigationSubtitle = overridingNavigationSubtitle ?? detailRow.subtitle
         let titledDestination = {

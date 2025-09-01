@@ -35,6 +35,8 @@
 		E2459F812A0335DE0068DCBB /* Plan.Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F802A0335DE0068DCBB /* Plan.Section.swift */; };
 		E2459F852A0351450068DCBB /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F842A0351450068DCBB /* Plan.swift */; };
 		E2459F892A0352090068DCBB /* Plan.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2459F882A0352090068DCBB /* Plan.Image.swift */; };
+		E24CE2C62E5EC7730086B30C /* Plan.Node+Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24CE2C52E5EC7730086B30C /* Plan.Node+Mirror.swift */; };
+		E24CE2C82E6137E30086B30C /* Plan.Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24CE2C72E6137DF0086B30C /* Plan.Node.swift */; };
 		E258A41A2B8DBF950035E549 /* Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E258A4192B8DBF950035E549 /* Compatible.swift */; };
 		E258A41C2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E258A41B2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift */; };
 		E2606CEC2A415378004E6400 /* Observing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CEB2A415378004E6400 /* Observing.swift */; };
@@ -89,7 +91,6 @@
 		E2D3165F2D3791A700064A63 /* Plan.Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3165E2D3791A300064A63 /* Plan.Label.swift */; };
 		E2D316612D37953E00064A63 /* Plan.Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D316602D37953900064A63 /* Plan.Menu.swift */; };
 		E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */; };
-		E2DDC20529FA54CB00DE6C84 /* Plan.DetailRow+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+View.swift */; };
 		E2E42BE42A80731E00B6E66E /* LabeledControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E42BE32A80731E00B6E66E /* LabeledControl.swift */; };
 		E2EA561E2838D3240053BDAC /* ListSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */; };
 		E2F47B122A13351C009BD9EC /* Plan.Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F47B112A13351C009BD9EC /* Plan.Rating.swift */; };
@@ -162,6 +163,8 @@
 		E2459F802A0335DE0068DCBB /* Plan.Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Section.swift; sourceTree = "<group>"; };
 		E2459F842A0351450068DCBB /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		E2459F882A0352090068DCBB /* Plan.Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Image.swift; sourceTree = "<group>"; };
+		E24CE2C52E5EC7730086B30C /* Plan.Node+Mirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Node+Mirror.swift"; sourceTree = "<group>"; };
+		E24CE2C72E6137DF0086B30C /* Plan.Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Node.swift; sourceTree = "<group>"; };
 		E258A4192B8DBF950035E549 /* Compatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compatible.swift; sourceTree = "<group>"; };
 		E258A41B2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compatible.NavigationSplitView.swift; sourceTree = "<group>"; };
 		E2606CEB2A415378004E6400 /* Observing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observing.swift; sourceTree = "<group>"; };
@@ -216,7 +219,6 @@
 		E2D3165E2D3791A300064A63 /* Plan.Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Label.swift; sourceTree = "<group>"; };
 		E2D316602D37953900064A63 /* Plan.Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Menu.swift; sourceTree = "<group>"; };
 		E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Cell.swift; sourceTree = "<group>"; };
-		E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.DetailRow+View.swift"; sourceTree = "<group>"; };
 		E2E42BE32A80731E00B6E66E /* LabeledControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledControl.swift; sourceTree = "<group>"; };
 		E2EA561D2838D3240053BDAC /* ListSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSceneFlow.swift; sourceTree = "<group>"; };
 		E2F47B112A13351C009BD9EC /* Plan.Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Rating.swift; sourceTree = "<group>"; };
@@ -354,13 +356,13 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		E28D1BCA2833508800064CCD /* ListScene */ = {
+		E28D1BCA2833508800064CCD /* Plan */ = {
 			isa = PBXGroup;
 			children = (
 				E28D1BD0283350C400064CCD /* View */,
 				E28D1BCB283350C400064CCD /* ViewModel */,
 			);
-			path = ListScene;
+			path = Plan;
 			sourceTree = "<group>";
 		};
 		E28D1BCB283350C400064CCD /* ViewModel */ = {
@@ -368,10 +370,8 @@
 			children = (
 				E269F7C32C06D4BC00D83739 /* DetailRowRepresentable.swift */,
 				E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */,
-				E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */,
 				E2459F882A0352090068DCBB /* Plan.Image.swift */,
 				E28D1BCD283350C400064CCD /* Plan.List.swift */,
-				E269F7C52C06D4FE00D83739 /* Plan.List+Mirror.swift */,
 				E2D316602D37953900064A63 /* Plan.Menu.swift */,
 				E286391A2A107CEA0038CB72 /* Plan.Rack.swift */,
 				E2F47B112A13351C009BD9EC /* Plan.Rating.swift */,
@@ -384,9 +384,12 @@
 		E28D1BD0283350C400064CCD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E2DDC20429FA54CB00DE6C84 /* Plan.DetailRow+View.swift */,
+				E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */,
 				E2386BE82A087314009FEA16 /* Plan.Image+View.swift */,
 				E2386BEA2A08D54A009FEA16 /* Plan.List+View.swift */,
+				E24CE2C72E6137DF0086B30C /* Plan.Node.swift */,
+				E24CE2C52E5EC7730086B30C /* Plan.Node+Mirror.swift */,
+				E269F7C52C06D4FE00D83739 /* Plan.List+Mirror.swift */,
 				E286391C2A107D040038CB72 /* Plan.Rack+View.swift */,
 				E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */,
 				E21636D02A519C3F005A7D48 /* Plan.Section+View.swift */,
@@ -450,7 +453,7 @@
 				E2C16B632664808E00BAC051 /* Common */,
 				E258A4182B8DBF790035E549 /* Compatible */,
 				E2FD40A726683A83004E4905 /* ImageSymbol */,
-				E28D1BCA2833508800064CCD /* ListScene */,
+				E28D1BCA2833508800064CCD /* Plan */,
 				E2C16B6D2664816F00BAC051 /* Style */,
 			);
 			path = Modules;
@@ -720,6 +723,7 @@
 				E2386BF72A093C45009FEA16 /* Plan.Tab+View.swift in Sources */,
 				E286391D2A107D040038CB72 /* Plan.Rack+View.swift in Sources */,
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
+				E24CE2C82E6137E30086B30C /* Plan.Node.swift in Sources */,
 				E21636D12A519C3F005A7D48 /* Plan.Section+View.swift in Sources */,
 				E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */,
 				E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */,
@@ -729,6 +733,7 @@
 				E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */,
 				E2E42BE42A80731E00B6E66E /* LabeledControl.swift in Sources */,
 				E2803FD62B5FE1430023A74E /* Binding+Transform.swift in Sources */,
+				E24CE2C62E5EC7730086B30C /* Plan.Node+Mirror.swift in Sources */,
 				E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */,
 				E28D1BD5283350C400064CCD /* Plan.List.swift in Sources */,
 				E23F78182DC1AB10002E0C4E /* ObservingArray.swift in Sources */,
@@ -743,7 +748,6 @@
 				E2386BE92A087314009FEA16 /* Plan.Image+View.swift in Sources */,
 				E286391B2A107CEA0038CB72 /* Plan.Rack.swift in Sources */,
 				E2803FD42B5FE05D0023A74E /* Plan.ConfirmationDialog.swift in Sources */,
-				E2DDC20529FA54CB00DE6C84 /* Plan.DetailRow+View.swift in Sources */,
 				E2D316612D37953E00064A63 /* Plan.Menu.swift in Sources */,
 				E2BAAC1126FD88F700CFDE50 /* Fetch.swift in Sources */,
 				E2386BEB2A08D54A009FEA16 /* Plan.List+View.swift in Sources */,
