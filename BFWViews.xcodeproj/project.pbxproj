@@ -70,6 +70,8 @@
 		E28D1BDC2833582A00064CCD /* ListSceneFlow.Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D1BDB2833582A00064CCD /* ListSceneFlow.Coordinator.swift */; };
 		E28D945E2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */; };
 		E293393E2C475EDB00810E45 /* OnTapFullScreenCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293393D2C475EDB00810E45 /* OnTapFullScreenCover.swift */; };
+		E29362552E73F16300CE5AAC /* DictionaryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29362542E73F16100CE5AAC /* DictionaryProtocol.swift */; };
+		E29362572E73F18B00CE5AAC /* OptionalProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29362562E73F18A00CE5AAC /* OptionalProtocol.swift */; };
 		E2B310F52CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B310F42CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift */; };
 		E2B62A402D911C32002CBD8E /* If.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B62A3F2D911C2D002CBD8E /* If.swift */; };
 		E2B62A422D911CBC002CBD8E /* IfLet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B62A412D911CB9002CBD8E /* IfLet.swift */; };
@@ -198,6 +200,8 @@
 		E28D1BDB2833582A00064CCD /* ListSceneFlow.Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSceneFlow.Coordinator.swift; sourceTree = "<group>"; };
 		E28D945D2679A3B3007F8E8F /* AsyncNavigationLinkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLinkScene.swift; sourceTree = "<group>"; };
 		E293393D2C475EDB00810E45 /* OnTapFullScreenCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTapFullScreenCover.swift; sourceTree = "<group>"; };
+		E29362542E73F16100CE5AAC /* DictionaryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryProtocol.swift; sourceTree = "<group>"; };
+		E29362562E73F18A00CE5AAC /* OptionalProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalProtocol.swift; sourceTree = "<group>"; };
 		E2B310F42CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackButtonTitle.swift; sourceTree = "<group>"; };
 		E2B62A3F2D911C2D002CBD8E /* If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = If.swift; sourceTree = "<group>"; };
 		E2B62A412D911CB9002CBD8E /* IfLet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfLet.swift; sourceTree = "<group>"; };
@@ -333,6 +337,8 @@
 			children = (
 				E23F78192DC1ACD0002E0C4E /* AnyObservedObject.swift */,
 				E2803FD52B5FE1430023A74E /* Binding+Transform.swift */,
+				E29362542E73F16100CE5AAC /* DictionaryProtocol.swift */,
+				E29362562E73F18A00CE5AAC /* OptionalProtocol.swift */,
 				E21636C82A500AD4005A7D48 /* PassedObject.swift */,
 				E23480CC2D1E79A100A9A9D0 /* Titled.swift */,
 			);
@@ -709,6 +715,7 @@
 				E26342B02C4E1DD20096D91B /* ZoomView.swift in Sources */,
 				E293393E2C475EDB00810E45 /* OnTapFullScreenCover.swift in Sources */,
 				E28B7ABF275C5E2F00ED5730 /* CellBorder.swift in Sources */,
+				E29362552E73F16300CE5AAC /* DictionaryProtocol.swift in Sources */,
 				E280939E2C8D8F8A00CB11A0 /* IdentifiableText.swift in Sources */,
 				E269F7C62C06D4FE00D83739 /* Plan.List+Mirror.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
@@ -752,6 +759,7 @@
 				E2BAAC1126FD88F700CFDE50 /* Fetch.swift in Sources */,
 				E2386BEB2A08D54A009FEA16 /* Plan.List+View.swift in Sources */,
 				E2386BF52A093B63009FEA16 /* Plan.Tab.swift in Sources */,
+				E29362572E73F18B00CE5AAC /* OptionalProtocol.swift in Sources */,
 				E28093A42C8D8FA700CB11A0 /* NavigationOptionalPicker.swift in Sources */,
 				E2BAAC1926FEFF0400CFDE50 /* AsyncImage.swift in Sources */,
 				E28093A02C8D8F9800CB11A0 /* Modified.swift in Sources */,
