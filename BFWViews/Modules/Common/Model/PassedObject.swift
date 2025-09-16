@@ -17,3 +17,14 @@ public class PassedObject<Value>: ObservableObject {
     
     @Published public var value: Value
 }
+
+import SwiftUI
+
+public extension PassedObject {
+    
+    var binding: Binding<Value> {
+        .init { self.value }
+        set: { self.value = $0 }
+    }
+    
+}
