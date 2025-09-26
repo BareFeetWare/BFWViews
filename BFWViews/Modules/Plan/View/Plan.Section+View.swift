@@ -49,6 +49,8 @@ extension Plan.Section: View {
     
 }
 
+// MARK: - Previews
+
 struct PlanSection_Previews: PreviewProvider {
     
     static var previews: some View {
@@ -63,6 +65,7 @@ struct PlanSection_Previews: PreviewProvider {
             Plan.List(
                 sections: [
                     Plan.Section(
+                        id: "Expandable",
                         isExpanded: $isExpanded,
                         title: "Expandable",
                         cells: [
@@ -71,6 +74,7 @@ struct PlanSection_Previews: PreviewProvider {
                         ]
                     ),
                     Plan.Section(
+                        id: "not expandable",
                         title: "not expandable",
                         cells: [
                             .detail("cell 1"),
