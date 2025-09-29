@@ -26,4 +26,3 @@ public class AnyObservableObject: ObservableObject {
 public protocol AnyObservable {
     var anyObservableObject: AnyObservableObject { get }
 }
-

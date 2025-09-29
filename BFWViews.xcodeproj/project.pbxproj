@@ -10,6 +10,7 @@
 		8798E0D52877E9BE00FB1344 /* WebScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798E0D42877E9BE00FB1344 /* WebScene.swift */; };
 		E2050A792709792600B726EE /* SVG_logo.svg in Resources */ = {isa = PBXBuildFile; fileRef = E2050A782709792600B726EE /* SVG_logo.svg */; };
 		E205F0A82762F98E005E0E6E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205F0A72762F98E005E0E6E /* Badge.swift */; };
+		E210AFCB2E8B479C00682E2C /* ObservableObject+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E210AFCA2E8B478E00682E2C /* ObservableObject+Binding.swift */; };
 		E213111C2586F380001496C7 /* BFWViewsDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213111B2586F380001496C7 /* BFWViewsDemoApp.swift */; };
 		E213111E2586F380001496C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213111D2586F380001496C7 /* ContentView.swift */; };
 		E21311202586F385001496C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E213111F2586F385001496C7 /* Assets.xcassets */; };
@@ -138,6 +139,7 @@
 		8798E0D42877E9BE00FB1344 /* WebScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebScene.swift; sourceTree = "<group>"; };
 		E2050A782709792600B726EE /* SVG_logo.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SVG_logo.svg; sourceTree = "<group>"; };
 		E205F0A72762F98E005E0E6E /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		E210AFCA2E8B478E00682E2C /* ObservableObject+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableObject+Binding.swift"; sourceTree = "<group>"; };
 		E21311182586F380001496C7 /* BFWViews Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BFWViews Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E213111B2586F380001496C7 /* BFWViewsDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFWViewsDemoApp.swift; sourceTree = "<group>"; };
 		E213111D2586F380001496C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				E23F78192DC1ACD0002E0C4E /* AnyObservedObject.swift */,
 				E2803FD52B5FE1430023A74E /* Binding+Transform.swift */,
 				E29362542E73F16100CE5AAC /* DictionaryProtocol.swift */,
+				E210AFCA2E8B478E00682E2C /* ObservableObject+Binding.swift */,
 				E29362562E73F18A00CE5AAC /* OptionalProtocol.swift */,
 				E21636C82A500AD4005A7D48 /* PassedObject.swift */,
 				E23480CC2D1E79A100A9A9D0 /* Titled.swift */,
@@ -773,6 +776,7 @@
 				E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */,
 				E2B62A422D911CBC002CBD8E /* IfLet.swift in Sources */,
 				E2D3165F2D3791A700064A63 /* Plan.Label.swift in Sources */,
+				E210AFCB2E8B479C00682E2C /* ObservableObject+Binding.swift in Sources */,
 				E2FD40AD26683A83004E4905 /* Image+Symbol.swift in Sources */,
 				E258A41C2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift in Sources */,
 				E2803FCA2B5E74B00023A74E /* Plan.Button.swift in Sources */,
