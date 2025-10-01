@@ -19,8 +19,8 @@ public extension Plan {
 
 public extension Plan.Node {
     
-    struct Section: Identifiable {
-        public let id = UUID()
+    struct Section: OptionalIdentifiable {
+        public let id: String?
         public let title: String?
         public let nodes: [Plan.Node<Row>]
     }
@@ -48,37 +48,39 @@ public extension Plan.Node {
     
     init(_ row: Row, nodes: [Self]? = nil) {
         self.row = row
-        self.sectionsDispatch = nodes.map { .sync([Section(title: nil, nodes: $0)]) }
+        self.sectionsDispatch = nodes.map { .sync([Section(nodes: $0)]) }
     }
     
     init(_ row: Row, nodes: @escaping () async throws -> [Self]) {
         self.row = row
         self.sectionsDispatch = .async {
-            try await [Section(title: nil, nodes: nodes())]
+            try await [Section(nodes: nodes())]
         }
     }
 }
 
 public extension Plan.Node.Section {
     
-    init(_ title: String?, nodes: [Plan.Node<Row>]) {
+    init(_ title: String? = nil, id: String? = nil, nodes: [Plan.Node<Row>]) {
         self.title = title
+        self.id = id
         self.nodes = nodes
     }
     
-    init(_ title: String?, nodes: () -> [Plan.Node<Row>]) {
+    init(_ title: String? = nil, id: String? = nil, nodes: () -> [Plan.Node<Row>]) {
         self.title = title
+        self.id = id
         self.nodes = nodes()
     }
 }
 
-extension Plan.Node: Identifiable where Row: Identifiable {
-    public var id: Row.ID { row.id }
+extension Plan.Node: OptionalIdentifiable where Row: OptionalIdentifiable {
+    public var id: String? { row.id }
 }
 
 // MARK: - Views
 
-extension Plan.Node: View where Row: View & Titled & Identifiable {
+extension Plan.Node: View where Row: View & Titled & OptionalIdentifiable {
     public var body: some View {
         switch sectionsDispatch {
         case .none:
@@ -86,7 +88,7 @@ extension Plan.Node: View where Row: View & Titled & Identifiable {
         case .sync(let sections):
             NavigationLink {
                 List {
-                    ForEach(sections) {$0 }
+                    ForEach(sections.identified) { $0 }
                 }
                 .navigationTitle(row.title)
             } label: {
@@ -96,7 +98,7 @@ extension Plan.Node: View where Row: View & Titled & Identifiable {
             AsyncNavigationLink(tag: row.id) {
                 let sections = try await sections()
                 return List {
-                    ForEach(sections) { $0 }
+                    ForEach(sections.identified) { $0 }
                 }
                 .navigationTitle(row.title)
             } label: {
@@ -106,10 +108,10 @@ extension Plan.Node: View where Row: View & Titled & Identifiable {
     }
 }
 
-extension Plan.Node.Section: View where Plan.Node<Row>: Identifiable & View {
+extension Plan.Node.Section: View where Plan.Node<Row>: OptionalIdentifiable & View {
     public var body: some View {
         SwiftUI.Section {
-            ForEach(nodes) { $0 }
+            ForEach(nodes.identified) { $0 }
         } header: {
             title.map { Text($0) }
         }

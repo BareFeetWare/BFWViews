@@ -39,7 +39,7 @@ extension Plan.Section: View {
             Text($0)
                 .foregroundStyle(.secondary)
         }
-        ForEach(cells.compactMap { $0 }) { cell in
+        ForEach(cells.compactMap { $0 }.identified) { cell in
             cell
                 .tag(cell.id)
             // `.borderless` on the row allows any contained buttons to show in their button style.

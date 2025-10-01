@@ -11,6 +11,7 @@
 		E2050A792709792600B726EE /* SVG_logo.svg in Resources */ = {isa = PBXBuildFile; fileRef = E2050A782709792600B726EE /* SVG_logo.svg */; };
 		E205F0A82762F98E005E0E6E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205F0A72762F98E005E0E6E /* Badge.swift */; };
 		E210AFCB2E8B479C00682E2C /* ObservableObject+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E210AFCA2E8B478E00682E2C /* ObservableObject+Binding.swift */; };
+		E210AFD12E8CC59400682E2C /* Identified.swift in Sources */ = {isa = PBXBuildFile; fileRef = E210AFD02E8CC58600682E2C /* Identified.swift */; };
 		E213111C2586F380001496C7 /* BFWViewsDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213111B2586F380001496C7 /* BFWViewsDemoApp.swift */; };
 		E213111E2586F380001496C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213111D2586F380001496C7 /* ContentView.swift */; };
 		E21311202586F385001496C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E213111F2586F385001496C7 /* Assets.xcassets */; };
@@ -140,6 +141,7 @@
 		E2050A782709792600B726EE /* SVG_logo.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SVG_logo.svg; sourceTree = "<group>"; };
 		E205F0A72762F98E005E0E6E /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		E210AFCA2E8B478E00682E2C /* ObservableObject+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableObject+Binding.swift"; sourceTree = "<group>"; };
+		E210AFD02E8CC58600682E2C /* Identified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identified.swift; sourceTree = "<group>"; };
 		E21311182586F380001496C7 /* BFWViews Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BFWViews Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E213111B2586F380001496C7 /* BFWViewsDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFWViewsDemoApp.swift; sourceTree = "<group>"; };
 		E213111D2586F380001496C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				E269F7C32C06D4BC00D83739 /* DetailRowRepresentable.swift */,
+				E210AFD02E8CC58600682E2C /* Identified.swift */,
 				E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */,
 				E2459F882A0352090068DCBB /* Plan.Image.swift */,
 				E28D1BCD283350C400064CCD /* Plan.List.swift */,
@@ -745,6 +748,7 @@
 				E2803FD62B5FE1430023A74E /* Binding+Transform.swift in Sources */,
 				E24CE2C62E5EC7730086B30C /* Plan.Node+Mirror.swift in Sources */,
 				E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */,
+				E210AFD12E8CC59400682E2C /* Identified.swift in Sources */,
 				E28D1BD5283350C400064CCD /* Plan.List.swift in Sources */,
 				E23F78182DC1AB10002E0C4E /* ObservingArray.swift in Sources */,
 				E26FDBF92AAEEFAA00AC992B /* ExpandableSection.swift in Sources */,

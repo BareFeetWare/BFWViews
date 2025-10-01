@@ -9,8 +9,7 @@
 import SwiftUI
 import BFWViews
 
-struct ContentView {
-}
+struct ContentView {}
 
 // MARK: - Functions
 
@@ -45,7 +44,7 @@ private extension ContentView {
 extension ContentView: View {
     var body: some View {
         NavigationView {
-            List(cells) { $0 }
+            List(cells.identified) { $0 }
                 .navigationTitle("BFWViews")
         }
     }

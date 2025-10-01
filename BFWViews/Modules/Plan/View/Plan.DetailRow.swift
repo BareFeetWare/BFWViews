@@ -8,31 +8,26 @@
 import SwiftUI
 
 public extension Plan {
-    struct DetailRow: Identifiable, Titled {
-        public let id: String
+    struct DetailRow: OptionalIdentifiable, Titled {
+        public let id: String?
         public let title: String
         public let subtitle: String?
         public let trailing: String?
         public let image: Plan.Image?
-    }
-}
-
-// MARK: - Convenience Inits
-
-public extension Plan.DetailRow {
-    
-    init(
-        id: String? = nil,
-        title: String,
-        subtitle: String? = nil,
-        trailing: String? = nil,
-        image: Plan.Image? = nil
-    ) {
-        self.id = id ?? UUID().uuidString
-        self.title = title
-        self.subtitle = subtitle
-        self.image = image
-        self.trailing = trailing
+        
+        public init(
+            id: String? = nil,
+            title: String,
+            subtitle: String? = nil,
+            trailing: String? = nil,
+            image: Plan.Image? = nil
+        ) {
+            self.id = id
+            self.title = title
+            self.subtitle = subtitle
+            self.image = image
+            self.trailing = trailing
+        }
     }
 }
 
@@ -75,6 +70,12 @@ extension Plan.DetailRow: View {
                     .foregroundColor(.secondary)
             }
         }
+    }
+}
+
+extension Array where Element == Plan.DetailRow {
+    var body: some View {
+        ForEach(self.identified) { $0 }
     }
 }
 
@@ -124,7 +125,7 @@ struct PlanDetailRow_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             List {
-                ForEach([Plan.DetailRow].preview) { $0 }
+                [Plan.DetailRow].preview.body
             }
             .navigationTitle("Plan.DetailRow")
         }

@@ -9,8 +9,8 @@
 import SwiftUI
 
 extension Plan {
-    public struct Cell: Identifiable {
-        public let id: String
+    public struct Cell: OptionalIdentifiable {
+        public let id: String?
         public let content: () -> any View
         
         public init<Content>(
@@ -21,7 +21,7 @@ extension Plan {
         }
         
         public init(
-            id: String,
+            id: String? = nil,
             content: @escaping () -> any View
         ) {
             self.id = id
@@ -137,7 +137,8 @@ public extension Plan.Cell {
                 )
         }
         let content = AsyncNavigationLink(
-            tag: detailRow.id,
+            // TODO: Better handling of id.
+            tag: detailRow.id ?? String(describing: detailRow),
             selection: selection,
             destination: titledDestination,
             label: { detailRow }
