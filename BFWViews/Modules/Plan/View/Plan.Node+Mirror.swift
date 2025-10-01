@@ -89,8 +89,12 @@ private extension Plan.DetailRow {
 
 /// Return an Optional, either the input value (if it is Optional), or wrapped in an Optional.
 private func optional(_ value: Any) -> Any? {
-    // TODO: Ignore compiler warning
-    value as? Optional<Any> ?? value
+    let mirror = Mirror(reflecting: value)
+    return if mirror.displayStyle == .optional {
+        mirror.children.first?.value
+    } else {
+        value
+    }
 }
 
 private extension String {
