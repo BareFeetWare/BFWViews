@@ -22,6 +22,21 @@ public struct Observing<
 
 // MARK: - Inits
 
+public extension Observing {
+    
+    init(
+        _ observed1: Observed1,
+        _ observed2: Observed2,
+        _ observed3: Observed3,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self._observed1 = StateObject(wrappedValue: observed1)
+        self._observed2 = StateObject(wrappedValue: observed2)
+        self._observed3 = StateObject(wrappedValue: observed3)
+        self.content = content
+    }
+}
+
 public extension Observing where Observed2 == EmptyObserved, Observed3 == EmptyObserved {
     
     init(
