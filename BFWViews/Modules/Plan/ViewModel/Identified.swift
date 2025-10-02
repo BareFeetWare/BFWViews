@@ -18,17 +18,15 @@ public protocol OptionalIdentifiable {
     var id: String? { get }
 }
 
-public extension Array {
-    
+public extension RandomAccessCollection where Element: OptionalIdentifiable {
     var identified: [Identified<Element>] {
         enumerated().map { index, element in
                 .init(
-                    id: (element as? OptionalIdentifiable)?.id ?? "index: \(index)",
+                    id: element.id ?? "index: \(index)",
                     content: element
                 )
         }
     }
-    
 }
 
 // MARK: - Views
@@ -36,5 +34,22 @@ public extension Array {
 extension Identified: View where Content: View {
     public var body: some View {
         content
+    }
+}
+
+public extension ForEach where ID == String {
+    init<C: RandomAccessCollection>(
+        _ collection: C,
+        @ViewBuilder content: @escaping (C.Element) -> Content
+    ) where C.Element: OptionalIdentifiable,
+    Data == [Identified<C.Element>],
+    Content: View
+    {
+        self.init(
+            collection.identified,
+            id: \Identified<C.Element>.id
+        ) { item in
+            content(item.content)
+        }
     }
 }
