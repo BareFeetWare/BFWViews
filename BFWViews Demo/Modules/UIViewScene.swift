@@ -10,7 +10,9 @@ import SwiftUI
 
 // TODO: Add better use cases.
 
-struct UIViewScene: View {
+struct UIViewScene {}
+
+extension UIViewScene: View {
     var body: some View {
         List {
             Text("Cell")

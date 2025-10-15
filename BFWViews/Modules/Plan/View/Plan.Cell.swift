@@ -9,89 +9,104 @@
 import SwiftUI
 
 extension Plan {
-    public struct Cell: OptionalIdentifiable {
-        public let id: String?
-        public let content: () -> any View
-        
-        public init<Content>(
-            content: @escaping () -> Content
-        ) where Content: View & Identifiable, Content.ID == String {
-            self.id = content().id
-            self.content = content
-        }
-        
-        public init(
-            id: String? = nil,
-            content: @escaping () -> any View
-        ) {
-            self.id = id
-            self.content = content
-        }
+    public enum Cell {
+        case anyView(AnyView)
+        case button(Plan.Button)
+        case detail(Plan.DetailRow)
+        case push(Push)
     }
 }
 
-public extension Array where Element == Plan.Cell {
-    /// Adjusts the layout of an array of cells to keep titles horizontally aligned, by adding Image.space in cells that have no image, if at least one cell has an image.
-    func alignedTitles() -> Self {
-        guard let maxWidth = compactMap(
-            {
-                ($0.content() as? Plan.DetailRow)?.image?.width
-            }
-        )
-            .max()
-        else { return self }
-        return map { cell in
-            guard let detailRow = (cell.content() as? Plan.DetailRow),
-                  detailRow.image == nil
-            else { return cell }
-            return .init(id: cell.id) {
-                Plan.DetailRow(
-                    id: detailRow.id,
-                    title: detailRow.title,
-                    subtitle: detailRow.subtitle,
-                    trailing: detailRow.trailing,
-                    image: {
-                        guard let image = detailRow.image
-                        else { return .space(width: maxWidth) }
-                        return .init(
-                            source: image.source,
-                            width: maxWidth,
-                            foregroundColor: image.foregroundColor,
-                            backgroundColor: image.backgroundColor,
-                            cornerRadius: image.cornerRadius
-                        )
-                    }()
-                )
-            }
+// MARK: - Protocol Implementations
+
+extension Plan.Cell: OptionalIdentifiable {
+    public var id: String? {
+        switch self {
+        case .anyView(let view): return (view as? OptionalIdentifiable)?.id.map { "anyView(id: \($0)" }
+        case .button: return nil
+        case .detail(let row): return row.id.map { "row(id: \($0))" }
+        case .push(let push): return push.row.id.map { "row(id: \($0))" }
         }
     }
 }
 
-extension Plan.Cell: View {
-    public var body: some View {
-        AnyView(content())
-    }
-}
-
-// MARK: - Static instances of Cell. Add your own custom instances in your project.
+// MARK: - Static instances
+// Add your own custom instances in your project.
 
 public extension Plan.Cell {
     
-    static func button(_ button: Plan.Button) -> Self {
-        .init(id: "button.title: \(button.title)") {
-            button
-        }
+    static func view<Content: View>(_ content: Content) -> Self {
+        .anyView(AnyView(content))
+    }
+    
+    static func view<Content: View>(_ content: () -> Content) -> Self {
+        .anyView(AnyView(content()))
     }
     
     static func button(
         _ title: String,
         action: @escaping () -> Void
     ) -> Self {
-        .button(
-            Plan.Button(title) {
-                action()
-            }
+        .button(.init(title, action: action))
+    }
+    
+    static func push(
+        _ row: Plan.DetailRow,
+        destination: @escaping () async throws -> Plan.Scene
+    ) -> Self {
+        .push(
+            .init(row, destination: destination)
         )
+    }
+    
+    static func push(
+        _ title: String,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        destination: @escaping () async throws -> Plan.Scene
+    ) -> Self {
+        .push(.init(title: title, subtitle: subtitle, trailing: trailing)) {
+            try await destination()
+        }
+    }
+    
+    static func push(
+        _ title: String,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        cells: @escaping () async throws -> [Plan.Cell]
+    ) -> Self {
+        .push(.init(title: title, subtitle: subtitle, trailing: trailing)) {
+            .list(.init(cells: try await cells()))
+        }
+    }
+    
+    static func push<Destination: View>(
+        _ row: Plan.DetailRow,
+        destination: @escaping () async throws -> Destination
+    ) -> Self {
+        .push(row) {
+            .anyView(AnyView(try await destination()))
+        }
+    }
+
+    static func push<Destination: View>(
+        _ title: String,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        destination: @escaping () async throws -> Destination
+    ) -> Self {
+        .push(.init(title: title, subtitle: subtitle, trailing: trailing)) {
+            .anyView(AnyView(try await destination()))
+        }
+    }
+    
+    static func detail(
+        _ title: String,
+        subtitle: String? = nil,
+        trailing: String? = nil
+    ) -> Self {
+        .detail(.init(title: title, subtitle: subtitle, trailing: trailing))
     }
     
     static func detail(
@@ -101,7 +116,7 @@ public extension Plan.Cell {
         trailing: String? = nil,
         image: Plan.Image? = nil
     ) -> Self {
-        .init {
+        .detail(
             Plan.DetailRow(
                 id: id,
                 title: title,
@@ -109,11 +124,11 @@ public extension Plan.Cell {
                 trailing: trailing,
                 image: image
             )
-        }
+        )
     }
     
     // TODO: Perhaps consolidate above and below functions.
-    
+    /*
     static func navigationLink<Destination: View>(
         detailRow: Plan.DetailRow,
         // TODO: Avoid needing overrides
@@ -143,7 +158,8 @@ public extension Plan.Cell {
             destination: titledDestination,
             label: { detailRow }
         )
-        return .init(id: detailRow.id, content: { content })
+        //return .init(id: detailRow.id, content: { content })
+        return push(Plan.Push(row: detailRow, destination: titledDestination))
     }
     
     static func detail<Destination: View>(
@@ -230,7 +246,7 @@ public extension Plan.Cell {
             return .init(id: appliedID, content: { label })
         }
     }
-    
+    */
 }
 
 private extension View {
@@ -258,6 +274,21 @@ private extension View {
     }
 }
 
+// MARK: - Views
+
+extension Plan.Cell: View {
+    public var body: some View {
+        switch self {
+        case .anyView(let view): view
+        case .button(let button): button
+        case .detail(let detailRow): detailRow
+        case .push(let push): push
+        }
+    }
+}
+
+// MARK: - Previews
+
 struct PlanCell_Previews: PreviewProvider {
     
     struct Preview: View {
@@ -269,7 +300,7 @@ struct PlanCell_Previews: PreviewProvider {
                 Plan.List(
                     selection: $selectedCellID,
                     cells: [
-                        Plan.Cell(id: "1") {
+                        .view {
                             NavigationLink(
                                 tag: "1",
                                 selection: $selectedCellID
@@ -279,7 +310,7 @@ struct PlanCell_Previews: PreviewProvider {
                                 Text("Cell 1")
                             }
                         },
-                        Plan.Cell(id: "2") {
+                        .view {
                             NavigationLink(
                                 tag: "2",
                                 selection: $selectedCellID
@@ -289,9 +320,12 @@ struct PlanCell_Previews: PreviewProvider {
                                 Text("Cell 2")
                             }
                         },
-                        .detail("Cell 3", id: "3", selection: $selectedCellID) {
+                        // TODO: Reimplement selection
+                        /*
+                        Plan.Cell.detail("Cell 3", id: "3", selection: $selectedCellID) {
                             Text("selection = \(selectedCellID ?? "nil")")
                         },
+                         */
                     ]
                 )
                 .navigationTitle("Plan.Cell")

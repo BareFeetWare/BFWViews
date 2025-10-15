@@ -24,7 +24,7 @@ private extension ListSceneFlow.Coordinator {
                 .init(
                     title: "Static detail",
                     cells: [
-                        .init(id: "button") { Button("Button") {}},
+                        .button("Button") {},
                         .detail("Detail 1", trailing: "trailing"),
                         .detail("Detail 2", subtitle: "subtitle", trailing: "trailing"),
                     ]
@@ -32,7 +32,7 @@ private extension ListSceneFlow.Coordinator {
                 .init(
                     title: "Push Immediate",
                     cells: [
-                        .detail("Push 1", trailing: "3") {
+                        .push("Push 1", trailing: "3") {
                             Plan.List(
                                 cells: [
                                     .detail("Child 1"),
@@ -46,7 +46,7 @@ private extension ListSceneFlow.Coordinator {
                 .init(
                     title: "Push Async",
                     cells: [
-                        .detail("Push 2", trailing: "3") {
+                        .push("Push 2", trailing: "3") {
                             await self.asyncChildrenScene()
                         },
                     ]

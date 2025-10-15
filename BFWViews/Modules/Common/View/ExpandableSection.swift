@@ -61,6 +61,8 @@ extension ExpandableSection where Header == Text {
     
 }
 
+// MARK: - Views
+
 extension ExpandableSection: View {
     public var body: some View {
         if let isExpanded {
@@ -93,6 +95,8 @@ private extension ExpandableSection {
     }
     
 }
+
+// MARK: - Previews
 
 struct ExpandableSection_Preview: PreviewProvider {
     

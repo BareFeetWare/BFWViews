@@ -8,7 +8,9 @@
 
 import SwiftUI
 
-struct CellBorderScene: View {
+struct CellBorderScene {}
+
+extension CellBorderScene: View {
     var body: some View {
         List {
             Section {

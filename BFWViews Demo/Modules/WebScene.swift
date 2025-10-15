@@ -9,7 +9,9 @@
 import SwiftUI
 import BFWViews
 
-struct WebScene: View {
+struct WebScene {}
+
+extension WebScene: View {
     var body: some View {
         WebView(
             title: .constant("Title"),

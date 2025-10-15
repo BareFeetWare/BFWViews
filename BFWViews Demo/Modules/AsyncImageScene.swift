@@ -113,8 +113,9 @@ extension AsyncImageScene: View {
         .alert(isPresented: isPresentedErrorBinding) {
             Alert(
                 title: Text("Error"),
-                message:
-                    error.map { Text("\($0)") }
+                message: error.map {
+                    Text("\($0.localizedDescription)")
+                }
             )
         }
     }
