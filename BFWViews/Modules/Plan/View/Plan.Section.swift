@@ -24,14 +24,14 @@ extension Plan {
             isExpanded: Binding<Bool>? = nil,
             title: String? = nil,
             footer: String? = nil,
-            cells: [Plan.Cell],
+            cells: [Plan.Cell?],
             emptyPlaceholder: String? = nil
         ) {
             self.id = id
             self.isExpanded = isExpanded
             self.title = title
             self.footer = footer
-            self.cells = cells
+            self.cells = cells.compactMap { $0 }
             self.emptyPlaceholder = emptyPlaceholder
         }
     }
@@ -47,14 +47,14 @@ public extension Plan.Section {
         id: String? = nil,
         isExpanded: Binding<Bool>? = nil,
         footer: String? = nil,
-        cells: [Plan.Cell],
+        cells: [Plan.Cell?],
         emptyPlaceholder: String? = nil
     ) {
         self.id = id
         self.isExpanded = isExpanded
         self.title = title
         self.footer = footer
-        self.cells = cells
+        self.cells = cells.compactMap { $0 }
         self.emptyPlaceholder = emptyPlaceholder
     }
     
@@ -62,12 +62,12 @@ public extension Plan.Section {
         _ title: String? = nil,
         id: String? = nil,
         footer: String? = nil,
-        cells: [Plan.Cell]
+        cells: [Plan.Cell?]
     ) {
         self.title = title
         self.id = id
         self.footer = footer
-        self.cells = cells
+        self.cells = cells.compactMap { $0 }
         self.isExpanded = nil
         self.emptyPlaceholder = nil
     }
