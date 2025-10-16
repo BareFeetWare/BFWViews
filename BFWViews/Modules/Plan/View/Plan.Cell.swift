@@ -10,10 +10,18 @@ import SwiftUI
 
 extension Plan {
     public enum Cell {
-        case anyView(AnyView)
         case button(Plan.Button)
         case detail(Plan.DetailRow)
         case push(Push)
+        // TODO: Remove AnyView.
+        case view(OptionalIdentified<AnyView>)
+    }
+}
+
+public extension Plan.Cell {
+    struct IdentifiableView: OptionalIdentifiable {
+        public let id: String?
+        public let anyView: AnyView
     }
 }
 
@@ -22,10 +30,14 @@ extension Plan {
 extension Plan.Cell: OptionalIdentifiable {
     public var id: String? {
         switch self {
-        case .anyView(let view): return (view as? OptionalIdentifiable)?.id.map { "anyView(id: \($0)" }
-        case .button: return nil
-        case .detail(let row): return row.id.map { "row(id: \($0))" }
-        case .push(let push): return push.row.id.map { "row(id: \($0))" }
+        case .button:
+            nil
+        case .detail(let row):
+            row.id.map { "row(id: \($0))" }
+        case .push(let push):
+            push.row.id.map { "row(id: \($0))" }
+        case .view(let identified):
+            identified.id.map { "view(id: \($0)" }
         }
     }
 }
@@ -35,12 +47,31 @@ extension Plan.Cell: OptionalIdentifiable {
 
 public extension Plan.Cell {
     
-    static func view<Content: View>(_ content: Content) -> Self {
-        .anyView(AnyView(content))
+    init<Content: View>(id: String?, content: () -> Content) {
+        self = .view(.init(id: id, content: AnyView(content())))
     }
     
-    static func view<Content: View>(_ content: () -> Content) -> Self {
-        .anyView(AnyView(content()))
+    static func view<Content: View>(
+        _ content: Content
+    ) -> Self {
+        .view(.init(id: nil, content: AnyView(content)))
+    }
+    
+    static func view<Content: View>(
+        _ content: () -> Content
+    ) -> Self {
+        .view(.init(id: nil, content: AnyView(content())))
+    }
+    
+    static func view<Content: View>(
+        _ content: Content
+    ) -> Self where Content: Identifiable {
+        .view(
+            .init(
+                id: String(describing: content.id),
+                content: AnyView(content)
+            )
+        )
     }
     
     static func button(
@@ -279,7 +310,7 @@ private extension View {
 extension Plan.Cell: View {
     public var body: some View {
         switch self {
-        case .anyView(let view): view
+        case .view(let identified): identified.content
         case .button(let button): button
         case .detail(let detailRow): detailRow
         case .push(let push): push

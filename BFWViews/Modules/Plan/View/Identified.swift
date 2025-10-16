@@ -18,6 +18,21 @@ public protocol OptionalIdentifiable {
     var id: String? { get }
 }
 
+public struct OptionalIdentified<Content>: OptionalIdentifiable {
+    public let id: String?
+    public let content: Content
+}
+
+// MARK: - Convenience Inits
+
+extension OptionalIdentified {
+    init (id: String?, content: () -> Content) {
+        self.init(id: id, content: content())
+    }
+}
+
+// MARK: - Functions
+
 public extension RandomAccessCollection where Element: OptionalIdentifiable {
     var identified: [Identified<Element>] {
         enumerated().map { index, element in
@@ -32,6 +47,12 @@ public extension RandomAccessCollection where Element: OptionalIdentifiable {
 // MARK: - Views
 
 extension Identified: View where Content: View {
+    public var body: some View {
+        content
+    }
+}
+
+extension OptionalIdentified where Content: View {
     public var body: some View {
         content
     }
