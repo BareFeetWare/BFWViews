@@ -88,7 +88,7 @@ extension Plan.Node: View where Row: View & Titled & OptionalIdentifiable {
         case .sync(let sections):
             NavigationLink {
                 List {
-                    ForEach(sections.identified) { $0 }
+                    ForEach(sections.identified()) { $0 }
                 }
                 .navigationTitle(row.title)
             } label: {
@@ -98,7 +98,7 @@ extension Plan.Node: View where Row: View & Titled & OptionalIdentifiable {
             AsyncNavigationLink(tag: row.id) {
                 let sections = try await sections()
                 return List {
-                    ForEach(sections.identified) { $0 }
+                    ForEach(sections.identified()) { $0 }
                 }
                 .navigationTitle(row.title)
             } label: {
@@ -111,7 +111,7 @@ extension Plan.Node: View where Row: View & Titled & OptionalIdentifiable {
 extension Plan.Node.Section: View where Plan.Node<Row>: OptionalIdentifiable & View {
     public var body: some View {
         SwiftUI.Section {
-            ForEach(nodes.identified) { $0 }
+            ForEach(nodes.identified()) { $0 }
         } header: {
             title.map { Text($0) }
         }

@@ -9,23 +9,26 @@
 import SwiftUI
 
 extension Plan {
-    public enum Cell {
+    public enum Cell<Scene: View> {
         case button(Plan.Button)
         case detail(Plan.DetailRow)
-        case push(Push)
-        // TODO: Remove AnyView.
+        case push(Plan.Push<Scene>)
+        /// Avoid using case view, since it erases type.
         case view(OptionalIdentified<AnyView>)
     }
 }
 
-public extension Plan.Cell {
-    struct IdentifiableView: OptionalIdentifiable {
-        public let id: String?
-        public let anyView: AnyView
+// MARK: - Protocol Implementations
+
+public extension Plan {
+    protocol CellConstructor {
+        associatedtype Scene: View
+        static func button(_ button: Plan.Button) -> Self
+        static func detail(_ row: Plan.DetailRow) -> Self
+        static func push(_ push: Plan.Push<Scene>) -> Self
+        static func view(_ view: OptionalIdentified<AnyView>) -> Self
     }
 }
-
-// MARK: - Protocol Implementations
 
 extension Plan.Cell: OptionalIdentifiable {
     public var id: String? {
@@ -42,267 +45,72 @@ extension Plan.Cell: OptionalIdentifiable {
     }
 }
 
-// MARK: - Static instances
-// Add your own custom instances in your project.
+// Conforming Plan.Cell so it can be used in a simple app that doesn't need to add its own Cell instances.
+extension Plan.Cell: Plan.CellConstructor {}
 
-public extension Plan.Cell {
+// MARK: - Static instances
+
+public extension Plan.CellConstructor {
     
-    init<Content: View>(id: String?, content: () -> Content) {
-        self = .view(.init(id: id, content: AnyView(content())))
-    }
-    
-    static func view<Content: View>(
-        _ content: Content
-    ) -> Self {
-        .view(.init(id: nil, content: AnyView(content)))
-    }
-    
-    static func view<Content: View>(
-        _ content: () -> Content
-    ) -> Self {
-        .view(.init(id: nil, content: AnyView(content())))
-    }
-    
-    static func view<Content: View>(
-        _ content: Content
-    ) -> Self where Content: Identifiable {
-        .view(
-            .init(
-                id: String(describing: content.id),
-                content: AnyView(content)
-            )
-        )
-    }
-    
-    static func button(
-        _ title: String,
-        action: @escaping () -> Void
-    ) -> Self {
+    static func button(_ title: String, action: @escaping () -> Void) -> Self {
         .button(.init(title, action: action))
     }
     
-    static func push(
-        _ row: Plan.DetailRow,
-        destination: @escaping () async throws -> Plan.Scene
-    ) -> Self {
-        .push(
-            .init(row, destination: destination)
-        )
+    static func detail(_ title: String, id: String? = nil, subtitle: String? = nil, trailing: String? = nil) -> Self {
+        .detail(.init(title, id: id, subtitle: subtitle, trailing: trailing))
     }
     
-    static func push(
-        _ title: String,
-        subtitle: String? = nil,
-        trailing: String? = nil,
-        destination: @escaping () async throws -> Plan.Scene
-    ) -> Self {
-        .push(.init(title: title, subtitle: subtitle, trailing: trailing)) {
-            try await destination()
-        }
+    static func push(_ row: Plan.DetailRow, destination: Scene) -> Self {
+        .push(.init(row: row, destination: .sync(destination)))
     }
     
-    static func push(
-        _ title: String,
-        subtitle: String? = nil,
-        trailing: String? = nil,
-        cells: @escaping () async throws -> [Plan.Cell]
-    ) -> Self {
-        .push(.init(title: title, subtitle: subtitle, trailing: trailing)) {
-            .list(.init(cells: try await cells()))
-        }
+    static func push(_ row: Plan.DetailRow, destination: @escaping () async throws -> Scene) -> Self {
+        .push(.init(row: row, destination: .async(destination)))
     }
     
-    static func push<Destination: View>(
-        _ row: Plan.DetailRow,
-        destination: @escaping () async throws -> Destination
-    ) -> Self {
-        .push(row) {
-            .anyView(AnyView(try await destination()))
-        }
+    static func push(_ title: String, id: String? = nil, subtitle: String? = nil, trailing: String? = nil, destination: Scene) -> Self {
+        .push(.init(id: id, title: title, subtitle: subtitle, trailing: trailing), destination: destination)
     }
+    
+    static func push(_ title: String, id: String? = nil, subtitle: String? = nil, trailing: String? = nil, destination: @escaping () async throws -> Scene) -> Self {
+        .push(.init(.init(id: id, title: title, subtitle: subtitle, trailing: trailing), destination: destination))
+    }
+    
+    static func view<Content: View>(id: String? = nil, content: Content) -> Self {
+        .view(OptionalIdentified(id: id, content: AnyView(content)))
+    }
+    
+    static func view<Content: View>(id: String? = nil, content: () -> Content) -> Self {
+        .view(id: id, content: content())
+    }
+}
 
-    static func push<Destination: View>(
-        _ title: String,
-        subtitle: String? = nil,
-        trailing: String? = nil,
-        destination: @escaping () async throws -> Destination
+public extension Plan.CellConstructor where Scene: Plan.SceneConstructor, Scene.Cell == Self {
+    
+    static func push(
+        _ row: Plan.DetailRow,
+        cells: [Self]
     ) -> Self {
-        .push(.init(title: title, subtitle: subtitle, trailing: trailing)) {
-            .anyView(AnyView(try await destination()))
-        }
+        .push(.init(row: row, destination: .list(.init(cells: cells))))
     }
     
-    static func detail(
-        _ title: String,
-        subtitle: String? = nil,
-        trailing: String? = nil
+    static func push(
+        _ row: Plan.DetailRow,
+        cells: @escaping () async throws -> [Self]
     ) -> Self {
-        .detail(.init(title: title, subtitle: subtitle, trailing: trailing))
+        .push(row) { .list(.init(cells: try await cells())) }
     }
     
-    static func detail(
+    static func push(
         _ title: String,
         id: String? = nil,
         subtitle: String? = nil,
         trailing: String? = nil,
-        image: Plan.Image? = nil
+        cells: @escaping () async throws -> [Self]
     ) -> Self {
-        .detail(
-            Plan.DetailRow(
-                id: id,
-                title: title,
-                subtitle: subtitle,
-                trailing: trailing,
-                image: image
-            )
-        )
+        .push(title, id: id, subtitle: subtitle, trailing: trailing) { .list(cells: try await cells()) }
     }
     
-    // TODO: Perhaps consolidate above and below functions.
-    /*
-    static func navigationLink<Destination: View>(
-        detailRow: Plan.DetailRow,
-        // TODO: Avoid needing overrides
-        overridingNavigationTitle: String? = nil,
-        overridingNavigationSubtitle: String? = nil,
-        selection: Binding<String?>? = nil,
-        destination: @escaping () async throws -> Destination
-    ) -> Self {
-        let navigationTitle = overridingNavigationTitle
-        ?? (
-            detailRow.title.hasSuffix(":")
-            ? String(detailRow.title.dropLast())
-            : detailRow.title
-        )
-        let navigationSubtitle = overridingNavigationSubtitle ?? detailRow.subtitle
-        let titledDestination = {
-            try await destination()
-                .navigationHeader(
-                    title: navigationTitle,
-                    subtitle: navigationSubtitle
-                )
-        }
-        let content = AsyncNavigationLink(
-            // TODO: Better handling of id.
-            tag: detailRow.id ?? String(describing: detailRow),
-            selection: selection,
-            destination: titledDestination,
-            label: { detailRow }
-        )
-        //return .init(id: detailRow.id, content: { content })
-        return push(Plan.Push(row: detailRow, destination: titledDestination))
-    }
-    
-    static func detail<Destination: View>(
-        _ title: String,
-        id explicitID: String? = nil,
-        subtitle: String? = nil,
-        trailing: String? = nil,
-        image: Plan.Image? = nil,
-        // TODO: Avoid needing overrides
-        overridingNavigationTitle: String? = nil,
-        overridingNavigationSubtitle: String? = nil,
-        selection: Binding<String?>? = nil,
-        destination: @escaping () async throws -> Destination
-    ) -> Self {
-        let appliedID = explicitID ?? "title: " + title
-        let detailRow = Plan.DetailRow(
-            id: appliedID,
-            title: title,
-            subtitle: subtitle,
-            trailing: trailing,
-            image: image
-        )
-        return .navigationLink(
-            detailRow: detailRow,
-            overridingNavigationTitle: overridingNavigationTitle,
-            overridingNavigationSubtitle: overridingNavigationSubtitle,
-            selection: selection,
-            destination: destination
-        )
-    }
-    
-    // TODO: Consolidate above and below functions.
-    
-    static func detail<Destination: View>(
-        _ title: String,
-        id explicitID: String? = nil,
-        subtitle: String? = nil,
-        trailing: String? = nil,
-        image: Plan.Image? = nil,
-        // TODO: Avoid needing overrides
-        overridingNavigationTitle: String? = nil,
-        overridingNavigationSubtitle: String? = nil,
-        selection: Binding<String?>? = nil,
-        destination: () -> Destination?
-    ) -> Self {
-        let appliedID = explicitID ?? "title: " + title
-        let label = Plan.DetailRow(
-            id: appliedID,
-            title: title,
-            subtitle: subtitle,
-            trailing: trailing,
-            image: image
-        )
-        if let destination = destination() {
-            let navigationTitle = overridingNavigationTitle
-            ?? (
-                title.hasSuffix(":")
-                ? String(title.dropLast())
-                : title
-            )
-            let navigationSubtitle = overridingNavigationSubtitle ?? subtitle
-            let titledDestination = {
-                destination
-                    .navigationHeader(
-                        title: navigationTitle,
-                        subtitle: navigationSubtitle
-                    )
-            }
-            let content = if let selection {
-                NavigationLink(
-                    tag: appliedID,
-                    selection: selection,
-                    destination: titledDestination,
-                    label: { label }
-                )
-            } else {
-                NavigationLink(
-                    destination: titledDestination,
-                    label: { label }
-                )
-            }
-            return .init(id: appliedID, content: { content })
-        } else {
-            return .init(id: appliedID, content: { label })
-        }
-    }
-    */
-}
-
-private extension View {
-    
-    // TODO: Refactor the above functions to use this shared code.
-    
-    func parsedNavigationHeader(
-        title: String,
-        subtitle: String?,
-        // TODO: Avoid needing overrides
-        overridingNavigationTitle: String? = nil,
-        overridingNavigationSubtitle: String? = nil
-    ) -> some View {
-        let navigationTitle = overridingNavigationTitle
-        ?? (
-            title.hasSuffix(":")
-            ? String(title.dropLast())
-            : title
-        )
-        let navigationSubtitle = overridingNavigationSubtitle ?? subtitle
-        return navigationHeader(
-            title: navigationTitle,
-            subtitle: navigationSubtitle
-        )
-    }
 }
 
 // MARK: - Views
@@ -310,7 +118,7 @@ private extension View {
 extension Plan.Cell: View {
     public var body: some View {
         switch self {
-        case .view(let identified): identified.content
+        case .view(let identified): identified
         case .button(let button): button
         case .detail(let detailRow): detailRow
         case .push(let push): push
@@ -328,18 +136,15 @@ struct PlanCell_Previews: PreviewProvider {
         
         var body: some View {
             NavigationView {
-                Plan.List(
+                Plan.Simple.List(
                     selection: $selectedCellID,
                     cells: [
-                        .view {
-                            NavigationLink(
-                                tag: "1",
-                                selection: $selectedCellID
-                            ) {
-                                Text("Destination 1")
-                            } label: {
-                                Text("Cell 1")
-                            }
+                        .button("Button 1") {},
+                        .detail("Detail 1"),
+                        .push("Push 1") {
+                            [
+                                .detail("Destination 1"),
+                            ]
                         },
                         .view {
                             NavigationLink(

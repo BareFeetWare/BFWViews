@@ -9,16 +9,16 @@ import Foundation
 import SwiftUI
 
 public extension Plan {
-    struct List {
+    struct List<Cell: View> {
         public let isSearchable: Bool
         public let selection: Binding<String?>?
-        public let sections: [Section]
+        let sections: [Plan.Section<Cell>]
         @State var searchString: String = ""
         
         public init(
             isSearchable: Bool = false,
             selection: Binding<String?>? = nil,
-            sections: [Section]
+            sections: [Plan.Section<Cell>]
         ) {
             self.isSearchable = isSearchable
             self.selection = selection
@@ -35,7 +35,7 @@ public extension Plan.List {
     init(
         isSearchable: Bool = false,
         selection: Binding<String?>,
-        sections: [Plan.Section]
+        sections: [Plan.Section<Cell>]
     ) {
         self.isSearchable = isSearchable
         self.selection = selection
@@ -45,7 +45,7 @@ public extension Plan.List {
     init(
         isSearchable: Bool = false,
         selection: Binding<String?>,
-        cells: [Plan.Cell]
+        cells: [Cell]
     ) {
         self.init(
             isSearchable: isSearchable,
@@ -59,7 +59,7 @@ public extension Plan.List {
     
     init(
         isSearchable: Bool = false,
-        sections: [Plan.Section]
+        sections: [Plan.Section<Cell>]
     ) {
         self.isSearchable = isSearchable
         self.selection = nil
@@ -68,7 +68,7 @@ public extension Plan.List {
     
     init(
         isSearchable: Bool = false,
-        cells: [Plan.Cell]
+        cells: [Cell]
     ) {
         self.init(
             isSearchable: isSearchable,
@@ -81,12 +81,21 @@ public extension Plan.List {
     
 }
 
+// MARK: - Functions
+
+extension Plan.List {
+    
+    var sectionsIdentified: [Identified<Plan.Section<Cell>>] {
+        sections.identified()
+    }
+}
+
 // MARK: - Views
 
 extension Plan.List: View {
     public var body: some View {
         List(selection: selection) {
-            ForEach(sections.compactMap { $0 }) { $0 }
+            ForEach(sectionsIdentified) { $0 }
         }
         .if(isSearchable) {
             $0.searchable(text: $searchString)
@@ -99,70 +108,78 @@ extension Plan.List: View {
 struct PlanListDisplay_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Plan.List.Preview().list
-                .navigationTitle("Plan.List")
+            Preview()
         }
     }
 }
 
-private extension Plan.List {
+private struct Preview {
+    @State var selectedCellID: String?
+    typealias List = Plan.Simple.List
+    typealias Scene = Plan.Simple.Scene
+}
+
+extension Preview {
     
-    struct Preview {
-        @State var selectedCellID: String?
-        
-        var list: Plan.List {
-            Plan.List(
-                selection: $selectedCellID,
-                sections: [
-                    .init(
-                        title: "selection",
-                        cells: [
-                            .detail("selection:", trailing: selectedCellID),
-                        ]
-                    ),
-                    .init(
-                        title: "Buttons and detail",
-                        cells: [
-                            .button("Start") {},
-                            .detail("Status", trailing: "Off line"),
-                            .button("Scan") {},
-                        ]
-                    ),
-                    .init(
-                        title: "NavigationLink",
-                        cells: [
-                            .push("Children", trailing: "3") {
-                                childrenScene
-                            }
-                        ]
-                    ),
-                    .init(
-                        title: "Async children",
-                        cells: [
-                            .push("Children", trailing: "3") {
-                                try await asyncChildrenScene()
-                            },
-                        ]
-                    ),
-                ]
-            )
-        }
-        
-        func asyncChildrenScene() async throws -> Plan.Scene {
-            // Arbitrary delay, pretending to be an async request.
-            try await Task.sleep(nanoseconds: 2000000000)
-            return childrenScene
-        }
-        
-        var childrenScene: Plan.Scene {
-            .list(
-                cells: [
-                    .detail("Child 1"),
-                    .detail("Child 2"),
-                    .detail("Child 3"),
-                ]
-            )
-        }
-        
+    var list: List {
+        .init(
+            selection: $selectedCellID,
+            sections: [
+                .init(
+                    title: "selection",
+                    cells: [
+                        .detail("selection:", trailing: selectedCellID),
+                    ]
+                ),
+                .init(
+                    title: "Buttons and detail",
+                    cells: [
+                        .button("Start") {},
+                        .detail("Status", trailing: "Off line"),
+                        .button("Scan") {},
+                    ]
+                ),
+                .init(
+                    title: "NavigationLink",
+                    cells: [
+                        .push("Children", trailing: "3") {
+                            childrenScene
+                        }
+                    ]
+                ),
+                .init(
+                    title: "Async children",
+                    cells: [
+                        .push("Children", trailing: "3") {
+                            try await asyncChildrenScene()
+                        },
+                    ]
+                ),
+            ]
+        )
+    }
+    
+    func asyncChildrenScene() async throws -> Scene {
+        // Arbitrary delay, pretending to be an async request.
+        try await Task.sleep(nanoseconds: 2000000000)
+        return childrenScene
+    }
+    
+    var childrenScene: Scene {
+        .list(
+            cells: [
+                .detail("Child 1"),
+                .detail("Child 2"),
+                .detail("Child 3"),
+            ]
+        )
+    }
+    
+}
+
+extension Preview: View {
+    var body: some View {
+        list
+            .navigationBarTitle("Plan.List")
     }
 }

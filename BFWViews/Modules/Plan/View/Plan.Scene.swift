@@ -9,11 +9,38 @@
 import SwiftUI
 
 public extension Plan {
-    enum Scene {
-        // TODO: Avoid AnyView
-        case anyView(AnyView)
-        case list(Plan.List)
+    enum Scene<Cell: View> {
+        case list(Plan.List<Cell>)
+        // Avoid using case view, since it erases type. Instead add your own cases.
+        // TODO: Enable:
+        //case view(Identified<AnyView>)
     }
+}
+
+// MARK: - Protocol Implementation
+
+public extension Plan {
+    protocol SceneConstructor {
+        associatedtype Cell: View
+        static func list(_ list: Plan.List<Cell>) -> Self
+        //static func view(_ identified: Identified<AnyView>) -> Self
+    }
+}
+
+// Conforming Plan.Scene so it can be used in a simple app that doesn't need to add its own Scene instances.
+
+extension Plan.Scene: Plan.SceneConstructor {}
+
+public extension Plan.SceneConstructor {
+    
+    static func list(isSearchable: Bool = false, sections: [Plan.Section<Cell>]) -> Self {
+        .list(.init(isSearchable: isSearchable, sections: sections))
+    }
+    
+    static func list(isSearchable: Bool = false, cells: [Cell]) -> Self {
+        .list(.init(isSearchable: isSearchable, cells: cells))
+    }
+    
 }
 
 // MARK: - Static Instances
@@ -22,35 +49,28 @@ public extension Plan.Scene {
     
     static func list(
         isSearchable: Bool = false,
-        sections: [Plan.Section]
+        sections: [Plan.Section<Cell>]
     ) -> Self {
         .list(.init(isSearchable: isSearchable, sections: sections))
     }
     
     static func list(
         isSearchable: Bool = false,
-        cells: [Plan.Cell]
+        cells: [Cell]
     ) -> Self {
         .list(.init(isSearchable: isSearchable, cells: cells))
     }
-
+    
+    // TODO: Enable:
+    /*
     static func view<Content: View>(_ content: Content) -> Self {
-        .anyView(AnyView(content))
+        .view(AnyView(content))
     }
     
-    static func view<Content: View>(_ content: () -> Content) -> Self {
-        .anyView(AnyView(content()))
+    static func view<Content: View>(_ content: () async throws -> Content) async throws -> Self {
+        .view(AnyView(try await content()))
     }
-}
-
-// MARK: - Mirror
-
-public extension Plan.Scene {
-    
-    static func reflecting(_ subject: Any?) -> Self {
-        .list(.init(reflecting: subject) ?? .init(cells: []))
-    }
-    
+     */
 }
 
 // MARK: - Views
@@ -58,8 +78,8 @@ public extension Plan.Scene {
 extension Plan.Scene: View {
     public var body: some View {
         switch self {
-        case let .anyView(view): view
-        case let .list(list): list
+        case let .list(content): content
+        //case let .view(content): content
         }
     }
 }

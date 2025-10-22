@@ -21,23 +21,32 @@ public protocol OptionalIdentifiable {
 public struct OptionalIdentified<Content>: OptionalIdentifiable {
     public let id: String?
     public let content: Content
+    
+    public init(id: String?, content: Content) {
+        self.id = id
+        ?? (content as? (any Identifiable)).map { String(describing: $0.id) }
+        ?? (content as? OptionalIdentifiable)?.id
+        self.content = content
+    }
 }
 
 // MARK: - Convenience Inits
 
 extension OptionalIdentified {
-    init (id: String?, content: () -> Content) {
+    init (id: String? = nil, content: () -> Content) {
         self.init(id: id, content: content())
     }
 }
 
 // MARK: - Functions
 
-public extension RandomAccessCollection where Element: OptionalIdentifiable {
-    var identified: [Identified<Element>] {
+public extension RandomAccessCollection {
+    func identified() -> [Identified<Element>] {
         enumerated().map { index, element in
                 .init(
-                    id: element.id ?? "index: \(index)",
+                    id: (element as? (any Identifiable)).map { String(describing: $0) }
+                    ?? (element as? OptionalIdentifiable)?.id
+                    ?? "index: \(index)",
                     content: element
                 )
         }
@@ -52,7 +61,7 @@ extension Identified: View where Content: View {
     }
 }
 
-extension OptionalIdentified where Content: View {
+extension OptionalIdentified: View where Content: View {
     public var body: some View {
         content
     }
@@ -67,7 +76,7 @@ public extension ForEach where ID == String {
     Content: View
     {
         self.init(
-            collection.identified,
+            collection.identified(),
             id: \Identified<C.Element>.id
         ) { item in
             content(item.content)

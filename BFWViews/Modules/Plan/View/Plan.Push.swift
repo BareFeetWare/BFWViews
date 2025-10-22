@@ -9,25 +9,24 @@
 import SwiftUI
 
 public extension Plan {
+    struct Push<Scene: View> {
+        public let row: DetailRow
+        public let destination: Dispatch<Scene>
+    }
+}
+
+// MARK: - Convenience Inits
+
+public extension Plan.Push {
     
-    enum Dispatch<T> {
-        case sync(T)
-        case async(() async throws -> T)
+    init(row: Plan.DetailRow, destination: Scene) {
+        self.row = row
+        self.destination = .sync(destination)
     }
     
-    struct Push {
-        let row: DetailRow
-        let destination: Dispatch<Scene>
-        
-        public init(row: DetailRow, destination: Scene) {
-            self.row = row
-            self.destination = .sync(destination)
-        }
-        
-        init(_ row: DetailRow, destination: @escaping () async throws -> Scene) {
-            self.row = row
-            self.destination = .async(destination)
-        }
+    init(_ row: Plan.DetailRow, destination: @escaping () async throws -> Scene) {
+        self.row = row
+        self.destination = .async(destination)
     }
     
 }

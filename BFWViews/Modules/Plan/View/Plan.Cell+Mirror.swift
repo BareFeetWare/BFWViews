@@ -1,5 +1,5 @@
 //
-//  Plan.Cell+Mirror.swift
+//  Plan+Mirror.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 29/5/2024.
@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import SwiftUI
 
-public extension Plan.Cell {
+public extension Plan.CellConstructor
+where Scene: Plan.SceneConstructor, Scene.Cell == Self
+{
     
     init(_ row: Plan.DetailRow, reflecting subject: Any?) {
         self = if let subject,
-                  let cells: [Plan.Cell] = .init(reflecting: subject)
+                  let cells: [Self] = .init(reflecting: subject)
         {
             .push(row) { .list(cells: cells) }
         } else {
@@ -27,7 +30,7 @@ public extension Plan.Cell {
         reflecting subject: Any?
     ) {
         self.init(
-            .init(title: title, subtitle: subtitle, trailing: trailing),
+            .init(title, subtitle: subtitle, trailing: trailing),
             reflecting: subject
         )
     }
@@ -39,13 +42,28 @@ public extension Plan.Cell {
         reflecting subject: @escaping () async throws -> Any?
     ) -> Self {
         .push(title, subtitle: subtitle, trailing: trailing) {
-            Plan.Scene.reflecting(subject)
+            Scene.reflecting(subject)
         }
     }
     
+    // TODO: Enable
+    /*
+    static func push<Destination: View>(
+        _ title: String,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        destination: @escaping () async throws -> Destination
+    ) -> Self {
+        .push(title, subtitle: subtitle, trailing: trailing) {
+            Scene.view(try await destination())
+        }
+    }
+    */
 }
 
-public extension Array where Element == Plan.Cell {
+public extension Array
+where Element: Plan.CellConstructor, Element.Scene: Plan.SceneConstructor, Element == Element.Scene.Cell
+{
     
     init?(reflecting subject: Any?) {
         guard let subject,
@@ -59,14 +77,36 @@ public extension Array where Element == Plan.Cell {
             let summary = childValue.map {
                 String(String(describing: $0).prefix(50))
             } ?? "nil"
-            return Plan.Cell(
+            return .init(
                 .init(
-                    title: child.label ?? summary,
+                    child.label ?? summary,
                     trailing: child.label == nil ? nil : summary
                 ),
                 reflecting: childValue
             )
         }
+    }
+    
+}
+
+public extension Plan.SceneConstructor
+where Cell: Plan.CellConstructor, Cell.Scene: Plan.SceneConstructor, Cell == Cell.Scene.Cell
+{
+    
+    static func reflecting(_ subject: Any?) -> Self {
+        .list(.init(reflecting: subject) ?? .init(cells: []))
+    }
+    
+}
+
+public extension Plan.List
+where Cell: Plan.CellConstructor, Cell.Scene: Plan.SceneConstructor, Cell == Cell.Scene.Cell
+{
+    
+    init?(reflecting subject: Any?) {
+        guard let cells = [Cell](reflecting: subject)
+        else { return nil }
+        self.init(cells: cells)
     }
     
 }

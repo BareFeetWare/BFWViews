@@ -31,6 +31,16 @@ public extension Plan {
     }
 }
 
+// MARK: - Convenience Inits
+
+public extension Plan.DetailRow {
+    
+    init(_ title: String, id: String? = nil, subtitle: String? = nil, trailing: String? = nil) {
+        self.init(id: id, title: title, subtitle: subtitle, trailing: trailing)
+    }
+    
+}
+
 // MARK: - Functions
 
 public extension Plan.DetailRow {
@@ -75,7 +85,7 @@ extension Plan.DetailRow: View {
 
 extension Array where Element == Plan.DetailRow {
     var body: some View {
-        ForEach(self.identified) { $0 }
+        ForEach(self.identified()) { $0 }
     }
 }
 

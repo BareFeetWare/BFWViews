@@ -11,9 +11,3 @@ import Foundation
 public protocol DetailRowRepresentable {
     var detailRow: Plan.DetailRow { get }
 }
-
-// TODO: Move to another file?:
-
-public protocol CellRepresentable {
-    var cell: Plan.Cell { get }
-}

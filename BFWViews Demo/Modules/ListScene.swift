@@ -1,28 +1,28 @@
 //
-//  ListSceneFlow.Coordinator.swift
+//  ListScene.swift
 //  BFWViews Demo
 //
 //  Created by Tom Brodhurst-Hill on 17/5/2022.
 //  Copyright © 2022 BareFeetWare. All rights reserved.
 //
 
-import Foundation
 import BFWViews
 import SwiftUI
 
-extension ListSceneFlow {
-    class Coordinator {
-        lazy var firstList: some View = rootView()
-    }
+struct ListScene {
+    typealias List = Plan.Simple.List
+    typealias Scene = Plan.Simple.Scene
 }
 
-private extension ListSceneFlow.Coordinator {
+// MARK: - Functions
+
+private extension ListScene {
     
-    func rootView() -> some View {
-        Plan.List(
+    var list: List {
+        .init(
             sections: [
                 .init(
-                    title: "Static detail",
+                    "Static detail",
                     cells: [
                         .button("Button") {},
                         .detail("Detail 1", trailing: "trailing"),
@@ -30,21 +30,20 @@ private extension ListSceneFlow.Coordinator {
                     ]
                 ),
                 .init(
-                    title: "Push Immediate",
+                    "Push Immediate",
                     cells: [
                         .push("Push 1", trailing: "3") {
-                            Plan.List(
+                            .list(
                                 cells: [
                                     .detail("Child 1"),
                                     .detail("Child 2"),
                                 ]
                             )
-                            .navigationTitle("Pushed")
                         },
                     ]
                 ),
                 .init(
-                    title: "Push Async",
+                    "Push Async",
                     cells: [
                         .push("Push 2", trailing: "3") {
                             await self.asyncChildrenScene()
@@ -53,19 +52,25 @@ private extension ListSceneFlow.Coordinator {
                 ),
             ]
         )
-        .navigationTitle("ListScene")
     }
     
-    func asyncChildrenScene() async -> some View {
+    func asyncChildrenScene() async -> Scene {
         // Arbitrary delay, pretending to be an async request.
         try? await Task.sleep(nanoseconds: 2000000000)
         let children = ["Child 1", "Child 2", "Child 3"]
-        return Plan.List(
+        return .list(
             cells: children.map { child in
                     .detail(child)
             }
         )
-        .navigationTitle("Children")
     }
     
+}
+
+// MARK: - Views
+
+extension ListScene: View {
+    var body: some View {
+        list
+    }
 }

@@ -9,22 +9,22 @@
 import Foundation
 import SwiftUI
 
-extension Plan {
-    public struct Section: OptionalIdentifiable {
+public extension Plan {
+    struct Section<Cell: View>: OptionalIdentifiable {
         public let id: String?
         public let isExpanded: Binding<Bool>?
         public let title: String?
         public let footer: String?
-        public let cells: [Plan.Cell]
+        public let cells: [Cell]
         public let emptyPlaceholder: String?
         
-        public init(
+        init(
             // Note: id must not use UUID() which prevents a refreshed section loading as the same instance.
             id: String? = nil,
             isExpanded: Binding<Bool>? = nil,
             title: String? = nil,
             footer: String? = nil,
-            cells: [Plan.Cell?],
+            cells: [Cell?],
             emptyPlaceholder: String? = nil
         ) {
             self.id = id
@@ -47,7 +47,7 @@ public extension Plan.Section {
         id: String? = nil,
         isExpanded: Binding<Bool>? = nil,
         footer: String? = nil,
-        cells: [Plan.Cell?],
+        cells: [Cell?],
         emptyPlaceholder: String? = nil
     ) {
         self.id = id
@@ -62,7 +62,7 @@ public extension Plan.Section {
         _ title: String? = nil,
         id: String? = nil,
         footer: String? = nil,
-        cells: [Plan.Cell?]
+        cells: [Cell?]
     ) {
         self.title = title
         self.id = id
@@ -76,7 +76,7 @@ public extension Plan.Section {
         _ title: String? = nil,
         id: String? = nil,
         footer: String? = nil,
-        cells: @escaping () -> [Plan.Cell]
+        cells: @escaping () -> [Cell]
     ) {
         self.title = title
         self.id = id
@@ -135,7 +135,7 @@ extension Plan.Section: View {
             Text($0)
                 .foregroundStyle(.secondary)
         }
-        ForEach(cells.compactMap { $0 }.identified) { cell in
+        ForEach(cells.identified()) { cell in
             cell
                 .tag(cell.id)
             // `.borderless` on the row allows any contained buttons to show in their button style.
@@ -143,12 +143,6 @@ extension Plan.Section: View {
         }
     }
     
-}
-
-public extension Array where Element == Plan.Section {
-    var body: some View {
-        ForEach(self.identified) { $0 }
-    }
 }
 
 // MARK: - Previews
@@ -164,9 +158,9 @@ struct PlanSection_Previews: PreviewProvider {
         @State var isExpanded = false
         
         var body: some View {
-            Plan.List(
+            Plan.Simple.List(
                 sections: [
-                    Plan.Section(
+                    .init(
                         id: "Expandable",
                         isExpanded: $isExpanded,
                         title: "Expandable",
@@ -175,7 +169,7 @@ struct PlanSection_Previews: PreviewProvider {
                             .detail("cell 2"),
                         ]
                     ),
-                    Plan.Section(
+                    .init(
                         id: "not expandable",
                         title: "not expandable",
                         cells: [

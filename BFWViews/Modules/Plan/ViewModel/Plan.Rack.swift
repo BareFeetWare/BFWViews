@@ -34,10 +34,10 @@ extension Plan.Rack {
     static let preview: Self = {
         let tabs: [Plan.Tab] = [
             .init(title: "First") {
-                Plan.List(cells: [.detail("First")])
+                Plan.Simple.List(cells: [.detail("First")])
             },
             .init(title: "Second") {
-                Plan.List(cells: [.detail("Second")])
+                Plan.Simple.List(cells: [.detail("Second")])
             },
         ]
         return Plan.Rack(

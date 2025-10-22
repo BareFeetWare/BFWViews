@@ -15,7 +15,7 @@ struct ContentView {}
 
 private extension ContentView {
     
-    var cells: [Plan.Cell] {
+    var cells: [Plan.Simple.Cell] {
         [
             .push("Alert") { AlertScene() },
             .push("AsyncImage") { AsyncImageScene() },
@@ -27,7 +27,7 @@ private extension ContentView {
             .push("CompressibleSpacer") { CompressibleSpacerScene() },
             .push("Distributed") { DistributedScene() },
             .push("ImageSymbol") { ImageSymbolScene() },
-            .push("Plan.List") { ListSceneFlow() },
+            .push("Plan.List") { ListScene() },
             .push("ReadFrame") { ReadFrameScene() },
             .push("TappableCell") { TappableCellScene() },
             .push("Trailing") { TrailingScene() },
@@ -44,7 +44,7 @@ private extension ContentView {
 extension ContentView: View {
     var body: some View {
         NavigationView {
-            List(cells.identified) { $0 }
+            List(cells.identified()) { $0 }
                 .navigationTitle("BFWViews")
         }
     }

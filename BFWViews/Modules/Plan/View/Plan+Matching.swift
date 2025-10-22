@@ -1,5 +1,5 @@
 //
-//  Scheme+Matching.swift
+//  Plan+Matching.swift
 //  Power
 //
 //  Created by Tom Brodhurst-Hill on 8/10/2025.
@@ -25,28 +25,34 @@ public extension Matchable {
     
 }
 
+extension Plan.DetailRow: Matchable {
+    public var matchStrings: [String] {
+        [title, subtitle, trailing]
+            .compactMap { $0 }
+    }
+}
+
 extension Plan.Cell: Matchable {
     public var matchStrings: [String] {
         switch self {
         case .detail(let row):
-            [row.title, row.subtitle, row.trailing]
-                .compactMap { $0 }
+            row.matchStrings
         case .push(let push):
-            [push.row.title, push.row.subtitle, push.row.trailing]
-                .compactMap { $0 }
+            push.row.matchStrings
             // TODO: Implement for any.
         default:
             []
         }
     }
 }
-extension Plan.Section: Matchable {
+
+extension Plan.Section: Matchable where Cell: Matchable {
     
     public var matchStrings: [String] {
         [title].compactMap { $0 }
     }
     
-    func matching(searchString: String) -> Self? {
+    public func matching(searchString: String) -> Self? {
         isMatching(searchString: searchString)
         || searchString.isEmpty
         ? self
@@ -57,13 +63,15 @@ extension Plan.Section: Matchable {
     }
 }
 
-extension Array where Element == Plan.Section {
-    func matching(searchString: String) -> Self {
+public extension Array {
+    func matching<Cell: Matchable>(searchString: String) -> Self
+    where Element == Plan.Section<Cell>
+    {
         compactMap { $0.matching(searchString: searchString) }
     }
 }
 
-extension Plan.List {
+public extension Plan.List where Cell: Matchable {
     func matching(searchString: String) -> Self {
         .init(sections: sections.matching(searchString: searchString))
     }
