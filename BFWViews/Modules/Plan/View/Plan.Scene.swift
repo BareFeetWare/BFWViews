@@ -11,19 +11,17 @@ import SwiftUI
 public extension Plan {
     enum Scene<Cell: View> {
         case list(Plan.List<Cell>)
-        // Avoid using case view, since it erases type. Instead add your own cases.
-        // TODO: Enable:
-        //case view(Identified<AnyView>)
+        case optionalIdentified(OptionalIdentified<AnyView>)
     }
 }
 
-// MARK: - Protocol Implementation
+// MARK: - Protocol
 
 public extension Plan {
     protocol SceneConstructor {
         associatedtype Cell: View
         static func list(_ list: Plan.List<Cell>) -> Self
-        //static func view(_ identified: Identified<AnyView>) -> Self
+        static func optionalIdentified(_ optionalIdentified: OptionalIdentified<AnyView>) -> Self
     }
 }
 
@@ -31,21 +29,9 @@ public extension Plan {
 
 extension Plan.Scene: Plan.SceneConstructor {}
 
-public extension Plan.SceneConstructor {
-    
-    static func list(isSearchable: Bool = false, sections: [Plan.Section<Cell>]) -> Self {
-        .list(.init(isSearchable: isSearchable, sections: sections))
-    }
-    
-    static func list(isSearchable: Bool = false, cells: [Cell]) -> Self {
-        .list(.init(isSearchable: isSearchable, cells: cells))
-    }
-    
-}
-
 // MARK: - Static Instances
 
-public extension Plan.Scene {
+public extension Plan.SceneConstructor {
     
     static func list(
         isSearchable: Bool = false,
@@ -61,16 +47,23 @@ public extension Plan.Scene {
         .list(.init(isSearchable: isSearchable, cells: cells))
     }
     
-    // TODO: Enable:
-    /*
-    static func view<Content: View>(_ content: Content) -> Self {
-        .view(AnyView(content))
+    static func view<V: View>(
+        id: String? = nil,
+        _ view: V
+    ) -> Self {
+        .optionalIdentified(
+            OptionalIdentified(view: view)
+        )
     }
     
-    static func view<Content: View>(_ content: () async throws -> Content) async throws -> Self {
-        .view(AnyView(try await content()))
+    /// Avoid using case view, since it erases type. Instead add your own cases.
+    static func view<V: View>(
+        id: String? = nil,
+        _ view: () async throws -> V
+    ) async throws -> Self {
+        .view(try await view())
     }
-     */
+    
 }
 
 // MARK: - Views
@@ -79,7 +72,7 @@ extension Plan.Scene: View {
     public var body: some View {
         switch self {
         case let .list(content): content
-        //case let .view(content): content
+        case let .optionalIdentified(content): content
         }
     }
 }

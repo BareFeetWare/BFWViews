@@ -17,6 +17,7 @@ extension Plan {
         public enum Scene: Plan.SceneConstructor {
             public typealias Cell = Plan.Simple.Cell
             case list(Plan.List<Cell>)
+            case optionalIdentified(OptionalIdentified<AnyView>)
         }
     }
 }
@@ -24,7 +25,8 @@ extension Plan {
 extension Plan.Simple.Scene: View {
     public var body: some View {
         switch self {
-        case .list(let list): list
+        case let .list(content): content
+        case let .optionalIdentified(content): content
         }
     }
 }

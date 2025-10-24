@@ -46,19 +46,34 @@ where Scene: Plan.SceneConstructor, Scene.Cell == Self
         }
     }
     
-    // TODO: Enable
-    /*
+    static func push<Destination: View>(
+        _ row: Plan.DetailRow,
+        destination: @escaping () async throws -> Destination
+    ) -> Self {
+        .push(row) {
+            try await Scene.view(destination)
+        }
+    }
+    
     static func push<Destination: View>(
         _ title: String,
+        id: String? = nil,
         subtitle: String? = nil,
         trailing: String? = nil,
         destination: @escaping () async throws -> Destination
     ) -> Self {
-        .push(title, subtitle: subtitle, trailing: trailing) {
-            Scene.view(try await destination())
+        .push(
+            Plan.DetailRow(
+                id: id,
+                title: title,
+                subtitle: subtitle,
+                trailing: trailing
+            )
+        ) {
+            try await Scene.view(destination)
         }
     }
-    */
+    
 }
 
 public extension Array

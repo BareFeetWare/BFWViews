@@ -32,9 +32,28 @@ public struct OptionalIdentified<Content>: OptionalIdentifiable {
 
 // MARK: - Convenience Inits
 
-extension OptionalIdentified {
-    init (id: String? = nil, content: () -> Content) {
+public extension OptionalIdentified {
+    
+    init(id: String? = nil, content: () -> Content) {
         self.init(id: id, content: content())
+    }
+}
+
+public extension OptionalIdentified where Content == AnyView {
+    
+    init<V: View>(id: String? = nil, view: V) where V: View {
+        self.init(
+            id: id
+            ?? (view as? (any Identifiable))
+                .map { String(describing: $0.id) }
+            ?? (view as? OptionalIdentifiable)
+                .flatMap { $0.id },
+            content: AnyView(view)
+        )
+    }
+    
+    init<V: View>(id: String? = nil, view: () -> V) where V: View {
+        self.init(id: id, view: view())
     }
 }
 
