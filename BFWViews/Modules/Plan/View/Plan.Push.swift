@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-public extension Plan {
-    struct Push<Scene: View> {
+extension Plan {
+    public struct Push<Scene: View> {
         public let row: DetailRow
         public let destination: Dispatch<Scene>
     }

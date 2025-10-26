@@ -35,7 +35,7 @@ where Scene: Plan.SceneConstructor, Scene.Cell == Self
         )
     }
     
-    static func push(
+    static func mirror(
         _ title: String,
         subtitle: String? = nil,
         trailing: String? = nil,
@@ -43,34 +43,6 @@ where Scene: Plan.SceneConstructor, Scene.Cell == Self
     ) -> Self {
         .push(title, subtitle: subtitle, trailing: trailing) {
             Scene.reflecting(subject)
-        }
-    }
-    
-    static func push<Destination: View>(
-        _ row: Plan.DetailRow,
-        destination: @escaping () async throws -> Destination
-    ) -> Self {
-        .push(row) {
-            try await Scene.view(destination)
-        }
-    }
-    
-    static func push<Destination: View>(
-        _ title: String,
-        id: String? = nil,
-        subtitle: String? = nil,
-        trailing: String? = nil,
-        destination: @escaping () async throws -> Destination
-    ) -> Self {
-        .push(
-            Plan.DetailRow(
-                id: id,
-                title: title,
-                subtitle: subtitle,
-                trailing: trailing
-            )
-        ) {
-            try await Scene.view(destination)
         }
     }
     

@@ -46,7 +46,7 @@
 		E2606D0B2A430FA5004E6400 /* NavigationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */; };
 		E26342B02C4E1DD20096D91B /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26342AF2C4E1DC90096D91B /* ZoomView.swift */; };
 		E269F7C42C06D4BC00D83739 /* DetailRowRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269F7C32C06D4BC00D83739 /* DetailRowRepresentable.swift */; };
-		E269F7C62C06D4FE00D83739 /* Plan.Cell+Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269F7C52C06D4FE00D83739 /* Plan.Cell+Mirror.swift */; };
+		E269F7C62C06D4FE00D83739 /* Plan+Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269F7C52C06D4FE00D83739 /* Plan+Mirror.swift */; };
 		E26A7AD42765A561007E3A6C /* BadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A7AD32765A561007E3A6C /* BadgeScene.swift */; };
 		E26FDBF92AAEEFAA00AC992B /* ExpandableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26FDBF82AAEEFAA00AC992B /* ExpandableSection.swift */; };
 		E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */; };
@@ -180,7 +180,7 @@
 		E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHeader.swift; sourceTree = "<group>"; };
 		E26342AF2C4E1DC90096D91B /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
 		E269F7C32C06D4BC00D83739 /* DetailRowRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRowRepresentable.swift; sourceTree = "<group>"; };
-		E269F7C52C06D4FE00D83739 /* Plan.Cell+Mirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Cell+Mirror.swift"; sourceTree = "<group>"; };
+		E269F7C52C06D4FE00D83739 /* Plan+Mirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan+Mirror.swift"; sourceTree = "<group>"; };
 		E26A7AD32765A561007E3A6C /* BadgeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeScene.swift; sourceTree = "<group>"; };
 		E26FDBF82AAEEFAA00AC992B /* ExpandableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSection.swift; sourceTree = "<group>"; };
 		E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLink.swift; sourceTree = "<group>"; };
@@ -397,7 +397,6 @@
 				E269F7C32C06D4BC00D83739 /* DetailRowRepresentable.swift */,
 				E210AFD02E8CC58600682E2C /* Identified.swift */,
 				E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */,
-				E269F7C52C06D4FE00D83739 /* Plan.Cell+Mirror.swift */,
 				E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */,
 				E2386BE82A087314009FEA16 /* Plan.Image+View.swift */,
 				E28D1BCD283350C400064CCD /* Plan.List.swift */,
@@ -412,6 +411,7 @@
 				E25E69262EA7240700899DA6 /* Plan.Simple.swift */,
 				E2386BF62A093C45009FEA16 /* Plan.Tab+View.swift */,
 				E24D7CEE2E9DE8ED00D8AB44 /* Plan+Matching.swift */,
+				E269F7C52C06D4FE00D83739 /* Plan+Mirror.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -728,7 +728,7 @@
 				E28B7ABF275C5E2F00ED5730 /* CellBorder.swift in Sources */,
 				E29362552E73F16300CE5AAC /* DictionaryProtocol.swift in Sources */,
 				E280939E2C8D8F8A00CB11A0 /* IdentifiableText.swift in Sources */,
-				E269F7C62C06D4FE00D83739 /* Plan.Cell+Mirror.swift in Sources */,
+				E269F7C62C06D4FE00D83739 /* Plan+Mirror.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
 				E2606CEC2A415378004E6400 /* Observing.swift in Sources */,
 				E23F781A2DC1ACD8002E0C4E /* AnyObservedObject.swift in Sources */,

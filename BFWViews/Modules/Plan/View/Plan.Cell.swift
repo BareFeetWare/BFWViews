@@ -85,7 +85,9 @@ public extension Plan.CellConstructor {
     }
 }
 
-public extension Plan.CellConstructor where Scene: Plan.SceneConstructor, Scene.Cell == Self {
+public extension Plan.CellConstructor
+where Scene: Plan.SceneConstructor, Scene.Cell == Self
+{
     
     static func push(
         _ row: Plan.DetailRow,
@@ -111,6 +113,34 @@ public extension Plan.CellConstructor where Scene: Plan.SceneConstructor, Scene.
         .push(title, id: id, subtitle: subtitle, trailing: trailing) { .list(cells: try await cells()) }
     }
     
+    static func push<Destination: View>(
+        _ row: Plan.DetailRow,
+        destination: @escaping () async throws -> Destination
+    ) -> Self {
+        .push(row) {
+            try await Scene.view(destination)
+        }
+    }
+    
+    static func push<Destination: View>(
+        _ title: String,
+        id: String? = nil,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        destination: @escaping () async throws -> Destination
+    ) -> Self {
+        .push(
+            Plan.DetailRow(
+                id: id,
+                title: title,
+                subtitle: subtitle,
+                trailing: trailing
+            )
+        ) {
+            try await Scene.view(destination)
+        }
+    }
+
 }
 
 // MARK: - Views
@@ -118,10 +148,10 @@ public extension Plan.CellConstructor where Scene: Plan.SceneConstructor, Scene.
 extension Plan.Cell: View {
     public var body: some View {
         switch self {
-        case .view(let identified): identified
         case .button(let button): button
         case .detail(let detailRow): detailRow
         case .push(let push): push
+        case .view(let identified): identified
         }
     }
 }
