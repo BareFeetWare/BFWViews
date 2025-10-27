@@ -35,8 +35,20 @@ public extension Plan {
 
 public extension Plan.DetailRow {
     
-    init(_ title: String, id: String? = nil, subtitle: String? = nil, trailing: String? = nil) {
-        self.init(id: id, title: title, subtitle: subtitle, trailing: trailing)
+    init(
+        _ title: String,
+        id: String? = nil,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        image: Plan.Image? = nil
+    ) {
+        self.init(
+            id: id,
+            title: title,
+            subtitle: subtitle,
+            trailing: trailing,
+            image: image
+        )
     }
     
 }

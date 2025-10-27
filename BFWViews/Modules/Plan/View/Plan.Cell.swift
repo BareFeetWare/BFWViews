@@ -14,7 +14,7 @@ extension Plan {
         case detail(Plan.DetailRow)
         case push(Plan.Push<Scene>)
         /// Avoid using case view, since it erases type.
-        case view(OptionalIdentified<AnyView>)
+        case optionalIdentified(OptionalIdentified<AnyView>)
     }
 }
 
@@ -26,7 +26,7 @@ public extension Plan {
         static func button(_ button: Plan.Button) -> Self
         static func detail(_ row: Plan.DetailRow) -> Self
         static func push(_ push: Plan.Push<Scene>) -> Self
-        static func view(_ view: OptionalIdentified<AnyView>) -> Self
+        static func optionalIdentified(_ optionalIdentified: OptionalIdentified<AnyView>) -> Self
     }
 }
 
@@ -39,7 +39,7 @@ extension Plan.Cell: OptionalIdentifiable {
             row.id.map { "row(id: \($0))" }
         case .push(let push):
             push.row.id.map { "row(id: \($0))" }
-        case .view(let identified):
+        case .optionalIdentified(let identified):
             identified.id.map { "view(id: \($0)" }
         }
     }
@@ -56,8 +56,22 @@ public extension Plan.CellConstructor {
         .button(.init(title, action: action))
     }
     
-    static func detail(_ title: String, id: String? = nil, subtitle: String? = nil, trailing: String? = nil) -> Self {
-        .detail(.init(title, id: id, subtitle: subtitle, trailing: trailing))
+    static func detail(
+        _ title: String,
+        id: String? = nil,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        image: Plan.Image? = nil
+    ) -> Self {
+        .detail(
+            .init(
+                title,
+                id: id,
+                subtitle: subtitle,
+                trailing: trailing,
+                image: image
+            )
+        )
     }
     
     static func push(_ row: Plan.DetailRow, destination: Scene) -> Self {
@@ -77,7 +91,7 @@ public extension Plan.CellConstructor {
     }
     
     static func view<Content: View>(id: String? = nil, content: Content) -> Self {
-        .view(OptionalIdentified(id: id, content: AnyView(content)))
+        .optionalIdentified(OptionalIdentified(id: id, content: AnyView(content)))
     }
     
     static func view<Content: View>(id: String? = nil, content: () -> Content) -> Self {
@@ -151,7 +165,7 @@ extension Plan.Cell: View {
         case .button(let button): button
         case .detail(let detailRow): detailRow
         case .push(let push): push
-        case .view(let identified): identified
+        case .optionalIdentified(let identified): identified
         }
     }
 }

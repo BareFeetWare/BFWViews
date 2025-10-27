@@ -15,6 +15,13 @@ public extension NumberFormatter {
         return formatter
     }()
     
+    static let decimal1Place: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 1
+        formatter.maximumFractionDigits = 1
+        return formatter
+    }()
+    
     static let decimal2Places: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 2
