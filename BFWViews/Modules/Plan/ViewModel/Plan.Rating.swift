@@ -44,8 +44,8 @@ extension Plan.Rating {
     }
 
     func planImage(index: Int) -> Plan.Image {
-        .system(
-            symbol: .star,
+        .symbol(
+            .star,
             variants: index <= (selection ?? 0) ? .fill : .none,
             scale: .large
         )

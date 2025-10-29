@@ -8,10 +8,18 @@
 import SwiftUI
 
 public extension Image {
-    init(symbol: ImageSymbol) {
-        self.init(systemName: symbol.name)
+    
+    init(symbol: ImageSymbol, variableValue: Double? = nil) {
+        if #available(iOS 16.0, *) {
+            self.init(systemName: symbol.name, variableValue: variableValue)
+        } else {
+            self.init(systemName: symbol.name)
+        }
     }
+    
 }
+
+// MARK: - Previews
 
 struct Image_Symbol_Previews: PreviewProvider {
     static var previews: some View {

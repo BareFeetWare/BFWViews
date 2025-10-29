@@ -69,6 +69,7 @@ public extension ImageSymbol {
     static let house: Self = .init("house")
     static let hifispeaker: Self = .init("hifispeaker")
     static let info: Self = .init("info")
+    static let leaf: Self = .init("leaf")
     static let leafArrowCirclePath: Self = .init("leaf.arrow.circlepath")
     static let listBulletRectangle: Self = .init("list.bullet.rectangle")
     static let lightbulb: Self = .init("lightbulb")

@@ -57,13 +57,13 @@ public extension Plan.DetailRow {
 
 public extension Plan.DetailRow {
     
-    func withImageWidth(_ width: CGFloat?) -> Self {
+    func with(imageWidth width: CGFloat?) -> Self {
         .init(
             id: id,
             title: title,
             subtitle: subtitle,
             trailing: trailing,
-            image: image?.withWidth(width)
+            image: image?.with(width: width)
         )
     }
     

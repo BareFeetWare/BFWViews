@@ -54,7 +54,7 @@ private extension AsyncImage {
     
     var errorImage: Plan.Image? {
         guard error != nil else { return nil }
-        return .system(symbol: .network, variants: .slash, foregroundColor: .orange)
+        return .symbol(.network, variants: .slash, foregroundColor: .orange)
     }
     
     var isLocalFile: Bool {
