@@ -115,17 +115,26 @@ extension Plan.Section: View {
                 cellsView
             } header: {
                 headerView
+            } footer: {
+                footerView
             }
         }
     }
     
-    // TODO: Maybe add footer?
-    
     @ViewBuilder
     var headerView: some View {
-        title.map {
-            Text($0)
+        if let title {
+            Text(title)
                 .textCase(.none)
+        }
+    }
+    
+    @ViewBuilder
+    var footerView: some View {
+        if let footer {
+            Text(footer)
+                .textCase(.none)
+                .font(.footnote)
         }
     }
     

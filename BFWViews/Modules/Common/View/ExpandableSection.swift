@@ -8,34 +8,48 @@
 
 import SwiftUI
 
-public struct ExpandableSection<Header: View, Content: View> {
-    
+public struct ExpandableSection<Header: View, Footer: View, Content: View> {
     let isExpanded: Binding<Bool>?
     @ViewBuilder let content: () -> Content?
     let header: (() -> Header)?
+    let footer: (() -> Footer)?
+}
+
+// MARK: - Convenience Inits
+
+public extension ExpandableSection {
     
-    public init(
-        isExpanded: Binding<Bool>,
+    init(
         @ViewBuilder content: @escaping () -> Content,
-        header: @escaping () -> Header
-    ) {
-        self.isExpanded = isExpanded
-        self.content = content
-        self.header = header
-    }
-    
-    public init(
-        @ViewBuilder content: @escaping () -> Content,
-        header: (() -> Header)?
+        header: (() -> Header)?,
+        footer: (() -> Footer)? = nil
     ) {
         self.isExpanded = nil
         self.content = content
         self.header = header
+        self.footer = footer
     }
     
 }
 
-extension ExpandableSection where Header == Text {
+public extension ExpandableSection where Footer == Text {
+    
+    init(
+        isExpanded: Binding<Bool>? = nil,
+        @ViewBuilder content: @escaping () -> Content,
+        header: (() -> Header)?
+    ) {
+        self.init(
+            isExpanded: isExpanded,
+            content: content,
+            header: header,
+            footer: nil
+        )
+    }
+        
+}
+
+extension ExpandableSection where Header == Text, Footer == Text {
     
     public init(
         _ title: String,
@@ -45,18 +59,23 @@ extension ExpandableSection where Header == Text {
         self.isExpanded = isExpanded
         self.content = content
         self.header = { Text(title) }
-        
+        self.footer = nil
     }
     
     public init(
         _ title: String?,
+        footer: String? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.isExpanded = nil
-        self.content = content
-        self.header = title.map { title in
-            { Text(title) }
-        }
+        self.init(
+            content: content,
+            header: title.map { title in
+                { Text(title) }
+            },
+            footer: footer.map { footer in
+                { Text(footer) }
+            }
+        )
     }
     
 }
@@ -70,7 +89,7 @@ extension ExpandableSection: View {
                 DisclosureGroup(isExpanded: isExpanded) {
                     content()
                 } label: {
-                    headerView
+                    header?()
                 }
             }
         } else {
@@ -86,12 +105,9 @@ private extension ExpandableSection {
             content()
         } header: {
             header?()
+        } footer: {
+            footer?()
         }
-    }
-    
-    @ViewBuilder
-    var headerView: some View {
-        header?()
     }
     
 }

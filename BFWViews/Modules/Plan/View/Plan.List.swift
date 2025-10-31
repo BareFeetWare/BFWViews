@@ -12,7 +12,7 @@ public extension Plan {
     struct List<Cell: View> {
         public let isSearchable: Bool
         public let selection: Binding<String?>?
-        let sections: [Plan.Section<Cell>]
+        public let sections: [Plan.Section<Cell>]
         @State var searchString: String = ""
         
         public init(
