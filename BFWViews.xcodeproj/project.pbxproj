@@ -94,6 +94,8 @@
 		E2C16B6C266480F900BAC051 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B6B266480F900BAC051 /* Card.swift */; };
 		E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */; };
 		E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */; };
+		E2D230B02EB5967200380D83 /* Plan.CellConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D230AF2EB5966A00380D83 /* Plan.CellConstructor.swift */; };
+		E2D230B22EB596F900380D83 /* Plan.SceneConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D230B12EB596EF00380D83 /* Plan.SceneConstructor.swift */; };
 		E2D3165F2D3791A700064A63 /* Plan.Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3165E2D3791A300064A63 /* Plan.Label.swift */; };
 		E2D316612D37953E00064A63 /* Plan.Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D316602D37953900064A63 /* Plan.Menu.swift */; };
 		E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */; };
@@ -227,6 +229,8 @@
 		E2C16B6B266480F900BAC051 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Style.swift"; sourceTree = "<group>"; };
+		E2D230AF2EB5966A00380D83 /* Plan.CellConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.CellConstructor.swift; sourceTree = "<group>"; };
+		E2D230B12EB596EF00380D83 /* Plan.SceneConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.SceneConstructor.swift; sourceTree = "<group>"; };
 		E2D3165E2D3791A300064A63 /* Plan.Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Label.swift; sourceTree = "<group>"; };
 		E2D316602D37953900064A63 /* Plan.Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Menu.swift; sourceTree = "<group>"; };
 		E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Cell.swift; sourceTree = "<group>"; };
@@ -394,6 +398,7 @@
 				E269F7C32C06D4BC00D83739 /* DetailRowRepresentable.swift */,
 				E210AFD02E8CC58600682E2C /* Identified.swift */,
 				E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */,
+				E2D230AF2EB5966A00380D83 /* Plan.CellConstructor.swift */,
 				E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */,
 				E2386BE82A087314009FEA16 /* Plan.Image+View.swift */,
 				E28D1BCD283350C400064CCD /* Plan.List.swift */,
@@ -404,6 +409,7 @@
 				E286391C2A107D040038CB72 /* Plan.Rack+View.swift */,
 				E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */,
 				E28A4DAA2E9F7D50002ECD1C /* Plan.Scene.swift */,
+				E2D230B12EB596EF00380D83 /* Plan.SceneConstructor.swift */,
 				E2459F802A0335DE0068DCBB /* Plan.Section.swift */,
 				E25E69262EA7240700899DA6 /* Plan.Simple.swift */,
 				E2386BF62A093C45009FEA16 /* Plan.Tab+View.swift */,
@@ -745,11 +751,13 @@
 				E269F7C42C06D4BC00D83739 /* DetailRowRepresentable.swift in Sources */,
 				E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
+				E2D230B22EB596F900380D83 /* Plan.SceneConstructor.swift in Sources */,
 				E25E69292EA7454B00899DA6 /* Dispatch.swift in Sources */,
 				E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */,
 				E2E42BE42A80731E00B6E66E /* LabeledControl.swift in Sources */,
 				E2803FD62B5FE1430023A74E /* Binding+Transform.swift in Sources */,
 				E24CE2C62E5EC7730086B30C /* Plan.Node+Mirror.swift in Sources */,
+				E2D230B02EB5967200380D83 /* Plan.CellConstructor.swift in Sources */,
 				E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */,
 				E210AFD12E8CC59400682E2C /* Identified.swift in Sources */,
 				E28A4DAB2E9F7D59002ECD1C /* Plan.Scene.swift in Sources */,
