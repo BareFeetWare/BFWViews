@@ -87,6 +87,8 @@ extension AsyncNavigationLink {
     }
 }
 
+// TODO: Remove instances of UUID().uuidString.
+
 extension AsyncNavigationLink where Label == Text, Tag == String {
     
     public init(
@@ -127,7 +129,10 @@ extension AsyncNavigationLink where Label == Text, Tag == String, Placeholder ==
         self.label = { Text(title) }
         self.placeholder = nil
     }
-    
+}
+
+extension AsyncNavigationLink where Tag == String, Placeholder == EmptyView {
+
     public init(
         destination: @escaping () async throws -> Destination,
         label: @escaping () -> Label
