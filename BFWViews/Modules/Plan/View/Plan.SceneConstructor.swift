@@ -9,9 +9,14 @@
 import SwiftUI
 
 public extension Plan {
-    protocol SceneConstructor {
-        associatedtype Cell: View
-        static func list(_ list: Plan.List<Cell>) -> Self
+    protocol SceneConstructor: View {
+        associatedtype Row: View
+        typealias Scene = Self
+        typealias Section = Plan.Section<Row, Scene>
+        typealias Cell = Plan.Cell<Row, Scene>
+        typealias List = Plan.List<Row, Scene>
+        
+        static func list(_ list: List) -> Self
         static func optionalIdentified(_ optionalIdentified: OptionalIdentified<AnyView>) -> Self
     }
 }
@@ -25,7 +30,7 @@ public extension Plan.SceneConstructor {
     
     static func list(
         isSearchable: Bool = false,
-        sections: [Plan.Section<Cell>]
+        sections: [Section]
     ) -> Self {
         .list(.init(isSearchable: isSearchable, sections: sections))
     }

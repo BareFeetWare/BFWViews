@@ -9,8 +9,8 @@
 import SwiftUI
 
 public extension Plan {
-    enum Scene<Cell: View> {
-        case list(Plan.List<Cell>)
+    enum Scene {
+        case list(Plan.List<Row, Scene>)
         case optionalIdentified(OptionalIdentified<AnyView>)
     }
 }

@@ -9,16 +9,16 @@ import Foundation
 import SwiftUI
 
 public extension Plan {
-    struct List<Cell: View> {
+    struct List<Row: View, Scene: View> {
         public let isSearchable: Bool
         public let selection: Binding<String?>?
-        public let sections: [Plan.Section<Cell>]
+        public let sections: [Section]
         @State var searchString: String = ""
         
         public init(
             isSearchable: Bool = false,
             selection: Binding<String?>? = nil,
-            sections: [Plan.Section<Cell>]
+            sections: [Section]
         ) {
             self.isSearchable = isSearchable
             self.selection = selection
@@ -28,6 +28,13 @@ public extension Plan {
     }
 }
 
+// MARK: - Types
+
+public extension Plan.List {
+    typealias Cell = Plan.Cell<Row, Scene>
+    typealias Section = Plan.Section<Row, Scene>
+}
+
 // MARK: - Convenience Inits
 
 public extension Plan.List {
@@ -35,7 +42,7 @@ public extension Plan.List {
     init(
         isSearchable: Bool = false,
         selection: Binding<String?>,
-        sections: [Plan.Section<Cell>]
+        sections: [Section]
     ) {
         self.isSearchable = isSearchable
         self.selection = selection
@@ -59,7 +66,7 @@ public extension Plan.List {
     
     init(
         isSearchable: Bool = false,
-        sections: [Plan.Section<Cell>]
+        sections: [Section]
     ) {
         self.isSearchable = isSearchable
         self.selection = nil
@@ -85,7 +92,7 @@ public extension Plan.List {
 
 extension Plan.List {
     
-    var sectionsIdentified: [Identified<Plan.Section<Cell>>] {
+    var sectionsIdentified: [Identified<Section>] {
         sections.identified()
     }
 }
@@ -115,8 +122,7 @@ struct PlanListDisplay_Previews: PreviewProvider {
 
 private struct Preview {
     @State var selectedCellID: String?
-    typealias List = Plan.Simple.List
-    typealias Scene = Plan.Simple.Scene
+    typealias List = Plan.List<Plan.Row, Plan.Scene>
 }
 
 extension Preview {
@@ -126,13 +132,13 @@ extension Preview {
             selection: $selectedCellID,
             sections: [
                 .init(
-                    title: "selection",
+                    "selection",
                     cells: [
                         .detail("selection:", trailing: selectedCellID),
                     ]
                 ),
                 .init(
-                    title: "Buttons and detail",
+                    "Buttons and detail",
                     cells: [
                         .button("Start") {},
                         .detail("Status", trailing: "Off line"),
@@ -140,18 +146,18 @@ extension Preview {
                     ]
                 ),
                 .init(
-                    title: "NavigationLink",
+                    "NavigationLink",
                     cells: [
-                        .push("Children", trailing: "3") {
-                            childrenScene
+                        .detail("Children", trailing: "3") {
+                            childrenList
                         }
                     ]
                 ),
                 .init(
-                    title: "Async children",
+                    "Async children",
                     cells: [
-                        .push("Children", trailing: "3") {
-                            try await asyncChildrenScene()
+                        .detail("Children", trailing: "3") {
+                            try await asyncChildrenList()
                         },
                     ]
                 ),
@@ -159,14 +165,14 @@ extension Preview {
         )
     }
     
-    func asyncChildrenScene() async throws -> Scene {
+    func asyncChildrenList() async throws -> List {
         // Arbitrary delay, pretending to be an async request.
         try await Task.sleep(nanoseconds: 2000000000)
-        return childrenScene
+        return childrenList
     }
     
-    var childrenScene: Scene {
-        .list(
+    var childrenList: List {
+        .init(
             cells: [
                 .detail("Child 1"),
                 .detail("Child 2"),

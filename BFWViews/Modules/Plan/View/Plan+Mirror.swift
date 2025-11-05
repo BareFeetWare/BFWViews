@@ -7,56 +7,27 @@
 //
 
 import Foundation
-import SwiftUI
 
-public extension Plan.CellConstructor
-where Scene: Plan.SceneConstructor, Scene.Cell == Self
-{
+extension Plan.Cell where Row: Plan.RowConstructor {
     
-    init(_ row: Plan.DetailRow, reflecting subject: Any?) {
-        self = if let subject,
-                  let cells: [Self] = .init(reflecting: subject)
-        {
-            .push(row) { .list(cells: cells) }
-        } else {
-            .detail(row)
-        }
-    }
-    
-    init(
-        _ title: String,
-        subtitle: String? = nil,
-        trailing: String? = nil,
+    private static func mirror(
+        _ detailRow: Plan.DetailRow,
         reflecting subject: Any?
-    ) {
-        self.init(
-            .init(title, subtitle: subtitle, trailing: trailing),
-            reflecting: subject
-        )
-    }
-    
-    static func mirror(
-        _ title: String,
-        subtitle: String? = nil,
-        trailing: String? = nil,
-        reflecting subject: @escaping () async throws -> Any?
     ) -> Self {
-        .push(title, subtitle: subtitle, trailing: trailing) {
-            Scene.reflecting(subject)
+        if let subject,
+           let cells = cells(reflecting: subject)
+        {
+            .mirror(detailRow) { cells }
+        } else {
+            .detail(detailRow)
         }
     }
     
-}
-
-public extension Array
-where Element: Plan.CellConstructor, Element.Scene: Plan.SceneConstructor, Element == Element.Scene.Cell
-{
-    
-    init?(reflecting subject: Any?) {
+    public static func cells(reflecting subject: Any?) -> [Self]? {
         guard let subject,
               let children = Mirror(reflecting: subject).children.nilIfEmpty
         else { return nil }
-        self = children.map { child in
+        return children.map { child in
             let childMirror = Mirror(reflecting: child.value)
             let childValue: Any? = childMirror.displayStyle == .optional
             ? childMirror.children.first?.value
@@ -64,7 +35,7 @@ where Element: Plan.CellConstructor, Element.Scene: Plan.SceneConstructor, Eleme
             let summary = childValue.map {
                 String(String(describing: $0).prefix(50))
             } ?? "nil"
-            return .init(
+            return .mirror(
                 .init(
                     child.label ?? summary,
                     trailing: child.label == nil ? nil : summary
@@ -76,26 +47,33 @@ where Element: Plan.CellConstructor, Element.Scene: Plan.SceneConstructor, Eleme
     
 }
 
-public extension Plan.SceneConstructor
-where Cell: Plan.CellConstructor, Cell.Scene: Plan.SceneConstructor, Cell == Cell.Scene.Cell
-{
-    
-    static func reflecting(_ subject: Any?) -> Self {
-        .list(.init(reflecting: subject) ?? .init(cells: []))
-    }
-    
-}
-
-public extension Plan.List
-where Cell: Plan.CellConstructor, Cell.Scene: Plan.SceneConstructor, Cell == Cell.Scene.Cell
-{
+public extension Plan.List where Row: Plan.RowConstructor {
     
     init?(reflecting subject: Any?) {
-        guard let cells = [Cell](reflecting: subject)
+        guard let cells = Cell.cells(reflecting: subject)
         else { return nil }
         self.init(cells: cells)
     }
     
+}
+
+public extension Plan.SceneConstructor where Row: Plan.RowConstructor {
+    
+    static func reflecting(
+        _ subject: Any?
+    ) -> Self {
+        .list(
+            cells: Cell.cells(reflecting: subject) ?? []
+        )
+    }
+    
+    static func reflecting(
+        _ subject: () async throws -> Any?
+    ) async throws -> Self {
+        .list(
+            cells: Cell.cells(reflecting: try await subject()) ?? []
+        )
+    }
 }
 
 private extension Collection {

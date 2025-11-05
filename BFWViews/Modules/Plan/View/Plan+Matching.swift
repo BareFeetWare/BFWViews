@@ -32,13 +32,11 @@ extension Plan.DetailRow: Matchable {
     }
 }
 
-extension Plan.Cell: Matchable {
+extension Plan.Cell: Matchable where Row == Plan.Row {
     public var matchStrings: [String] {
-        switch self {
-        case .detail(let row):
-            row.matchStrings
-        case .push(let push):
-            push.row.matchStrings
+        switch row {
+        case .detail(let detailRow):
+            detailRow.matchStrings
             // TODO: Implement for any.
         default:
             []
@@ -46,7 +44,7 @@ extension Plan.Cell: Matchable {
     }
 }
 
-extension Plan.Section: Matchable where Cell: Matchable {
+extension Plan.Section: Matchable where Row: Matchable {
     
     public var matchStrings: [String] {
         [title].compactMap { $0 }
@@ -57,23 +55,15 @@ extension Plan.Section: Matchable where Cell: Matchable {
         || searchString.isEmpty
         ? self
         : cells
-            .filter { $0.isMatching(searchString: searchString) }
+            .filter { $0.row.isMatching(searchString: searchString) }
             .nilIfEmpty
             .map { .init(title, footer: footer, cells: $0) }
     }
 }
 
-public extension Array {
-    func matching<Cell: Matchable>(searchString: String) -> Self
-    where Element == Plan.Section<Cell>
-    {
-        compactMap { $0.matching(searchString: searchString) }
-    }
-}
-
-public extension Plan.List where Cell: Matchable {
+public extension Plan.List where Row: Matchable {
     func matching(searchString: String) -> Self {
-        .init(sections: sections.matching(searchString: searchString))
+        .init(sections: sections.compactMap { $0.matching(searchString: searchString) })
     }
 }
 

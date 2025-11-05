@@ -10,7 +10,9 @@ import SwiftUI
 
 extension Plan {
     public struct Push<Scene: View> {
-        public let row: DetailRow
+        // TODO: Richer title, perhaps using Plan.DetailRow.
+        public let title: String?
+        public let isActive: Binding<Bool>?
         public let destination: Dispatch<Scene>
     }
 }
@@ -19,37 +21,16 @@ extension Plan {
 
 public extension Plan.Push {
     
-    init(row: Plan.DetailRow, destination: Scene) {
-        self.row = row
+    init(_ title: String?, isActive: Binding<Bool>? = nil, destination: Scene) {
+        self.title = title
+        self.isActive = isActive
         self.destination = .sync(destination)
     }
     
-    init(_ row: Plan.DetailRow, destination: @escaping () async throws -> Scene) {
-        self.row = row
+    init(_ title: String?, isActive: Binding<Bool>? = nil, destination: @escaping () async throws -> Scene) {
+        self.title = title
+        self.isActive = isActive
         self.destination = .async(destination)
     }
     
-}
-
-// MARK: - Views
-
-extension Plan.Push: View {
-    public var body: some View {
-        switch destination {
-        case .async(let scene):
-            AsyncNavigationLink(tag: row.id) {
-                try await scene()
-                    .navigationTitle(row.title)
-            } label: {
-                row
-            }
-        case .sync(let scene):
-            NavigationLink {
-                scene
-                    .navigationTitle(row.title)
-            } label: {
-                row
-            }
-        }
-    }
 }

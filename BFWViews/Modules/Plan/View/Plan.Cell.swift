@@ -9,28 +9,56 @@
 import SwiftUI
 
 extension Plan {
-    public enum Cell<Scene: View> {
-        case button(Plan.Button)
-        case detail(Plan.DetailRow)
-        case push(Plan.Push<Scene>)
-        /// Avoid using case view, since it erases type.
-        case optionalIdentified(OptionalIdentified<AnyView>)
+    public struct Cell<Row: View, Scene: View> {
+        public let row: Row
+        public let branch: Branch?
+        
+        public init(_ row: Row, branch: Branch? = nil) {
+            self.row = row
+            self.branch = branch
+        }
     }
+}
+
+public extension Plan.Cell {
+    
+    enum Branch {
+        case disclosure(Disclosure)
+        case push(Plan.Push<Scene>)
+    }
+    
+    struct Disclosure {
+        let isExpanded: Binding<Bool>?
+        let cells: [Plan.Cell<Row, Scene>]
+        
+        init(
+            isExpanded: Binding<Bool>? = nil,
+            cells: [Plan.Cell<Row, Scene>]
+        ) {
+            self.isExpanded = isExpanded
+            self.cells = cells
+        }
+    }
+
 }
 
 // MARK: - Protocol Implementations
 
 extension Plan.Cell: OptionalIdentifiable {
     public var id: String? {
-        switch self {
-        case .button:
-            nil
-        case .detail(let row):
-            row.id.map { "row(id: \($0))" }
-        case .push(let push):
-            push.row.id.map { "row(id: \($0))" }
-        case .optionalIdentified(let identified):
-            identified.id.map { "view(id: \($0)" }
+        (row as? (any Identifiable)).map { String(describing: $0.id) }
+        ?? (row as? OptionalIdentifiable)?.id
+    }
+}
+
+// MARK: - Private Extensions
+
+private extension DisclosureGroup {
+    init(isExpanded: Binding<Bool>?, content: @escaping () -> Content, label: () -> Label) {
+        if let isExpanded {
+            self.init(isExpanded: isExpanded, content: content, label: label)
+        } else {
+            self.init(content: content, label: label)
         }
     }
 }
@@ -39,12 +67,52 @@ extension Plan.Cell: OptionalIdentifiable {
 
 extension Plan.Cell: View {
     public var body: some View {
-        switch self {
-        case .button(let button): button
-        case .detail(let detailRow): detailRow
-        case .push(let push): push
-        case .optionalIdentified(let identified): identified
+        switch branch {
+        case .none:
+            row
+        case .disclosure(let disclosure):
+            DisclosureGroup(isExpanded: disclosure.isExpanded) {
+                disclosure
+            } label: {
+                row
+            }
+        case .push(let push):
+            view(title: push.title, dispatch: push.destination)
         }
+    }
+    
+    @ViewBuilder
+    func view<Destination: View>(
+        title: String?,
+        dispatch: Dispatch<Destination>
+    ) -> some View {
+        switch dispatch {
+        case .async(let scene):
+            AsyncNavigationLink {
+                try await scene()
+                    .ifLet(title) { title, view in
+                        view.navigationTitle(title)
+                    }
+            } label: {
+                row
+            }
+        case .sync(let scene):
+            NavigationLink {
+                scene
+                    .ifLet(title) { title, view in
+                        view.navigationTitle(title)
+                    }
+            } label: {
+                row
+            }
+        }
+    }
+    
+}
+
+extension Plan.Cell.Disclosure: View {
+    public var body: some View {
+        ForEach(cells.identified()) { $0.content }
     }
 }
 
@@ -53,17 +121,17 @@ extension Plan.Cell: View {
 struct PlanCell_Previews: PreviewProvider {
     
     struct Preview: View {
-        
         @State var selectedCellID: String?
+        typealias List = Plan.List<Plan.Row, Plan.Scene>
         
         var body: some View {
             NavigationView {
-                Plan.Simple.List(
+                List(
                     selection: $selectedCellID,
                     cells: [
                         .button("Button 1") {},
                         .detail("Detail 1"),
-                        .push("Push 1") {
+                        .detail("Push 1") {
                             [
                                 .detail("Destination 1"),
                             ]

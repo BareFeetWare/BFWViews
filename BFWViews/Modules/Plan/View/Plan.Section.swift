@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 public extension Plan {
-    struct Section<Cell: View>: OptionalIdentifiable {
+    struct Section<Row: View, Scene: View>: OptionalIdentifiable {
         public let id: String?
         public let isExpanded: Binding<Bool>?
         public let title: String?
@@ -35,6 +35,12 @@ public extension Plan {
             self.emptyPlaceholder = emptyPlaceholder
         }
     }
+}
+
+// MARK: - Types
+
+public extension Plan.Section {
+    typealias Cell = Plan.Cell<Row, Scene>
 }
 
 // MARK: - Convenience Inits
@@ -163,11 +169,11 @@ struct PlanSection_Previews: PreviewProvider {
     }
     
     struct Preview: View {
-        
         @State var isExpanded = false
+        typealias List = Plan.List<Plan.Row, Never>
         
         var body: some View {
-            Plan.Simple.List(
+            List(
                 sections: [
                     .init(
                         id: "Expandable",
