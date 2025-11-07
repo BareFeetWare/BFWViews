@@ -97,6 +97,7 @@
 		E2D3165F2D3791A700064A63 /* Plan.Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3165E2D3791A300064A63 /* Plan.Label.swift */; };
 		E2D316612D37953E00064A63 /* Plan.Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D316602D37953900064A63 /* Plan.Menu.swift */; };
 		E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */; };
+		E2E31E462EBDB13D00690BC4 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E31E452EBDB13800690BC4 /* LoaderView.swift */; };
 		E2E42BE42A80731E00B6E66E /* LabeledControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E42BE32A80731E00B6E66E /* LabeledControl.swift */; };
 		E2F47B122A13351C009BD9EC /* Plan.Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F47B112A13351C009BD9EC /* Plan.Rating.swift */; };
 		E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */; };
@@ -230,6 +231,7 @@
 		E2D3165E2D3791A300064A63 /* Plan.Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Label.swift; sourceTree = "<group>"; };
 		E2D316602D37953900064A63 /* Plan.Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Menu.swift; sourceTree = "<group>"; };
 		E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Cell.swift; sourceTree = "<group>"; };
+		E2E31E452EBDB13800690BC4 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		E2E42BE32A80731E00B6E66E /* LabeledControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledControl.swift; sourceTree = "<group>"; };
 		E2F47B112A13351C009BD9EC /* Plan.Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Rating.swift; sourceTree = "<group>"; };
 		E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan.Rating+View.swift"; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				E2B62A3F2D911C2D002CBD8E /* If.swift */,
 				E2B62A412D911CB9002CBD8E /* IfLet.swift */,
 				E2E42BE32A80731E00B6E66E /* LabeledControl.swift */,
+				E2E31E452EBDB13800690BC4 /* LoaderView.swift */,
 				E226BCC42C924FF700A62B9E /* LoopingVideoPlayer.swift */,
 				E280939F2C8D8F9800CB11A0 /* Modified.swift */,
 				E2B310F42CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift */,
@@ -741,6 +744,7 @@
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
 				E24CE2C82E6137E30086B30C /* Plan.Node.swift in Sources */,
 				E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */,
+				E2E31E462EBDB13D00690BC4 /* LoaderView.swift in Sources */,
 				E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */,
 				E269F7C42C06D4BC00D83739 /* DetailRowRepresentable.swift in Sources */,
 				E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */,
