@@ -10,15 +10,18 @@ import SwiftUI
 
 public struct LoaderView<Content: View> {
     public let content: () async throws -> Content
+    public let timelineModifier: ((Content) -> Content)?
     @State private var status: Status = .loading
     @State private var alert: Plan.Alert?
     
     public init(
+        status: Status = .loading,
         content: @escaping () async throws -> Content,
-        status: Status = .loading
+        timelineModifier: ((Content) -> Content)? = nil
     ) {
-        self.content = content
         self.status = status
+        self.content = content
+        self.timelineModifier = timelineModifier
     }
 }
 
@@ -63,20 +66,25 @@ extension LoaderView {
 
 extension LoaderView: View {
     public var body: some View {
-        status
+        statusView
             .refreshable { await onRefresh() }
             .task { await onTask() }
             .alert($alert)
     }
-}
-
-extension LoaderView.Status: View {
-    public var body: some View {
-        switch self {
+    
+    @ViewBuilder
+    var statusView: some View {
+        switch status {
         case .loading:
             ProgressView()
         case .success(let content):
-            content
+            if let timelineModifier {
+                TimelineView(.periodic(from: .now, by: 1)) { context in
+                    timelineModifier(content)
+                }
+            } else {
+                content
+            }
         }
     }
 }
