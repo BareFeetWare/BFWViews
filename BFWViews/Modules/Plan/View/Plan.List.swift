@@ -95,6 +95,36 @@ extension Plan.List {
     var sectionsIdentified: [Identified<Section>] {
         sections.identified()
     }
+    
+    public func replacingLastSection(footer: String? = nil) -> Self {
+        .init(
+            isSearchable: isSearchable,
+            sections: sections.dropLast()
+                .appendingIfLet(sections.last) { section in
+                    [
+                        .init(
+                            section.title,
+                            id: section.id,
+                            footer: footer,
+                            cells: section.cells,
+                        )
+                    ]
+                }
+        )
+    }
+    
+}
+
+private extension Array {
+    
+    func appendingIfLet<T>(
+        _ optional: T?,
+        transform: (T) -> [Element]
+    ) -> [Element] {
+        guard let value = optional else { return self }
+        return self + transform(value)
+    }
+    
 }
 
 // MARK: - Views
