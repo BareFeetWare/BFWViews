@@ -31,7 +31,7 @@ public extension Plan.Cell {
         let isExpanded: Binding<Bool>?
         let cells: [Plan.Cell<Row, Scene>]
         
-        init(
+        public init(
             isExpanded: Binding<Bool>? = nil,
             cells: [Plan.Cell<Row, Scene>]
         ) {
