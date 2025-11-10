@@ -18,11 +18,11 @@ public extension Plan {
         public let cells: [Cell]
         public let emptyPlaceholder: String?
         
-        init(
+        public init(
+            _ title: String? = nil,
             // Note: id must not use UUID() which prevents a refreshed section loading as the same instance.
             id: String? = nil,
             isExpanded: Binding<Bool>? = nil,
-            title: String? = nil,
             footer: String? = nil,
             cells: [Cell?],
             emptyPlaceholder: String? = nil
@@ -48,48 +48,19 @@ public extension Plan.Section {
 public extension Plan.Section {
     
     init(
-        _ title: String,
-        // Note: id must not use UUID() which prevents a refreshed section loading as the same instance.
+        _ title: String? = nil,
         id: String? = nil,
         isExpanded: Binding<Bool>? = nil,
         footer: String? = nil,
-        cells: [Cell?],
+        cells: @escaping () -> [Cell],
         emptyPlaceholder: String? = nil
     ) {
         self.id = id
         self.isExpanded = isExpanded
         self.title = title
         self.footer = footer
-        self.cells = cells.compactMap { $0 }
-        self.emptyPlaceholder = emptyPlaceholder
-    }
-    
-    init(
-        _ title: String? = nil,
-        id: String? = nil,
-        footer: String? = nil,
-        cells: [Cell?]
-    ) {
-        self.title = title
-        self.id = id
-        self.footer = footer
-        self.cells = cells.compactMap { $0 }
-        self.isExpanded = nil
-        self.emptyPlaceholder = nil
-    }
-    
-    init(
-        _ title: String? = nil,
-        id: String? = nil,
-        footer: String? = nil,
-        cells: @escaping () -> [Cell]
-    ) {
-        self.title = title
-        self.id = id
-        self.footer = footer
         self.cells = cells()
-        self.isExpanded = nil
-        self.emptyPlaceholder = nil
+        self.emptyPlaceholder = emptyPlaceholder
     }
     
 }
@@ -176,17 +147,17 @@ struct PlanSection_Previews: PreviewProvider {
             List(
                 sections: [
                     .init(
+                        "Expandable",
                         id: "Expandable",
                         isExpanded: $isExpanded,
-                        title: "Expandable",
                         cells: [
                             .detail("cell 1"),
                             .detail("cell 2"),
                         ]
                     ),
                     .init(
+                        "not expandable",
                         id: "not expandable",
-                        title: "not expandable",
                         cells: [
                             .detail("cell 1"),
                             .detail("cell 2"),
