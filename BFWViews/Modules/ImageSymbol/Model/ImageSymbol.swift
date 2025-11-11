@@ -113,3 +113,5 @@ public extension ImageSymbol {
     static let x: Self = .init("x")
     static let xmark: Self = .init("xmark")
 }
+
+extension ImageSymbol: Equatable {}
