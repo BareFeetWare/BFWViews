@@ -1,5 +1,5 @@
 //
-//  Plan.Image+View.swift
+//  Plan.Image.swift
 //  BFWViews
 //
 //  Created by Tom Brodhurst-Hill on 8/5/2023.
@@ -177,7 +177,9 @@ private extension Image {
         self
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .foregroundColor(planImage.foregroundColor)
+            .ifLet(planImage.foregroundColor) { foregroundColor, view in
+                view.foregroundColor(foregroundColor)
+            }
     }
 }
 
@@ -241,7 +243,9 @@ private extension Plan.Image {
             Image(symbol: symbol, variableValue: variableValue)
                 .symbolVariant(variant)
                 .imageScale(scale)
-                .foregroundColor(foregroundColor)
+                .ifLet(foregroundColor) { foregroundColor, view in
+                    view.foregroundColor(foregroundColor)
+                }
         }
     }
 }
