@@ -90,7 +90,7 @@ public extension ForEach where ID == String {
     init<C: RandomAccessCollection>(
         _ collection: C,
         @ViewBuilder content: @escaping (C.Element) -> Content
-    ) where C.Element: OptionalIdentifiable,
+    ) where
     Data == [Identified<C.Element>],
     Content: View
     {
