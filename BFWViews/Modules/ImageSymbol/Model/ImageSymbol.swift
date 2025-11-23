@@ -114,4 +114,4 @@ public extension ImageSymbol {
     static let xmark: Self = .init("xmark")
 }
 
-extension ImageSymbol: Equatable {}
+extension ImageSymbol: Equatable, Hashable {}

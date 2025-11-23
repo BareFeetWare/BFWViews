@@ -48,11 +48,10 @@ extension Plan {
     }
 }
 
-// MARK: - Convenience Inits
+// MARK: - Protocol Conformances
 
-extension Plan.Image {
-    
-}
+extension Plan.Image: Equatable {}
+extension Plan.Image.Source: Hashable {}
 
 // MARK: - Static Instances
 
