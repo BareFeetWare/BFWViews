@@ -75,6 +75,7 @@
 		E29362552E73F16300CE5AAC /* DictionaryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29362542E73F16100CE5AAC /* DictionaryProtocol.swift */; };
 		E29362572E73F18B00CE5AAC /* OptionalProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29362562E73F18A00CE5AAC /* OptionalProtocol.swift */; };
 		E2B310F52CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B310F42CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift */; };
+		E2B41E0A2ED4FCED008715BC /* Compatible.Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B41E092ED4FCED008715BC /* Compatible.Font.swift */; };
 		E2B62A402D911C32002CBD8E /* If.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B62A3F2D911C2D002CBD8E /* If.swift */; };
 		E2B62A422D911CBC002CBD8E /* IfLet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B62A412D911CB9002CBD8E /* IfLet.swift */; };
 		E2BAAC0526FD4EC900CFDE50 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAC0426FD4EC900CFDE50 /* WebView.swift */; };
@@ -209,6 +210,7 @@
 		E29362542E73F16100CE5AAC /* DictionaryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryProtocol.swift; sourceTree = "<group>"; };
 		E29362562E73F18A00CE5AAC /* OptionalProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalProtocol.swift; sourceTree = "<group>"; };
 		E2B310F42CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackButtonTitle.swift; sourceTree = "<group>"; };
+		E2B41E092ED4FCED008715BC /* Compatible.Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compatible.Font.swift; sourceTree = "<group>"; };
 		E2B62A3F2D911C2D002CBD8E /* If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = If.swift; sourceTree = "<group>"; };
 		E2B62A412D911CB9002CBD8E /* IfLet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfLet.swift; sourceTree = "<group>"; };
 		E2BAAC0426FD4EC900CFDE50 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				E258A4192B8DBF950035E549 /* Compatible.swift */,
+				E2B41E092ED4FCED008715BC /* Compatible.Font.swift */,
 				E258A41B2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift */,
 			);
 			path = Compatible;
@@ -740,6 +743,7 @@
 				E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */,
 				E2386BF72A093C45009FEA16 /* Plan.Tab+View.swift in Sources */,
 				E28A4DAD2E9F7E3D002ECD1C /* Plan.Push.swift in Sources */,
+				E2B41E0A2ED4FCED008715BC /* Compatible.Font.swift in Sources */,
 				E286391D2A107D040038CB72 /* Plan.Rack.swift in Sources */,
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
 				E24CE2C82E6137E30086B30C /* Plan.Node.swift in Sources */,
