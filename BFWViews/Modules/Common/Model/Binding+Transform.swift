@@ -90,3 +90,18 @@ public extension Binding where Value: DictionaryProtocol {
         )
     }
 }
+
+public extension Binding where Value: SetAlgebra {
+    func contains(_ element: Value.Element) -> Binding<Bool> {
+        Binding<Bool>(
+            get: { self.wrappedValue.contains(element) },
+            set: { newValue in
+                if newValue {
+                    self.wrappedValue.insert(element)
+                } else {
+                    self.wrappedValue.remove(element)
+                }
+            }
+        )
+    }
+}
