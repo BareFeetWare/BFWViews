@@ -15,25 +15,27 @@ struct ContentView {}
 
 private extension ContentView {
     
-    var cells: [Plan.Simple.Cell] {
+    typealias Cell = Plan.Cell<Plan.Row, Plan.Scene>
+    
+    var cells: [Cell] {
         [
-            .push("Alert") { AlertScene() },
-            .push("AsyncImage") { AsyncImageScene() },
-            .push("AsyncNavigationLink") { AsyncNavigationLinkScene() },
-            .push("Badge") { BadgeScene() },
-            .push("Card") { CardScene() },
-            .push("CellBorder") { CellBorderScene() },
-            .push("Color+Hex") { ColorHexScene() },
-            .push("CompressibleSpacer") { CompressibleSpacerScene() },
-            .push("Distributed") { DistributedScene() },
-            .push("ImageSymbol") { ImageSymbolScene() },
-            .push("Plan.List") { ListScene() },
-            .push("ReadFrame") { ReadFrameScene() },
-            .push("TappableCell") { TappableCellScene() },
-            .push("Trailing") { TrailingScene() },
-            .push("UIView") { UIViewScene() },
-            .push("UIViewController") { UIViewControllerScene() },
-            .push("WebView") { WebScene() },
+            .detail("Alert") { .view(AlertScene()) },
+            .detail("AsyncImage") { .view(AsyncImageScene()) },
+            .detail("AsyncNavigationLink") { .view(AsyncNavigationLinkScene()) },
+            .detail("Badge") { .view(BadgeScene()) },
+            .detail("Card") { .view(CardScene()) },
+            .detail("CellBorder") { .view(CellBorderScene()) },
+            .detail("Color+Hex") { .view(ColorHexScene()) },
+            .detail("CompressibleSpacer") { .view(CompressibleSpacerScene()) },
+            .detail("Distributed") { .view(DistributedScene()) },
+            .detail("ImageSymbol") { .view(ImageSymbolScene()) },
+            .detail("Plan.List") { .view(ListScene()) },
+            .detail("ReadFrame") { .view(ReadFrameScene()) },
+            .detail("TappableCell") { .view(TappableCellScene()) },
+            .detail("Trailing") { .view(TrailingScene()) },
+            .detail("UIView") { .view(UIViewScene()) },
+            .detail("UIViewController") { .view(UIViewControllerScene()) },
+            .detail("WebView") { .view(WebScene()) },
         ]
     }
     

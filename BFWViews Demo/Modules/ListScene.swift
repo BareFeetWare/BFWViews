@@ -10,8 +10,8 @@ import BFWViews
 import SwiftUI
 
 struct ListScene {
-    typealias List = Plan.Simple.List
-    typealias Scene = Plan.Simple.Scene
+    typealias List = Plan.List<Plan.Row, Scene>
+    typealias Scene = Plan.Scene
 }
 
 // MARK: - Functions
@@ -32,7 +32,7 @@ private extension ListScene {
                 .init(
                     "Push Immediate",
                     cells: [
-                        .push("Push 1", trailing: "3") {
+                        .detail("Push 1", trailing: "3") {
                             .list(
                                 cells: [
                                     .detail("Child 1"),
@@ -45,7 +45,7 @@ private extension ListScene {
                 .init(
                     "Push Async",
                     cells: [
-                        .push("Push 2", trailing: "3") {
+                        .detail("Push 2", trailing: "3") {
                             await self.asyncChildrenScene()
                         },
                     ]
@@ -72,5 +72,13 @@ private extension ListScene {
 extension ListScene: View {
     var body: some View {
         list
+    }
+}
+
+// MARK: - Previews
+
+#Preview {
+    NavigationView {
+        ListScene()
     }
 }
