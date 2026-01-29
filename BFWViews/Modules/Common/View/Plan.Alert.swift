@@ -14,16 +14,19 @@ public extension Plan {
     struct Alert {
         public let title: String
         public let message: String?
+        public let textFields: [Plan.TextField]
         /// The buttons to display. Use role: .cancel for a cancel button. Provide no buttons to show system default OK button.
         public let buttons: [Plan.Button]
         
         public init(
             title: String,
             message: String?,
+            textFields: [Plan.TextField] = [],
             buttons: [Plan.Button] = []
         ) {
             self.title = title
             self.message = message
+            self.textFields = textFields
             self.buttons = buttons
         }
     }
@@ -39,7 +42,8 @@ public extension View {
                 alert.title,
                 isPresented: alertBinding.isNotNil
             ) {
-                ForEach(alert.buttons, id: \.title) { $0 }
+                ForEach(alert.textFields.identified()) { $0 }
+                ForEach(alert.buttons.identified()) { $0 }
             } message: {
                 alert.message.map { Text($0) }
             }
@@ -77,6 +81,39 @@ public extension View {
                             // Do action.
                         },
                     ]
+                )
+            )
+        )
+}
+
+#Preview("TextField") {
+    Text("Content")
+        .alert(
+            .constant(
+                .init(
+                    title: "Title",
+                    message: "Message",
+                    textFields: [
+                        .init("Title", text: .constant("Text")),
+                    ]
+                    // No buttons, shows system OK.
+                )
+            )
+        )
+}
+
+#Preview("Login") {
+    Text("Content")
+        .alert(
+            .constant(
+                .init(
+                    title: "Login",
+                    message: "Enter your user name and password",
+                    textFields: [
+                        .init("User Name", text: .constant("Text"), textContentType: .username),
+                        .init("Password", text: .constant("Text"), isSecure: true, textContentType: .password),
+                    ]
+                    // No buttons, shows system OK.
                 )
             )
         )

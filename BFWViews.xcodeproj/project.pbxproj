@@ -40,6 +40,7 @@
 		E258A41A2B8DBF950035E549 /* Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E258A4192B8DBF950035E549 /* Compatible.swift */; };
 		E258A41C2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E258A41B2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift */; };
 		E25E69292EA7454B00899DA6 /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25E69282EA7454400899DA6 /* Dispatch.swift */; };
+		E25FDC142F2B433E00E42D14 /* Plan.TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25FDC132F2B433800E42D14 /* Plan.TextField.swift */; };
 		E2606CEC2A415378004E6400 /* Observing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CEB2A415378004E6400 /* Observing.swift */; };
 		E2606D0B2A430FA5004E6400 /* NavigationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */; };
 		E26342B02C4E1DD20096D91B /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26342AF2C4E1DC90096D91B /* ZoomView.swift */; };
@@ -175,6 +176,7 @@
 		E258A4192B8DBF950035E549 /* Compatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compatible.swift; sourceTree = "<group>"; };
 		E258A41B2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compatible.NavigationSplitView.swift; sourceTree = "<group>"; };
 		E25E69282EA7454400899DA6 /* Dispatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispatch.swift; sourceTree = "<group>"; };
+		E25FDC132F2B433800E42D14 /* Plan.TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.TextField.swift; sourceTree = "<group>"; };
 		E2606CEB2A415378004E6400 /* Observing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observing.swift; sourceTree = "<group>"; };
 		E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHeader.swift; sourceTree = "<group>"; };
 		E26342AF2C4E1DC90096D91B /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 				E2803FC92B5E74B00023A74E /* Plan.Button.swift */,
 				E2803FD32B5FE05D0023A74E /* Plan.ConfirmationDialog.swift */,
 				E2D3165E2D3791A300064A63 /* Plan.Label.swift */,
+				E25FDC132F2B433800E42D14 /* Plan.TextField.swift */,
 				E23AB43A268157720018DD04 /* ReadFrame.swift */,
 				E2803FC52B5E72A20023A74E /* SheetLink.swift */,
 				E28B7ABC275AC77700ED5730 /* UIKitView.swift */,
@@ -783,6 +786,7 @@
 				E2BAAC1926FEFF0400CFDE50 /* AsyncImage.swift in Sources */,
 				E28093A02C8D8F9800CB11A0 /* Modified.swift in Sources */,
 				E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */,
+				E25FDC142F2B433E00E42D14 /* Plan.TextField.swift in Sources */,
 				E28093A62C8DD49500CB11A0 /* OptionalRow.swift in Sources */,
 				E2C16B6C266480F900BAC051 /* Card.swift in Sources */,
 				E28D1BD6283350C400064CCD /* Plan.DetailRow.swift in Sources */,
