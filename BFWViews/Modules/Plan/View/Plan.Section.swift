@@ -63,6 +63,22 @@ public extension Plan.Section {
         self.emptyPlaceholder = emptyPlaceholder
     }
     
+    init(
+        _ title: String? = nil,
+        id: String? = nil,
+        isExpanded: Binding<Bool>? = nil,
+        footer: String? = nil,
+        rows: @escaping () -> [Row],
+        emptyPlaceholder: String? = nil
+    ) {
+        self.id = id
+        self.isExpanded = isExpanded
+        self.title = title
+        self.footer = footer
+        self.cells = rows().map { .init($0) }
+        self.emptyPlaceholder = emptyPlaceholder
+    }
+
 }
 
 // MARK: - Functions

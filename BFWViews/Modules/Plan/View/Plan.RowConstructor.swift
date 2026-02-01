@@ -43,6 +43,35 @@ extension Plan.Cell where Row: Plan.RowConstructor {}
 
 // MARK: - Static instances
 
+public extension Plan.RowConstructor {
+    
+    static func button(_ title: String, action: @escaping () -> Void) -> Self {
+        .button(.init(title, action: action))
+    }
+    
+    static func detail(
+        _ title: String,
+        id: String? = nil,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        image: Plan.Image? = nil
+    ) -> Self {
+        .detail(
+            .init(
+                title,
+                id: id,
+                subtitle: subtitle,
+                trailing: trailing,
+                image: image
+            )
+        )
+    }
+    
+    static func view<Content: View>(id: String? = nil, content: Content) -> Self {
+        .optionalIdentified(.init(id: id, content: AnyView(content)))
+    }
+}
+
 public extension Plan.Cell where Row: Plan.RowConstructor {
     
     static func button(_ title: String, action: @escaping () -> Void) -> Self {
