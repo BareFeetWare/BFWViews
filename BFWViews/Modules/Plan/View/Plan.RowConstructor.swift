@@ -67,8 +67,8 @@ public extension Plan.RowConstructor {
         )
     }
     
-    static func view<Content: View>(id: String? = nil, content: Content) -> Self {
-        .optionalIdentified(.init(id: id, content: AnyView(content)))
+    static func anyView<Content: View>(id: String? = nil, content: () -> Content) -> Self {
+        .optionalIdentified(.init(id: id, content: AnyView(content())))
     }
 }
 
