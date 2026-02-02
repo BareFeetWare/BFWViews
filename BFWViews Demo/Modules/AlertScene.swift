@@ -10,9 +10,13 @@ import SwiftUI
 import BFWViews
 
 struct AlertScene {
-    @State private var presentedError: Error?
-    @State private var presentedAlert: Plan.Alert?
-    
+    @State private var alert: Plan.Alert?
+}
+
+// MARK: - Types
+
+extension AlertScene {
+
     enum SomeError: LocalizedError {
         case test
         
@@ -37,10 +41,10 @@ extension AlertScene {
     var buttons: [Plan.Button] {
         [
             .init("Show Error Alert") {
-                presentedError = SomeError.test
+                alert = .init(error: SomeError.test)
             },
             .init("Show Custom Alert") {
-                presentedAlert = Plan.Alert(
+                alert = Plan.Alert(
                     title: "Title",
                     message: "Message",
                     buttons: [
@@ -60,8 +64,7 @@ extension AlertScene: View {
         Form {
             ForEach(buttons, id: \.title) { $0 }
         }
-        .alert(error: $presentedError)
-        .alert($presentedAlert)
+        .alert($alert)
     }
 }
 

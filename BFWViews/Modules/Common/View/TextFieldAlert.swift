@@ -13,13 +13,13 @@ public struct TextFieldAlert {
     public let title: String
     public let message: String?
     public let textFieldTitle: String
-    public let onSave: (String) -> Void
+    public let onSave: (String) async throws -> Void
     
     public init(
         title: String,
         message: String?,
         textFieldTitle: String,
-        onSave: @escaping (String) -> Void
+        onSave: @escaping (String) async throws -> Void
     ) {
         self.title = title
         self.message = message
@@ -52,7 +52,7 @@ extension TextFieldAlert.Modifier {
                 buttons: [
                     Plan.Button("Cancel", role: .cancel) {},
                     Plan.Button("Save") {
-                        textFieldAlert.onSave(text)
+                        try await textFieldAlert.onSave(text)
                     },
                 ]
             )
