@@ -75,6 +75,7 @@
 		E293393E2C475EDB00810E45 /* OnTapFullScreenCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293393D2C475EDB00810E45 /* OnTapFullScreenCover.swift */; };
 		E29362552E73F16300CE5AAC /* DictionaryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29362542E73F16100CE5AAC /* DictionaryProtocol.swift */; };
 		E29362572E73F18B00CE5AAC /* OptionalProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29362562E73F18A00CE5AAC /* OptionalProtocol.swift */; };
+		E2A34AA12F304DFC00351E0A /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A34AA02F304DF600351E0A /* TextFieldAlert.swift */; };
 		E2B310F52CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B310F42CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift */; };
 		E2B41E0A2ED4FCED008715BC /* Compatible.Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B41E092ED4FCED008715BC /* Compatible.Font.swift */; };
 		E2B62A402D911C32002CBD8E /* If.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B62A3F2D911C2D002CBD8E /* If.swift */; };
@@ -211,6 +212,7 @@
 		E293393D2C475EDB00810E45 /* OnTapFullScreenCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTapFullScreenCover.swift; sourceTree = "<group>"; };
 		E29362542E73F16100CE5AAC /* DictionaryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryProtocol.swift; sourceTree = "<group>"; };
 		E29362562E73F18A00CE5AAC /* OptionalProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalProtocol.swift; sourceTree = "<group>"; };
+		E2A34AA02F304DF600351E0A /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
 		E2B310F42CDAC73A00A63EB5 /* NavigationBackButtonTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackButtonTitle.swift; sourceTree = "<group>"; };
 		E2B41E092ED4FCED008715BC /* Compatible.Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compatible.Font.swift; sourceTree = "<group>"; };
 		E2B62A3F2D911C2D002CBD8E /* If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = If.swift; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 				E25FDC132F2B433800E42D14 /* Plan.TextField.swift */,
 				E23AB43A268157720018DD04 /* ReadFrame.swift */,
 				E2803FC52B5E72A20023A74E /* SheetLink.swift */,
+				E2A34AA02F304DF600351E0A /* TextFieldAlert.swift */,
 				E28B7ABC275AC77700ED5730 /* UIKitView.swift */,
 				E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */,
 				E2C16B65266480C400BAC051 /* View+Distributed.swift */,
@@ -755,6 +758,7 @@
 				E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */,
 				E269F7C42C06D4BC00D83739 /* DetailRowRepresentable.swift in Sources */,
 				E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */,
+				E2A34AA12F304DFC00351E0A /* TextFieldAlert.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,
 				E2D230B22EB596F900380D83 /* Plan.SceneConstructor.swift in Sources */,
 				E25E69292EA7454B00899DA6 /* Dispatch.swift in Sources */,
