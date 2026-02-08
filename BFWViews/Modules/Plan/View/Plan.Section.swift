@@ -85,6 +85,20 @@ public extension Plan.Section {
 
 public extension Plan.Section {
     
+    /// Shows section if search is empty, section title matches, or (when Row: Matchable) any row matches; otherwise filters to matching rows or nil.
+    func matching(searchString: String) -> Self? {
+        guard !searchString.isEmpty,
+              !(self as any Matchable).isMatching(searchString: searchString),
+              cells.first?.row is any Matchable
+        else { return self }
+        let filtered = cells.filter { cell in
+            (cell.row as? any Matchable)?.isMatching(searchString: searchString) ?? false
+        }
+        return filtered.isEmpty
+        ? nil
+        : .init(title, footer: footer, cells: { filtered })
+    }
+    
     var rowPlaceholderString: String? {
         guard let emptyPlaceholder, cells.isEmpty
         else { return nil }

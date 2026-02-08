@@ -75,7 +75,3 @@ public extension Plan.SceneConstructor where Row: Plan.RowConstructor {
         )
     }
 }
-
-private extension Collection {
-    var nilIfEmpty: Self? { isEmpty ? nil : self }
-}

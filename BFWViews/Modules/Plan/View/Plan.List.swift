@@ -16,11 +16,10 @@ public extension Plan {
         @State var searchString: String = ""
         
         public init(
-            isSearchable: Bool = false,
             selection: Binding<String?>? = nil,
             sections: [Section]
         ) {
-            self.isSearchable = isSearchable
+            self.isSearchable = false
             self.selection = selection
             self.sections = sections
         }
@@ -40,22 +39,19 @@ public extension Plan.List {
 public extension Plan.List {
     
     init(
-        isSearchable: Bool = false,
         selection: Binding<String?>,
         sections: [Section]
     ) {
-        self.isSearchable = isSearchable
+        self.isSearchable = false
         self.selection = selection
         self.sections = sections
     }
     
     init(
-        isSearchable: Bool = false,
         selection: Binding<String?>,
         cells: [Cell]
     ) {
         self.init(
-            isSearchable: isSearchable,
             selection: selection,
             sections: [
                 // Note: The id is needed here so it consistently has the same id for this section, otherwise animations will not track it correctly, such as in an expanding/collapsing DisclosureGroup.
@@ -65,20 +61,17 @@ public extension Plan.List {
     }
     
     init(
-        isSearchable: Bool = false,
         sections: [Section]
     ) {
-        self.isSearchable = isSearchable
+        self.isSearchable = false
         self.selection = nil
         self.sections = sections
     }
     
     init(
-        isSearchable: Bool = false,
         cells: [Cell]
     ) {
         self.init(
-            isSearchable: isSearchable,
             sections: [
                 // Note: The id is needed here so it consistently has the same id for this section, otherwise animations will not track it correctly, such as in an expanding/collapsing DisclosureGroup.
                 .init(id: "only one section", cells: cells)
@@ -92,14 +85,17 @@ public extension Plan.List {
 
 extension Plan.List {
     
+    var matchingSections: [Section] {
+        sections.compactMap { $0.matching(searchString: searchString) }
+    }
+    
     var sectionsIdentified: [Identified<Section>] {
-        sections.identified()
+        matchingSections.identified()
     }
     
     public func replacingLastSection(footer: String? = nil) -> Self {
         .init(
-            isSearchable: isSearchable,
-            sections: sections.dropLast()
+            sections: matchingSections.dropLast()
                 .appendingIfLet(sections.last) { section in
                     [
                         .init(
@@ -111,18 +107,6 @@ extension Plan.List {
                     ]
                 }
         )
-    }
-    
-}
-
-private extension Array {
-    
-    func appendingIfLet<T>(
-        _ optional: T?,
-        transform: (T) -> [Element]
-    ) -> [Element] {
-        guard let value = optional else { return self }
-        return self + transform(value)
     }
     
 }

@@ -29,17 +29,15 @@ extension Plan.Scene: Plan.SceneConstructor {}
 public extension Plan.SceneConstructor {
     
     static func list(
-        isSearchable: Bool = false,
         sections: [Section]
     ) -> Self {
-        .list(.init(isSearchable: isSearchable, sections: sections))
+        .list(.init(sections: sections))
     }
     
     static func list(
-        isSearchable: Bool = false,
         cells: [Cell]
     ) -> Self {
-        .list(.init(isSearchable: isSearchable, cells: cells))
+        .list(.init(cells: cells))
     }
     
     static func view<V: View>(

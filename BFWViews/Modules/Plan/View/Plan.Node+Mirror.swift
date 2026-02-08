@@ -117,10 +117,6 @@ private extension String {
     }
 }
 
-private extension Collection {
-    var nilIfEmpty: Self? { isEmpty ? nil : self }
-}
-
 // MARK: - Views
 
 import SwiftUI
