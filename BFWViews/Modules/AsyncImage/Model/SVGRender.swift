@@ -87,12 +87,6 @@ private extension WKWebView {
     }
 }
 
-private extension Task where Failure == Never, Success == Never {
-    static func sleep(seconds: TimeInterval) async throws {
-        try await sleep(nanoseconds: UInt64(seconds * 1e9))
-    }
-}
-
 // Inspired by https://stackoverflow.com/questions/42789953/swift-3-how-do-i-extract-captured-groups-in-regular-expressions
 private extension String {
     func groups(regexPattern: String) throws -> [[String]] {

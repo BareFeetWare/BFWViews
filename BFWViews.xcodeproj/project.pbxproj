@@ -43,6 +43,7 @@
 		E25FDC142F2B433E00E42D14 /* Plan.TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25FDC132F2B433800E42D14 /* Plan.TextField.swift */; };
 		E2606CEC2A415378004E6400 /* Observing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606CEB2A415378004E6400 /* Observing.swift */; };
 		E2606D0B2A430FA5004E6400 /* NavigationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */; };
+		E26181B42F3C3E3B005D8533 /* Task+Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26181B32F3C3E30005D8533 /* Task+Sleep.swift */; };
 		E26342B02C4E1DD20096D91B /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26342AF2C4E1DC90096D91B /* ZoomView.swift */; };
 		E269F7C42C06D4BC00D83739 /* DetailRowRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269F7C32C06D4BC00D83739 /* DetailRowRepresentable.swift */; };
 		E269F7C62C06D4FE00D83739 /* Plan+Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269F7C52C06D4FE00D83739 /* Plan+Mirror.swift */; };
@@ -187,6 +188,7 @@
 		E25FDC132F2B433800E42D14 /* Plan.TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.TextField.swift; sourceTree = "<group>"; };
 		E2606CEB2A415378004E6400 /* Observing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observing.swift; sourceTree = "<group>"; };
 		E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHeader.swift; sourceTree = "<group>"; };
+		E26181B32F3C3E30005D8533 /* Task+Sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Sleep.swift"; sourceTree = "<group>"; };
 		E26342AF2C4E1DC90096D91B /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
 		E269F7C32C06D4BC00D83739 /* DetailRowRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRowRepresentable.swift; sourceTree = "<group>"; };
 		E269F7C52C06D4FE00D83739 /* Plan+Mirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan+Mirror.swift"; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				E210AFCA2E8B478E00682E2C /* ObservableObject+Binding.swift */,
 				E29362562E73F18A00CE5AAC /* OptionalProtocol.swift */,
 				E21636C82A500AD4005A7D48 /* PassedObject.swift */,
+				E26181B32F3C3E30005D8533 /* Task+Sleep.swift */,
 				E23480CC2D1E79A100A9A9D0 /* Titled.swift */,
 			);
 			path = Model;
@@ -778,6 +781,7 @@
 				E286391D2A107D040038CB72 /* Plan.Rack.swift in Sources */,
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
 				E24CE2C82E6137E30086B30C /* Plan.Node.swift in Sources */,
+				E26181B42F3C3E3B005D8533 /* Task+Sleep.swift in Sources */,
 				E23AB43B268157720018DD04 /* ReadFrame.swift in Sources */,
 				E2E31E462EBDB13D00690BC4 /* LoaderView.swift in Sources */,
 				E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */,
