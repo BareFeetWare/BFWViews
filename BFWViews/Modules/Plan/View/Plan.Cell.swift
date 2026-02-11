@@ -20,6 +20,19 @@ extension Plan {
     }
 }
 
+// MARK: - Convenience Inits
+
+public extension Plan.Cell {
+    
+    init(_ row: Row, destination: @escaping () async throws -> Scene) {
+        self.row = row
+        self.branch = .push(.init(nil, destination: destination))
+    }
+    
+}
+
+// MARK: - Types
+
 public extension Plan.Cell {
     
     enum Branch {
