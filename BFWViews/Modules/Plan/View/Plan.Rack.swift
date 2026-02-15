@@ -55,10 +55,10 @@ extension Plan.Rack {
         typealias List = Plan.List<Plan.Row, Never>
         let tabs: [Plan.Tab] = [
             .init(title: "First") {
-                List(cells: [.detail("First")])
+                List(rows: [.detail("First")])
             },
             .init(title: "Second") {
-                List(cells: [.detail("Second")])
+                List(rows: [.detail("Second")])
             },
         ]
         return Plan.Rack(

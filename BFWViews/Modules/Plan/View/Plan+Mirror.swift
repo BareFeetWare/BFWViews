@@ -8,22 +8,22 @@
 
 import Foundation
 
-extension Plan.Cell where Row: Plan.RowConstructor {
+extension Plan.RowConstructor {
     
     private static func mirror(
         _ detailRow: Plan.DetailRow,
         reflecting subject: Any?
     ) -> Self {
         if let subject,
-           let cells = cells(reflecting: subject)
+           let rows = rows(reflecting: subject)
         {
-            .mirror(detailRow) { cells }
+            .mirror(detailRow) { rows }
         } else {
             .detail(detailRow)
         }
     }
     
-    public static func cells(reflecting subject: Any?) -> [Self]? {
+    public static func rows(reflecting subject: Any?) -> [Self]? {
         guard let subject,
               let children = Mirror(reflecting: subject).children.nilIfEmpty
         else { return nil }
@@ -50,9 +50,9 @@ extension Plan.Cell where Row: Plan.RowConstructor {
 public extension Plan.List where Row: Plan.RowConstructor {
     
     init?(reflecting subject: Any?) {
-        guard let cells = Cell.cells(reflecting: subject)
+        guard let rows = Row.rows(reflecting: subject)
         else { return nil }
-        self.init(cells: cells)
+        self.init(rows: rows)
     }
     
 }
@@ -63,7 +63,7 @@ public extension Plan.SceneConstructor where Row: Plan.RowConstructor {
         _ subject: Any?
     ) -> Self {
         .list(
-            cells: Cell.cells(reflecting: subject) ?? []
+            rows: Row.rows(reflecting: subject) ?? []
         )
     }
     
@@ -71,7 +71,7 @@ public extension Plan.SceneConstructor where Row: Plan.RowConstructor {
         _ subject: () async throws -> Any?
     ) async throws -> Self {
         .list(
-            cells: Cell.cells(reflecting: try await subject()) ?? []
+            rows: Row.rows(reflecting: try await subject()) ?? []
         )
     }
 }

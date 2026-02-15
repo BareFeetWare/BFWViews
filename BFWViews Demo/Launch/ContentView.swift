@@ -15,9 +15,7 @@ struct ContentView {}
 
 private extension ContentView {
     
-    typealias Cell = Plan.Cell<Plan.Row, Plan.Scene>
-    
-    var cells: [Cell] {
+    var rows: [Plan.Row] {
         [
             .detail("Alert") { .view(AlertScene()) },
             .detail("AsyncImage") { .view(AsyncImageScene()) },
@@ -46,7 +44,7 @@ private extension ContentView {
 extension ContentView: View {
     var body: some View {
         NavigationView {
-            List(cells.identified()) { $0 }
+            List(rows.identified()) { $0 }
                 .navigationTitle("BFWViews")
         }
     }

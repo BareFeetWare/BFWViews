@@ -15,7 +15,7 @@ public extension Plan {
         public let isExpanded: Binding<Bool>?
         public let title: String?
         public let footer: String?
-        public let cells: [Cell]
+        public let rows: [Row]
         public let emptyPlaceholder: String?
         
         public init(
@@ -24,44 +24,22 @@ public extension Plan {
             id: String? = nil,
             isExpanded: Binding<Bool>? = nil,
             footer: String? = nil,
-            cells: [Cell?],
+            rows: [Row?],
             emptyPlaceholder: String? = nil
         ) {
             self.id = id
             self.isExpanded = isExpanded
             self.title = title
             self.footer = footer
-            self.cells = cells.compactMap { $0 }
+            self.rows = rows.compactMap { $0 }
             self.emptyPlaceholder = emptyPlaceholder
         }
     }
 }
 
-// MARK: - Types
-
-public extension Plan.Section {
-    typealias Cell = Plan.Cell<Row, Scene>
-}
-
 // MARK: - Convenience Inits
 
 public extension Plan.Section {
-    
-    init(
-        _ title: String? = nil,
-        id: String? = nil,
-        isExpanded: Binding<Bool>? = nil,
-        footer: String? = nil,
-        cells: @escaping () -> [Cell],
-        emptyPlaceholder: String? = nil
-    ) {
-        self.id = id
-        self.isExpanded = isExpanded
-        self.title = title
-        self.footer = footer
-        self.cells = cells()
-        self.emptyPlaceholder = emptyPlaceholder
-    }
     
     init(
         _ title: String? = nil,
@@ -75,10 +53,10 @@ public extension Plan.Section {
         self.isExpanded = isExpanded
         self.title = title
         self.footer = footer
-        self.cells = rows().map { .init($0) }
+        self.rows = rows()
         self.emptyPlaceholder = emptyPlaceholder
     }
-
+    
 }
 
 // MARK: - Functions
@@ -89,18 +67,18 @@ public extension Plan.Section {
     func matching(searchString: String) -> Self? {
         guard !searchString.isEmpty,
               !(self as any Matchable).isMatching(searchString: searchString),
-              cells.first?.row is any Matchable
+              rows.first is any Matchable
         else { return self }
-        let filtered = cells.filter { cell in
-            (cell.row as? any Matchable)?.isMatching(searchString: searchString) ?? false
+        let filteredRows = rows.filter { row in
+            (row as? any Matchable)?.isMatching(searchString: searchString) ?? false
         }
-        return filtered.isEmpty
+        return filteredRows.isEmpty
         ? nil
-        : .init(title, footer: footer, cells: { filtered })
+        : .init(title, footer: footer, rows: { filteredRows })
     }
     
     var rowPlaceholderString: String? {
-        guard let emptyPlaceholder, cells.isEmpty
+        guard let emptyPlaceholder, rows.isEmpty
         else { return nil }
         return emptyPlaceholder
     }
@@ -113,13 +91,13 @@ extension Plan.Section: View {
     public var body: some View {
         if let isExpanded {
             ExpandableSection(isExpanded: isExpanded) {
-                cellsView
+                rowsView
             } header: {
                 headerView
             }
         } else {
             ExpandableSection {
-                cellsView
+                rowsView
             } header: {
                 headerView
             } footer: {
@@ -146,12 +124,12 @@ extension Plan.Section: View {
     }
     
     @ViewBuilder
-    var cellsView: some View {
+    var rowsView: some View {
         rowPlaceholderString.map {
             Text($0)
                 .foregroundStyle(.secondary)
         }
-        ForEach(cells.identified()) { cell in
+        ForEach(rows.identified()) { cell in
             cell
                 .tag(cell.id)
             // `.borderless` on the row allows any contained buttons to show in their button style.
@@ -180,7 +158,7 @@ struct PlanSection_Previews: PreviewProvider {
                         "Expandable",
                         id: "Expandable",
                         isExpanded: $isExpanded,
-                        cells: [
+                        rows: [
                             .detail("cell 1"),
                             .detail("cell 2"),
                         ]
@@ -188,7 +166,7 @@ struct PlanSection_Previews: PreviewProvider {
                     .init(
                         "not expandable",
                         id: "not expandable",
-                        cells: [
+                        rows: [
                             .detail("cell 1"),
                             .detail("cell 2"),
                         ]

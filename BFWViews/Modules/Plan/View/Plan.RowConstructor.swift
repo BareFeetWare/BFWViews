@@ -10,18 +10,22 @@ import SwiftUI
 
 extension Plan {
     /// Provides Plan.Row instances
-    public protocol RowConstructor {
+    public protocol RowConstructor: View {
+        associatedtype Scene: View
         static func button(_ content: Plan.Button) -> Self
         static func detail(_ content: Plan.DetailRow) -> Self
+        static func navigationLink(_ content: Plan.NavigationLink<Self, Scene>) -> Self
         static func optionalIdentified(_ optionalIdentified: OptionalIdentified<AnyView>) -> Self
     }
 }
 
 extension Plan {
     /// Simple concrete implementation of Plan.RowConstructor. Copy this to your app and add your own instances.
-    public enum Row: Plan.RowConstructor {
+    public indirect enum Row: Plan.RowConstructor {
+        public typealias Scene = Plan.Scene
         case button(Plan.Button)
         case detail(Plan.DetailRow)
+        case navigationLink(Plan.NavigationLink<Self, Scene>)
         case optionalIdentified(OptionalIdentified<AnyView>)
     }
 }
@@ -33,13 +37,11 @@ extension Plan.Row: View {
         switch self {
         case let .button(content): content
         case let .detail(content): content
+        case let .navigationLink(content): content
         case let .optionalIdentified(content): content
         }
     }
 }
-
-/// Provides Plan.RowContructor instances, usually via enum Row.
-extension Plan.Cell where Row: Plan.RowConstructor {}
 
 // MARK: - Static instances
 
@@ -70,139 +72,125 @@ public extension Plan.RowConstructor {
     static func anyView<Content: View>(id: String? = nil, content: () -> Content) -> Self {
         .optionalIdentified(.init(id: id, content: AnyView(content())))
     }
-}
-
-public extension Plan.Cell where Row: Plan.RowConstructor {
     
-    static func button(_ title: String, action: @escaping () -> Void) -> Self {
-        .init(.button(.init(title, action: action)))
+    static func navigationLink<Destination: View>(
+        _ row: Self,
+        title: String?,
+        destination: Destination
+    ) -> Self where Scene == Destination {
+        .navigationLink(
+            Plan.NavigationLink(
+                label: row,
+                title: title,
+                destination: destination
+            )
+        )
     }
     
-    static func detail(_ detailRow: Plan.DetailRow) -> Self {
-        .init(.detail(detailRow))
+    static func navigationLink<Destination: View>(
+        _ row: Self,
+        title: String?,
+        destination: @escaping () async throws -> Destination
+    ) -> Self where Scene == Destination {
+        .navigationLink(
+            Plan.NavigationLink(
+                label: row,
+                title: title,
+                destination: destination
+            )
+        )
     }
     
-    static func detail(
+    // Instances that embed DetailRow in another Row:
+    
+    static func detail<Destination: View> (
+        _ detailRow: Plan.DetailRow,
+        destination: @escaping () async throws -> Destination
+    ) -> Self where Scene == Destination {
+        .navigationLink(
+            Plan.NavigationLink(
+                label: .detail(detailRow),
+                title: detailRow.title,
+                destination: destination
+            )
+        )
+    }
+    
+    static func detail<Destination: View> (
         _ title: String,
         id: String? = nil,
         subtitle: String? = nil,
         trailing: String? = nil,
-        image: Plan.Image? = nil
-    ) -> Self {
-        .init(
-            .detail(
-                .init(
+        image: Plan.Image? = nil,
+        destination: @escaping () async throws -> Destination
+    ) -> Self where Scene == Destination {
+        .navigationLink(
+            Plan.NavigationLink(
+                label: .detail(
                     title,
                     id: id,
                     subtitle: subtitle,
                     trailing: trailing,
                     image: image
-                )
+                ),
+                title: title,
+                destination: destination
             )
         )
     }
     
-    static func detail(_ detailRow: Plan.DetailRow, destination: Scene) -> Self {
-        .init(
-            .detail(detailRow),
-            branch: .push(.init(detailRow.title, destination: destination))
-        )
-    }
-    
-    static func detail(_ detailRow: Plan.DetailRow, destination: @escaping () async throws -> Scene) -> Self {
-        .init(
-            .detail(detailRow),
-            branch: .push(.init(detailRow.title, destination: destination))
-        )
-    }
-    
-    static func detail(_ title: String, id: String? = nil, subtitle: String? = nil, trailing: String? = nil, destination: Scene) -> Self {
-        .init(
-            .detail(.init(id: id, title: title, subtitle: subtitle, trailing: trailing)),
-            branch: .push(.init(title, destination: destination))
-        )
-    }
-    
-    static func detail(_ title: String, id: String? = nil, subtitle: String? = nil, trailing: String? = nil, destination: @escaping () async throws -> Scene) -> Self {
-        .init(
-            .detail(.init(id: id, title: title, subtitle: subtitle, trailing: trailing)),
-            branch: .push(.init(title, destination: destination))
-        )
-    }
-    
-    static func view<Content: View>(id: String? = nil, content: Content) -> Self {
-        .init(
-            .optionalIdentified(OptionalIdentified(id: id, content: AnyView(content))),
-            branch: nil
-        )
-    }
-    
-    static func view<Content: View>(id: String? = nil, content: () -> Content) -> Self {
-        .view(id: id, content: content())
-    }
 }
 
-public extension Plan.Cell
-where Row: Plan.RowConstructor,
-      Scene: Plan.SceneConstructor,
-      Scene.Row == Row
+public extension Plan.RowConstructor
+where Scene: Plan.SceneConstructor,
+      Scene.Row == Self
 {
     
     static func detail(
         _ detailRow: Plan.DetailRow,
-        list: Plan.List<Row, Scene>
+        list: Plan.List<Self, Scene>
     ) -> Self {
-        .init(
+        .navigationLink(
             .detail(detailRow),
-            branch: .push(
-                .init(
-                    detailRow.title,
-                    destination: .list(list)
-                )
-            )
+            title: detailRow.title,
+            destination: .list(list)
         )
     }
     
     static func detail(
         _ detailRow: Plan.DetailRow,
-        list: @escaping () async throws -> Plan.List<Row, Scene>
+        list: @escaping () async throws -> Plan.List<Self, Scene>
     ) -> Self {
-        .init(
+        .navigationLink(
             .detail(detailRow),
-            branch: .push(
-                .init(detailRow.title) {
-                    .list(try await list())
-                }
-            )
-        )
+            title: detailRow.title
+        ) {
+            .list(try await list())
+        }
     }
     
     static func detail(
         _ detailRow: Plan.DetailRow,
-        cells: [Self]
+        rows: [Self]
     ) -> Self {
-        .init(
+        .navigationLink(
             .detail(detailRow),
-            branch: .push(
-                .init(detailRow.title) {
-                    .list(Plan.List(cells: cells))
-                }
-            )
-        )
+            title: detailRow.title
+        ) {
+            .list(Plan.List(rows: rows))
+        }
     }
     
     static func detail(
         _ detailRow: Plan.DetailRow,
-        cells: @escaping () async throws -> [Self]
+        rows: @escaping () async throws -> [Self]
     ) -> Self {
-        .init(
+        .navigationLink(
             .detail(detailRow),
-            branch: .push(
-                .init(detailRow.title) {
-                    .list(Plan.List(cells: try await cells()))
-                }
-            )
-        )
+            title: detailRow.title
+        ) {
+            .list(Plan.List(rows: try await rows()))
+        }
     }
     
     static func detail(
@@ -210,16 +198,14 @@ where Row: Plan.RowConstructor,
         id: String? = nil,
         subtitle: String? = nil,
         trailing: String? = nil,
-        list: @escaping () async throws -> Plan.List<Row, Scene>
+        list: @escaping () async throws -> Plan.List<Self, Scene>
     ) -> Self {
-        .init(
+        .navigationLink(
             .detail(.init(id: id, title: title, subtitle: subtitle, trailing: trailing)),
-            branch: .push(
-                .init(title) {
-                    .list(try await list())
-                }
-            )
-        )
+            title: title
+        ) {
+            .list(try await list())
+        }
     }
     
     static func detail(
@@ -227,15 +213,13 @@ where Row: Plan.RowConstructor,
         id: String? = nil,
         subtitle: String? = nil,
         trailing: String? = nil,
-        cells: @escaping () async throws -> [Self]
+        rows: @escaping () async throws -> [Self]
     ) -> Self {
-        .init(
+        .navigationLink(
             .detail(.init(id: id, title: title, subtitle: subtitle, trailing: trailing)),
-            branch: .push(
-                .init(title) {
-                    .list(Plan.List(cells: try await cells()))
-                }
-            )
-        )
+            title: title
+        ) {
+            .list(Plan.List(rows: try await rows()))
+        }
     }
 }

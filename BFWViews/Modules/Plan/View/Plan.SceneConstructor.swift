@@ -13,16 +13,12 @@ public extension Plan {
         associatedtype Row: View
         typealias Scene = Self
         typealias Section = Plan.Section<Row, Scene>
-        typealias Cell = Plan.Cell<Row, Scene>
         typealias List = Plan.List<Row, Scene>
         
         static func list(_ list: List) -> Self
         static func optionalIdentified(_ optionalIdentified: OptionalIdentified<AnyView>) -> Self
     }
 }
-
-// Conforming Plan.Scene so it can be used in a simple app that doesn't need to add its own Scene instances.
-extension Plan.Scene: Plan.SceneConstructor {}
 
 // MARK: - Static Instances
 
@@ -35,9 +31,9 @@ public extension Plan.SceneConstructor {
     }
     
     static func list(
-        cells: [Cell]
+        rows: [Row]
     ) -> Self {
-        .list(.init(cells: cells))
+        .list(.init(rows: rows))
     }
     
     static func view<V: View>(

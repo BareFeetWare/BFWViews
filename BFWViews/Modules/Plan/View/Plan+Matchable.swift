@@ -58,14 +58,14 @@ public extension Plan.List where Row: Matchable {
     init(
         isSearchable: Bool = false,
         selection: Binding<String?>,
-        cells: [Cell]
+        rows: [Row]
     ) {
         self.init(
             isSearchable: isSearchable,
             selection: selection,
             sections: [
                 // Note: The id is needed here so it consistently has the same id for this section, otherwise animations will not track it correctly, such as in an expanding/collapsing DisclosureGroup.
-                .init(id: "only one section", cells: cells)
+                .init(id: "only one section", rows: rows)
             ]
         )
     }
@@ -81,13 +81,13 @@ public extension Plan.List where Row: Matchable {
     
     init(
         isSearchable: Bool = false,
-        cells: [Cell]
+        rows: [Row]
     ) {
         self.init(
             isSearchable: isSearchable,
             sections: [
                 // Note: The id is needed here so it consistently has the same id for this section, otherwise animations will not track it correctly, such as in an expanding/collapsing DisclosureGroup.
-                .init(id: "only one section", cells: cells)
+                .init(id: "only one section", rows: rows)
             ]
         )
     }
@@ -102,7 +102,7 @@ public extension Plan.List where Row: Matchable {
                             section.title,
                             id: section.id,
                             footer: footer,
-                            cells: section.cells,
+                            rows: section.rows
                         )
                     ]
                 }
@@ -122,9 +122,9 @@ public extension Plan.SceneConstructor where Row: Matchable {
     
     static func list(
         isSearchable: Bool = false,
-        cells: [Cell]
+        rows: [Row]
     ) -> Self {
-        .list(.init(isSearchable: isSearchable, cells: cells))
+        .list(.init(isSearchable: isSearchable, rows: rows))
     }
     
 }
@@ -139,6 +139,7 @@ extension Preview.Row: Matchable {
         case .button(let button): [button.title]
         case .detail(let detail): detail.matchStrings
         case .optionalIdentified: []
+        case .navigationLink(let navigationLink): navigationLink.label.matchStrings
         }
     }
 }

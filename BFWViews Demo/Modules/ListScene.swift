@@ -23,7 +23,7 @@ private extension ListScene {
             sections: [
                 .init(
                     "Static detail",
-                    cells: [
+                    rows: [
                         .button("Button") {},
                         .detail("Detail 1", trailing: "trailing"),
                         .detail("Detail 2", subtitle: "subtitle", trailing: "trailing"),
@@ -31,10 +31,10 @@ private extension ListScene {
                 ),
                 .init(
                     "Push Immediate",
-                    cells: [
+                    rows: [
                         .detail("Push 1", trailing: "3") {
                             .list(
-                                cells: [
+                                rows: [
                                     .detail("Child 1"),
                                     .detail("Child 2"),
                                 ]
@@ -44,7 +44,7 @@ private extension ListScene {
                 ),
                 .init(
                     "Push Async",
-                    cells: [
+                    rows: [
                         .detail("Push 2", trailing: "3") {
                             await self.asyncChildrenScene()
                         },
@@ -59,7 +59,7 @@ private extension ListScene {
         try? await Task.sleep(nanoseconds: 2000000000)
         let children = ["Child 1", "Child 2", "Child 3"]
         return .list(
-            cells: children.map { child in
+            rows: children.map { child in
                     .detail(child)
             }
         )

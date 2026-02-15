@@ -64,7 +64,7 @@
 		E281557C2701219200D56072 /* filledSquare100.svg in Resources */ = {isa = PBXBuildFile; fileRef = E281557A2701219200D56072 /* filledSquare100.svg */; };
 		E286391D2A107D040038CB72 /* Plan.Rack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286391C2A107D040038CB72 /* Plan.Rack.swift */; };
 		E28A4DAB2E9F7D59002ECD1C /* Plan.Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28A4DAA2E9F7D50002ECD1C /* Plan.Scene.swift */; };
-		E28A4DAD2E9F7E3D002ECD1C /* Plan.Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28A4DAC2E9F7E37002ECD1C /* Plan.Push.swift */; };
+		E28A4DAD2E9F7E3D002ECD1C /* Plan.NavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28A4DAC2E9F7E37002ECD1C /* Plan.NavigationLink.swift */; };
 		E28B7ABB275AC73F00ED5730 /* UIViewScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B7ABA275AC73F00ED5730 /* UIViewScene.swift */; };
 		E28B7ABD275AC77700ED5730 /* UIKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B7ABC275AC77700ED5730 /* UIKitView.swift */; };
 		E28B7ABF275C5E2F00ED5730 /* CellBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B7ABE275C5E2F00ED5730 /* CellBorder.swift */; };
@@ -107,7 +107,6 @@
 		E2D230B22EB596F900380D83 /* Plan.SceneConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D230B12EB596EF00380D83 /* Plan.SceneConstructor.swift */; };
 		E2D3165F2D3791A700064A63 /* Plan.Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3165E2D3791A300064A63 /* Plan.Label.swift */; };
 		E2D316612D37953E00064A63 /* Plan.Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D316602D37953900064A63 /* Plan.Menu.swift */; };
-		E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */; };
 		E2E31E462EBDB13D00690BC4 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E31E452EBDB13800690BC4 /* LoaderView.swift */; };
 		E2E42BE42A80731E00B6E66E /* LabeledControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E42BE32A80731E00B6E66E /* LabeledControl.swift */; };
 		E2F47B122A13351C009BD9EC /* Plan.Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F47B112A13351C009BD9EC /* Plan.Rating.swift */; };
@@ -209,7 +208,7 @@
 		E281557A2701219200D56072 /* filledSquare100.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = filledSquare100.svg; sourceTree = "<group>"; };
 		E286391C2A107D040038CB72 /* Plan.Rack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.Rack.swift; sourceTree = "<group>"; };
 		E28A4DAA2E9F7D50002ECD1C /* Plan.Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Scene.swift; sourceTree = "<group>"; };
-		E28A4DAC2E9F7E37002ECD1C /* Plan.Push.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Push.swift; sourceTree = "<group>"; };
+		E28A4DAC2E9F7E37002ECD1C /* Plan.NavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.NavigationLink.swift; sourceTree = "<group>"; };
 		E28B7ABA275AC73F00ED5730 /* UIViewScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewScene.swift; sourceTree = "<group>"; };
 		E28B7ABC275AC77700ED5730 /* UIKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitView.swift; sourceTree = "<group>"; };
 		E28B7ABE275C5E2F00ED5730 /* CellBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBorder.swift; sourceTree = "<group>"; };
@@ -252,7 +251,6 @@
 		E2D230B12EB596EF00380D83 /* Plan.SceneConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.SceneConstructor.swift; sourceTree = "<group>"; };
 		E2D3165E2D3791A300064A63 /* Plan.Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Label.swift; sourceTree = "<group>"; };
 		E2D316602D37953900064A63 /* Plan.Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Menu.swift; sourceTree = "<group>"; };
-		E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Cell.swift; sourceTree = "<group>"; };
 		E2E31E452EBDB13800690BC4 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		E2E42BE32A80731E00B6E66E /* LabeledControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledControl.swift; sourceTree = "<group>"; };
 		E2F47B112A13351C009BD9EC /* Plan.Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Rating.swift; sourceTree = "<group>"; };
@@ -428,7 +426,6 @@
 				E22B2D762D0FE7AE00E79C92 /* Plan.Alert.swift */,
 				E2FD40CC2669C9F5004E4905 /* Plan.Alert+Error.swift */,
 				E2803FC92B5E74B00023A74E /* Plan.Button.swift */,
-				E2DDC1F029EE0C5B00DE6C84 /* Plan.Cell.swift */,
 				E2803FD32B5FE05D0023A74E /* Plan.ConfirmationDialog.swift */,
 				E28D1BCE283350C400064CCD /* Plan.DetailRow.swift */,
 				E2386BE82A087314009FEA16 /* Plan.Image.swift */,
@@ -438,7 +435,7 @@
 				E24CE2C72E6137DF0086B30C /* Plan.Node.swift */,
 				E24CE2C52E5EC7730086B30C /* Plan.Node+Mirror.swift */,
 				E2A34AA42F306F3400351E0A /* Plan.Picker.swift */,
-				E28A4DAC2E9F7E37002ECD1C /* Plan.Push.swift */,
+				E28A4DAC2E9F7E37002ECD1C /* Plan.NavigationLink.swift */,
 				E286391C2A107D040038CB72 /* Plan.Rack.swift */,
 				E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */,
 				E2D230AF2EB5966A00380D83 /* Plan.RowConstructor.swift */,
@@ -776,7 +773,7 @@
 				E29C5D4B2F35951600B3F8AC /* Array+Appending.swift in Sources */,
 				E2F9B1B5274CB7A300C8EC18 /* UIKitViewController.swift in Sources */,
 				E2386BF72A093C45009FEA16 /* Plan.Tab+View.swift in Sources */,
-				E28A4DAD2E9F7E3D002ECD1C /* Plan.Push.swift in Sources */,
+				E28A4DAD2E9F7E3D002ECD1C /* Plan.NavigationLink.swift in Sources */,
 				E2B41E0A2ED4FCED008715BC /* Compatible.Font.swift in Sources */,
 				E286391D2A107D040038CB72 /* Plan.Rack.swift in Sources */,
 				E205F0A82762F98E005E0E6E /* Badge.swift in Sources */,
@@ -786,7 +783,6 @@
 				E2E31E462EBDB13D00690BC4 /* LoaderView.swift in Sources */,
 				E2F47B142A13370D009BD9EC /* Plan.Rating+View.swift in Sources */,
 				E269F7C42C06D4BC00D83739 /* DetailRowRepresentable.swift in Sources */,
-				E2DDC1F129EE0C5B00DE6C84 /* Plan.Cell.swift in Sources */,
 				E2A34AA12F304DFC00351E0A /* TextFieldAlert.swift in Sources */,
 				E29C5D4F2F39457C00B3F8AC /* Collection+Empty.swift in Sources */,
 				E23AB43F26817EC50018DD04 /* View+TappableCell.swift in Sources */,

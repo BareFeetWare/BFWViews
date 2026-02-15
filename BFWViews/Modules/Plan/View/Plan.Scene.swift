@@ -9,7 +9,9 @@
 import SwiftUI
 
 public extension Plan {
-    enum Scene {
+    
+    /// A simple concrete implementation of Plan.SceneConstructor, for apps that don't require their own scenes.
+    enum Scene: Plan.SceneConstructor {
         case list(Plan.List<Row, Scene>)
         case optionalIdentified(OptionalIdentified<AnyView>)
     }

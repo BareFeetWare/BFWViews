@@ -30,7 +30,6 @@ public extension Plan {
 // MARK: - Types
 
 public extension Plan.List {
-    typealias Cell = Plan.Cell<Row, Scene>
     typealias Section = Plan.Section<Row, Scene>
 }
 
@@ -49,13 +48,13 @@ public extension Plan.List {
     
     init(
         selection: Binding<String?>,
-        cells: [Cell]
+        rows: [Row]
     ) {
         self.init(
             selection: selection,
             sections: [
                 // Note: The id is needed here so it consistently has the same id for this section, otherwise animations will not track it correctly, such as in an expanding/collapsing DisclosureGroup.
-                .init(id: "only one section", cells: cells)
+                .init(id: "only one section", rows: rows)
             ]
         )
     }
@@ -69,12 +68,12 @@ public extension Plan.List {
     }
     
     init(
-        cells: [Cell]
+        rows: [Row]
     ) {
         self.init(
             sections: [
                 // Note: The id is needed here so it consistently has the same id for this section, otherwise animations will not track it correctly, such as in an expanding/collapsing DisclosureGroup.
-                .init(id: "only one section", cells: cells)
+                .init(id: "only one section", rows: rows)
             ]
         )
     }
@@ -102,7 +101,7 @@ extension Plan.List {
                             section.title,
                             id: section.id,
                             footer: footer,
-                            cells: section.cells,
+                            rows: section.rows,
                         )
                     ]
                 }
@@ -147,13 +146,13 @@ extension Preview {
             sections: [
                 .init(
                     "selection",
-                    cells: [
+                    rows: [
                         .detail("selection:", trailing: selectedCellID),
                     ]
                 ),
                 .init(
                     "Buttons and detail",
-                    cells: [
+                    rows: [
                         .button("Start") {},
                         .detail("Status", trailing: "Off line"),
                         .button("Scan") {},
@@ -161,7 +160,7 @@ extension Preview {
                 ),
                 .init(
                     "NavigationLink",
-                    cells: [
+                    rows: [
                         .detail("Children", trailing: "3") {
                             childrenList
                         }
@@ -169,7 +168,7 @@ extension Preview {
                 ),
                 .init(
                     "Async children",
-                    cells: [
+                    rows: [
                         .detail("Children", trailing: "3") {
                             try await asyncChildrenList()
                         },
@@ -187,7 +186,7 @@ extension Preview {
     
     var childrenList: List {
         .init(
-            cells: [
+            rows: [
                 .detail("Child 1"),
                 .detail("Child 2"),
                 .detail("Child 3"),
