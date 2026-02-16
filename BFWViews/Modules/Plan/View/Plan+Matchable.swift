@@ -131,20 +131,6 @@ public extension Plan.SceneConstructor where Row: Matchable {
 
 // MARK: - Previews
 
-// TODO: Move to public
-
-extension Preview.Row: Matchable {
-    public var matchStrings: [String] {
-        switch self {
-        case .button(let button): [button.title]
-        case .detail(let detail): detail.matchStrings
-        case .navigationLink(let navigationLink): navigationLink.label.matchStrings
-        case .optionalIdentified: []
-        case .picker: []
-        }
-    }
-}
-
 private struct Preview: View {
     
     typealias Row = Plan.Row

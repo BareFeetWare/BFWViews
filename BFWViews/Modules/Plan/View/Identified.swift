@@ -9,8 +9,14 @@
 import SwiftUI
 
 public struct Identified<Content>: Identifiable {
+    // TODO: id to be any hashable, not just String.
     public let id: String
     public let content: Content
+    
+    public init(id: String, content: Content) {
+        self.id = id
+        self.content = content
+    }
 }
 
 /// Might provide an id.

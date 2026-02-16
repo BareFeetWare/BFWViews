@@ -15,8 +15,33 @@ extension Plan {
         case button(Plan.Button)
         case detail(Plan.DetailRow)
         case navigationLink(Plan.NavigationLink<Self, Scene>)
-        case optionalIdentified(OptionalIdentified<AnyView>)
+        case optionalIdentified(OptionalIdentified<Self>)
         case picker(Plan.Picker)
+    }
+}
+
+// MARK: - Protocol Implementations
+
+extension Plan.Row: OptionalIdentifiable {
+    public var id: String? {
+        switch self {
+        case .detail(let detailRow): detailRow.id
+        case .navigationLink(let navigationLink): navigationLink.label.id
+        case .optionalIdentified(let optionalIdentified): optionalIdentified.id
+        default: nil
+        }
+    }
+}
+
+extension Plan.Row: Matchable {
+    public var matchStrings: [String] {
+        switch self {
+        case .button(let button): [button.title]
+        case .detail(let detail): detail.matchStrings
+        case .navigationLink(let navigationLink): navigationLink.label.matchStrings
+        case .optionalIdentified(let optionalIdentified): optionalIdentified.content.matchStrings
+        case .picker: []
+        }
     }
 }
 
@@ -52,6 +77,7 @@ fileprivate struct Preview {
                         ]
                     )
                 },
+                .optionalIdentified(.init(id: "123", content: .detail("Identified Row"))),
                 .picker(
                     "Picker",
                     selection: $pickerSelection,
