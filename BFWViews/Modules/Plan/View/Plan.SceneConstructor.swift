@@ -36,6 +36,16 @@ public extension Plan.SceneConstructor {
         .list(.init(rows: rows))
     }
     
+    static func list(
+        rows: () async throws -> [Row]
+    ) async throws -> Self {
+        .list(
+            .init(
+                rows: try await rows()
+            )
+        )
+    }
+    
     static func view<V: View>(
         id: String? = nil,
         _ view: V
