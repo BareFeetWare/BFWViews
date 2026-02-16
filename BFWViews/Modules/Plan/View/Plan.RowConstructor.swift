@@ -16,30 +16,7 @@ extension Plan {
         static func detail(_ content: Plan.DetailRow) -> Self
         static func navigationLink(_ content: Plan.NavigationLink<Self, Scene>) -> Self
         static func optionalIdentified(_ optionalIdentified: OptionalIdentified<AnyView>) -> Self
-    }
-}
-
-extension Plan {
-    /// Simple concrete implementation of Plan.RowConstructor. Copy this to your app and add your own instances.
-    public indirect enum Row: Plan.RowConstructor {
-        public typealias Scene = Plan.Scene
-        case button(Plan.Button)
-        case detail(Plan.DetailRow)
-        case navigationLink(Plan.NavigationLink<Self, Scene>)
-        case optionalIdentified(OptionalIdentified<AnyView>)
-    }
-}
-
-// TODO: Move
-
-extension Plan.Row: View {
-    public var body: some View {
-        switch self {
-        case let .button(content): content
-        case let .detail(content): content
-        case let .navigationLink(content): content
-        case let .optionalIdentified(content): content
-        }
+        static func picker(_ content: Plan.Picker) -> Self
     }
 }
 
@@ -97,6 +74,48 @@ public extension Plan.RowConstructor {
                 label: row,
                 title: title,
                 destination: destination
+            )
+        )
+    }
+    
+    static func navigationLink<Destination: View>(
+        _ title: String,
+        destination: @escaping () async throws -> Destination
+    ) -> Self where Scene == Destination {
+        .navigationLink(
+            Plan.NavigationLink(
+                label: .detail(title),
+                title: title,
+                destination: destination
+            )
+        )
+    }
+    
+    static func picker(
+        _ title: String,
+        selection: Binding<String>,
+        options: [String]
+    ) -> Self {
+        .picker(
+            .init(
+                title,
+                selection: selection,
+                options: options
+            )
+        )
+    }
+
+    static func picker<Item: RawRepresentable>(
+        _ title: String,
+        selection: Binding<Item>,
+        options: [Item]
+    ) -> Self where Item.RawValue == String {
+        .picker(
+            .init(
+                title,
+                selection: selection
+                    .map { $0.rawValue } reverse: { .init(rawValue: $0)! },
+                options: options.map { $0.rawValue }
             )
         )
     }

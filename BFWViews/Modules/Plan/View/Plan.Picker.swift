@@ -13,17 +13,17 @@ import SwiftUI
 extension Plan {
     public struct Picker {
         public let title: String
-        public let options: [String]
         @Binding public var selection: String
+        public let options: [String]
         
         public init(
             _ title: String,
-            options: [String],
-            selection: Binding<String>
+            selection: Binding<String>,
+            options: [String]
         ) {
             self.title = title
-            self.options = options
             self._selection = selection
+            self.options = options
         }
     }
 }
@@ -50,8 +50,8 @@ struct Plan_Picker_Previews: PreviewProvider {
         var body: some View {
             Plan.Picker(
                 "Picker",
-                options: ["One", "Two"],
-                selection: $selection
+                selection: $selection,
+                options: ["One", "Two"]
             )
         }
     }

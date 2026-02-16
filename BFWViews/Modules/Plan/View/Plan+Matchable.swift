@@ -138,8 +138,9 @@ extension Preview.Row: Matchable {
         switch self {
         case .button(let button): [button.title]
         case .detail(let detail): detail.matchStrings
-        case .optionalIdentified: []
         case .navigationLink(let navigationLink): navigationLink.label.matchStrings
+        case .optionalIdentified: []
+        case .picker: []
         }
     }
 }
