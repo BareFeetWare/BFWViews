@@ -15,17 +15,36 @@ extension Plan {
         public let title: String
         @Binding public var selection: String
         public let options: [String]
+        public let style: Style
         
         public init(
             _ title: String,
             selection: Binding<String>,
-            options: [String]
+            options: [String],
+            style: Style = .automatic
         ) {
             self.title = title
             self._selection = selection
             self.options = options
+            self.style = style
         }
     }
+}
+
+// MARK: - Types
+
+extension Plan.Picker {
+    
+    /// Storable representation of SwiftUI PickerStyle for use in view models.
+    public enum Style {
+        case automatic
+        case menu
+        case segmented
+        case wheel
+        case inline
+        case navigationLink
+    }
+
 }
 
 // MARK: - Views
@@ -35,6 +54,33 @@ extension Plan.Picker: View {
         Picker(title, selection: $selection) {
             ForEach(options, id: \.self) { option in
                 Text(option)
+            }
+        }
+        .modifier(StyleModifier(style: style))
+    }
+    
+    struct StyleModifier: ViewModifier {
+        let style: Style
+        
+        @ViewBuilder
+        func body(content: Content) -> some View {
+            switch style {
+            case .automatic:
+                content.pickerStyle(.automatic)
+            case .inline:
+                content.pickerStyle(.inline)
+            case .menu:
+                content.pickerStyle(.menu)
+            case .navigationLink:
+                if #available(iOS 16, *) {
+                    content.pickerStyle(.navigationLink)
+                } else {
+                    content.pickerStyle(.menu)
+                }
+            case .segmented:
+                content.pickerStyle(.segmented)
+            case .wheel:
+                content.pickerStyle(.wheel)
             }
         }
     }
@@ -51,7 +97,8 @@ struct Plan_Picker_Previews: PreviewProvider {
             Plan.Picker(
                 "Picker",
                 selection: $selection,
-                options: ["One", "Two"]
+                options: ["One", "Two"],
+                style: .segmented
             )
         }
     }

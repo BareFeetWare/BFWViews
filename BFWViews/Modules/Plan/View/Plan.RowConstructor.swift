@@ -94,13 +94,15 @@ public extension Plan.RowConstructor {
     static func picker(
         _ title: String,
         selection: Binding<String>,
-        options: [String]
+        options: [String],
+        style: Plan.Picker.Style = .automatic
     ) -> Self {
         .picker(
             .init(
                 title,
                 selection: selection,
-                options: options
+                options: options,
+                style: style
             )
         )
     }
@@ -108,14 +110,16 @@ public extension Plan.RowConstructor {
     static func picker<Item: RawRepresentable>(
         _ title: String,
         selection: Binding<Item>,
-        options: [Item]
+        options: [Item],
+        style: Plan.Picker.Style = .automatic
     ) -> Self where Item.RawValue == String {
         .picker(
             .init(
                 title,
                 selection: selection
                     .map { $0.rawValue } reverse: { .init(rawValue: $0)! },
-                options: options.map { $0.rawValue }
+                options: options.map { $0.rawValue },
+                style: style
             )
         )
     }
