@@ -17,6 +17,7 @@ extension Plan {
         static func navigationLink(_ content: Plan.NavigationLink<Self, Scene>) -> Self
         static func optionalIdentified(_ optionalIdentified: OptionalIdentified<Self>) -> Self
         static func picker(_ content: Plan.Picker) -> Self
+        static func textField(_ content: Plan.TextField) -> Self
     }
 }
 
@@ -52,13 +53,15 @@ public extension Plan.RowConstructor {
     
     static func navigationLink<Destination: View>(
         _ row: Self,
-        title: String?,
+        title: String? = nil,
+        style: Plan.NavigationLink<Self, Scene>.Style = .push,
         destination: Destination
     ) -> Self where Scene == Destination {
         .navigationLink(
             Plan.NavigationLink(
                 label: row,
                 title: title,
+                style: style,
                 destination: destination
             )
         )
@@ -66,13 +69,15 @@ public extension Plan.RowConstructor {
     
     static func navigationLink<Destination: View>(
         _ row: Self,
-        title: String?,
+        title: String? = nil,
+        style: Plan.NavigationLink<Self, Scene>.Style = .push,
         destination: @escaping () async throws -> Destination
     ) -> Self where Scene == Destination {
         .navigationLink(
             Plan.NavigationLink(
                 label: row,
                 title: title,
+                style: style,
                 destination: destination
             )
         )
@@ -80,12 +85,14 @@ public extension Plan.RowConstructor {
     
     static func navigationLink<Destination: View>(
         _ title: String,
+        style: Plan.NavigationLink<Self, Scene>.Style = .push,
         destination: @escaping () async throws -> Destination
     ) -> Self where Scene == Destination {
         .navigationLink(
             Plan.NavigationLink(
                 label: .detail(title),
                 title: title,
+                style: style,
                 destination: destination
             )
         )
@@ -120,6 +127,24 @@ public extension Plan.RowConstructor {
                     .map { $0.rawValue } reverse: { .init(rawValue: $0)! },
                 options: options.map { $0.rawValue },
                 style: style
+            )
+        )
+    }
+    
+    static func textField(
+        _ title: String,
+        text: Binding<String>,
+        isSecure: Bool = false,
+        keyboardType: UIKeyboardType = .default,
+        textContentType: UITextContentType? = nil
+    ) -> Self {
+        .textField(
+            .init(
+                title,
+                text: text,
+                isSecure: isSecure,
+                keyboardType: keyboardType,
+                textContentType: textContentType
             )
         )
     }

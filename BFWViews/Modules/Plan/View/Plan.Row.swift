@@ -17,6 +17,7 @@ extension Plan {
         case navigationLink(Plan.NavigationLink<Self, Scene>)
         case optionalIdentified(OptionalIdentified<Self>)
         case picker(Plan.Picker)
+        case textField(Plan.TextField)
     }
 }
 
@@ -41,6 +42,7 @@ extension Plan.Row: Matchable {
         case .navigationLink(let navigationLink): navigationLink.label.matchStrings
         case .optionalIdentified(let optionalIdentified): optionalIdentified.content.matchStrings
         case .picker: []
+        case .textField(let textField): [textField.title, textField.text]
         }
     }
 }
@@ -55,6 +57,7 @@ extension Plan.Row: View {
         case let .navigationLink(content): content
         case let .optionalIdentified(content): content
         case let .picker(content): content
+        case let .textField(content): content
         }
     }
 }

@@ -6,6 +6,6 @@
 //  Copyright © 2025 BareFeetWare. All rights reserved.
 //
 
-extension Collection {
+public extension Collection {
     var nilIfEmpty: Self? { isEmpty ? nil : self }
 }
