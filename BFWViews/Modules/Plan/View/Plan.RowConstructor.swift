@@ -55,6 +55,7 @@ public extension Plan.RowConstructor {
         _ row: Self,
         title: String? = nil,
         style: Plan.NavigationLink<Self, Scene>.Style = .push,
+        isActive: Binding<Bool>? = nil,
         destination: Destination
     ) -> Self where Scene == Destination {
         .navigationLink(
@@ -62,6 +63,7 @@ public extension Plan.RowConstructor {
                 label: row,
                 title: title,
                 style: style,
+                isActive: isActive,
                 destination: destination
             )
         )
@@ -71,6 +73,7 @@ public extension Plan.RowConstructor {
         _ row: Self,
         title: String? = nil,
         style: Plan.NavigationLink<Self, Scene>.Style = .push,
+        isActive: Binding<Bool>? = nil,
         destination: @escaping () async throws -> Destination
     ) -> Self where Scene == Destination {
         .navigationLink(
@@ -78,6 +81,7 @@ public extension Plan.RowConstructor {
                 label: row,
                 title: title,
                 style: style,
+                isActive: isActive,
                 destination: destination
             )
         )
@@ -86,6 +90,7 @@ public extension Plan.RowConstructor {
     static func navigationLink<Destination: View>(
         _ title: String,
         style: Plan.NavigationLink<Self, Scene>.Style = .push,
+        isActive: Binding<Bool>? = nil,
         destination: @escaping () async throws -> Destination
     ) -> Self where Scene == Destination {
         .navigationLink(
@@ -93,6 +98,7 @@ public extension Plan.RowConstructor {
                 label: .detail(title),
                 title: title,
                 style: style,
+                isActive: isActive,
                 destination: destination
             )
         )
