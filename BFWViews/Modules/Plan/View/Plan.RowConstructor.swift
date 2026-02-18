@@ -14,6 +14,7 @@ extension Plan {
         associatedtype Scene: View
         static func button(_ content: Plan.Button) -> Self
         static func detail(_ content: Plan.DetailRow) -> Self
+        static func labeledContent(_ content: Plan.LabeledContent<Self, Self>) -> Self
         static func navigationLink(_ content: Plan.NavigationLink<Self, Scene>) -> Self
         static func optionalIdentified(_ optionalIdentified: OptionalIdentified<Self>) -> Self
         static func picker(_ content: Plan.Picker) -> Self
@@ -25,7 +26,7 @@ extension Plan {
 
 public extension Plan.RowConstructor {
     
-    static func button(_ title: String, action: @escaping () -> Void) -> Self {
+    static func button(_ title: String, action: @escaping () async throws -> Void) -> Self {
         .button(.init(title, action: action))
     }
     
@@ -44,6 +45,16 @@ public extension Plan.RowConstructor {
                 trailing: trailing,
                 image: image
             )
+        )
+    }
+    
+    static func labeledContent(
+        _ title: String,
+        subtitle: String? = nil,
+        content: Self
+    ) -> Self {
+        .labeledContent(
+            .init(label: .detail(title, subtitle: subtitle), content: content)
         )
     }
     

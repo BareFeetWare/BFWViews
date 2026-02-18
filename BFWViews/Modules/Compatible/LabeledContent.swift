@@ -8,33 +8,48 @@
 import SwiftUI
 
 /// Backward compatibility implementation.
-public struct LabeledContent<Content: View> {
-    public let titleKey: LocalizedStringKey
+public struct LabeledContent<Content, Label> {
     public let content: () -> Content
+    public let label: () -> Label
+
+    public init(
+        content: @escaping () -> Content,
+        label: @escaping () -> Label
+    ) {
+        self.content = content
+        self.label = label
+    }
     
-    public init(_ titleKey: LocalizedStringKey, content: @escaping () -> Content) {
-        self.titleKey = titleKey
+    public init(
+        _ titleKey: LocalizedStringKey,
+        content: @escaping () -> Content
+    ) where Label == Text {
+        self.label = { Text(titleKey) }
         self.content = content
     }
     
-    public init(_ title: String, content: @escaping () -> Content) {
-        self.titleKey = LocalizedStringKey(title)
+    public init(
+        _ title: String,
+        content: @escaping () -> Content
+    ) where Label == Text {
+        self.label = { Text(title) }
         self.content = content
     }
 }
 
 // MARK: - Views
 
-extension LabeledContent: View {
+extension LabeledContent: View where Content: View, Label: View {
     public var body: some View {
         if #available(iOS 16.0, *) {
-            SwiftUI.LabeledContent(titleKey, content: content)
+            SwiftUI.LabeledContent(content: content, label: label)
         } else {
             HStack {
-                Text(titleKey)
+                label()
                     .multilineTextAlignment(.leading)
                 Spacer()
                 content()
+                    .multilineTextAlignment(.trailing)
             }
         }
     }
