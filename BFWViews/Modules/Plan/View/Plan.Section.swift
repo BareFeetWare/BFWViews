@@ -124,7 +124,7 @@ extension Plan.Section: View {
     }
     
     @ViewBuilder
-    var rowsView: some View {
+    public var rowsView: some View {
         rowPlaceholderString.map {
             Text($0)
                 .foregroundStyle(.secondary)
