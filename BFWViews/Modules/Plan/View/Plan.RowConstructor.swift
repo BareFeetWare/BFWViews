@@ -12,6 +12,7 @@ extension Plan {
     /// Provides Plan.Row instances
     public protocol RowConstructor: View {
         associatedtype Scene: View
+        static func anyView(_ content: AnyView) -> Self
         static func button(_ content: Plan.Button) -> Self
         static func detail(_ content: Plan.DetailRow) -> Self
         static func labeledContent(_ content: Plan.LabeledContent<Self, Self>) -> Self
@@ -25,6 +26,10 @@ extension Plan {
 // MARK: - Static instances
 
 public extension Plan.RowConstructor {
+    
+    static func anyView<Content: View>(_ content: () -> Content) -> Self {
+        .anyView(AnyView(content()))
+    }
     
     static func button(_ title: String, action: @escaping () async throws -> Void) -> Self {
         .button(.init(title, action: action))

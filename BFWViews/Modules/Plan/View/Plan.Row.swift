@@ -12,6 +12,7 @@ extension Plan {
     /// Simple concrete implementation of Plan.RowConstructor. Copy this to your app and add your own instances.
     public indirect enum Row: Plan.RowConstructor {
         public typealias Scene = Plan.Scene
+        case anyView(AnyView)
         case button(Plan.Button)
         case detail(Plan.DetailRow)
         case labeledContent(Plan.LabeledContent<Self, Self>)
@@ -38,6 +39,7 @@ extension Plan.Row: OptionalIdentifiable {
 extension Plan.Row: Matchable {
     public var matchStrings: [String] {
         switch self {
+        case .anyView: []
         case .button(let button): [button.title]
         case .detail(let detail): detail.matchStrings
         case .labeledContent(let labeledContent): labeledContent.content.matchStrings + labeledContent.label.matchStrings
@@ -54,6 +56,7 @@ extension Plan.Row: Matchable {
 extension Plan.Row: View {
     public var body: some View {
         switch self {
+        case let .anyView(content): content
         case let .button(content): content
         case let .detail(content): content
         case let .labeledContent(content): content
