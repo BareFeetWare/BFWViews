@@ -24,10 +24,13 @@ public struct AsyncNavigationLink<
     Tag: Hashable,
     Placeholder: View
 > {
-    let tag: Tag
+    let tag: Tag?
     let externalSelectionBinding: Binding<Tag?>?
+    let externalIsActiveBinding: Binding<Bool>?
     /// Used internally if no external selection binding is provided.
     @State private var internalSelection: Tag?
+    /// Used internally if no external isActive binding is provided.
+    @State private var internalIsActive = false
     /// Only changes when activeDestination is ready.
     @State private var activeSelection: Tag?
     let destination: () async throws -> Destination
@@ -38,7 +41,7 @@ public struct AsyncNavigationLink<
     @State private var error: Error?
 }
 
-// MARK: - Inits
+// MARK: - Inits with Tag
 
 extension AsyncNavigationLink {
     public init(
@@ -50,6 +53,7 @@ extension AsyncNavigationLink {
     ) {
         self.tag = tag
         self.externalSelectionBinding = selection
+        self.externalIsActiveBinding = nil
         self.destination = destination
         self.label = label
         self.placeholder = placeholder
@@ -65,6 +69,7 @@ extension AsyncNavigationLink where Placeholder == EmptyView {
     ) {
         self.tag = tag
         self.externalSelectionBinding = selection
+        self.externalIsActiveBinding = nil
         self.destination = destination
         self.label = label
         self.placeholder = nil
@@ -81,35 +86,26 @@ extension AsyncNavigationLink {
     ) where Label == Text {
         self.tag = tag
         self.externalSelectionBinding = selection
+        self.externalIsActiveBinding = nil
         self.destination = destination
         self.label = { Text(title) }
         self.placeholder = placeholder
     }
 }
 
-// TODO: Remove instances of UUID().uuidString.
+// MARK: - Inits without tags (using isActive binding)
 
-extension AsyncNavigationLink where Label == Text, Tag == String {
+extension AsyncNavigationLink where Tag == Never {
     
     public init(
-        _ title: String,
-        destination: @escaping () async throws -> Destination,
-        placeholder: @escaping () -> Placeholder
-    ) {
-        self.tag = UUID().uuidString
-        self.externalSelectionBinding = nil
-        self.destination = destination
-        self.label = { Text(title) }
-        self.placeholder = placeholder
-    }
-    
-    public init(
+        isActive: Binding<Bool>? = nil,
         destination: @escaping () async throws -> Destination,
         label: @escaping () -> Label,
         placeholder: @escaping () -> Placeholder
     ) {
-        self.tag = UUID().uuidString
+        self.tag = nil
         self.externalSelectionBinding = nil
+        self.externalIsActiveBinding = isActive
         self.destination = destination
         self.label = label
         self.placeholder = placeholder
@@ -117,31 +113,53 @@ extension AsyncNavigationLink where Label == Text, Tag == String {
     
 }
 
-extension AsyncNavigationLink where Label == Text, Tag == String, Placeholder == EmptyView {
+extension AsyncNavigationLink where Tag == Never, Placeholder == EmptyView {
+
+    public init(
+        isActive: Binding<Bool>? = nil,
+        destination: @escaping () async throws -> Destination,
+        label: @escaping () -> Label
+    ) {
+        self.tag = nil
+        self.externalSelectionBinding = nil
+        self.externalIsActiveBinding = isActive
+        self.destination = destination
+        self.label = label
+        self.placeholder = nil
+    }
+    
+}
+
+extension AsyncNavigationLink where Label == Text, Tag == Never, Placeholder == EmptyView {
     
     public init(
         _ title: String,
+        isActive: Binding<Bool>? = nil,
         destination: @escaping () async throws -> Destination
     ) {
-        self.tag = UUID().uuidString
+        self.tag = nil
         self.externalSelectionBinding = nil
+        self.externalIsActiveBinding = isActive
         self.destination = destination
         self.label = { Text(title) }
         self.placeholder = nil
     }
 }
 
-extension AsyncNavigationLink where Tag == String, Placeholder == EmptyView {
-
+extension AsyncNavigationLink where Label == Text, Tag == Never {
+    
     public init(
+        _ title: String,
+        isActive: Binding<Bool>? = nil,
         destination: @escaping () async throws -> Destination,
-        label: @escaping () -> Label
+        placeholder: @escaping () -> Placeholder
     ) {
-        self.tag = UUID().uuidString
+        self.tag = nil
         self.externalSelectionBinding = nil
+        self.externalIsActiveBinding = isActive
         self.destination = destination
-        self.label = label
-        self.placeholder = nil
+        self.label = { Text(title) }
+        self.placeholder = placeholder
     }
     
 }
@@ -150,7 +168,7 @@ extension AsyncNavigationLink where Tag == String, Placeholder == EmptyView {
 
 private extension AsyncNavigationLink {
     
-    /// Used by the view
+    /// Used by the view - works with either tag-based or isActive navigation
     var selectionBinding: Binding<Tag?> {
         .init {
             externalSelectionBinding?.wrappedValue ?? internalSelection
@@ -163,9 +181,26 @@ private extension AsyncNavigationLink {
         }
     }
     
+    var isActiveBinding: Binding<Bool> {
+        .init {
+            externalIsActiveBinding?.wrappedValue ?? internalIsActive
+        } set: { newValue in
+            if externalIsActiveBinding != nil {
+                externalIsActiveBinding?.wrappedValue = newValue
+            } else {
+                internalIsActive = newValue
+            }
+        }
+    }
+    
     var selection: Tag? {
         get { selectionBinding.wrappedValue }
         set { selectionBinding.wrappedValue = newValue }
+    }
+    
+    var isActive: Bool {
+        get { isActiveBinding.wrappedValue }
+        set { isActiveBinding.wrappedValue = newValue }
     }
     
     var isDisabled: Bool {
@@ -174,6 +209,10 @@ private extension AsyncNavigationLink {
     
     var isVisibleProgress: Bool {
         isInProgress
+    }
+    
+    var usesTagNavigation: Bool {
+        tag != nil
     }
     
     func activateDestination() {
@@ -185,10 +224,20 @@ private extension AsyncNavigationLink {
                 }
                 do {
                     activeDestination = try await destination()
-                    if selectionBinding.wrappedValue != tag {
-                        selectionBinding.wrappedValue = tag
+                    if usesTagNavigation {
+                        // Tag-based navigation
+                        if let tag, selectionBinding.wrappedValue != tag {
+                            selectionBinding.wrappedValue = tag
+                        }
+                        if let tag {
+                            activeSelection = tag
+                        }
+                    } else {
+                        // isActive-based navigation
+                        if !isActiveBinding.wrappedValue {
+                            isActiveBinding.wrappedValue = true
+                        }
                     }
-                    activeSelection = tag
                 } catch {
                     self.error = error
                 }
@@ -197,8 +246,14 @@ private extension AsyncNavigationLink {
     }
     
     func activateDestinationIfNeeded() {
-        if selection == tag && activeSelection != tag {
-            activateDestination()
+        if usesTagNavigation {
+            if let tag, selection == tag && activeSelection != tag {
+                activateDestination()
+            }
+        } else {
+            if isActive && activeDestination == nil {
+                activateDestination()
+            }
         }
     }
     
@@ -207,6 +262,10 @@ private extension AsyncNavigationLink {
     }
     
     func onChange(selection: Tag?) {
+        activateDestinationIfNeeded()
+    }
+    
+    func onChangeIsActive(isActive: Bool) {
         activateDestinationIfNeeded()
     }
     
@@ -220,23 +279,39 @@ private extension AsyncNavigationLink {
 
 extension AsyncNavigationLink: View {
     public var body: some View {
-        NavigationLink(tag: tag, selection: selectionBinding) {
-            activeDestination
-        } label: {
-            if isVisibleProgress {
-                if let placeholder = placeholder?() {
-                    placeholder
-                } else {
-                    labelView
-                        .overlay(alignment: .trailing) {
-                            ProgressView()
-                        }
-                }
+        if usesTagNavigation, let tag {
+            // Tag-based navigation
+            NavigationLink(tag: tag, selection: selectionBinding) {
+                activeDestination
+            } label: {
+                linkLabel
+            }
+            .disabled(isDisabled)
+        } else {
+            // isActive-based navigation
+            NavigationLink(isActive: isActiveBinding) {
+                activeDestination
+            } label: {
+                linkLabel
+            }
+            .disabled(isDisabled)
+        }
+    }
+    
+    @ViewBuilder
+    var linkLabel: some View {
+        if isVisibleProgress {
+            if let placeholder = placeholder?() {
+                placeholder
             } else {
                 labelView
+                    .overlay(alignment: .trailing) {
+                        ProgressView()
+                    }
             }
+        } else {
+            labelView
         }
-        .disabled(isDisabled)
     }
     
     var labelView: some View {
@@ -246,6 +321,7 @@ extension AsyncNavigationLink: View {
             .contentShape(Rectangle())
             .onTapGesture { onTap() }
             .onChange(of: selection) { onChange(selection: $0) }
+            .onChange(of: isActive) { onChangeIsActive(isActive: $0) }
             .onAppear { onAppear() }
             .alert(error: $error)
     }
