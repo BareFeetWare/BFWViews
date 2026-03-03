@@ -20,6 +20,7 @@ extension Plan {
         static func optionalIdentified(_ optionalIdentified: OptionalIdentified<Self>) -> Self
         static func picker(_ content: Plan.Picker) -> Self
         static func textField(_ content: Plan.TextField) -> Self
+        static func toggle(_ content: Plan.Toggle) -> Self
     }
 }
 
@@ -154,6 +155,24 @@ public extension Plan.RowConstructor {
     }
     
     static func textField(
+        _ detailRow: Plan.DetailRow,
+        text: Binding<String>,
+        isSecure: Bool = false,
+        keyboardType: UIKeyboardType = .default,
+        textContentType: UITextContentType? = nil
+    ) -> Self {
+        .textField(
+            .init(
+                detailRow,
+                text: text,
+                isSecure: isSecure,
+                keyboardType: keyboardType,
+                textContentType: textContentType
+            )
+        )
+    }
+    
+    static func textField(
         _ title: String,
         text: Binding<String>,
         isSecure: Bool = false,
@@ -167,6 +186,48 @@ public extension Plan.RowConstructor {
                 isSecure: isSecure,
                 keyboardType: keyboardType,
                 textContentType: textContentType
+            )
+        )
+    }
+    
+    static func secureField(
+        _ title: String,
+        text: Binding<String>,
+        keyboardType: UIKeyboardType = .default,
+        textContentType: UITextContentType? = nil
+    ) -> Self {
+        .textField(
+            .init(
+                title,
+                text: text,
+                isSecure: true,
+                keyboardType: keyboardType,
+                textContentType: textContentType
+            )
+        )
+    }
+    
+    static func toggle(
+        _ detailRow: Plan.DetailRow,
+        isOn: Binding<Bool>
+    ) -> Self {
+        .toggle(
+            .init(
+                detailRow: detailRow,
+                isOn: isOn
+            )
+        )
+    }
+    
+    static func toggle(
+        _ title: String,
+        subtitle: String? = nil,
+        isOn: Binding<Bool>
+    ) -> Self {
+        .toggle(
+            .init(
+                detailRow: .init(title, subtitle: subtitle),
+                isOn: isOn
             )
         )
     }

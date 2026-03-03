@@ -10,20 +10,20 @@ import SwiftUI
 
 extension Plan {
     public struct TextField {
-        public let title: String
+        public let detailRow: Plan.DetailRow
         @Binding public var text: String
         public let isSecure: Bool
         public let keyboardType: UIKeyboardType
         public let textContentType: UITextContentType?
         
         public init(
-            _ title: String,
+            _ detailRow: Plan.DetailRow,
             text: Binding<String>,
             isSecure: Bool = false,
             keyboardType: UIKeyboardType = .default,
             textContentType: UITextContentType? = nil
         ) {
-            self.title = title
+            self.detailRow = detailRow
             self._text = text
             self.isSecure = isSecure
             self.keyboardType = keyboardType
@@ -32,15 +32,47 @@ extension Plan {
     }
 }
 
+// MARK: - Functions
+
+public extension Plan.TextField {
+    
+    var title: String {
+        detailRow.title
+    }
+    
+}
+
+// MARK: - Convenience Inits
+
+public extension Plan.TextField {
+    
+    init(
+        _ title: String,
+        text: Binding<String>,
+        isSecure: Bool = false,
+        keyboardType: UIKeyboardType = .default,
+        textContentType: UITextContentType? = nil
+    ) {
+        self.init(
+            .init(title),
+            text: text,
+            isSecure: isSecure,
+            keyboardType: keyboardType,
+            textContentType: textContentType,
+        )
+    }
+    
+}
+
 // MARK: - Views
 
 extension Plan.TextField: View {
     public var body: some View {
         Group {
             if isSecure {
-                SecureField(title, text: $text)
+                SecureField(text: $text) { detailRow }
             } else {
-                TextField(title, text: $text)
+                TextField(text: $text) { detailRow }
             }
         }
         .keyboardType(keyboardType)

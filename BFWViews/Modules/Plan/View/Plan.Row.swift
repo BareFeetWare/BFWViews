@@ -20,6 +20,7 @@ extension Plan {
         case optionalIdentified(OptionalIdentified<Self>)
         case picker(Plan.Picker)
         case textField(Plan.TextField)
+        case toggle(Plan.Toggle)
     }
 }
 
@@ -28,10 +29,15 @@ extension Plan {
 extension Plan.Row: OptionalIdentifiable {
     public var id: String? {
         switch self {
+        case .anyView: nil
+        case .button: nil
         case .detail(let detailRow): detailRow.id
+        case .labeledContent(let labeledContent): labeledContent.label.id
         case .navigationLink(let navigationLink): navigationLink.label.id
         case .optionalIdentified(let optionalIdentified): optionalIdentified.id
-        default: nil
+        case .picker: nil
+        case .textField: nil
+        case .toggle(let toggle): toggle.detailRow.id
         }
     }
 }
@@ -46,7 +52,8 @@ extension Plan.Row: Matchable {
         case .navigationLink(let navigationLink): navigationLink.label.matchStrings
         case .optionalIdentified(let optionalIdentified): optionalIdentified.content.matchStrings
         case .picker: []
-        case .textField(let textField): [textField.title, textField.text]
+        case .textField(let textField): textField.detailRow.matchStrings + [textField.text]
+        case .toggle(let toggle): toggle.detailRow.matchStrings
         }
     }
 }
@@ -64,6 +71,7 @@ extension Plan.Row: View {
         case let .optionalIdentified(content): content
         case let .picker(content): content
         case let .textField(content): content
+        case let .toggle(content): content
         }
     }
 }
@@ -73,12 +81,14 @@ extension Plan.Row: View {
 fileprivate struct Preview {
     @State var textFieldText: String = ""
     @State var pickerSelection: String = "Option 1"
+    @State var isOn: Bool = false
     
     var list: Plan.List<Plan.Row, Plan.Scene> {
         .init(
             rows: [
                 .button("Button") {},
                 .detail("Detail", subtitle: "Subtitle", trailing: "Trailing"),
+                .labeledContent("Labeled Content", content: .textField("Text Field", text: $textFieldText)),
                 .navigationLink("navigationLink") {
                     .list(
                         rows: [
@@ -87,13 +97,15 @@ fileprivate struct Preview {
                         ]
                     )
                 },
-                .labeledContent("Labeled Content", content: .textField("Text Field", text: $textFieldText)),
                 .optionalIdentified(.init(id: "123", content: .detail("Identified Row"))),
                 .picker(
                     "Picker",
                     selection: $pickerSelection,
                     options: ["Option 1", "Option 2"]
                 ),
+                .secureField("Secure", text: $textFieldText),
+                .textField("Text", text: $textFieldText),
+                .toggle("Toggle", isOn: $isOn),
             ]
         )
     }

@@ -17,6 +17,7 @@
 		E21311202586F385001496C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E213111F2586F385001496C7 /* Assets.xcassets */; };
 		E21311232586F385001496C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E21311222586F385001496C7 /* Preview Assets.xcassets */; };
 		E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21636C82A500AD4005A7D48 /* PassedObject.swift */; };
+		E21E88E52F56954B00563537 /* Plan.Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21E88E42F56954600563537 /* Plan.Toggle.swift */; };
 		E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A126E8661100AC5CD2 /* Color+Hex.swift */; };
 		E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */; };
 		E226BCC52C924FF700A62B9E /* LoopingVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226BCC42C924FF700A62B9E /* LoopingVideoPlayer.swift */; };
@@ -165,6 +166,7 @@
 		E21311222586F385001496C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E21311242586F385001496C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E21636C82A500AD4005A7D48 /* PassedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassedObject.swift; sourceTree = "<group>"; };
+		E21E88E42F56954600563537 /* Plan.Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Toggle.swift; sourceTree = "<group>"; };
 		E224C9A126E8661100AC5CD2 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHexScene.swift; sourceTree = "<group>"; };
 		E226BCC42C924FF700A62B9E /* LoopingVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingVideoPlayer.swift; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 				E2459F802A0335DE0068DCBB /* Plan.Section.swift */,
 				E2386BF62A093C45009FEA16 /* Plan.Tab+View.swift */,
 				E25FDC132F2B433800E42D14 /* Plan.TextField.swift */,
+				E21E88E42F56954600563537 /* Plan.Toggle.swift */,
 				E24D7CEE2E9DE8ED00D8AB44 /* Plan+Matchable.swift */,
 				E269F7C52C06D4FE00D83739 /* Plan+Mirror.swift */,
 			);
@@ -831,6 +834,7 @@
 				E28093A42C8D8FA700CB11A0 /* NavigationOptionalPicker.swift in Sources */,
 				E2BAAC1926FEFF0400CFDE50 /* AsyncImage.swift in Sources */,
 				E28093A02C8D8F9800CB11A0 /* Modified.swift in Sources */,
+				E21E88E52F56954B00563537 /* Plan.Toggle.swift in Sources */,
 				E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */,
 				E25FDC142F2B433E00E42D14 /* Plan.TextField.swift in Sources */,
 				E28093A62C8DD49500CB11A0 /* OptionalRow.swift in Sources */,
