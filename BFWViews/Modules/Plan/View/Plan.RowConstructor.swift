@@ -20,6 +20,7 @@ extension Plan {
         static func optionalIdentified(_ optionalIdentified: OptionalIdentified<Self>) -> Self
         static func picker(_ content: Plan.Picker) -> Self
         static func textField(_ content: Plan.TextField) -> Self
+        static func timelineView(_ content: Plan.TimelineView<Self>) -> Self
         static func toggle(_ content: Plan.Toggle) -> Self
     }
 }
@@ -172,6 +173,23 @@ public extension Plan.RowConstructor {
         )
     }
     
+    static func secureField(
+        _ title: String,
+        text: Binding<String>,
+        keyboardType: UIKeyboardType = .default,
+        textContentType: UITextContentType? = nil
+    ) -> Self {
+        .textField(
+            .init(
+                title,
+                text: text,
+                isSecure: true,
+                keyboardType: keyboardType,
+                textContentType: textContentType
+            )
+        )
+    }
+    
     static func textField(
         _ title: String,
         text: Binding<String>,
@@ -190,20 +208,12 @@ public extension Plan.RowConstructor {
         )
     }
     
-    static func secureField(
-        _ title: String,
-        text: Binding<String>,
-        keyboardType: UIKeyboardType = .default,
-        textContentType: UITextContentType? = nil
+    static func timelineView(
+        timeInterval: TimeInterval,
+        content: @escaping () -> Self
     ) -> Self {
-        .textField(
-            .init(
-                title,
-                text: text,
-                isSecure: true,
-                keyboardType: keyboardType,
-                textContentType: textContentType
-            )
+        .timelineView(
+            .init(timeInterval: timeInterval, content: content)
         )
     }
     

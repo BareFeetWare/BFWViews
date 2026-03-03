@@ -20,6 +20,7 @@ extension Plan {
         case optionalIdentified(OptionalIdentified<Self>)
         case picker(Plan.Picker)
         case textField(Plan.TextField)
+        case timelineView(Plan.TimelineView<Self>)
         case toggle(Plan.Toggle)
     }
 }
@@ -37,6 +38,7 @@ extension Plan.Row: OptionalIdentifiable {
         case .optionalIdentified(let optionalIdentified): optionalIdentified.id
         case .picker: nil
         case .textField: nil
+        case .timelineView: nil
         case .toggle(let toggle): toggle.detailRow.id
         }
     }
@@ -53,6 +55,7 @@ extension Plan.Row: Matchable {
         case .optionalIdentified(let optionalIdentified): optionalIdentified.content.matchStrings
         case .picker: []
         case .textField(let textField): textField.detailRow.matchStrings + [textField.text]
+        case .timelineView: []
         case .toggle(let toggle): toggle.detailRow.matchStrings
         }
     }
@@ -71,6 +74,7 @@ extension Plan.Row: View {
         case let .optionalIdentified(content): content
         case let .picker(content): content
         case let .textField(content): content
+        case let .timelineView(content): content
         case let .toggle(content): content
         }
     }
