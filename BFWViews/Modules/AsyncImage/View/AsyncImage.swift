@@ -9,26 +9,43 @@
 import SwiftUI
 
 public struct AsyncImage<Content: View, Placeholder: View> {
+    let url: URL?
+    let imageFromURL: ((URL) async throws -> UIImage)?
+    let content: (Image) -> Content
+    let placeholder: () -> Placeholder
+    @State var image: UIImage?
+    @State var error: Error?
     
+    public init(
+        url: URL?,
+        imageFromURL: ((URL) async throws -> UIImage)? = nil,
+        @ViewBuilder content: @escaping (Image) -> Content,
+        @ViewBuilder placeholder: @escaping () -> Placeholder
+    ) {
+        self.url = url
+        self.imageFromURL = imageFromURL
+        self.content = content
+        self.placeholder = placeholder
+    }
+    
+}
+
+// MARK: - Convenience
+
+extension AsyncImage {
     public init(
         url: URL?,
         caching: Fetch.Caching,
         @ViewBuilder content: @escaping (Image) -> Content,
         @ViewBuilder placeholder: @escaping () -> Placeholder
     ) {
-        self.url = url
-        self.caching = caching
-        self.content = content
-        self.placeholder = placeholder
+        self.init(
+            url: url,
+            imageFromURL: { url in try await Fetch.image(url: url, caching: caching) },
+            content: content,
+            placeholder: placeholder
+        )
     }
-    
-    let url: URL?
-    let caching: Fetch.Caching
-    let content: (Image) -> Content
-    let placeholder: () -> Placeholder
-    
-    @State var image: UIImage?
-    @State var error: Error?
 }
 
 extension AsyncImage where Placeholder == EmptyView {
@@ -58,30 +75,30 @@ private extension AsyncImage {
     }
     
     var isLocalFile: Bool {
-        guard let url else { return false }
-        return caching == .file && Fetch.isCached(url: url)
-        || url.isFileURL
+        url?.isFileURL ?? false
     }
     
     // Don't call fetchImage() from onAppear, since that is only called when the AsyncImage first appears and not when reinstantiated by an update of the superview, such as with a new URL.
     
-    func fetchImage() {
+    func fetchImage() async {
         guard let url else {
             self.image = nil
             return
         }
-        Task {
-            do {
-                self.image = try await Fetch.image(url: url, caching: caching)
-            } catch {
-                debugPrint("image error = \(error)")
-                self.error = error
+        do {
+            self.image = if let imageFromURL {
+                try await imageFromURL(url)
+            } else {
+                try await Fetch.image(url: url, caching: .file)
             }
+        } catch {
+            debugPrint("image error = \(error)")
+            self.error = error
         }
     }
     
-    func task() {
-        fetchImage()
+    func task() async {
+        await fetchImage()
     }
 }
 
@@ -102,7 +119,7 @@ extension AsyncImage: View {
                 Color.clear
             }
         }
-        .task(id: url) { task() }
+        .task(id: url) { await task() }
     }
 }
 
