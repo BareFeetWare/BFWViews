@@ -136,6 +136,7 @@ struct PlanListDisplay_Previews: PreviewProvider {
 private struct Preview {
     @State var selectedCellID: String?
     typealias List = Plan.List<Plan.Row, Plan.Scene>
+    typealias Section = Plan.Section<Plan.Row, Plan.Scene>
 }
 
 extension Preview {
@@ -143,39 +144,43 @@ extension Preview {
     var list: List {
         .init(
             selection: $selectedCellID,
-            sections: [
-                .init(
-                    "selection",
-                    rows: [
-                        .detail("selection:", trailing: selectedCellID),
-                    ]
-                ),
-                .init(
-                    "Buttons and detail",
-                    rows: [
-                        .button("Start") {},
-                        .detail("Status", trailing: "Off line"),
-                        .button("Scan") {},
-                    ]
-                ),
-                .init(
-                    "NavigationLink",
-                    rows: [
-                        .detail("Children", trailing: "3") {
-                            childrenList
-                        }
-                    ]
-                ),
-                .init(
-                    "Async children",
-                    rows: [
-                        .detail("Children", trailing: "3") {
-                            try await asyncChildrenList()
-                        },
-                    ]
-                ),
-            ]
+            sections: sections
         )
+    }
+    
+    var sections: [Section] {
+        [
+            .init(
+                "selection",
+                rows: [
+                    .detail("selection:", trailing: selectedCellID),
+                ]
+            ),
+            .init(
+                "Buttons and detail",
+                rows: [
+                    .button("Start") {},
+                    .detail("Status", trailing: "Off line"),
+                    .button("Scan") {},
+                ]
+            ),
+            .init(
+                "NavigationLink",
+                rows: [
+                    .detail("Children", trailing: "3") {
+                        childrenList
+                    }
+                ]
+            ),
+            .init(
+                "Async children",
+                rows: [
+                    .detail("Children", trailing: "3") {
+                        try await asyncChildrenList()
+                    },
+                ]
+            ),
+        ]
     }
     
     func asyncChildrenList() async throws -> List {
