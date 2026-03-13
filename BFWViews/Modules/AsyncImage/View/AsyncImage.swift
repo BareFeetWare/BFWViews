@@ -30,7 +30,7 @@ public struct AsyncImage<Content: View, Placeholder: View> {
     
 }
 
-// MARK: - Convenience
+// MARK: - Convenience Inits
 
 extension AsyncImage {
     public init(
@@ -62,6 +62,8 @@ extension AsyncImage where Placeholder == EmptyView {
         )
     }
 }
+
+// MARK: - Functions
 
 private extension AsyncImage {
     
@@ -102,7 +104,7 @@ private extension AsyncImage {
     }
 }
 
-// MARK: - View
+// MARK: - Views
 
 extension AsyncImage: View {
     public var body: some View {
@@ -123,7 +125,7 @@ extension AsyncImage: View {
     }
 }
 
-// MARK: - Preview
+// MARK: - Previews
 
 struct AsyncImage_Previews: PreviewProvider {
     static var previews: some View {

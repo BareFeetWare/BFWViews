@@ -13,55 +13,11 @@ import SwiftUI
 public extension Plan.Alert {
     
     init(error: Error, buttons: [Plan.Button] = []) {
-        if let error = error as? DecodingError {
-            self.init(
-                title: "Decoding Error",
-                message: error.debugDescription,
-                buttons: buttons
-            )
-        } else if let error = error as? LocalizedError {
-            self.init(
-                title: error.failureReason ?? error.localizedDescription,
-                message: error.recoverySuggestion,
-                buttons: buttons
-            )
-        } else {
-            self.init(
-                title: "Error: \(error)",
-                message: nil,
-                buttons: buttons
-            )
-        }
-    }
-    
-}
-
-// MARK: - Private Extensions
-
-private extension DecodingError {
-    
-    var context: Context? {
-        switch self {
-        case let .typeMismatch(_, context):
-            context
-        case let .valueNotFound(_, context):
-            context
-        case let .keyNotFound(_, context):
-            context
-        case let .dataCorrupted(context):
-            context
-        @unknown default:
-            nil
-        }
-    }
-    
-    /// Parsed readable description of the decoding error.
-    var debugDescription: String? {
-        guard let context else { return nil }
-        let codingPath = context.codingPath.map { $0.stringValue }
-        let labeledCodingPath = "codingPath: " + codingPath.joined(separator: ".")
-        return [labeledCodingPath, context.debugDescription]
-            .joined(separator: "\n")
+        self.init(
+            title: error.alertTitle,
+            message: error.alertMessage,
+            buttons: buttons
+        )
     }
     
 }
