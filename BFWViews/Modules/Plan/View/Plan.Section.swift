@@ -46,15 +46,17 @@ public extension Plan.Section {
         id: String? = nil,
         isExpanded: Binding<Bool>? = nil,
         footer: String? = nil,
-        rows: @escaping () -> [Row],
+        rows: @escaping () -> [Row?],
         emptyPlaceholder: String? = nil
     ) {
-        self.id = id
-        self.isExpanded = isExpanded
-        self.title = title
-        self.footer = footer
-        self.rows = rows()
-        self.emptyPlaceholder = emptyPlaceholder
+        self.init(
+            title,
+            id: id,
+            isExpanded: isExpanded,
+            footer: footer,
+            rows: rows(),
+            emptyPlaceholder: emptyPlaceholder
+        )
     }
     
 }
