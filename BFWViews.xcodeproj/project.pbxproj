@@ -21,6 +21,7 @@
 		E21E88E52F56954B00563537 /* Plan.Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21E88E42F56954600563537 /* Plan.Toggle.swift */; };
 		E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A126E8661100AC5CD2 /* Color+Hex.swift */; };
 		E224C9A426E8665000AC5CD2 /* ColorHexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */; };
+		E2264C982F70DB7900A876EE /* NavigationStackIfNeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2264C972F70DB7900A876EE /* NavigationStackIfNeeded.swift */; };
 		E226BCC52C924FF700A62B9E /* LoopingVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226BCC42C924FF700A62B9E /* LoopingVideoPlayer.swift */; };
 		E2299CF12BA93F740040CE93 /* SVGRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2299CF02BA93F730040CE93 /* SVGRender.swift */; };
 		E22B2D772D0FE7AE00E79C92 /* Plan.Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22B2D762D0FE7AE00E79C92 /* Plan.Alert.swift */; };
@@ -173,6 +174,7 @@
 		E21E88E42F56954600563537 /* Plan.Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Toggle.swift; sourceTree = "<group>"; };
 		E224C9A126E8661100AC5CD2 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		E224C9A326E8665000AC5CD2 /* ColorHexScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHexScene.swift; sourceTree = "<group>"; };
+		E2264C972F70DB7900A876EE /* NavigationStackIfNeeded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackIfNeeded.swift; sourceTree = "<group>"; };
 		E226BCC42C924FF700A62B9E /* LoopingVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingVideoPlayer.swift; sourceTree = "<group>"; };
 		E2299CF02BA93F730040CE93 /* SVGRender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGRender.swift; sourceTree = "<group>"; };
 		E22B2D762D0FE7AE00E79C92 /* Plan.Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Alert.swift; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				E2606D0A2A430FA5004E6400 /* NavigationHeader.swift */,
 				E28093A22C8D8FA700CB11A0 /* NavigationOptionalPicker.swift */,
 				E28093A12C8D8FA700CB11A0 /* NavigationPicker.swift */,
+				E2264C972F70DB7900A876EE /* NavigationStackIfNeeded.swift */,
 				E2606CEB2A415378004E6400 /* Observing.swift */,
 				E23F78172DC1AAEC002E0C4E /* ObservingArray.swift */,
 				E293393D2C475EDB00810E45 /* OnTapFullScreenCover.swift */,
@@ -825,6 +828,7 @@
 				E28D1BD5283350C400064CCD /* Plan.List.swift in Sources */,
 				E23F78182DC1AB10002E0C4E /* ObservingArray.swift in Sources */,
 				E26FDBF92AAEEFAA00AC992B /* ExpandableSection.swift in Sources */,
+				E2264C982F70DB7900A876EE /* NavigationStackIfNeeded.swift in Sources */,
 				E226BCC52C924FF700A62B9E /* LoopingVideoPlayer.swift in Sources */,
 				E282D3DB2F62CF120094F458 /* Error+Alert.swift in Sources */,
 				E224C9A226E8661100AC5CD2 /* Color+Hex.swift in Sources */,
