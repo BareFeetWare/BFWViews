@@ -20,10 +20,9 @@ import SwiftUI
 /// existing controller and skips wrapping, so only one level of navigation
 /// is ever present.
 ///
-/// When no `NavigationStack` is provided, SwiftUI's `.navigationTitle` has no
-/// effect. Use `.adaptiveNavigationTitle(_:)` instead, which sets both the
-/// SwiftUI title and a preference that `NavigationStackIfNeeded` forwards to
-/// UIKit's `navigationItem.title`.
+/// When an external `UINavigationController` is detected, SwiftUI's
+/// `.navigationTitle` has no effect. Use `.adaptiveNavigationTitle(_:)` instead,
+/// which also sets UIKit's `navigationItem.title` directly.
 ///
 /// Usage:
 /// ```swift
@@ -42,9 +41,6 @@ public struct NavigationStackIfNeeded<Content: View> {
     /// Starting at `false` avoids the SwiftUI bug where removing a
     /// `NavigationStack` via if/else branch switch leaves a ghost bar.
     @State private var needsNavigationStack = false
-    /// Title captured from `adaptiveNavigationTitle`, forwarded to UIKit when
-    /// no SwiftUI `NavigationStack` is present.
-    @State private var externalTitle: String?
 
     public init(@ViewBuilder content: () -> Content) {
         self.content = content()
@@ -64,14 +60,6 @@ private extension NavigationStackIfNeeded {
         let needs = viewController.navigationController == nil
         if needsNavigationStack != needs {
             needsNavigationStack = needs
-        }
-        // When inside an external navigation controller (e.g. More tab),
-        // forward the title captured via adaptiveNavigationTitle to UIKit's
-        // navigationItem so UIMoreNavigationController displays it.
-        if !needs, let externalTitle {
-            if viewController.navigationItem.title != externalTitle {
-                viewController.navigationItem.title = externalTitle
-            }
         }
     }
 
@@ -95,9 +83,6 @@ extension NavigationStackIfNeeded: View {
                     content
                 }
             }
-        }
-        .onPreferenceChange(NavigationTitlePreferenceKey.self) { title in
-            externalTitle = title
         }
         .uiViewController(onParentViewController)
     }
