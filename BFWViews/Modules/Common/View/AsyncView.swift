@@ -147,7 +147,7 @@ private extension AsyncView {
         TaskID(id: id, loadedID: loadedID)
     }
     
-    func load() async {
+    @MainActor func load() async {
         // Show placeholder on initial load and retry from error,
         // but keep existing content visible during refresh.
         if case .success = phase {} else {
