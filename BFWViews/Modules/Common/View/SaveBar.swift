@@ -11,7 +11,7 @@ import SwiftUI
 public extension View {
     func saveBar<Model: Equatable>(
         model: Binding<Model?>,
-        onSave: @escaping (Model) -> Void,
+        onSave: @escaping (Model) async throws -> Void,
         onCancel: (() -> Void)? = nil
     ) -> some View {
         modifier(
@@ -26,7 +26,7 @@ public extension View {
 
 struct SaveBarModifier<Model: Equatable> {
     @Binding var model: Model?
-    let onSave: (Model) -> Void
+    let onSave: (Model) async throws -> Void
     let onCancel: (() -> Void)?
     @State var savedModel: Model?
 }
@@ -50,7 +50,7 @@ extension SaveBarModifier {
     var saveButton: Plan.Button {
         .init("Save", systemImage: "checkmark") {
             guard let model else { return }
-            onSave(model)
+            try await onSave(model)
             savedModel = model
         }
     }
