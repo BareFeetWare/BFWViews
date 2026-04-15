@@ -47,6 +47,11 @@ extension SaveBarModifier {
         isChanged
     }
     
+    func onTapCancel() {
+        model = savedModel
+        onCancel?()
+    }
+    
     var saveButton: Plan.Button {
         .init("Save", systemImage: "checkmark") {
             guard let model else { return }
@@ -55,13 +60,6 @@ extension SaveBarModifier {
         }
     }
     
-    var cancelButton: Plan.Button {
-        .init("Cancel", systemImage: "xmark", role: .cancel) {
-            model = savedModel
-            onCancel?()
-        }
-    }
-
 }
 
 // MARK: - Views
@@ -69,12 +67,10 @@ extension SaveBarModifier {
 extension SaveBarModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
+            .if(isVisibleCancelButton) {
+                $0.toolbarCancel { onTapCancel() }
+            }
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    if isVisibleCancelButton {
-                        cancelButton
-                    }
-                }
                 ToolbarItem(placement: .confirmationAction) {
                     saveButton
                         .disabled(isDisabledSave)

@@ -112,6 +112,7 @@
 		E2C16B68266480C400BAC051 /* View+Distributed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B65266480C400BAC051 /* View+Distributed.swift */; };
 		E2C16B69266480C400BAC051 /* CompressibleSpacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */; };
 		E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B67266480C400BAC051 /* View+Trailing.swift */; };
+		E2F0CA022F100A0000ABCDEF /* ToolbarCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA012F100A0000ABCDEF /* ToolbarCancel.swift */; };
 		E2C16B6C266480F900BAC051 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B6B266480F900BAC051 /* Card.swift */; };
 		E2C16B7C2664816F00BAC051 /* DateComponentsFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */; };
 		E2C16B7D2664816F00BAC051 /* NumberFormatter+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */; };
@@ -269,6 +270,7 @@
 		E2C16B65266480C400BAC051 /* View+Distributed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Distributed.swift"; sourceTree = "<group>"; };
 		E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompressibleSpacer.swift; sourceTree = "<group>"; };
 		E2C16B67266480C400BAC051 /* View+Trailing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Trailing.swift"; sourceTree = "<group>"; };
+		E2F0CA012F100A0000ABCDEF /* ToolbarCancel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarCancel.swift; sourceTree = "<group>"; };
 		E2C16B6B266480F900BAC051 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E2C16B732664816F00BAC051 /* DateComponentsFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Style.swift"; sourceTree = "<group>"; };
 		E2C16B742664816F00BAC051 /* NumberFormatter+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Style.swift"; sourceTree = "<group>"; };
@@ -618,6 +620,7 @@
 				E2370E0C2F456AB900F2B75C /* SaveBar.swift */,
 				E2803FC52B5E72A20023A74E /* SheetLink.swift */,
 				E2A34AA02F304DF600351E0A /* TextFieldAlert.swift */,
+				E2F0CA012F100A0000ABCDEF /* ToolbarCancel.swift */,
 				E28B7ABC275AC77700ED5730 /* UIKitView.swift */,
 				E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */,
 				E2C16B65266480C400BAC051 /* View+Distributed.swift */,
@@ -883,6 +886,7 @@
 				E280939E2C8D8F8A00CB11A0 /* IdentifiableText.swift in Sources */,
 				E269F7C62C06D4FE00D83739 /* Plan+Mirror.swift in Sources */,
 				E2C16B6A266480C400BAC051 /* View+Trailing.swift in Sources */,
+				E2F0CA022F100A0000ABCDEF /* ToolbarCancel.swift in Sources */,
 				E2606CEC2A415378004E6400 /* Observing.swift in Sources */,
 				E23F781A2DC1ACD8002E0C4E /* AnyObservedObject.swift in Sources */,
 				E22B2D772D0FE7AE00E79C92 /* Plan.Alert.swift in Sources */,
