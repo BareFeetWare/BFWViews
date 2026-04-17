@@ -11,7 +11,7 @@ import SwiftUI
 public struct NavigationStack<Content: View> {
     let content: () -> Content
     
-    public init(content: @escaping () -> Content) {
+    public init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
     }
 }
