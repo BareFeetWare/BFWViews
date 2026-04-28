@@ -62,25 +62,13 @@ extension Plan.Button {
 
 extension Plan.Button {
     
-    // TODO: Make this more broadly available.
-    
-    func presentingError(_ action: @escaping () async throws -> Void) {
-        Task {
-            do {
-                try await action()
-            } catch {
-                alert = .init(error: error)
-            }
-        }
-    }
-    
     var action: () -> Void {
         switch dispatch {
         case .sync(let action):
             return { action() }
         case .async(let action):
             return {
-                presentingError {
+                withErrorAlert($alert) {
                     isInProgress = true
                     defer { isInProgress = false }
                     try await action()

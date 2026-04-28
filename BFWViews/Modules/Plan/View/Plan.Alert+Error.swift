@@ -43,6 +43,21 @@ public extension View {
     }
 }
 
+// MARK: - With Error Alert
+
+public func withErrorAlert(
+    _ alert: Binding<Plan.Alert?>,
+    _ action: @escaping () async throws -> Void
+) {
+    Task {
+        do {
+            try await action()
+        } catch {
+            alert.wrappedValue = .init(error: error)
+        }
+    }
+}
+
 // MARK: - Previews
 
 struct Plan_Alert_Error_Previews: PreviewProvider {

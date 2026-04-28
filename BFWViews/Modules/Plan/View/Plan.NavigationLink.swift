@@ -80,22 +80,10 @@ private extension Plan.NavigationLink {
         isInProgress || isPresentedModal.wrappedValue
     }
     
-    // TODO: Make presentingError more broadly available.
-    
-    func presentingError(_ action: @escaping () async throws -> Void) {
-        Task {
-            do {
-                try await action()
-            } catch {
-                alert = .init(error: error)
-            }
-        }
-    }
-    
     func onTap(destination: @escaping () async throws -> Destination) {
         isInProgress = true
         defer { isInProgress = false }
-        presentingError {
+        withErrorAlert($alert) {
             presentedDestination = try await destination()
             isPresentedModal.wrappedValue = true
         }
