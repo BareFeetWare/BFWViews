@@ -58,6 +58,7 @@
 		E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27BCFF927870D320004F48C /* TableViewProxy.swift */; };
 		E2803FC62B5E72A20023A74E /* SheetLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FC52B5E72A20023A74E /* SheetLink.swift */; };
 		E2803FCA2B5E74B00023A74E /* Plan.Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FC92B5E74B00023A74E /* Plan.Button.swift */; };
+		E2A3F1172F9D000100EC3DDD /* Plan.Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A3F1162F9D000100EC3DDD /* Plan.Link.swift */; };
 		E2803FD42B5FE05D0023A74E /* Plan.ConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FD32B5FE05D0023A74E /* Plan.ConfirmationDialog.swift */; };
 		E2803FD62B5FE1430023A74E /* Binding+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FD52B5FE1430023A74E /* Binding+Transform.swift */; };
 		E280939E2C8D8F8A00CB11A0 /* IdentifiableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280939D2C8D8F8A00CB11A0 /* IdentifiableText.swift */; };
@@ -215,6 +216,7 @@
 		E27BCFF927870D320004F48C /* TableViewProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProxy.swift; sourceTree = "<group>"; };
 		E2803FC52B5E72A20023A74E /* SheetLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetLink.swift; sourceTree = "<group>"; };
 		E2803FC92B5E74B00023A74E /* Plan.Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.Button.swift; sourceTree = "<group>"; };
+		E2A3F1162F9D000100EC3DDD /* Plan.Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Link.swift; sourceTree = "<group>"; };
 		E2803FD32B5FE05D0023A74E /* Plan.ConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.ConfirmationDialog.swift; sourceTree = "<group>"; };
 		E2803FD52B5FE1430023A74E /* Binding+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Transform.swift"; sourceTree = "<group>"; };
 		E280939D2C8D8F8A00CB11A0 /* IdentifiableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableText.swift; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 				E2386BE82A087314009FEA16 /* Plan.Image.swift */,
 				E2D3165E2D3791A300064A63 /* Plan.Label.swift */,
 				E2370E142F45D33500F2B75C /* Plan.LabeledContent.swift */,
+				E2A3F1162F9D000100EC3DDD /* Plan.Link.swift */,
 				E28D1BCD283350C400064CCD /* Plan.List.swift */,
 				E2D316602D37953900064A63 /* Plan.Menu.swift */,
 				E28A4DAC2E9F7E37002ECD1C /* Plan.NavigationLink.swift */,
@@ -964,6 +967,7 @@
 				E258A41C2B8DBFC90035E549 /* Compatible.NavigationSplitView.swift in Sources */,
 				E2C0A0022F2B500100351E0A /* ContentUnavailableView.swift in Sources */,
 				E2803FCA2B5E74B00023A74E /* Plan.Button.swift in Sources */,
+				E2A3F1172F9D000100EC3DDD /* Plan.Link.swift in Sources */,
 				E2B62A402D911C32002CBD8E /* If.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

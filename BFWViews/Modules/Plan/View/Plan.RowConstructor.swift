@@ -16,6 +16,7 @@ extension Plan {
         static func button(_ content: Plan.Button) -> Self
         static func detail(_ content: Plan.DetailRow) -> Self
         static func labeledContent(_ content: Plan.LabeledContent<Self, Self>) -> Self
+        static func link(_ content: Plan.Link) -> Self
         static func navigationLink(_ content: Plan.NavigationLink<Self, Scene>) -> Self
         static func optionalIdentified(_ optionalIdentified: OptionalIdentified<Self>) -> Self
         static func picker(_ content: Plan.Picker) -> Self
@@ -62,6 +63,20 @@ public extension Plan.RowConstructor {
     ) -> Self {
         .labeledContent(
             .init(label: .detail(title, subtitle: subtitle), content: content)
+        )
+    }
+    
+    static func link(
+        _ title: String,
+        systemImage: String? = nil,
+        destination: URL
+    ) -> Self {
+        .link(
+            .init(
+                title,
+                systemImage: systemImage,
+                destination: destination
+            )
         )
     }
     
