@@ -11,14 +11,14 @@ import SwiftUI
 public extension View {
     func saveBar<Model: Equatable>(
         model: Binding<Model?>,
+        isChanged: Binding<Bool>? = nil,
         onSave: @escaping (Model) async throws -> Void,
-        onCancel: (() -> Void)? = nil
     ) -> some View {
         modifier(
             SaveBarModifier(
                 model: model,
+                externalIsChanged: isChanged,
                 onSave: onSave,
-                onCancel: onCancel
             )
         )
     }
@@ -26,8 +26,8 @@ public extension View {
 
 struct SaveBarModifier<Model: Equatable> {
     @Binding var model: Model?
+    let externalIsChanged: Binding<Bool>?
     let onSave: (Model) async throws -> Void
-    let onCancel: (() -> Void)?
     @State var savedModel: Model?
 }
 
@@ -39,24 +39,38 @@ extension SaveBarModifier {
         model != savedModel
     }
     
-    var isDisabledSave: Bool {
-        !isChanged
+    func onAppear() {
+        // Sync `savedModel` to the loaded `model` on first appear so that
+        // edit-existing scenes (model passed in pre-populated) start with
+        // `isChanged == false`. Without this, `savedModel` stays nil and any
+        // non-nil `model` reads as dirty, showing Cancel/Save immediately.
+        if savedModel == nil, model != nil {
+            savedModel = model
+        }
+        externalIsChanged?.wrappedValue = isChanged
     }
     
-    var isVisibleCancelButton: Bool {
-        isChanged
+    func onChange(isChanged: Bool) {
+        externalIsChanged?.wrappedValue = isChanged
     }
     
     func onTapCancel() {
         model = savedModel
-        onCancel?()
     }
     
-    var saveButton: Plan.Button {
-        .init("Save", systemImage: "checkmark") {
+    var saveButton: Plan.Button? {
+        guard isChanged else { return nil }
+        return .init("Save", systemImage: "checkmark") {
             guard let model else { return }
             try await onSave(model)
             savedModel = model
+        }
+    }
+    
+    var cancelButton: Plan.Button? {
+        guard isChanged else { return nil }
+        return .init("Cancel", systemImage: "xmark", role: .cancel) {
+            onTapCancel()
         }
     }
     
@@ -67,16 +81,18 @@ extension SaveBarModifier {
 extension SaveBarModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .if(isVisibleCancelButton) {
-                $0.toolbarCancel { onTapCancel() }
-            }
             .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    cancelButton
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     saveButton
-                        .disabled(isDisabledSave)
                 }
             }
-            .navigationBarBackButtonHidden(isVisibleCancelButton)
+            .navigationBarBackButtonHidden(isChanged)
+            .interactiveDismissDisabled(isChanged)
+            .onAppear { onAppear() }
+            .onChange(of: isChanged) { onChange(isChanged: $0) }
     }
     
 }
@@ -129,10 +145,6 @@ extension Preview {
             email = person?.email ?? ""
             salutation = person?.salutation
         }
-    }
-    
-    var isChanged: Bool {
-        person != .tomBH
     }
     
     struct Person: Equatable {
