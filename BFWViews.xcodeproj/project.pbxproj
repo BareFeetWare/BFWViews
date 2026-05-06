@@ -54,6 +54,7 @@
 		E269F7C62C06D4FE00D83739 /* Plan+Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269F7C52C06D4FE00D83739 /* Plan+Mirror.swift */; };
 		E26A7AD42765A561007E3A6C /* BadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A7AD32765A561007E3A6C /* BadgeScene.swift */; };
 		E26FDBF92AAEEFAA00AC992B /* ExpandableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26FDBF82AAEEFAA00AC992B /* ExpandableSection.swift */; };
+		DBDC3E6E59F9426E8054BB75 /* UIApplication+EndEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2CB00437645148BC94E0B /* UIApplication+EndEditing.swift */; };
 		E2739DDC2678A095007C42EA /* AsyncNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */; };
 		E27BCFFA27870D320004F48C /* TableViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27BCFF927870D320004F48C /* TableViewProxy.swift */; };
 		E2803FC62B5E72A20023A74E /* SheetLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2803FC52B5E72A20023A74E /* SheetLink.swift */; };
@@ -212,6 +213,7 @@
 		E269F7C52C06D4FE00D83739 /* Plan+Mirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan+Mirror.swift"; sourceTree = "<group>"; };
 		E26A7AD32765A561007E3A6C /* BadgeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeScene.swift; sourceTree = "<group>"; };
 		E26FDBF82AAEEFAA00AC992B /* ExpandableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSection.swift; sourceTree = "<group>"; };
+		30B2CB00437645148BC94E0B /* UIApplication+EndEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+EndEditing.swift"; sourceTree = "<group>"; };
 		E2739DDB2678A095007C42EA /* AsyncNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncNavigationLink.swift; sourceTree = "<group>"; };
 		E27BCFF927870D320004F48C /* TableViewProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProxy.swift; sourceTree = "<group>"; };
 		E2803FC52B5E72A20023A74E /* SheetLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetLink.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 				E2803FC52B5E72A20023A74E /* SheetLink.swift */,
 				E2A34AA02F304DF600351E0A /* TextFieldAlert.swift */,
 				E2F0CA012F100A0000ABCDEF /* ToolbarCancel.swift */,
+				30B2CB00437645148BC94E0B /* UIApplication+EndEditing.swift */,
 				E28B7ABC275AC77700ED5730 /* UIKitView.swift */,
 				E2F9B1B4274CB7A300C8EC18 /* UIKitViewController.swift */,
 				E2C16B65266480C400BAC051 /* View+Distributed.swift */,
@@ -926,6 +929,7 @@
 				E28D1BD5283350C400064CCD /* Plan.List.swift in Sources */,
 				E23F78182DC1AB10002E0C4E /* ObservingArray.swift in Sources */,
 				E26FDBF92AAEEFAA00AC992B /* ExpandableSection.swift in Sources */,
+				DBDC3E6E59F9426E8054BB75 /* UIApplication+EndEditing.swift in Sources */,
 				E2264C982F70DB7900A876EE /* NavigationStackIfNeeded.swift in Sources */,
 				E226BCC52C924FF700A62B9E /* LoopingVideoPlayer.swift in Sources */,
 				E282D3DB2F62CF120094F458 /* Error+Alert.swift in Sources */,

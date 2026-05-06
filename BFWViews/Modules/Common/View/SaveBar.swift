@@ -56,6 +56,7 @@ extension SaveBarModifier {
     
     func onTapCancel() {
         model = savedModel
+        UIApplication.shared.endEditing()
     }
     
     var saveButton: Plan.Button? {
