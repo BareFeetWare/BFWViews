@@ -11,29 +11,65 @@
 import SwiftUI
 
 extension Plan {
+    /// A view-model picker. The struct stays concrete (no generics, no stored view) by
+    /// erasing identifiers to `AnyHashable`; the generic boundary is the init only, so
+    /// callers can pick any `Identifiable` while `Scheme.Row.picker` carries one type.
     public struct Picker {
         public let title: String
-        @Binding public var selection: String
-        public let options: [String]
+        @Binding public var selection: AnyHashable?
+        public let options: [Option]
         public let style: Style
         
-        public init(
+        /// Pick any `Identifiable` from `options`, shown via `label`, bound by `id`.
+        public init<Item: Identifiable>(
             _ title: String,
-            selection: Binding<String>,
-            options: [String],
+            selection: Binding<Item.ID?>,
+            options: [Item],
+            label: (Item) -> String,
             style: Style = .automatic
         ) {
             self.title = title
-            self._selection = selection
-            self.options = options
+            self._selection = Binding(
+                get: { selection.wrappedValue.map(AnyHashable.init) },
+                set: { selection.wrappedValue = $0?.base as? Item.ID }
+            )
+            self.options = options.map { Option(id: AnyHashable($0.id), label: label($0)) }
             self.style = style
         }
     }
 }
 
+// MARK: - Convenience Inits
+
+public extension Plan.Picker {
+    
+    /// Convenience for the common case where the options are plain strings and the
+    /// selection is one of them (label == value).
+    init(
+        _ title: String,
+        selection: Binding<String>,
+        options: [String],
+        style: Style = .automatic
+    ) {
+        self.title = title
+        self._selection = Binding(
+            get: { selection.wrappedValue as AnyHashable? },
+            set: { selection.wrappedValue = $0?.base as? String ?? "" }
+        )
+        self.options = options.map { Option(id: AnyHashable($0), label: $0) }
+        self.style = style
+    }
+    
+}
+
 // MARK: - Types
 
 extension Plan.Picker {
+    
+    public struct Option: Identifiable {
+        public let id: AnyHashable
+        public let label: String
+    }
     
     /// Storable representation of SwiftUI PickerStyle for use in view models.
     public enum Style {
@@ -44,7 +80,7 @@ extension Plan.Picker {
         case inline
         case navigationLink
     }
-
+    
 }
 
 // MARK: - Views
@@ -52,8 +88,9 @@ extension Plan.Picker {
 extension Plan.Picker: View {
     public var body: some View {
         Picker(title, selection: $selection) {
-            ForEach(options, id: \.self) { option in
-                Text(option)
+            ForEach(options) { option in
+                Text(option.label)
+                    .tag(Optional(option.id))
             }
         }
         .modifier(StyleModifier(style: style))
@@ -68,7 +105,9 @@ extension Plan.Picker: View {
             case .automatic:
                 content.pickerStyle(.automatic)
             case .inline:
-                content.pickerStyle(.inline)
+                // Hidden label keeps the VoiceOver name without duplicating a
+                // section header in the inline list.
+                content.pickerStyle(.inline).labelsHidden()
             case .menu:
                 content.pickerStyle(.menu)
             case .navigationLink:
@@ -78,7 +117,9 @@ extension Plan.Picker: View {
                     content.pickerStyle(.menu)
                 }
             case .segmented:
-                content.pickerStyle(.segmented)
+                // Hidden label keeps the VoiceOver name without duplicating a
+                // section header beside the segmented control.
+                content.pickerStyle(.segmented).labelsHidden()
             case .wheel:
                 content.pickerStyle(.wheel)
             }
@@ -90,20 +131,50 @@ extension Plan.Picker: View {
 
 struct Plan_Picker_Previews: PreviewProvider {
     
-    struct Preview: View {
+    struct StringPreview: View {
         @State var selection: String = "Two"
         
         var body: some View {
-            Plan.Picker(
-                "Picker",
-                selection: $selection,
-                options: ["One", "Two"],
-                style: .segmented
-            )
+            Form {
+                Plan.Picker(
+                    "Number",
+                    selection: $selection,
+                    options: ["One", "Two"],
+                    style: .segmented
+                )
+            }
+        }
+    }
+    
+    struct IdentifiedPreview: View {
+        struct Fruit: Identifiable {
+            let id: String
+            let emoji: String
+        }
+        
+        let fruits = [
+            Fruit(id: "apple", emoji: "🍎"),
+            Fruit(id: "banana", emoji: "🍌"),
+            Fruit(id: "orange", emoji: "🍊"),
+        ]
+        
+        @State var selection: String?
+        
+        var body: some View {
+            Form {
+                Plan.Picker(
+                    "Fruit",
+                    selection: $selection,
+                    options: fruits,
+                    label: { "\($0.emoji) \($0.id.capitalized)" },
+                    style: .inline
+                )
+            }
         }
     }
     
     static var previews: some View {
-        Preview()
+        StringPreview()
+        IdentifiedPreview()
     }
 }

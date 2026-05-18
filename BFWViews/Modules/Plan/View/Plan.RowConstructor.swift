@@ -170,6 +170,24 @@ public extension Plan.RowConstructor {
         )
     }
     
+    static func picker<Item: Identifiable>(
+        _ title: String,
+        selection: Binding<Item.ID?>,
+        options: [Item],
+        label: @escaping (Item) -> String,
+        style: Plan.Picker.Style = .automatic
+    ) -> Self {
+        .picker(
+            .init(
+                title,
+                selection: selection,
+                options: options,
+                label: label,
+                style: style
+            )
+        )
+    }
+    
     static func textField(
         _ detailRow: Plan.DetailRow,
         text: Binding<String>,
