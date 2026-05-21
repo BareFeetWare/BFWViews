@@ -20,6 +20,7 @@ extension Plan {
         static func navigationLink(_ content: Plan.NavigationLink<Self, Scene>) -> Self
         static func optionalIdentified(_ optionalIdentified: OptionalIdentified<Self>) -> Self
         static func picker(_ content: Plan.Picker) -> Self
+        static func slider(_ content: Plan.Slider) -> Self
         static func textField(_ content: Plan.TextField) -> Self
         static func timelineView(_ content: Plan.TimelineView<Self>) -> Self
         static func toggle(_ content: Plan.Toggle) -> Self
@@ -175,6 +176,7 @@ public extension Plan.RowConstructor {
         selection: Binding<Item.ID?>,
         options: [Item],
         label: @escaping (Item) -> String,
+        subtitle: ((Item) -> String?)? = nil,
         style: Plan.Picker.Style = .automatic
     ) -> Self {
         .picker(
@@ -183,11 +185,52 @@ public extension Plan.RowConstructor {
                 selection: selection,
                 options: options,
                 label: label,
+                subtitle: subtitle,
                 style: style
             )
         )
     }
     
+    static func slider(
+        _ title: String,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        value: Binding<Double>,
+        in bounds: ClosedRange<Double>,
+        step: Double = 1
+    ) -> Self {
+        .slider(
+            .init(
+                title,
+                subtitle: subtitle,
+                trailing: trailing,
+                value: value,
+                in: bounds,
+                step: step
+            )
+        )
+    }
+
+    static func slider(
+        _ title: String,
+        subtitle: String? = nil,
+        trailing: String? = nil,
+        value: Binding<Int>,
+        in bounds: ClosedRange<Int>,
+        step: Int = 1
+    ) -> Self {
+        .slider(
+            .init(
+                title,
+                subtitle: subtitle,
+                trailing: trailing,
+                value: value,
+                in: bounds,
+                step: step
+            )
+        )
+    }
+
     static func textField(
         _ detailRow: Plan.DetailRow,
         text: Binding<String>,

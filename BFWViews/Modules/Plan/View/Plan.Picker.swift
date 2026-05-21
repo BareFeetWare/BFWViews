@@ -21,11 +21,15 @@ extension Plan {
         public let style: Style
         
         /// Pick any `Identifiable` from `options`, shown via `label`, bound by `id`.
+        /// `subtitle` is an optional per-option caption shown under the label —
+        /// mainly useful in `.inline` style (the only built-in `PickerStyle` whose
+        /// rows are tall enough to show a second line).
         public init<Item: Identifiable>(
             _ title: String,
             selection: Binding<Item.ID?>,
             options: [Item],
             label: (Item) -> String,
+            subtitle: ((Item) -> String?)? = nil,
             style: Style = .automatic
         ) {
             self.title = title
@@ -33,7 +37,13 @@ extension Plan {
                 get: { selection.wrappedValue.map(AnyHashable.init) },
                 set: { selection.wrappedValue = $0?.base as? Item.ID }
             )
-            self.options = options.map { Option(id: AnyHashable($0.id), label: label($0)) }
+            self.options = options.map {
+                Option(
+                    id: AnyHashable($0.id),
+                    label: label($0),
+                    subtitle: subtitle?($0)
+                )
+            }
             self.style = style
         }
     }
@@ -56,10 +66,10 @@ public extension Plan.Picker {
             get: { selection.wrappedValue as AnyHashable? },
             set: { selection.wrappedValue = $0?.base as? String ?? "" }
         )
-        self.options = options.map { Option(id: AnyHashable($0), label: $0) }
+        self.options = options.map { Option(id: AnyHashable($0), label: $0, subtitle: nil) }
         self.style = style
     }
-    
+
 }
 
 // MARK: - Types
@@ -69,6 +79,7 @@ extension Plan.Picker {
     public struct Option: Identifiable {
         public let id: AnyHashable
         public let label: String
+        public let subtitle: String?
     }
     
     /// Storable representation of SwiftUI PickerStyle for use in view models.
@@ -89,8 +100,18 @@ extension Plan.Picker: View {
     public var body: some View {
         Picker(title, selection: $selection) {
             ForEach(options) { option in
-                Text(option.label)
+                if let subtitle = option.subtitle {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(option.label)
+                        Text(subtitle)
+                            .font(.callout)
+                            .foregroundColor(.secondary)
+                    }
                     .tag(Optional(option.id))
+                } else {
+                    Text(option.label)
+                        .tag(Optional(option.id))
+                }
             }
         }
         .modifier(StyleModifier(style: style))

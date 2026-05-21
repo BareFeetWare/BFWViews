@@ -20,6 +20,7 @@ extension Plan {
         case navigationLink(Plan.NavigationLink<Self, Scene>)
         case optionalIdentified(OptionalIdentified<Self>)
         case picker(Plan.Picker)
+        case slider(Plan.Slider)
         case textField(Plan.TextField)
         case timelineView(Plan.TimelineView<Self>)
         case toggle(Plan.Toggle)
@@ -39,6 +40,7 @@ extension Plan.Row: OptionalIdentifiable {
         case .navigationLink(let navigationLink): navigationLink.label.id
         case .optionalIdentified(let optionalIdentified): optionalIdentified.id
         case .picker: nil
+        case .slider(let slider): slider.detailRow.id
         case .textField: nil
         case .timelineView: nil
         case .toggle(let toggle): toggle.detailRow.id
@@ -57,6 +59,7 @@ extension Plan.Row: Matchable {
         case .navigationLink(let navigationLink): navigationLink.label.matchStrings
         case .optionalIdentified(let optionalIdentified): optionalIdentified.content.matchStrings
         case .picker: []
+        case .slider(let slider): slider.detailRow.matchStrings
         case .textField(let textField): textField.detailRow.matchStrings + [textField.text]
         case .timelineView: []
         case .toggle(let toggle): toggle.detailRow.matchStrings
@@ -77,6 +80,7 @@ extension Plan.Row: View {
         case let .navigationLink(content): content
         case let .optionalIdentified(content): content
         case let .picker(content): content
+        case let .slider(content): content
         case let .textField(content): content
         case let .timelineView(content): content
         case let .toggle(content): content
@@ -89,6 +93,7 @@ extension Plan.Row: View {
 fileprivate struct Preview {
     @State var textFieldText: String = ""
     @State var pickerSelection: String = "Option 1"
+    @State var sliderValue: Int = 20
     @State var isOn: Bool = false
     
     var list: Plan.List<Plan.Row, Plan.Scene> {
@@ -110,6 +115,13 @@ fileprivate struct Preview {
                     "Picker",
                     selection: $pickerSelection,
                     options: ["Option 1", "Option 2"]
+                ),
+                .slider(
+                    "Slider",
+                    trailing: "\(sliderValue)%",
+                    value: $sliderValue,
+                    in: 0 ... 100,
+                    step: 5
                 ),
                 .secureField("Secure", text: $textFieldText),
                 .textField("Text", text: $textFieldText),

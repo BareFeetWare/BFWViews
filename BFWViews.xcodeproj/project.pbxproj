@@ -137,6 +137,7 @@
 		E2FD40B926689384004E4905 /* TrailingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40B826689384004E4905 /* TrailingScene.swift */; };
 		E2FD40CD2669C9F5004E4905 /* Plan.Alert+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40CC2669C9F5004E4905 /* Plan.Alert+Error.swift */; };
 		E2FD40CF2669CA26004E4905 /* AlertScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD40CE2669CA26004E4905 /* AlertScene.swift */; };
+		E2C0DE0026052102000002AA /* Plan.Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C0DE0026052102000001AA /* Plan.Slider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -297,6 +298,7 @@
 		E2FD40B826689384004E4905 /* TrailingScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingScene.swift; sourceTree = "<group>"; };
 		E2FD40CC2669C9F5004E4905 /* Plan.Alert+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plan.Alert+Error.swift"; sourceTree = "<group>"; };
 		E2FD40CE2669CA26004E4905 /* AlertScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertScene.swift; sourceTree = "<group>"; };
+		E2C0DE0026052102000001AA /* Plan.Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Slider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -497,6 +499,7 @@
 				E28A4DAC2E9F7E37002ECD1C /* Plan.NavigationLink.swift */,
 				E24CE2C72E6137DF0086B30C /* Plan.Node.swift */,
 				E2A34AA42F306F3400351E0A /* Plan.Picker.swift */,
+				E2C0DE0026052102000001AA /* Plan.Slider.swift */,
 				E286391C2A107D040038CB72 /* Plan.Rack.swift */,
 				E2F47B132A13370D009BD9EC /* Plan.Rating+View.swift */,
 				E2370E012F42C1C200F2B75C /* Plan.Row.swift */,
@@ -973,6 +976,7 @@
 				E2803FCA2B5E74B00023A74E /* Plan.Button.swift in Sources */,
 				E2A3F1172F9D000100EC3DDD /* Plan.Link.swift in Sources */,
 				E2B62A402D911C32002CBD8E /* If.swift in Sources */,
+				E2C0DE0026052102000002AA /* Plan.Slider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
