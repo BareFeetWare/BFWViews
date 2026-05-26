@@ -9,16 +9,17 @@
 import SwiftUI
 
 public extension View {
+    /// Adds Save + Cancel toolbar items when `binding` differs from the value first captured on appear. `onSave: nil` renders Save as disabled (Cancel still reverts) for forms that have been edited but aren't yet ready to save.
     func saveBar<Model: Equatable>(
-        model: Binding<Model?>,
+        _ binding: Binding<Model?>,
         isChanged: Binding<Bool>? = nil,
-        onSave: @escaping (Model) async throws -> Void,
+        onSave: ((Model) async throws -> Void)?
     ) -> some View {
         modifier(
             SaveBarModifier(
-                model: model,
+                model: binding,
                 externalIsChanged: isChanged,
-                onSave: onSave,
+                onSave: onSave
             )
         )
     }
@@ -27,7 +28,7 @@ public extension View {
 struct SaveBarModifier<Model: Equatable> {
     @Binding var model: Model?
     let externalIsChanged: Binding<Bool>?
-    let onSave: (Model) async throws -> Void
+    let onSave: ((Model) async throws -> Void)?
     @State var savedModel: Model?
 }
 
@@ -61,6 +62,11 @@ extension SaveBarModifier {
     
     var saveButton: Plan.Button? {
         guard isChanged else { return nil }
+        guard let onSave
+        else {
+            // Caller signalled "not ready to save" — render disabled.
+            return .init("Save", systemImage: "checkmark", action: nil)
+        }
         return .init("Save", systemImage: "checkmark") {
             guard let model else { return }
             try await onSave(model)
@@ -186,6 +192,6 @@ extension Preview {
             TextField("Last Name", text: $lastName)
             TextField("Email", text: $email)
         }
-        .saveBar(model: personBinding) { _ in }
+        .saveBar(personBinding) { _ in }
     }
 }
