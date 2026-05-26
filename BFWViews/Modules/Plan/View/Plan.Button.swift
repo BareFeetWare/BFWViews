@@ -15,7 +15,7 @@ extension Plan {
         public let title: String
         public let systemImage: String?
         public let role: ButtonRole?
-        private let dispatch: Dispatch
+        private let dispatch: Dispatch?
         @State var isInProgress: Bool = false
         @State var alert: Plan.Alert?
         
@@ -23,24 +23,24 @@ extension Plan {
             _ title: String,
             systemImage: String? = nil,
             role: ButtonRole? = nil,
-            action: @escaping () -> Void
+            action: (() -> Void)?
         ) {
             self.title = title
             self.systemImage = systemImage
             self.role = role
-            self.dispatch = .sync(action)
+            self.dispatch = action.map { .sync($0) }
         }
-
+        
         public init(
             _ title: String,
             systemImage: String? = nil,
             role: ButtonRole? = nil,
-            action: @escaping () async throws -> Void
+            action: (() async throws -> Void)?
         ) {
             self.title = title
             self.systemImage = systemImage
             self.role = role
-            self.dispatch = .async(action)
+            self.dispatch = action.map { .async($0) }
         }
     }
 }
@@ -62,12 +62,18 @@ extension Plan.Button {
 
 extension Plan.Button {
     
+    var isDisabled: Bool {
+        dispatch == nil || isInProgress
+    }
+    
     var action: () -> Void {
         switch dispatch {
+        case .none:
+            {}
         case .sync(let action):
-            return { action() }
+            action
         case .async(let action):
-            return {
+            {
                 withErrorAlert($alert) {
                     isInProgress = true
                     defer { isInProgress = false }
@@ -89,7 +95,7 @@ extension Plan.Button: View {
                 Button(title, role: role, action: action)
             }
         }
-        .disabled(isInProgress)
+        .disabled(isDisabled)
         .overlay {
             if isInProgress {
                 ProgressView()
