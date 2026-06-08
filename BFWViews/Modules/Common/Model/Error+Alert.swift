@@ -31,6 +31,13 @@ public extension Error {
             nil
         }
     }
+
+    /// `alertTitle` and `alertMessage` joined into one string, for logging or compact display.
+    var alertDescription: String {
+        [alertTitle, alertMessage]
+            .compactMap { $0 }
+            .joined(separator: " ")
+    }
 }
 
 // MARK: - Private Extensions
