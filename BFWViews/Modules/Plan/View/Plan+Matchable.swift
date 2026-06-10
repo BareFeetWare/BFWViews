@@ -48,16 +48,6 @@ public extension Plan.List where Row: Matchable {
     init(
         isSearchable: Bool = false,
         selection: Binding<String?>,
-        sections: [Section]
-    ) {
-        self.isSearchable = isSearchable
-        self.selection = selection
-        self.sections = sections
-    }
-    
-    init(
-        isSearchable: Bool = false,
-        selection: Binding<String?>,
         rows: [Row]
     ) {
         self.init(
@@ -68,15 +58,6 @@ public extension Plan.List where Row: Matchable {
                 .init(id: "only one section", rows: rows)
             ]
         )
-    }
-    
-    init(
-        isSearchable: Bool = false,
-        sections: [Section]
-    ) {
-        self.isSearchable = isSearchable
-        self.selection = nil
-        self.sections = sections
     }
     
     init(

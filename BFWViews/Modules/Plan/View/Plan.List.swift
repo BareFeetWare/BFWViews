@@ -16,10 +16,11 @@ public extension Plan {
         @State var searchString: String = ""
         
         public init(
+            isSearchable: Bool = false,
             selection: Binding<String?>? = nil,
             sections: [Section]
         ) {
-            self.isSearchable = false
+            self.isSearchable = isSearchable
             self.selection = selection
             self.sections = sections
         }
