@@ -92,6 +92,7 @@
 		E29F364C2F4C0FE2001F6459 /* Bundle+AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F364B2F4C0FE2001F6459 /* Bundle+AppInfo.swift */; };
 		E2A00001300E00000086B30C /* Plan+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A00002300E00000086B30C /* Plan+Node.swift */; };
 		E2A34AA12F304DFC00351E0A /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A34AA02F304DF600351E0A /* TextFieldAlert.swift */; };
+		E2A34AB52F306F4900351E0A /* Plan.NavigationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A34AB42F306F4400351E0A /* Plan.NavigationPicker.swift */; };
 		E2A34AA52F306F3900351E0A /* Plan.Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A34AA42F306F3400351E0A /* Plan.Picker.swift */; };
 		E2A3A2742F8E099400EC3DDD /* BFWViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C16B5426647C4400BAC051 /* BFWViews.framework */; };
 		E2A3A2762F8E09A500EC3DDD /* BFWFetch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A3A2752F8E09A500EC3DDD /* BFWFetch.framework */; };
@@ -253,6 +254,7 @@
 		E29F364B2F4C0FE2001F6459 /* Bundle+AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppInfo.swift"; sourceTree = "<group>"; };
 		E2A00002300E00000086B30C /* Plan+Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plan+Node.swift"; sourceTree = "<group>"; };
 		E2A34AA02F304DF600351E0A /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
+		E2A34AB42F306F4400351E0A /* Plan.NavigationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.NavigationPicker.swift; sourceTree = "<group>"; };
 		E2A34AA42F306F3400351E0A /* Plan.Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Picker.swift; sourceTree = "<group>"; };
 		E2A3A25B2F8DEFEF00EC3DDD /* BFWViewsFetch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BFWViewsFetch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2A3A2712F8E094D00EC3DDD /* BFWFetch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BFWFetch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -499,6 +501,7 @@
 				E28D1BCD283350C400064CCD /* Plan.List.swift */,
 				E2D316602D37953900064A63 /* Plan.Menu.swift */,
 				E28A4DAC2E9F7E37002ECD1C /* Plan.NavigationLink.swift */,
+				E2A34AB42F306F4400351E0A /* Plan.NavigationPicker.swift */,
 				E24CE2C72E6137DF0086B30C /* Plan.Node.swift */,
 				E2A34AA42F306F3400351E0A /* Plan.Picker.swift */,
 				E2C0DE0026052102000001AA /* Plan.Slider.swift */,
@@ -930,6 +933,7 @@
 				E2D230B02EB5967200380D83 /* Plan.RowConstructor.swift in Sources */,
 				E21636C92A500AD4005A7D48 /* PassedObject.swift in Sources */,
 				E210AFD12E8CC59400682E2C /* Identified.swift in Sources */,
+				E2A34AB52F306F4900351E0A /* Plan.NavigationPicker.swift in Sources */,
 				E2A34AA52F306F3900351E0A /* Plan.Picker.swift in Sources */,
 				E28A4DAB2E9F7D59002ECD1C /* Plan.Scene.swift in Sources */,
 				E28D1BD5283350C400064CCD /* Plan.List.swift in Sources */,

@@ -18,6 +18,7 @@ extension Plan {
         case labeledContent(Plan.LabeledContent<Self, Self>)
         case link(Plan.Link)
         case navigationLink(Plan.NavigationLink<Self, Scene>)
+        case navigationPicker(Plan.NavigationPicker)
         case optionalIdentified(OptionalIdentified<Self>)
         case picker(Plan.Picker)
         case slider(Plan.Slider)
@@ -38,6 +39,7 @@ extension Plan.Row: OptionalIdentifiable {
         case .labeledContent(let labeledContent): labeledContent.label.id
         case .link: nil
         case .navigationLink(let navigationLink): navigationLink.label.id
+        case .navigationPicker: nil
         case .optionalIdentified(let optionalIdentified): optionalIdentified.id
         case .picker: nil
         case .slider(let slider): slider.detailRow.id
@@ -57,6 +59,7 @@ extension Plan.Row: Matchable {
         case .labeledContent(let labeledContent): labeledContent.content.matchStrings + labeledContent.label.matchStrings
         case .link(let link): [link.title]
         case .navigationLink(let navigationLink): navigationLink.label.matchStrings
+        case .navigationPicker: []
         case .optionalIdentified(let optionalIdentified): optionalIdentified.content.matchStrings
         case .picker: []
         case .slider(let slider): slider.detailRow.matchStrings
@@ -78,6 +81,7 @@ extension Plan.Row: View {
         case let .labeledContent(content): content
         case let .link(content): content
         case let .navigationLink(content): content
+        case let .navigationPicker(content): content
         case let .optionalIdentified(content): content
         case let .picker(content): content
         case let .slider(content): content

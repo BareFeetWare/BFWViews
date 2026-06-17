@@ -18,6 +18,7 @@ extension Plan {
         static func labeledContent(_ content: Plan.LabeledContent<Self, Self>) -> Self
         static func link(_ content: Plan.Link) -> Self
         static func navigationLink(_ content: Plan.NavigationLink<Self, Scene>) -> Self
+        static func navigationPicker(_ content: Plan.NavigationPicker) -> Self
         static func optionalIdentified(_ optionalIdentified: OptionalIdentified<Self>) -> Self
         static func picker(_ content: Plan.Picker) -> Self
         static func slider(_ content: Plan.Slider) -> Self
