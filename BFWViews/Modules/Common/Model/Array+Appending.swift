@@ -6,7 +6,14 @@
 //  Copyright © 2026 BareFeetWare. All rights reserved.
 //
 
-internal extension Array {
+public extension Array {
+    
+    func appendingIf(
+        _ condition: Bool,
+        elements: () -> [Element]
+    ) -> [Element] {
+        condition ? self + elements() : self
+    }
     
     func appendingIfLet<T>(
         _ optional: T?,
