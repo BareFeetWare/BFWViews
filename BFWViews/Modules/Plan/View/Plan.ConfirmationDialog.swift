@@ -84,7 +84,7 @@ struct PlanConfirmationDialog_Previews: PreviewProvider {
     }
     
     struct Preview: View {
-        @State var confirmation: Plan.ConfirmationDialog?
+        @State var confirmationDialog: Plan.ConfirmationDialog?
         @State var result: String = "None"
         
         var body: some View {
@@ -95,7 +95,7 @@ struct PlanConfirmationDialog_Previews: PreviewProvider {
                     Text(result)
                 }
                 Button("Do First") {
-                    confirmation = .init(
+                    confirmationDialog = .init(
                         title: "Do First?",
                         buttons: [
                             .init("First") { self.result = "First" },
@@ -103,7 +103,7 @@ struct PlanConfirmationDialog_Previews: PreviewProvider {
                     )
                 }
                 Button("Do Second") {
-                    confirmation = .init(
+                    confirmationDialog = .init(
                         title: "Do Second?",
                         buttons: [
                             .init("Second") { self.result = "Second" },
@@ -111,7 +111,7 @@ struct PlanConfirmationDialog_Previews: PreviewProvider {
                     )
                 }
             }
-            .confirmationDialog($confirmation)
+            .confirmationDialog($confirmationDialog)
         }
     }
 }
