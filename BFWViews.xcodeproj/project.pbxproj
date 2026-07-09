@@ -125,6 +125,7 @@
 		E2D316612D37953E00064A63 /* Plan.Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D316602D37953900064A63 /* Plan.Menu.swift */; };
 		E2E42BE42A80731E00B6E66E /* LabeledControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E42BE32A80731E00B6E66E /* LabeledControl.swift */; };
 		E2E6548E2F579E5B003D6E02 /* Plan.TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6548D2F579E52003D6E02 /* Plan.TimelineView.swift */; };
+		E2ED1F2126E5400000FACE02 /* AsyncEditFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED1F2026E5400000FACE01 /* AsyncEditFlow.swift */; };
 		E2ED1F1126E5400000FACE02 /* EditFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED1F1026E5400000FACE01 /* EditFlow.swift */; };
 		E2F0CA022F100A0000ABCDEF /* ToolbarCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA012F100A0000ABCDEF /* ToolbarCancel.swift */; };
 		E2F47B122A13351C009BD9EC /* Plan.Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F47B112A13351C009BD9EC /* Plan.Rating.swift */; };
@@ -288,6 +289,7 @@
 		E2D316602D37953900064A63 /* Plan.Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Menu.swift; sourceTree = "<group>"; };
 		E2E42BE32A80731E00B6E66E /* LabeledControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledControl.swift; sourceTree = "<group>"; };
 		E2E6548D2F579E52003D6E02 /* Plan.TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.TimelineView.swift; sourceTree = "<group>"; };
+		E2ED1F2026E5400000FACE01 /* AsyncEditFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncEditFlow.swift; sourceTree = "<group>"; };
 		E2ED1F1026E5400000FACE01 /* EditFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFlow.swift; sourceTree = "<group>"; };
 		E2F0CA012F100A0000ABCDEF /* ToolbarCancel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarCancel.swift; sourceTree = "<group>"; };
 		E2F47B112A13351C009BD9EC /* Plan.Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.Rating.swift; sourceTree = "<group>"; };
@@ -613,6 +615,7 @@
 				E28B7ABE275C5E2F00ED5730 /* CellBorder.swift */,
 				E224C9A126E8661100AC5CD2 /* Color+Hex.swift */,
 				E2C16B66266480C400BAC051 /* CompressibleSpacer.swift */,
+				E2ED1F2026E5400000FACE01 /* AsyncEditFlow.swift */,
 				E2ED1F1026E5400000FACE01 /* EditFlow.swift */,
 				E26FDBF82AAEEFAA00AC992B /* ExpandableSection.swift */,
 				E280939D2C8D8F8A00CB11A0 /* IdentifiableText.swift */,
@@ -956,6 +959,7 @@
 				E2D316612D37953E00064A63 /* Plan.Menu.swift in Sources */,
 				E282D3D52F5FADEC0094F458 /* AsyncView.swift in Sources */,
 				E2370E0D2F456ADF00F2B75C /* SaveBar.swift in Sources */,
+				E2ED1F2126E5400000FACE02 /* AsyncEditFlow.swift in Sources */,
 				E2ED1F1126E5400000FACE02 /* EditFlow.swift in Sources */,
 				E2BAAC1126FD88F700CFDE50 /* Fetch.swift in Sources */,
 				E2386BF52A093B63009FEA16 /* Plan.Tab.swift in Sources */,

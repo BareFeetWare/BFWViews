@@ -13,17 +13,20 @@ public struct EditFlow<Form: View, Model: Equatable>: View {
     let style: Style
     let form: (Binding<Model>) -> Form
     let onCommit: (Model) async throws -> Void
+    let isChanged: Binding<Bool>?
     
     public init(
         model: Model,
         style: Style = .save,
         @ViewBuilder form: @escaping (Binding<Model>) -> Form,
-        onCommit: @escaping (Model) async throws -> Void
+        onCommit: @escaping (Model) async throws -> Void,
+        isChanged: Binding<Bool>? = nil
     ) {
         _model = State(wrappedValue: model)
         self.style = style
         self.form = form
         self.onCommit = onCommit
+        self.isChanged = isChanged
     }
 }
 
@@ -77,7 +80,7 @@ extension EditFlow {
                 }
         case .save:
             form($model)
-                .saveBar(savableBinding, onSave: onCommit)
+                .saveBar(savableBinding, isChanged: isChanged, onSave: onCommit)
         }
     }
     
