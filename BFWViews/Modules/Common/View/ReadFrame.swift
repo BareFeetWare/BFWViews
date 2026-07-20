@@ -30,8 +30,8 @@ private struct ReadFrameModifier {
 
 extension ReadFrameModifier {
     
-    /// Dedupes sub-pixel-jitter callbacks (e.g. 49.999… → 50.000…) that would otherwise call the writer on every layout pass — and that can cause an endless state-update / re-layout loop when the writer drives layout (e.g. animated cell heights derived from a measured natural size).
-    func onPreferenceChange(frame rect: CGRect) {
+    /// Dedupes sub-pixel-jitter callbacks (e.g. 49.999… → 50.000…) that would otherwise call the writer on every layout pass — and that can cause an endless state-update / re-layout loop when the writer drives layout (e.g. animated cell heights derived from a measured natural size). Compares pixel-aligned copies but delivers the raw rect. The oscillation reproduces only on @3x hardware, never on Simulator, so a clean Simulator run is not evidence this guard can be removed.
+    func onChange(frame rect: CGRect) {
         let roundedRect = rect.rounded
         guard roundedRect != lastRoundedRect else { return }
         lastRoundedRect = roundedRect
@@ -40,35 +40,7 @@ extension ReadFrameModifier {
     
 }
 
-// MARK: - Views
-
-extension ReadFrameModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .background(
-                GeometryReader { geometry in
-                    Color.clear
-                        .preference(
-                            key: FramePreferenceKey.self,
-                            value: geometry.frame(in: coordinateSpace)
-                        )
-                }
-            )
-            .onPreferenceChange(FramePreferenceKey.self) { onPreferenceChange(frame: $0) }
-    }
-}
-
 // MARK: - Private Extensions
-
-private struct FramePreferenceKey: PreferenceKey {
-    
-    static let defaultValue: CGRect = .zero
-    
-    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
-        value = nextValue()
-    }
-    
-}
 
 private extension CGRect {
     /// Pixel-aligned copy, for use in deduping geometry callbacks.
@@ -79,5 +51,18 @@ private extension CGRect {
             width: width.rounded(),
             height: height.rounded()
         )
+    }
+}
+
+// MARK: - Views
+
+extension ReadFrameModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .backport.onGeometryChange(for: CGRect.self) { proxy in
+                proxy.frame(in: coordinateSpace)
+            } action: { rect in
+                onChange(frame: rect)
+            }
     }
 }
