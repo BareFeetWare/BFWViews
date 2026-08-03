@@ -6,7 +6,8 @@
 //  Copyright © 2026 BareFeetWare. All rights reserved.
 //
 
-public extension Array {
+/// Internal, not public: BFWFetch vends the same helpers publicly, and identical overloads visible from two modules make call-site inference ambiguous.
+extension Array {
     
     func appendingIf(
         _ condition: Bool,
