@@ -17,6 +17,9 @@ extension Plan {
         @Binding public var value: Double
         public let bounds: ClosedRange<Double>
         public let step: Double
+        
+        /// Called with `true` when a drag begins and `false` when it ends. A caller writing each value somewhere slow can hold off until the drag ends, rather than acting on every value the slider passes through on the way.
+        public let onChangedIsEditing: (Bool) -> Void
     }
 }
 
@@ -28,12 +31,14 @@ public extension Plan.Slider {
         _ detailRow: Plan.DetailRow,
         value: Binding<Double>,
         in bounds: ClosedRange<Double>,
-        step: Double = 1
+        step: Double = 1,
+        onChangedIsEditing: @escaping (Bool) -> Void = { _ in }
     ) {
         self.detailRow = detailRow
         self._value = value
         self.bounds = bounds
         self.step = step
+        self.onChangedIsEditing = onChangedIsEditing
     }
     
     init(
@@ -42,13 +47,15 @@ public extension Plan.Slider {
         trailing: String? = nil,
         value: Binding<Double>,
         in bounds: ClosedRange<Double>,
-        step: Double = 1
+        step: Double = 1,
+        onChangedIsEditing: @escaping (Bool) -> Void = { _ in }
     ) {
         self.init(
             Plan.DetailRow(title, subtitle: subtitle, trailing: trailing),
             value: value,
             in: bounds,
-            step: step
+            step: step,
+            onChangedIsEditing: onChangedIsEditing
         )
     }
     
@@ -60,7 +67,8 @@ public extension Plan.Slider {
         trailing: String? = nil,
         value: Binding<Int>,
         in bounds: ClosedRange<Int>,
-        step: Int = 1
+        step: Int = 1,
+        onChangedIsEditing: @escaping (Bool) -> Void = { _ in }
     ) {
         self.init(
             Plan.DetailRow(title, subtitle: subtitle, trailing: trailing),
@@ -69,7 +77,8 @@ public extension Plan.Slider {
                 set: { value.wrappedValue = Int($0) }
             ),
             in: Double(bounds.lowerBound) ... Double(bounds.upperBound),
-            step: Double(step)
+            step: Double(step),
+            onChangedIsEditing: onChangedIsEditing
         )
     }
     
@@ -81,7 +90,12 @@ extension Plan.Slider: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             detailRow
-            SwiftUI.Slider(value: $value, in: bounds, step: step)
+            SwiftUI.Slider(
+                value: $value,
+                in: bounds,
+                step: step,
+                onEditingChanged: onChangedIsEditing
+            )
         }
     }
 }
