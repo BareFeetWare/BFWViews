@@ -90,6 +90,7 @@
 		E29C5D442F34105500B3F8AC /* LabeledContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29C5D412F34105500B3F8AC /* LabeledContent.swift */; };
 		E29C5D452F34105500B3F8AC /* ShareLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29C5D432F34105500B3F8AC /* ShareLink.swift */; };
 		E29C5D462F34105500B3F8AC /* NavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29C5D422F34105500B3F8AC /* NavigationStack.swift */; };
+		E2A11C0B2F90000100EC3DDD /* OSAllocatedUnfairLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A11C0A2F90000100EC3DDD /* OSAllocatedUnfairLock.swift */; };
 		E29C5D4B2F35951600B3F8AC /* Array+Appending.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29C5D4A2F35950D00B3F8AC /* Array+Appending.swift */; };
 		E29C5D4F2F39457C00B3F8AC /* Collection+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29C5D4E2F39456F00B3F8AC /* Collection+Empty.swift */; };
 		E29F364C2F4C0FE2001F6459 /* Bundle+AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F364B2F4C0FE2001F6459 /* Bundle+AppInfo.swift */; };
@@ -254,6 +255,7 @@
 		E29362562E73F18A00CE5AAC /* OptionalProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalProtocol.swift; sourceTree = "<group>"; };
 		E29C5D412F34105500B3F8AC /* LabeledContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledContent.swift; sourceTree = "<group>"; };
 		E29C5D422F34105500B3F8AC /* NavigationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStack.swift; sourceTree = "<group>"; };
+		E2A11C0A2F90000100EC3DDD /* OSAllocatedUnfairLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSAllocatedUnfairLock.swift; sourceTree = "<group>"; };
 		E29C5D432F34105500B3F8AC /* ShareLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLink.swift; sourceTree = "<group>"; };
 		E29C5D4A2F35950D00B3F8AC /* Array+Appending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Appending.swift"; sourceTree = "<group>"; };
 		E29C5D4E2F39456F00B3F8AC /* Collection+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Empty.swift"; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				E2C0A0012F2B500100351E0A /* ContentUnavailableView.swift */,
 				E29C5D412F34105500B3F8AC /* LabeledContent.swift */,
 				E29C5D422F34105500B3F8AC /* NavigationStack.swift */,
+				E2A11C0A2F90000100EC3DDD /* OSAllocatedUnfairLock.swift */,
 				E29C5D432F34105500B3F8AC /* ShareLink.swift */,
 				E21B14BF2F67933900AA8D60 /* WithAnimation+Compatible.swift */,
 			);
@@ -915,6 +918,7 @@
 				E29C5D442F34105500B3F8AC /* LabeledContent.swift in Sources */,
 				E29C5D452F34105500B3F8AC /* ShareLink.swift in Sources */,
 				E29C5D462F34105500B3F8AC /* NavigationStack.swift in Sources */,
+				E2A11C0B2F90000100EC3DDD /* OSAllocatedUnfairLock.swift in Sources */,
 				E26342B02C4E1DD20096D91B /* ZoomView.swift in Sources */,
 				E293393E2C475EDB00810E45 /* OnTapFullScreenCover.swift in Sources */,
 				E28B7ABF275C5E2F00ED5730 /* CellBorder.swift in Sources */,
